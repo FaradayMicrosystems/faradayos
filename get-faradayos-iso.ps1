@@ -1,23 +1,16 @@
-# Downloads the FaradayOS test ISO from the iso-test branch and joins it into one verified file.
-# In PowerShell:  irm https://raw.githubusercontent.com/FaradayMicrosystems/faradayos/iso-test/get-faradayos-iso.ps1 | iex
+# Downloads the FaradayOS test ISO from the iso-test branch and joins it into one verified file (Windows PowerShell).
+#   irm https://raw.githubusercontent.com/FaradayMicrosystems/faradayos/iso-test/get-faradayos-iso.ps1 | iex
 $ErrorActionPreference = 'Stop'
-$Base = 'https://raw.githubusercontent.com/FaradayMicrosystems/faradayos/iso-test'
-$Iso = 'FaradayOSv0.0.1-test.iso'
-$N = 69
-$Expected = '2e9b72ff23ee22ac3724ecfd56b82a911b221e889de119c242c3456b387d1ce8'
-$Parts = Join-Path (Get-Location) 'faradayos-iso-parts'
-New-Item -ItemType Directory -Force -Path $Parts | Out-Null
-$Out = [IO.File]::Create((Join-Path (Get-Location) $Iso))
-try {
-  for ($i = 0; $i -lt $N; $i++) {
-    $f = '{0}.p{1:D2}' -f $Iso, $i
-    $p = Join-Path $Parts $f
-    Write-Host "Downloading part $($i+1) of $N"
-    Invoke-WebRequest -Uri "$Base/$f" -OutFile $p -UseBasicParsing
-    $in = [IO.File]::OpenRead($p); $in.CopyTo($Out); $in.Close()
-    Remove-Item $p
-  }
-} finally { $Out.Close() }
-Remove-Item $Parts -Recurse
-$h = (Get-FileHash $Iso -Algorithm SHA256).Hash.ToLower()
-if ($h -eq $Expected) { Write-Host "Done: checksum OK, $Iso is ready." } else { Write-Host "Checksum FAILED. Run again." ; exit 1 }
+$base = 'https://raw.githubusercontent.com/FaradayMicrosystems/faradayos/iso-test'
+$iso  = 'FaradayOSv0.0.1-test.iso'
+$n    = 69
+New-Item -ItemType Directory -Force faradayos-iso-parts | Out-Null
+$out = [IO.File]::Create((Join-Path $PWD $iso))
+for ($i = 0; $i -lt $n; $i++) {
+  $p = '{0}.p{1:D2}' -f $iso, $i; $f = Join-Path faradayos-iso-parts $p
+  if (-not (Test-Path $f)) { Write-Host "Downloading piece $($i+1) of $n"; Invoke-WebRequest "$base/$p" -OutFile $f -UseBasicParsing }
+  $bytes = [IO.File]::OpenRead((Resolve-Path $f)); $bytes.CopyTo($out); $bytes.Close()
+}
+$out.Close()
+$h = (Get-FileHash $iso -Algorithm SHA256).Hash.ToLower()
+if ($h -eq '2e9b72ff23ee22ac3724ecfd56b82a911b221e889de119c242c3456b387d1ce8') { Remove-Item -Recurse faradayos-iso-parts; Write-Host "Done: $PWD\$iso" } else { Write-Host 'Checksum FAILED: delete faradayos-iso-parts and run again.' }
