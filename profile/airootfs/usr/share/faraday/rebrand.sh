@@ -46,3 +46,22 @@ if [ -d $T ]; then
     printf '[KSplash]\nEngine=KSplashQML\nTheme=org.faraday.desktop\n' > /etc/skel/.config/ksplashrc
 fi
 true
+# Show Ubuntu and Kali wallpapers in KDE's wallpaper picker (they install to GNOME's folders)
+_link_walls(){ # $1 = KDE folder name, $2.. = source dirs
+  name=$1; shift; dest=/usr/share/wallpapers/$name
+  rm -rf "$dest"; found=
+  for src in "$@"; do
+    [ -d "$src" ] || continue
+    find "$src" -maxdepth 3 -type f \( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' -o -iname '*.svg' \) | while read -r f; do
+      mkdir -p "$dest"; ln -sf "$f" "$dest/$(basename "$(dirname "$f")")-$(basename "$f")"
+    done
+  done
+  true
+}
+pacman -Qq ubuntu-wallpapers >/dev/null 2>&1 || rm -rf /usr/share/wallpapers/Ubuntu
+pacman -Qq kali-wallpapers >/dev/null 2>&1 || rm -rf /usr/share/wallpapers/Kali
+pacman -Qq ubuntu-wallpapers >/dev/null 2>&1 && \
+  _link_walls Ubuntu $(pacman -Qlq ubuntu-wallpapers | grep -E '^/usr/share/backgrounds/' | xargs -r -n1 dirname | sort -u)
+pacman -Qq kali-wallpapers >/dev/null 2>&1 && \
+  _link_walls Kali $(pacman -Qlq kali-wallpapers | grep -E '\.(jpg|jpeg|png|webp|svg)$' | grep -v '^/usr/share/wallpapers/' | xargs -r -n1 dirname | sort -u)
+true

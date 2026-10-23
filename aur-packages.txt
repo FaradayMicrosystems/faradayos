@@ -9,3 +9,5 @@ lm-studio-bin
 wivrn-server
 wivrn-dashboard
 xrizer-git
+ubuntu-wallpapers
+kali-wallpapers

@@ -25,6 +25,7 @@ Boot the USB, open the installer, choose **offline install** (copies the live sy
 - `aur-packages.txt` AUR packages built locally and baked in; failures are skipped and offered via the desktop "Install Faraday extras" icon
 - `profile/airootfs/usr/local/bin/faraday-vr-check` VR readiness check (Steam, SteamVR, WiVRn, ALVR, AMD Vulkan, firewall). Runs at boot (`--fix-system`: opens WiVRn/ALVR ports, gives SteamVR's compositor realtime priority) and at login (pops up only if something needs attention). Run `faraday-vr-check` any time.
 - Theme: `org.faraday.desktop` global theme, `FaradayOS` colour scheme (black `#0B0B0B`, orange `#FF7A1A`, yellow `#FFC53D`, jade `#00A86B`), `FaradayOS` wallpaper (desktop, lock and login screens), Plymouth + KDE splash with the Faraday Microsystems logo. `rebrand.sh` re-applies the defaults after updates.
+- Extra wallpapers: Ubuntu (`ubuntu-wallpapers`) and Kali (`kali-wallpapers`) from the AUR. They install to GNOME folders, so `rebrand.sh` links them into `/usr/share/wallpapers/Ubuntu` and `/Kali` for the KDE wallpaper picker, and refreshes the links after updates.
 - `assets/` logo + splash source images
 
 CachyOS repo, keyring and mirrorlist names are kept so `pacman -Syu` keeps working. A pacman hook re-applies FaradayOS branding after updates.

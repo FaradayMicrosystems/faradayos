@@ -1,6 +1,7 @@
 [Trigger]
 Operation = Install
 Operation = Upgrade
+Operation = Remove
 Type = Package
 Target = filesystem
 Target = lsb-release
@@ -8,6 +9,8 @@ Target = limine*
 Target = cachyos-*
 Target = calamares*
 Target = plymouth*
+Target = ubuntu-wallpapers
+Target = kali-wallpapers
 
 [Action]
 Description = Re-applying FaradayOS branding...
