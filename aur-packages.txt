@@ -1,0 +1,8 @@
+alvr-bin
+cogl
+clutter
+clutter-gtk
+ckan
+trayscale
+opencomposite-git
+lm-studio-bin

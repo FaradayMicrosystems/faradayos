@@ -1,0 +1,10 @@
+{
+  "logo": {
+    "source": "/usr/share/faraday/logo.txt",
+    "type": "file",
+    "color": { "1": "38;5;208", "2": "38;5;220", "3": "97" },
+    "padding": { "right": 2 }
+  },
+  "display": { "color": { "keys": "38;5;214", "title": "38;5;208" } },
+  "modules": ["title","separator","os","kernel","uptime","packages","shell","display","de","wm","terminal","cpu","gpu","memory","disk","colors"]
+}

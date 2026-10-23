@@ -1,0 +1,20 @@
+componentName: faraday
+welcomeStyleCalamares: true
+strings:
+    productName: FaradayOS
+    shortProductName: Faraday
+    version: 0.0.1
+    shortVersion: 0.0.1
+    versionedName: FaradayOS 0.0.1
+    shortVersionedName: Faraday 0.0.1
+    bootloaderEntryName: FaradayOS
+images:
+    productLogo: "/usr/share/faraday/logo.png"
+    productIcon: "/usr/share/faraday/logo.png"
+    productWelcome: "/usr/share/faraday/logo.png"
+slideshow: "show.qml"
+style:
+    SidebarBackground: "#1a0d08"
+    SidebarText: "#ffd27a"
+    SidebarTextCurrent: "#ffffff"
+    SidebarBackgroundCurrent: "#e8611a"

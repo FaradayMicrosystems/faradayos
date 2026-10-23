@@ -1,0 +1,4 @@
+#!/bin/sh
+# Installs the AUR apps that couldn't be prebuilt into the ISO.
+paru -S --needed --skipreview ckan trayscale opencomposite-git lm-studio-bin clutter-gtk
+echo; read -p "Done. Press Enter to close." _

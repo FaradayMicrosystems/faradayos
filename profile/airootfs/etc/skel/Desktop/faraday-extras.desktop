@@ -1,0 +1,5 @@
+[Desktop Entry]
+Type=Application
+Name=Install Faraday extras (CKAN, LM Studio, Trayscale, OpenComposite)
+Exec=alacritty -e /usr/local/bin/faraday-extras
+Icon=/usr/share/faraday/logo.png

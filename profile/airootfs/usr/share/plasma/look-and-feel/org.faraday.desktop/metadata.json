@@ -1,0 +1,2 @@
+{ "KPlugin": { "Id": "org.faraday.desktop", "Name": "FaradayOS", "Description": "FaradayOS splash", "License": "GPL", "Version": "0.0.1" },
+  "KPackageStructure": "Plasma/LookAndFeel", "X-Plasma-MainScript": "defaults" }
