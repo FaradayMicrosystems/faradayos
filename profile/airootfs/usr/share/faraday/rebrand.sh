@@ -34,7 +34,7 @@ if [ -d $B ]; then
 fi
 true
 mkdir -p /etc/plymouth && printf '[Daemon]\nTheme=faraday\nShowDelay=0\n' > /etc/plymouth/plymouthd.conf
-# keep FaradayOS theme defaults after cachyos-kde-settings / plasma-login-manager updates
+# keep FaradayOS theme defaults after plasma-login-manager updates
 T=/usr/share/faraday/theme
 if [ -d $T ]; then
   install -Dm644 $T/kdeglobals /etc/xdg/kdeglobals
