@@ -5,8 +5,8 @@ CachyOS-based gaming distro: KDE Plasma (Wayland), AMD-tuned, live USB + Calamar
 ## Build the ISO (on your CachyOS PC)
 
 ```fish
-git clone https://github.com/FaradayMicrosystems/faradayos.git
-cd faradayos
+git clone -b FaradayOS-Lite https://github.com/FaradayMicrosystems/faradayos.git faradayos-lite
+cd faradayos-lite
 ```
 Then **double-click `Build-FaradayOS.desktop`** (or `build.sh`) in Dolphin. KDE asks once whether to trust/execute it: say yes.
 Or run `./build.sh` in a terminal.
