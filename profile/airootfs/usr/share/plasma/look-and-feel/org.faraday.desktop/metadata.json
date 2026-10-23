@@ -1,2 +1,13 @@
-{ "KPlugin": { "Id": "org.faraday.desktop", "Name": "FaradayOS", "Description": "FaradayOS splash", "License": "GPL", "Version": "0.0.1" },
-  "KPackageStructure": "Plasma/LookAndFeel", "X-Plasma-MainScript": "defaults" }
+{
+  "KPlugin": {
+    "Id": "org.faraday.desktop",
+    "Name": "FaradayOS",
+    "Description": "FaradayOS global theme: black, orange, yellow and jade",
+    "Authors": [{ "Name": "Faraday Microsystems" }],
+    "License": "GPL-3.0-or-later",
+    "Version": "0.0.1",
+    "Website": "https://github.com/FaradayMicrosystems/faradayos"
+  },
+  "KPackageStructure": "Plasma/LookAndFeel",
+  "X-Plasma-MainScript": "defaults"
+}

@@ -1,0 +1,10 @@
+[General]
+ColorScheme=FaradayOS
+AccentColor=255,122,26
+
+[Icons]
+Theme=breeze-dark
+
+[KDE]
+LookAndFeelPackage=org.faraday.desktop
+widgetStyle=Breeze

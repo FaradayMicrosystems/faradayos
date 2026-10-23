@@ -1,5 +1,5 @@
-Window.SetBackgroundTopColor(0.067, 0.067, 0.067);
-Window.SetBackgroundBottomColor(0.067, 0.067, 0.067);
+Window.SetBackgroundTopColor(0.043, 0.043, 0.043);
+Window.SetBackgroundBottomColor(0.043, 0.043, 0.043);
 logo.image = Image("logo.png");
 sw = Window.GetWidth(); sh = Window.GetHeight();
 scale = Math.Min(sw * 0.6 / logo.image.GetWidth(), 1);
@@ -17,7 +17,7 @@ fun progress_cb(duration, progress) {
 Plymouth.SetBootProgressFunction(progress_cb);
 # password prompt (LUKS)
 fun display_password_cb(prompt, bullets) {
-  global.pt = Sprite(Image.Text(prompt + "  " + bullets, 1, 0.82, 0.48));
+  global.pt = Sprite(Image.Text(prompt + "  " + bullets, 1, 0.478, 0.102));
   global.pt.SetPosition((sw - global.pt.GetImage().GetWidth()) / 2, bar.y + 30, 3);
 }
 Plymouth.SetDisplayPasswordFunction(display_password_cb);
