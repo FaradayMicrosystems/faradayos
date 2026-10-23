@@ -3,7 +3,7 @@
 
 iso_name="FaradayOSv0.0.1"
 iso_label="FARADAY_001"
-iso_publisher="FaradayOS"
+iso_publisher="FaradayOS <https://github.com/FaradayMicrosystems>"
 iso_application="FaradayOS Live"
 iso_version="0.0.1"
 install_dir="arch"
@@ -20,6 +20,7 @@ file_permissions=(
   ["/root/customize_airootfs.sh"]="0:0:755"
   ["/usr/share/faraday/rebrand.sh"]="0:0:755"
   ["/usr/local/bin/faraday-extras"]="0:0:755"
+  ["/usr/local/bin/faraday-vr-check"]="0:0:755"
   ["/etc/shadow"]="0:0:400"
   ["/etc/gshadow"]="0:0:400"
   ["/root"]="0:0:750"

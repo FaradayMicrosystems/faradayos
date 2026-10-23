@@ -99,9 +99,12 @@ filelight
 firefox
 flatpak
 freecad
+freerdp
 fsarchiver
 fuse2
 fwupd
+gamemode
+gamescope
 gcc
 gimp
 git
@@ -149,8 +152,12 @@ kxkb2locale1
 ldns
 less
 lftp
+lib32-gamemode
+lib32-libpulse
+lib32-mangohud
 lib32-mesa
 lib32-opencl-mesa
+lib32-pipewire
 lib32-vulkan-radeon
 libdvdcss
 libfido2
@@ -159,6 +166,7 @@ libmythes
 libopenraw
 libreoffice-fresh
 libusb-compat
+libvncserver
 libwnck3
 limine
 limine-mkinitcpio-hook
@@ -176,6 +184,7 @@ lsscsi
 lvm2
 man-db
 man-pages
+mangohud
 mc
 mdadm
 meld
@@ -208,12 +217,14 @@ nss-mdns
 ntfs-3g
 ntp
 nvme-cli
+obsidian
 open-iscsi
 opencl-mesa
 opencolorio
 opendesktop-fonts
 openssh
 openvpn
+openxr
 orca
 os-prober
 pacman-contrib
@@ -258,6 +269,7 @@ qbittorrent
 realtime-privileges
 rebuild-detector
 reflector
+remmina
 ripgrep
 rp-pppoe
 rsync
@@ -275,6 +287,7 @@ snapper
 sof-firmware
 spectacle
 squashfs-tools
+steam
 sudo
 sysfsutils
 syslinux
@@ -308,6 +321,7 @@ vlc
 vlc-plugins-all
 vpnc
 vulkan-radeon
+vulkan-tools
 wget
 which
 winboat

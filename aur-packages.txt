@@ -6,3 +6,6 @@ ckan
 trayscale
 opencomposite-git
 lm-studio-bin
+wivrn-server
+wivrn-dashboard
+xrizer-git

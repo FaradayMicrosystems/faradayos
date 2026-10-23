@@ -23,6 +23,10 @@ Boot the USB, open the installer, choose **offline install** (copies the live sy
   - `airootfs/` files baked into the system: branding, Plymouth splash, KDE splash, fastfetch dragon, gaming sysctl, Calamares branding
   - `airootfs/root/customize_airootfs.sh` runs inside the image after packages install
 - `aur-packages.txt` AUR packages built locally and baked in; failures are skipped and offered via the desktop "Install Faraday extras" icon
+- `profile/airootfs/usr/local/bin/faraday-vr-check` VR readiness check (Steam, SteamVR, WiVRn, ALVR, AMD Vulkan, firewall). Runs at boot (`--fix-system`: opens WiVRn/ALVR ports, gives SteamVR's compositor realtime priority) and at login (pops up only if something needs attention). Run `faraday-vr-check` any time.
 - `assets/` logo + splash source images
 
 CachyOS repo, keyring and mirrorlist names are kept so `pacman -Syu` keeps working. A pacman hook re-applies FaradayOS branding after updates.
+
+## VR
+Steam, WiVRn (server + dashboard), ALVR and xrizer/OpenComposite are preinstalled. SteamVR itself is installed from inside Steam (it needs your Steam account): open Steam, install **SteamVR**, then reboot once so FaradayOS can grant it realtime priority.

@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+# FaradayOS VR readiness check for Steam, SteamVR, WiVRn and ALVR (AMD GPUs).
+#   faraday-vr-check              run the check and print a report
+#   faraday-vr-check --login      run at login; shows a desktop notice only if something needs attention
+#   faraday-vr-check --fix-system run as root at boot: firewall ports + SteamVR compositor permission
+set -uo pipefail
+MODE="${1:-}"
+OK=0; WARN=0; FAIL=0; REPORT=""
+pass(){ REPORT+="  [ OK ] $*\n"; OK=$((OK+1)); }
+warn(){ REPORT+="  [WARN] $*\n"; WARN=$((WARN+1)); }
+fail(){ REPORT+="  [FAIL] $*\n"; FAIL=$((FAIL+1)); }
+have(){ command -v "$1" >/dev/null 2>&1; }
+pkg(){ pacman -Qq "$1" >/dev/null 2>&1; }
+
+steamvr_dirs(){
+  local h
+  for h in /home/*; do
+    for d in "$h/.local/share/Steam/steamapps/common/SteamVR" "$h/.steam/steam/steamapps/common/SteamVR"; do
+      [[ -d $d ]] && echo "$d"
+    done
+  done | sort -u
+}
+
+fix_system(){
+  # Open the ports WiVRn (5353/udp mDNS, 9757 tcp+udp) and ALVR (9943-9944 tcp+udp) need.
+  if have ufw; then
+    ufw allow 5353/udp comment 'mDNS (WiVRn discovery)'   >/dev/null
+    ufw allow 9757 comment 'WiVRn'                         >/dev/null
+    ufw allow 9943:9944/tcp comment 'ALVR'                 >/dev/null
+    ufw allow 9943:9944/udp comment 'ALVR'                 >/dev/null
+  fi
+  systemctl enable --now avahi-daemon.service >/dev/null 2>&1 || true
+  # SteamVR needs CAP_SYS_NICE on its compositor launcher to get realtime GPU priority.
+  # Steam installs SteamVR per user, so re-apply on every boot once it appears.
+  local d l
+  while read -r d; do
+    l="$d/bin/linux64/vrcompositor-launcher"
+    [[ -f $l ]] && setcap CAP_SYS_NICE=eip "$l" 2>/dev/null
+  done < <(steamvr_dirs)
+  exit 0
+}
+[[ $MODE == --fix-system ]] && { [[ $EUID -eq 0 ]] || { echo "--fix-system needs root"; exit 1; }; fix_system; }
+
+# --- Steam -----------------------------------------------------------------
+pkg steam && pass "Steam installed" || fail "Steam not installed (sudo pacman -S steam)"
+grep -q '^\[multilib\]' /etc/pacman.conf && pass "multilib (32-bit) repo enabled" || fail "multilib repo disabled in /etc/pacman.conf"
+for p in lib32-mesa lib32-vulkan-radeon lib32-pipewire lib32-gamemode; do
+  pkg "$p" && pass "$p" || fail "$p missing (Steam/Proton 32-bit dependency)"
+done
+pkg gamemode && pass "GameMode installed" || warn "GameMode not installed"
+
+# --- GPU / Vulkan ----------------------------------------------------------
+pkg vulkan-radeon && pass "AMD Vulkan driver (RADV)" || fail "vulkan-radeon missing"
+if have vulkaninfo; then
+  vulkaninfo --summary 2>/dev/null | grep -qiE 'RADV|AMD' \
+    && pass "Vulkan sees an AMD GPU" || fail "Vulkan cannot see an AMD GPU"
+else warn "vulkaninfo not available, GPU check skipped"; fi
+
+# --- SteamVR ---------------------------------------------------------------
+SVR=$(steamvr_dirs | head -1)
+if [[ -n $SVR ]]; then
+  pass "SteamVR installed ($SVR)"
+  L="$SVR/bin/linux64/vrcompositor-launcher"
+  if getcap "$L" 2>/dev/null | grep -qi cap_sys_nice; then pass "SteamVR compositor has realtime permission"
+  else warn "SteamVR compositor lacks CAP_SYS_NICE (reboot, or: sudo faraday-vr-check --fix-system)"; fi
+else
+  warn "SteamVR not installed yet: open Steam and install 'SteamVR' (needed for SteamVR/ALVR)"
+fi
+
+# --- WiVRn -----------------------------------------------------------------
+pkg wivrn-server && pass "WiVRn server installed" || fail "WiVRn server missing (run 'Install Faraday extras')"
+pkg wivrn-dashboard && pass "WiVRn dashboard installed" || warn "WiVRn dashboard missing"
+systemctl is-active --quiet avahi-daemon && pass "Avahi running (headset can discover this PC)" || fail "Avahi not running (sudo systemctl enable --now avahi-daemon)"
+if pkg xrizer-git || pkg opencomposite-git; then pass "OpenVR to OpenXR layer installed (xrizer/OpenComposite)"
+else warn "No xrizer/OpenComposite: OpenVR games won't run on WiVRn"; fi
+
+# --- ALVR ------------------------------------------------------------------
+if pkg alvr-bin || pkg alvr; then pass "ALVR installed"; else fail "ALVR missing (run 'Install Faraday extras')"; fi
+
+# --- Firewall --------------------------------------------------------------
+if have ufw && systemctl is-active --quiet ufw; then
+  rules=$(ufw status 2>/dev/null || true)
+  if [[ -z $rules || $rules == *"need to be root"* ]]; then
+    warn "Firewall rules not readable without root (applied automatically at boot)"
+  else
+    grep -q 9757 <<<"$rules" && pass "Firewall open for WiVRn (9757)" || fail "Firewall blocks WiVRn port 9757"
+    grep -q 9943 <<<"$rules" && pass "Firewall open for ALVR (9943-9944)" || fail "Firewall blocks ALVR ports 9943-9944"
+  fi
+else pass "No active firewall blocking VR ports"; fi
+
+# --- Report ----------------------------------------------------------------
+SUMMARY="VR readiness: $OK ok, $WARN warnings, $FAIL problems"
+if [[ $MODE == --login ]]; then
+  STAMP="${XDG_STATE_HOME:-$HOME/.local/state}/faradayos/vr-ready"
+  (( FAIL == 0 && WARN == 0 )) && { mkdir -p "$(dirname "$STAMP")"; touch "$STAMP"; exit 0; }
+  [[ -f $STAMP ]] && (( FAIL == 0 )) && exit 0
+  if have kdialog; then
+    kdialog --title "FaradayOS VR check" --msgbox "$(printf "%s\n\n%b\nRun 'faraday-vr-check' in a terminal any time to re-check." "$SUMMARY" "$REPORT")"
+  elif have notify-send; then notify-send "FaradayOS VR check" "$SUMMARY"; fi
+  exit 0
+fi
+printf "\e[38;5;208mFaradayOS VR readiness check\e[0m\n%b\n%s\n" "$REPORT" "$SUMMARY"
+(( FAIL == 0 ))

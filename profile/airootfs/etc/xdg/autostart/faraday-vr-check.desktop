@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=FaradayOS VR readiness check
+Exec=/usr/local/bin/faraday-vr-check --login
+NoDisplay=true
+X-KDE-autostart-phase=2
