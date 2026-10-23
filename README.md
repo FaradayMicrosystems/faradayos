@@ -15,7 +15,7 @@ It asks for your sudo password once, needs ~45 GB free and takes 20-60 min. Outp
 `out/FaradayOSv0.0.1.iso` + `.sha256`. Log in `build.log`.
 
 ## Install
-Boot the USB, open the installer, choose **offline install** (copies the live system, so all packages come along).
+Boot the USB and open the installer. It copies the live system, so every FaradayOS package and setting comes along. An **Optional apps** page offers the big apps that aren't on the ISO (LibreOffice, GIMP, Krita, Darktable, Blender, FreeCAD); they're ticked by default and downloaded during install. With no internet they're skipped and the install still completes. Installer overrides live in `profile/airootfs/usr/share/faraday/calamares/` and are applied by the launcher after it updates the installer.
 
 ## Layout
 - `profile/` archiso profile (CachyOS live profile + FaradayOS changes)

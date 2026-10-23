@@ -16,7 +16,6 @@ bash-completion
 bcachefs-tools
 bind
 birdfont
-blender
 bluedevil
 bluez
 bluez-hid2hci
@@ -66,7 +65,6 @@ cpu-x
 cpupower
 cryptsetup
 darkhttpd
-darktable
 ddrescue
 device-mapper
 dhcpcd
@@ -97,7 +95,6 @@ ffmpegthumbs
 filelight
 firefox
 flatpak
-freecad
 freerdp
 fsarchiver
 fuse2
@@ -105,7 +102,6 @@ fwupd
 gamemode
 gamescope
 gcc
-gimp
 git
 glances
 gnome-disk-utility
@@ -142,8 +138,6 @@ kdialog
 kinfocenter
 kio-admin
 konsole
-krita
-krita-plugin-gmic
 kscreen
 kwallet-pam
 kwalletmanager
@@ -163,7 +157,6 @@ libfido2
 libgsf
 libmythes
 libopenraw
-libreoffice-fresh
 libusb-compat
 libvncserver
 libwnck3

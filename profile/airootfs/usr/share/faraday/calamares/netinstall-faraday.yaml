@@ -1,0 +1,27 @@
+- name: "Office"
+  description: "LibreOffice suite (Writer, Calc, Impress)"
+  selected: true
+  packages:
+    - libreoffice-fresh
+- name: "Image editing"
+  description: "GIMP and Krita (with G'MIC filters)"
+  selected: true
+  packages:
+    - gimp
+    - krita
+    - krita-plugin-gmic
+- name: "Photography"
+  description: "Darktable RAW photo editor"
+  selected: true
+  packages:
+    - darktable
+- name: "3D"
+  description: "Blender"
+  selected: true
+  packages:
+    - blender
+- name: "CAD"
+  description: "FreeCAD"
+  selected: true
+  packages:
+    - freecad

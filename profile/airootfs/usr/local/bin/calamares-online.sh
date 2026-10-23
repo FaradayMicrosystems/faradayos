@@ -19,7 +19,7 @@ main() {
 
     local progname="$(basename "$0")"
     local log="/home/liveuser/cachy-install.log"
-    local mode="online"  # TODO: keep this line for now
+    local mode="offline"  # FaradayOS: copy the live system so all FaradayOS packages and settings are installed
 
     local SYSTEM=""
 
@@ -45,6 +45,13 @@ main() {
 EOF
 
     sudo cp "/usr/share/calamares/settings_${mode}.conf" /etc/calamares/settings.conf
+    # FaradayOS installer overrides, applied after the installer update above so they always win
+    sudo cp /usr/share/faraday/calamares/*.conf /usr/share/faraday/calamares/*.yaml /etc/calamares/modules/
+    sudo sed -i 's/^branding:.*/branding: faraday/' /etc/calamares/settings.conf
+    grep -q 'netinstall-faraday.conf' /etc/calamares/settings.conf || \
+      sudo sed -i 's/^instances:$/instances:\n- id:       faraday\n  module:   netinstall\n  config:   netinstall-faraday.conf/' /etc/calamares/settings.conf
+    grep -q 'netinstall@faraday' /etc/calamares/settings.conf || \
+      sudo sed -i '0,/^  - users$/s//  - users\n  - netinstall@faraday/' /etc/calamares/settings.conf
     exec pkexec-wrapper calamares -D6 >> $log
 }
 
