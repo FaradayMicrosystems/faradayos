@@ -15,11 +15,6 @@
   selected: true
   packages:
     - darktable
-- name: "3D"
-  description: "Blender"
-  selected: true
-  packages:
-    - blender
 - name: "CAD"
   description: "FreeCAD"
   selected: true
