@@ -1,0 +1,24 @@
+#!/bin/bash
+# FaradayOS installer step (offline install), run inside the new system just before its boot
+# images are built. The new system is a copy of the live USB, so it still carries the live USB's
+# boot-image settings (archiso presets and /etc/mkinitcpio.conf.d/archiso.conf), and only the main
+# kernel's file is copied into /boot. Building boot images from that fails with
+# "'/boot/vmlinuz-linux-cachyos-lts' must be readable", or would build live-USB boot images.
+# This does what CachyOS's online install does: normal settings, and every kernel in /boot.
+set -u
+rm -f /etc/mkinitcpio.conf.d/archiso.conf
+# Every preset here came from the live USB; recreate them from mkinitcpio's template
+rm -f /etc/mkinitcpio.d/*.preset
+template=/usr/share/mkinitcpio/hook.preset
+[ -f "$template" ] || { echo "faraday-prepare-kernels: $template missing" >&2; exit 1; }
+n=0
+for vmlinuz in /usr/lib/modules/*/vmlinuz; do
+  [ -f "$vmlinuz" ] || continue
+  pkgbase=$(cat "${vmlinuz%/vmlinuz}/pkgbase" 2>/dev/null) || continue
+  [ -n "$pkgbase" ] || continue
+  sed "s|%PKGBASE%|${pkgbase}|g" "$template" | install -Dm644 /dev/stdin "/etc/mkinitcpio.d/${pkgbase}.preset"
+  install -Dm644 "$vmlinuz" "/boot/vmlinuz-${pkgbase}"
+  echo "faraday-prepare-kernels: $pkgbase ready"
+  n=$((n + 1))
+done
+[ "$n" -gt 0 ] || { echo "faraday-prepare-kernels: no kernels found" >&2; exit 1; }

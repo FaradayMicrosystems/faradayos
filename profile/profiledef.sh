@@ -22,6 +22,7 @@ file_permissions=(
   ["/usr/local/bin/faraday-extras"]="0:0:755"
   ["/usr/local/bin/faraday-vr-check"]="0:0:755"
   ["/usr/local/bin/faraday-calamares-compat"]="0:0:755"
+  ["/usr/local/bin/faraday-prepare-kernels"]="0:0:755"
   ["/etc/skel/Desktop/install-faradayos.desktop"]="0:0:755"
   ["/etc/skel/Desktop/faraday-extras.desktop"]="0:0:755"
   ["/etc/shadow"]="0:0:400"
