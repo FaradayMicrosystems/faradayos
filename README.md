@@ -12,7 +12,7 @@ curl -fsSL https://raw.githubusercontent.com/FaradayMicrosystems/faradayos/iso-t
 ```
 irm https://raw.githubusercontent.com/FaradayMicrosystems/faradayos/iso-test/get-faradayos-iso.ps1 | iex
 ```
-Both download every piece, join them into `FaradayOSv0.0.1-test.iso` and check its SHA-256:
+Both download every piece, check each one against `pieces.sha256` (re-downloading any damaged piece), join them into `FaradayOSv0.0.1-test.iso` and check its SHA-256:
 `2e9b72ff23ee22ac3724ecfd56b82a911b221e889de119c242c3456b387d1ce8`
 
 Or clone just this branch and join locally:
