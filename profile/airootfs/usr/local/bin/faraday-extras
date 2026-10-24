@@ -1,5 +1,5 @@
 #!/bin/sh
 # Installs the AUR apps that couldn't be prebuilt into the ISO.
-paru -S --needed --skipreview alvr-bin wivrn-server wivrn-dashboard xrizer-git opencomposite-git ckan trayscale lm-studio-bin clutter-gtk ubuntu-wallpapers kali-wallpapers
+paru -S --needed --skipreview alvr-bin wivrn-server wivrn-dashboard xrizer-git opencomposite-git ckan trayscale lm-studio-bin ubuntu-wallpapers kali-wallpapers
 sudo faraday-vr-check --fix-system && faraday-vr-check
 echo; read -p "Done. Press Enter to close." _

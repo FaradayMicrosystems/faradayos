@@ -30,7 +30,7 @@ if [[ ! -t 1 && -z "${FARADAY_IN_TERM:-}" ]]; then
     esac
   done
 fi
-exec > >(tee "$LOG") 2>&1
+exec > >(trap '' INT TERM HUP; exec tee "$LOG") 2>&1  # tee ignores Ctrl+C so cleanup messages still show
 
 c(){ printf '\e[38;5;208m==> %s\e[0m\n' "$*"; }
 die(){ printf '\e[31m!! %s\e[0m\n' "$*"; exit 1; }
@@ -101,7 +101,7 @@ if ls "$WORK/localrepo"/*.pkg.tar.zst >/dev/null 2>&1; then
   repo-add -q "$WORK/localrepo/faraday.db.tar.zst" "$WORK/localrepo"/*.pkg.tar.zst
   printf '\n[faraday]\nSigLevel = Optional TrustAll\nServer = file://%s\n' "$WORK/localrepo" >> "$WORK/profile/pacman.conf"
   for p in "${BUILT[@]}"; do
-    case $p in cogl|clutter) ;; *) echo "$p" >> "$WORK/profile/packages.x86_64";; esac
+    echo "$p" >> "$WORK/profile/packages.x86_64"
   done
 fi
 
