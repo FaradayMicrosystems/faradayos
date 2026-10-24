@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Build FaradayOS (unattended)
+Comment=Update to the latest FaradayOS and build the ISO; asks for your password once, then needs nothing else
+Icon=media-optical
+Exec=sh -c '"$(dirname "$1")/build.sh" --unattended' _ %k
+Terminal=false

@@ -1,6 +1,18 @@
 #!/usr/bin/env bash
 # FaradayOS v0.0.1 ISO builder. Run on CachyOS as your normal user (it asks for your sudo password).
+#   ./build.sh               build from this folder; asks for your sudo password once
+#   ./build.sh --unattended  update to the latest FaradayOS, then build with no further input:
+#                            after your password, a temporary passwordless-sudo rule is added
+#                            for the build and always removed when it ends, fails or is cancelled
 set -uo pipefail
+UNATTENDED=0
+for a in "$@"; do
+  case $a in
+    --unattended|-y) UNATTENDED=1 ;;
+    -h|--help) sed -n '2,6p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+    *) echo "Unknown option: $a (try --help)"; exit 2 ;;
+  esac
+done
 VERSION="0.0.1"
 HERE="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
 WORK="${WORK:-$HERE/build}"
@@ -13,8 +25,8 @@ if [[ ! -t 1 && -z "${FARADAY_IN_TERM:-}" ]]; then
   for t in konsole alacritty kitty xterm; do
     command -v "$t" >/dev/null || continue
     case $t in
-      konsole) exec konsole --hold -e "$0" ;;
-      *) exec "$t" -e bash -c '"$0"; echo; read -rp "Press Enter to close"' "$0" ;;
+      konsole) exec konsole --hold -e "$0" "$@" ;;
+      *) exec "$t" -e bash -c '"$0" "$@"; echo; read -rp "Press Enter to close"' "$0" "$@" ;;
     esac
   done
 fi
@@ -25,11 +37,41 @@ die(){ printf '\e[31m!! %s\e[0m\n' "$*"; exit 1; }
 
 [[ $EUID -eq 0 ]] && die "Run this as your normal user, not root."
 command -v pacman >/dev/null || die "This needs CachyOS or Arch Linux."
+
+if (( UNATTENDED )) && [[ -z "${FARADAY_UPDATED:-}" ]] && git -C "$HERE" rev-parse --git-dir >/dev/null 2>&1; then
+  c "Updating to the latest FaradayOS"
+  before=$(sha256sum "$HERE/build.sh")
+  git -C "$HERE" pull --ff-only || die "git pull failed (local changes?). Commit or stash them, or run without --unattended."
+  if [[ "$(sha256sum "$HERE/build.sh")" != "$before" ]]; then
+    c "build.sh was updated; restarting with the new version"
+    export FARADAY_UPDATED=1
+    exec "$HERE/build.sh" "$@"
+  fi
+fi
 free_gb=$(df -BG --output=avail "$HERE" | tail -1 | tr -dc 0-9)
 (( free_gb >= 45 )) || die "Need at least 45 GB free here (have ${free_gb} GB)."
 
 c "Asking for sudo once (kept alive during the build)"
 sudo -v || die "sudo failed"
+if (( UNATTENDED )); then
+  SUDO_RULE=/etc/sudoers.d/zz-faradayos-build  # zz: sudo reads this folder in name order and the last match wins
+  _drop_rule(){
+    sudo -n rm -f "$SUDO_RULE" 2>/dev/null || sudo rm -f "$SUDO_RULE" 2>/dev/null
+    if sudo -n test -e "$SUDO_RULE" 2>/dev/null || [[ -e $SUDO_RULE ]]; then
+      printf '\e[31m!! Could not remove %s. Remove it yourself: sudo rm %s\e[0m\n' "$SUDO_RULE" "$SUDO_RULE"
+    else printf '\e[38;5;208m==> Removed temporary sudo rule\e[0m\n'; fi
+  }
+  trap _drop_rule EXIT
+  trap 'exit 130' INT TERM HUP
+  tmp=$(mktemp); printf '%s ALL=(ALL) NOPASSWD: ALL\n' "$USER" > "$tmp"
+  if visudo -cqf "$tmp" 2>/dev/null || sudo visudo -cqf "$tmp"; then
+    sudo install -m 440 -o root -g root "$tmp" "$SUDO_RULE" || die "Couldn't add temporary sudo rule"
+  else
+    rm -f "$tmp"; die "Temporary sudo rule failed validation"
+  fi
+  rm -f "$tmp"
+  c "Unattended: temporary passwordless sudo for $USER until this build ends"
+fi
 while true; do sudo -n true; sleep 60; kill -0 "$$" 2>/dev/null || exit; done 2>/dev/null &
 
 c "Installing build tools"

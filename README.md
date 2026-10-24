@@ -11,6 +11,17 @@ cd faradayos
 Then **double-click `Build-FaradayOS.desktop`** (or `build.sh`) in Dolphin. KDE asks once whether to trust/execute it: say yes.
 Or run `./build.sh` in a terminal.
 
+### Unattended build
+```
+./build.sh --unattended
+```
+(or double-click **Build-FaradayOS-Unattended.desktop**). It pulls the latest FaradayOS, asks for your sudo password once, then needs nothing else. For the length of the build it adds a temporary passwordless-sudo rule for your user (`/etc/sudoers.d/zz-faradayos-build`), which is removed when the build finishes, fails or is cancelled. If removal ever fails, the build says so and gives you the `sudo rm` command.
+
+One command, from scratch or to update an existing clone:
+```
+bash -c '[ -d faradayos ] || git clone https://github.com/FaradayMicrosystems/faradayos.git; cd faradayos && ./build.sh --unattended'
+```
+
 It asks for your sudo password once, needs ~45 GB free and takes 20-60 min. Output:
 `out/FaradayOSv0.0.1.iso` + `.sha256`. Log in `build.log`.
 
