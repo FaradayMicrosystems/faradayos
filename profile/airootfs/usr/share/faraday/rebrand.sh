@@ -65,3 +65,7 @@ pacman -Qq ubuntu-wallpapers >/dev/null 2>&1 && \
 pacman -Qq kali-wallpapers >/dev/null 2>&1 && \
   _link_walls Kali $(pacman -Qlq kali-wallpapers | grep -E '\.(jpg|jpeg|png|webp|svg)$' | grep -v '^/usr/share/wallpapers/' | xargs -r -n1 dirname | sort -u)
 true
+# GPU-failure screen (cachyos-drm-awaiter): FaradayOS help link and log name
+F=/usr/lib/systemd/scripts/drm-failure-handler
+[ -f $F ] && sed -i 's#https://wiki.cachyos.org#https://github.com/FaradayMicrosystems/faradayos#g; s#/cachyos-bugreport-\$(date#/faradayos-bugreport-$(date#' $F
+true

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# FaradayOS VR readiness check for Steam, SteamVR, WiVRn and ALVR (AMD GPUs).
+# FaradayOS VR readiness check for Steam, SteamVR, WiVRn and ALVR (AMD, NVIDIA and Intel GPUs).
 #   faraday-vr-check              run the check and print a report
 #   faraday-vr-check --login      run at login; shows a desktop notice only if something needs attention
 #   faraday-vr-check --fix-system run as root at boot: firewall ports + SteamVR compositor permission
@@ -44,16 +44,32 @@ fix_system(){
 # --- Steam -----------------------------------------------------------------
 pkg steam && pass "Steam installed" || fail "Steam not installed (sudo pacman -S steam)"
 grep -q '^\[multilib\]' /etc/pacman.conf && pass "multilib (32-bit) repo enabled" || fail "multilib repo disabled in /etc/pacman.conf"
-for p in lib32-mesa lib32-vulkan-radeon lib32-pipewire lib32-gamemode; do
+for p in lib32-mesa lib32-pipewire lib32-gamemode; do
   pkg "$p" && pass "$p" || fail "$p missing (Steam/Proton 32-bit dependency)"
 done
 pkg gamemode && pass "GameMode installed" || warn "GameMode not installed"
 
-# --- GPU / Vulkan ----------------------------------------------------------
-pkg vulkan-radeon && pass "AMD Vulkan driver (RADV)" || fail "vulkan-radeon missing"
+# --- GPU / Vulkan (AMD, NVIDIA or Intel) -----------------------------------
+GPUS=$(lspci -n 2>/dev/null | grep -E ' 03[0-9a-f]{2}: ' || true)
+check_vendor(){ # $1 PCI vendor id, $2 name, $3 64-bit Vulkan pkg, $4 32-bit Vulkan pkg
+  grep -q " $1:" <<<"$GPUS" || return 0
+  pkg "$3" && pass "$2 Vulkan driver ($3)" || fail "$2 GPU found but $3 is missing"
+  pkg "$4" && pass "$2 32-bit Vulkan driver ($4)" || fail "$4 missing (needed by Steam/Proton)"
+}
+check_vendor 1002 AMD    vulkan-radeon lib32-vulkan-radeon
+check_vendor 10de NVIDIA nvidia-utils  lib32-nvidia-utils
+check_vendor 8086 Intel  vulkan-intel  lib32-vulkan-intel
+if grep -q ' 10de:' <<<"$GPUS"; then
+  lsmod 2>/dev/null | grep -q '^nvidia_drm' && pass "NVIDIA driver loaded" \
+    || fail "NVIDIA GPU found but its driver isn't loaded (reboot; check Secure Boot is off)"
+fi
+if [[ $(grep -c . <<<"$GPUS") -gt 1 ]]; then
+  pass "Hybrid graphics: Steam picks the dedicated GPU via switcheroo-control"
+  systemctl is-active --quiet switcheroo-control || warn "switcheroo-control not running (sudo systemctl enable --now switcheroo-control)"
+fi
 if have vulkaninfo; then
-  vulkaninfo --summary 2>/dev/null | grep -qiE 'RADV|AMD' \
-    && pass "Vulkan sees an AMD GPU" || fail "Vulkan cannot see an AMD GPU"
+  vulkaninfo --summary 2>/dev/null | grep -qiE 'PHYSICAL_DEVICE_TYPE_(DISCRETE|INTEGRATED)_GPU' \
+    && pass "Vulkan sees a GPU" || fail "Vulkan cannot see any GPU"
 else warn "vulkaninfo not available, GPU check skipped"; fi
 
 # --- SteamVR ---------------------------------------------------------------

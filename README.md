@@ -1,6 +1,6 @@
 # FaradayOS
 
-CachyOS-based gaming distro: KDE Plasma (Wayland), AMD-tuned, live USB + Calamares disk install, FaradayOS branding throughout.
+CachyOS-based gaming distro: KDE Plasma (Wayland), supports AMD, NVIDIA (RTX 20 / GTX 16 series and newer) and Intel graphics, including hybrid laptops, live USB + Calamares disk install, FaradayOS branding throughout.
 
 ## Build the ISO (on your CachyOS PC)
 
@@ -32,3 +32,6 @@ CachyOS repo, keyring and mirrorlist names are kept so `pacman -Syu` keeps worki
 
 ## VR
 Steam, WiVRn (server + dashboard), ALVR and xrizer/OpenComposite are preinstalled. SteamVR itself is installed from inside Steam (it needs your Steam account): open Steam, install **SteamVR**, then reboot once so FaradayOS can grant it realtime priority.
+
+## Graphics hardware
+The ISO carries drivers for AMD (RADV), NVIDIA (open kernel modules, RTX 20 / GTX 16 series and newer), Intel (ANV) and the Nouveau fallback, plus `switcheroo-control` so hybrid laptops run games on the dedicated GPU. On install, NVIDIA's ~1.5 GB of drivers are removed from machines without an NVIDIA card. Older NVIDIA cards (GTX 10 series and earlier) need NVIDIA's legacy driver, which isn't included.

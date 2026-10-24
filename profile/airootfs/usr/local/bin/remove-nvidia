@@ -45,4 +45,17 @@ if [[ "${_check_not_running_vm}" -eq 0 ]]; then
   _clean_vm_packages
 fi
 
+# FaradayOS ships NVIDIA drivers for every machine; remove them when no NVIDIA GPU is present
+# (they are ~1.5 GB and would otherwise load on AMD/Intel-only systems).
+_clean_nvidia_packages() {
+  local pkgs=() p
+  for p in linux-cachyos-nvidia-open linux-cachyos-lts-nvidia-open nvidia-prime nvidia-settings lib32-nvidia-utils nvidia-utils; do
+    pacman -Qq "$p" &>/dev/null && pkgs+=("$p")
+  done
+  [ ${#pkgs[@]} -gt 0 ] && pacman -Rdd --noconfirm "${pkgs[@]}" || true
+}
+if ! lspci -n 2>/dev/null | grep -Eq ' 03[0-9a-f]{2}: 10de:'; then
+  _clean_nvidia_packages
+fi
+
 # vim:set ft=bash sw=2 sts=2 et:
