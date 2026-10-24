@@ -59,7 +59,45 @@ local _packages_to_remove=(
   done
 }
 
+# FaradayOS: the installed system is a copy of the live USB, so undo the live USB's
+# passwordless root and autologin. Runs inside the new system (chroot).
+_clean_live_security() {
+  # Passwordless sudo and polkit for wheel (every installed user is in wheel)
+  rm -f /etc/sudoers.d/g_wheel /etc/polkit-1/rules.d/49-nopasswd_global.rules
+  # Keep password-protected sudo for wheel. The installer normally writes this (users.conf
+  # sudoersGroup: wheel); add it only if no remaining rule grants it, so nobody is locked out.
+  if ! grep -rqsE '^[[:space:]]*%wheel[[:space:]]+ALL' /etc/sudoers /etc/sudoers.d/; then
+    printf '%%wheel ALL=(ALL:ALL) ALL\n' > /etc/sudoers.d/10-faraday-wheel
+    chmod 440 /etc/sudoers.d/10-faraday-wheel
+    visudo -cqf /etc/sudoers.d/10-faraday-wheel || rm -f /etc/sudoers.d/10-faraday-wheel
+  fi
+
+  # sshd drop-in: PermitRootLogin yes + PasswordAuthentication yes (sshd is enabled on installs)
+  rm -f /etc/ssh/sshd_config.d/10-archiso.conf
+
+  # liveuser autologin on tty1 and in the login screen (only the live USB's own files)
+  rm -rf /etc/systemd/system/getty@tty1.service.d/autologin.conf
+  rmdir /etc/systemd/system/getty@tty1.service.d 2>/dev/null || true
+  grep -qs '^User=liveuser' /etc/plasmalogin.conf.d/autologin.conf && rm -f /etc/plasmalogin.conf.d/autologin.conf
+
+  # The live USB's root password is the public default "faraday"; lock root on the installed
+  # system unless the installer set its own root password
+  local live_root_hash='$6$UQAhIoTZ.ng76.T0$syyV8JiY.KXEGR6z3yCXkG3PlXoy.W6xLFAAZWiyKZeXa6LNk.7esc4ipN4yOhQOOUUdaftre1DcxfuSTCwhJ.'
+  local root_hash; root_hash="$(getent shadow root | cut -d: -f2)"
+  if [[ -z "$root_hash" || "$root_hash" == "$live_root_hash" ]]; then
+    usermod -p '!' root
+  fi
+
+  # Live-only services: screen reader, ALSA unmuter, and pacman-init (re-creates the
+  # package-signing keyring on every boot; with its tmpfs mount it would wipe it)
+  local u
+  for u in livecd-talk.service livecd-alsa-unmuter.service pacman-init.service etc-pacman.d-gnupg.mount; do
+    rm -f /etc/systemd/system/*.wants/"$u" /etc/systemd/system/"$u"
+  done
+}
+
 _clean_packages
 _clean_files
+_clean_live_security
 
 # vim:set ft=bash sw=2 sts=2 et:
