@@ -74,7 +74,25 @@ if (( UNATTENDED )); then
 fi
 while true; do sudo -n true; sleep 60; kill -0 "$$" 2>/dev/null || exit; done 2>/dev/null &
 
+# pacman allows one package operation at a time and marks it with a lock file. Wait while another
+# package manager (updater, software store) really is running; clear the lock only if nothing
+# holds it, which means an earlier run was interrupted and left it behind.
+wait_pacman_lock(){
+  local lck=/var/lib/pacman/db.lck waited=0
+  while [[ -e $lck ]]; do
+    if sudo fuser -s "$lck" 2>/dev/null || pgrep -x 'pacman|paru|yay|pamac|pamac-daemon|octopi|packagekitd' >/dev/null; then
+      (( waited == 0 )) && c "Another package manager is running; waiting for it to finish (up to 15 min)"
+      (( waited >= 900 )) && die "Package manager still busy after 15 min. Close it and run again."
+      sleep 10; waited=$((waited + 10))
+    else
+      c "Removing stale pacman lock left by an interrupted run"
+      sudo rm -f "$lck"
+    fi
+  done
+}
+
 c "Installing build tools"
+wait_pacman_lock
 sudo pacman -S --needed --noconfirm archiso grub git base-devel squashfs-tools libisoburn \
   dosfstools mtools erofs-utils edk2-shell memtest86+ memtest86+-efi syslinux || die "Tool install failed"
 
@@ -100,6 +118,7 @@ while read -r p; do
   [[ -z $p ]] && continue
   c "  AUR: $p"
   if ls "$WORK/localrepo/$p"-[0-9]*.pkg.tar.zst >/dev/null 2>&1; then BUILT+=("$p"); continue; fi
+  wait_pacman_lock
   ( cd "$WORK/aur" && git clone -q "https://aur.archlinux.org/$p.git" && cd "$p" \
     && PKGDEST="$WORK/localrepo" makepkg -si --noconfirm --needed --skippgpcheck ) && BUILT+=("$p") \
     || printf '\e[33m   skipped %s\e[0m\n' "$p"
@@ -120,6 +139,7 @@ cp /usr/bin/mkarchiso "$WORK/mkarchiso"
 sed -i 's/_run_once _make_customize_airootfs/_run_once _make_customize_airootfs\n\trm -f "${pacstrap_dir}\/usr\/lib\/systemd\/system\/timers.target.wants\/archlinux-keyring-wkd-sync.timer"\n/' "$WORK/mkarchiso"
 
 c "Building the ISO (20-60 min)"
+wait_pacman_lock
 sudo "$WORK/mkarchiso" -v -w "$WORK/work" -o "$OUT" "$WORK/profile" || die "mkarchiso failed - see $LOG"
 
 built=$(ls -t "$OUT"/FaradayOSv*.iso 2>/dev/null | grep -v "FaradayOSv${VERSION}.iso$" | head -1)
