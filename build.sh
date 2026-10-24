@@ -83,6 +83,9 @@ sudo rm -rf "$WORK/work"
 rm -rf "$WORK/profile" "$WORK/aur"
 mkdir -p "$WORK/localrepo" "$WORK/aur" "$OUT"
 cp -r "$HERE/profile" "$WORK/profile"
+# Build-time files CachyOS's own ISO builder writes (util-iso.sh); the installer reads version-tag
+echo "$VERSION-$(date +%y%m%d)" > "$WORK/profile/airootfs/etc/version-tag"
+echo "desktop" > "$WORK/profile/airootfs/etc/edition-tag"
 
 c "Building AUR packages (failures are skipped; they go in the desktop 'extras' installer)"
 BUILT=()
