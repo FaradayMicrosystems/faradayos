@@ -160,6 +160,7 @@ libdvdcss
 libfido2
 libgsf
 libmythes
+libnotify
 libopenraw
 libusb-compat
 libva-intel-driver

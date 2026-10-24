@@ -1,6 +1,36 @@
 #!/bin/bash
 
+_notify(){ command -v notify-send >/dev/null && notify-send -a "FaradayOS" -i /usr/share/faraday/logo.png "FaradayOS installer" "$1" 2>/dev/null || true; }
+
+# Run once at a time: this script reinstalls the installer before starting it, so a second launch
+# would replace the installer's plugin files while the first one is loading them, making most
+# modules fail with "Calamares Initialization Failed".
+exec 9>"/tmp/faradayos-installer.lock"
+if ! flock -n 9 || pgrep -x calamares >/dev/null; then
+    _notify "The installer is already starting or open."
+    exit 0
+fi
+
+# At boot the live system sets up its package-signing keys (pacman-init); this script resets
+# them, so wait for that to finish first. Then wait for any other package operation to finish.
+_wait_for_system(){
+    local i=0
+    while [ "$(systemctl show -p ActiveState --value pacman-init.service 2>/dev/null)" = "activating" ] && [ $i -lt 300 ]; do
+        sleep 2; i=$((i + 2))
+    done
+    local lck=/var/lib/pacman/db.lck; i=0
+    while [ -e $lck ] && [ $i -lt 600 ]; do
+        if sudo fuser -s $lck 2>/dev/null || pgrep -x 'pacman|pamac|pamac-daemon|octopi|packagekitd' >/dev/null; then
+            sleep 2; i=$((i + 2))
+        else
+            sudo rm -f $lck   # left behind by an interrupted operation
+        fi
+    done
+}
+
 main() {
+    _notify "Preparing the installer. This can take a minute or two."
+    _wait_for_system
     # Remove current keyring first, to complete initiate it
     sudo rm -rf /etc/pacman.d/gnupg
     # We are using this, because archlinux is signing the keyring often with a newly created keyring
