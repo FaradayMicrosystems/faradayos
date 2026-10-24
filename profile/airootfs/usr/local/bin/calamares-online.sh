@@ -33,6 +33,7 @@ main() {
     echo "USING ISO VERSION: ${ISO_VERSION}"
 
     sudo pacman -Sy --noconfirm cachyos-calamares-next
+    sudo /usr/local/bin/faraday-calamares-compat >> "$log" 2>&1 || true
 
     # Get Hardware Informations
     inxi -F > "$log"

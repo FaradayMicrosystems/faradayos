@@ -1,0 +1,31 @@
+#!/bin/bash
+# FaradayOS: keep the installer (cachyos-calamares-next) runnable when Arch updates Boost before
+# CachyOS rebuilds the installer. Boost puts its version in each library's filename, so the older
+# libraries the installer was built against can sit beside the current ones without conflict.
+# Finds which Boost libraries the installer can't load, fetches that Boost version from Arch's
+# official package archive and extracts only those files. Does nothing when nothing is missing.
+set -uo pipefail
+ARCHIVE=https://archive.archlinux.org/packages/b/boost-libs
+LIST=/usr/share/faraday/calamares-compat-libs.txt
+
+missing=$( { ldd /usr/bin/calamares; find /usr/lib -maxdepth 1 -name 'libcalamares*.so*' -exec ldd {} \; ;
+             find /usr/lib/calamares -name '*.so' -exec ldd {} \; ; } 2>/dev/null \
+           | grep -o 'libboost_[A-Za-z0-9_]*\.so\.[0-9.]*[0-9] => not found' | cut -d' ' -f1 | sort -u)
+[ -z "$missing" ] && { echo "faraday-calamares-compat: installer libraries OK"; exit 0; }
+ver=$(head -1 <<<"$missing" | grep -o '\.so\.[0-9.]*' | cut -c5-)
+echo "faraday-calamares-compat: installer needs Boost $ver:"; echo "$missing" | sed 's/^/  /'
+
+pkg=$(curl -fsS -m 60 "$ARCHIVE/" | grep -o "boost-libs-${ver//./\\.}-[0-9.]*-x86_64\.pkg\.tar\.zst" | sort -uV | tail -1)
+[ -z "$pkg" ] && { echo "faraday-calamares-compat: boost-libs $ver not found in the Arch archive"; exit 1; }
+tmp=$(mktemp -d); trap 'rm -rf "$tmp"' EXIT
+curl -fsSL -m 600 --retry 3 "$ARCHIVE/$pkg" -o "$tmp/$pkg" || { echo "download failed"; exit 1; }
+bsdtar -xf "$tmp/$pkg" -C "$tmp" usr/lib || exit 1
+mkdir -p "$(dirname "$LIST")"
+for f in "$tmp"/usr/lib/libboost_*.so."$ver"; do
+  [ -e "/usr/lib/$(basename "$f")" ] && continue          # never touch files a package owns
+  cp -a "$f" /usr/lib/ && echo "/usr/lib/$(basename "$f")" >> "$LIST"
+done
+ldconfig
+still=$(ldd /usr/bin/calamares 2>/dev/null | grep -c 'libboost.*not found' || true)
+[ "$still" -eq 0 ] && echo "faraday-calamares-compat: added Boost $ver libraries; installer can start" \
+                   || { echo "faraday-calamares-compat: installer still has missing libraries"; exit 1; }

@@ -58,4 +58,10 @@ if ! lspci -n 2>/dev/null | grep -Eq ' 03[0-9a-f]{2}: 10de:'; then
   _clean_nvidia_packages
 fi
 
+# Remove Boost libraries added only so the live installer could start (faraday-calamares-compat)
+if [ -f /usr/share/faraday/calamares-compat-libs.txt ]; then
+  while read -r f; do pacman -Qqo "$f" &>/dev/null || rm -f "$f"; done < /usr/share/faraday/calamares-compat-libs.txt
+  rm -f /usr/share/faraday/calamares-compat-libs.txt; ldconfig
+fi
+
 # vim:set ft=bash sw=2 sts=2 et:
