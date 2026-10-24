@@ -84,8 +84,15 @@ rm -rf "$WORK/profile" "$WORK/aur"
 mkdir -p "$WORK/localrepo" "$WORK/aur" "$OUT"
 cp -r "$HERE/profile" "$WORK/profile"
 # Build-time files CachyOS's own ISO builder writes (util-iso.sh); the installer reads version-tag
-echo "$VERSION-$(date +%y%m%d)" > "$WORK/profile/airootfs/etc/version-tag"
+# CachyOS's Welcome app compares version-tag with CachyOS's latest ISO and warns "older version of
+# CachyOS ISO" on any mismatch. Use the CachyOS version this build is based on, so a fresh build
+# passes and an old one warns as it ages; FaradayOS's own version goes in faradayos-version.
+cachy_ver=$(curl -fsS -m 15 https://cachyos.org/versions.json 2>/dev/null | grep -o '"desktopISOVersion"[^,}]*' | grep -o '[0-9]\{6\}' || true)
+if [[ -n $cachy_ver ]]; then c "Based on CachyOS ISO version $cachy_ver"
+else cachy_ver=$(date +%y%m%d); printf '\e[33m   Could not reach cachyos.org; installer may show a "testing ISO" note\e[0m\n'; fi
+echo "$cachy_ver" > "$WORK/profile/airootfs/etc/version-tag"
 echo "desktop" > "$WORK/profile/airootfs/etc/edition-tag"
+echo "$VERSION" > "$WORK/profile/airootfs/etc/faradayos-version"
 
 c "Building AUR packages (failures are skipped; they go in the desktop 'extras' installer)"
 BUILT=()
