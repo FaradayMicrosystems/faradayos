@@ -148,6 +148,17 @@ sudo chown "$USER:" "$ISO"
 ( cd "$OUT" && sha256sum "$(basename "$ISO")" > "$(basename "$ISO").sha256" )
 sudo rm -rf "$WORK/work"
 
+# Move the finished ISO and its checksum to the Desktop (built in $OUT first, moved only once complete)
+DESKTOP="$(xdg-user-dir DESKTOP 2>/dev/null || true)"
+[[ -n $DESKTOP && $DESKTOP != "$HOME" ]] || DESKTOP="$HOME/Desktop"
+mkdir -p "$DESKTOP"
+if mv -f "$ISO" "$ISO.sha256" "$DESKTOP/"; then
+  ISO="$DESKTOP/$(basename "$ISO")"
+  c "Moved the ISO to $DESKTOP"
+else
+  printf '\e[33m   Could not move the ISO to %s; it is still in %s\e[0m\n' "$DESKTOP" "$OUT"
+fi
+
 c "Done!"
 ls -lh "$ISO"
 echo "Flash it: copy to your Ventoy stick, or:  sudo dd if=\"$ISO\" of=/dev/sdX bs=4M status=progress oflag=sync"
