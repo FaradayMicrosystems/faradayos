@@ -22,6 +22,7 @@ local _packages_to_remove=(
   cachyos-calamares-refind
   cachyos-calamares
   cachyos-calamares-config
+  cachyos-calamares-next
   edk2-shell
   boost-libs
   doxygen
@@ -49,7 +50,13 @@ local _packages_to_remove=(
   local xx
   # @ does one by one to avoid errors in the entire process
   # taken from Erik Dubois script
-  for xx in "${_packages_to_remove[@]}"; do pacman -Rsnc "$xx" --noconfirm; done
+  # FaradayOS: no -c (cascade). Cascade also removed every package depending on a target, which
+  # took Blender, qBittorrent, Snapper, base-devel and optional apps like Krita off new installs.
+  # Without it, pacman refuses to remove a package something still needs, so it's kept.
+  for xx in "${_packages_to_remove[@]}"; do
+    pacman -Qq "$xx" &>/dev/null || continue
+    pacman -Rsn "$xx" --noconfirm &>/dev/null || echo "removeun: kept $xx (needed by other packages)"
+  done
 }
 
 _clean_packages
