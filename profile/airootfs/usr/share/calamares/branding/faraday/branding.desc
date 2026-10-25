@@ -3,10 +3,10 @@ welcomeStyleCalamares: true
 strings:
     productName: FaradayOS
     shortProductName: Faraday
-    version: 0.0.1
-    shortVersion: 0.0.1
-    versionedName: FaradayOS 0.0.1
-    shortVersionedName: Faraday 0.0.1
+    version: 0.0.64
+    shortVersion: 0.0.64
+    versionedName: FaradayOS 0.0.64
+    shortVersionedName: Faraday 0.0.64
     bootloaderEntryName: FaradayOS
 images:
     productLogo: "/usr/share/faraday/logo.png"
