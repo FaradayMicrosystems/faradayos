@@ -87,6 +87,10 @@ EOF
       sudo sed -i 's/^instances:$/instances:\n- id:       faraday_kernels\n  module:   shellprocess\n  config:   shellprocess-faraday-kernels.conf/' /etc/calamares/settings.conf
     grep -q 'shellprocess@faraday_kernels' /etc/calamares/settings.conf || \
       sudo sed -i '0,/^  - initcpio$/s//  - shellprocess@faraday_kernels\n  - initcpio/' /etc/calamares/settings.conf
+    grep -q 'shellprocess-faraday-keyring.conf' /etc/calamares/settings.conf || \
+      sudo sed -i 's/^instances:$/instances:\n- id:       faraday_keyring\n  module:   shellprocess\n  config:   shellprocess-faraday-keyring.conf/' /etc/calamares/settings.conf
+    grep -q 'shellprocess@faraday_keyring' /etc/calamares/settings.conf || \
+      sudo sed -i '0,/^  - packages@offline$/s//  - shellprocess@faraday_keyring\n  - packages@offline/' /etc/calamares/settings.conf
     exec pkexec-wrapper calamares -D6 >> $log
 }
 

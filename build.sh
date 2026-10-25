@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# FaradayOS v0.0.64 ISO builder. Run on CachyOS as your normal user (it asks for your sudo password).
+# FaradayOS v0.0.65 ISO builder. Run on CachyOS as your normal user (it asks for your sudo password).
 #   ./build.sh               build from this folder; asks for your sudo password once
 #   ./build.sh --unattended  update to the latest FaradayOS, then build with no further input:
 #                            after your password, a temporary passwordless-sudo rule is added
@@ -13,7 +13,7 @@ for a in "$@"; do
     *) echo "Unknown option: $a (try --help)"; exit 2 ;;
   esac
 done
-VERSION="0.0.64"
+VERSION="0.0.65"
 HERE="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
 WORK="${WORK:-$HERE/build}"
 OUT="${OUT:-$HERE/out}"

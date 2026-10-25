@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034
 
-iso_name="FaradayOSv0.0.64"
+iso_name="FaradayOSv0.0.65"
 iso_label="FARADAY_001"
 iso_publisher="FaradayOS <https://github.com/FaradayMicrosystems>"
 iso_application="FaradayOS Live"
-iso_version="0.0.64"
+iso_version="0.0.65"
 install_dir="arch"
 buildmodes=('iso')
 ## GRUB
@@ -23,6 +23,7 @@ file_permissions=(
   ["/usr/local/bin/faraday-vr-check"]="0:0:755"
   ["/usr/local/bin/faraday-calamares-compat"]="0:0:755"
   ["/usr/local/bin/faraday-prepare-kernels"]="0:0:755"
+  ["/usr/local/bin/faraday-init-keyring"]="0:0:755"
   ["/etc/skel/Desktop/install-faradayos.desktop"]="0:0:755"
   ["/etc/skel/Desktop/faraday-extras.desktop"]="0:0:755"
   ["/etc/shadow"]="0:0:400"

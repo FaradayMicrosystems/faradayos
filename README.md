@@ -23,7 +23,7 @@ bash -c '[ -d faradayos ] || git clone https://github.com/FaradayMicrosystems/fa
 ```
 
 It asks for your sudo password once, needs ~45 GB free and takes 20-60 min. Output:
-`out/FaradayOSv0.0.64.iso` + `.sha256`. Log in `build.log`.
+`out/FaradayOSv0.0.65.iso` + `.sha256`. Log in `build.log`.
 
 ## Install
 Boot the USB and open the installer. It copies the live system, so every FaradayOS package and setting comes along. An **Optional apps** page offers the big apps that aren't on the ISO (LibreOffice, GIMP, Krita, Darktable, FreeCAD); they're ticked by default and downloaded during install. With no internet they're skipped and the install still completes. Installer overrides live in `profile/airootfs/usr/share/faraday/calamares/` and are applied by the launcher after it updates the installer.

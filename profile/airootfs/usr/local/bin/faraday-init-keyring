@@ -1,0 +1,26 @@
+#!/bin/bash
+# FaradayOS installer step (offline install), run inside the new system before the installer's
+# package step. The new system is a copy of the live USB image, which has no package-signing
+# keyring (the live USB builds one in memory at boot). Without one, the package step's
+# "pacman -Su" fails with "required key missing from keyring" as soon as any Arch package has
+# an update, and the install stops with "Package Manager error". This builds the new system its
+# own keyring, the same way CachyOS's online install does.
+exec 2>&1
+set -u
+G=/etc/pacman.d/gnupg
+_stop_gpg(){ gpgconf --homedir "$G" --kill all >/dev/null 2>&1 || true; }   # leftover agents keep the disk busy
+trap _stop_gpg EXIT
+
+rm -rf "$G"
+pacman-key --init || { echo "faraday-init-keyring: pacman-key --init failed"; exit 1; }
+pacman-key --populate archlinux cachyos || { echo "faraday-init-keyring: populating keys failed"; exit 1; }
+
+# Pick up signing keys newer than the ISO. Needs internet; without it the package step is skipped
+# anyway, so a failure here is not fatal.
+for i in 1 2 3; do
+  pacman -Sy --noconfirm --needed archlinux-keyring cachyos-keyring && break
+  echo "faraday-init-keyring: keyring update attempt $i failed"; sleep 3
+done
+pacman-key --populate archlinux cachyos || true
+echo "faraday-init-keyring: keyring ready"
+exit 0
