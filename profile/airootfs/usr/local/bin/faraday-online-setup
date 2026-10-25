@@ -1,0 +1,144 @@
+#!/bin/bash
+# FaradayOS installer step for the online install (CachyOS's maintained install route).
+# Runs on the live USB, after the installer has built a fresh CachyOS system in $1 (the new
+# system's root, with /proc, /sys, /dev and /run mounted) and before its boot images are made.
+# It turns that system into FaradayOS:
+#   1. installs FaradayOS's package list from the online repos
+#   2. installs the AUR apps that were built into the ISO
+#   3. adds the NVIDIA driver for any extra CachyOS kernel (the installer's driver step ran
+#      before those kernels existed)
+#   4. copies FaradayOS's own files (theme, branding, settings) - never the live USB's
+#      live-only settings (passwordless sudo, autologin, live services, ...)
+#   5. enables FaradayOS's services and applies the branding
+# Packages that can't be installed are skipped and listed in /var/log/faradayos-install.log,
+# so one bad package can't stop the whole install.
+exec 2>&1
+set -u
+ROOT="${1:-}"
+[[ -n "$ROOT" && -d "$ROOT/etc" && "$ROOT" != "/" ]] || { echo "faraday-online-setup: invalid target '$ROOT'"; exit 1; }
+SRC=/usr/share/faraday/install
+LOG="$ROOT/var/log/faradayos-install.log"
+mkdir -p "$ROOT/var/log"
+say(){ echo "faraday-online-setup: $*" | tee -a "$LOG"; }
+C(){ chroot "$ROOT" /usr/bin/env PATH=/usr/local/sbin:/usr/local/bin:/usr/bin "$@" </dev/null; }
+PAC=(pacman --noconfirm --noprogressbar --disable-download-timeout)
+_stop_gpg(){ C gpgconf --homedir /etc/pacman.d/gnupg --kill all >/dev/null 2>&1 || true; }
+trap _stop_gpg EXIT
+say "started $(date -u '+%F %T UTC')"
+
+# ---- 1. FaradayOS package list --------------------------------------------------------------
+# Live-USB / installer tools, and packages the installer itself chooses for this hardware:
+# GPU drivers (chwd) and the bootloader (installer's bootloader choice; limine-mkinitcpio-hook
+# would also clash with the installer's temporary kernel hook).
+EXCLUDE=" cachyos-calamares-next cachyos-cli-installer-new mkinitcpio-archiso memtest86+ memtest86+-efi
+ syslinux edk2-shell arch-install-scripts squashfs-tools gparted gpart tcpdump darkhttpd
+ nvidia-utils lib32-nvidia-utils nvidia-settings nvidia-prime linux-cachyos-nvidia-open
+ linux-cachyos-lts-nvidia-open limine limine-mkinitcpio-hook limine-snapper-sync limine-entry-tool
+ cachyos-snapper-support grub os-prober "
+mapfile -t AUR_FILES < <(ls "$SRC"/aur/*.pkg.tar.zst 2>/dev/null)
+AUR_NAMES=" "
+for f in "${AUR_FILES[@]}"; do AUR_NAMES+="$(bsdtar -xOf "$f" .PKGINFO 2>/dev/null | sed -n 's/^pkgname = //p') "; done
+
+wanted=()
+while read -r p; do
+  p="${p%%#*}"; p="${p//[[:space:]]/}"
+  [[ -z "$p" || "$EXCLUDE" == *" $p "* || "$AUR_NAMES" == *" $p "* ]] && continue
+  wanted+=("$p")
+done < "$SRC/packages.x86_64"
+
+C "${PAC[@]}" -Sy >/dev/null || say "warning: could not refresh package databases"
+available=" $(C pacman -Slq 2>/dev/null | tr '\n' ' ') "
+repo=() missing=()
+for p in "${wanted[@]}"; do
+  if [[ "$available" == *" $p "* ]]; then repo+=("$p"); else missing+=("$p"); fi
+done
+((${#missing[@]})) && say "not in the repos, skipped: ${missing[*]}"
+
+failed=()
+if ((${#repo[@]})); then
+  say "installing ${#repo[@]} packages (several GB, this takes a while)"
+  ok=0
+  for attempt in 1 2 3; do
+    C "${PAC[@]}" -S --needed "${repo[@]}" && { ok=1; break; }
+    say "package install attempt $attempt failed"; sleep 5
+  done
+  if ((!ok)); then
+    say "installing one at a time to skip the packages that fail"
+    for p in "${repo[@]}"; do
+      C "${PAC[@]}" -S --needed "$p" >/dev/null || failed+=("$p")
+    done
+    if ((${#failed[@]} == ${#repo[@]})); then
+      say "error: no packages could be installed (no internet, or the package manager is broken)"
+      exit 1
+    fi
+  fi
+fi
+
+# ---- 2. AUR apps built into the ISO -------------------------------------------------------
+if ((${#AUR_FILES[@]})); then
+  say "installing ${#AUR_FILES[@]} AUR apps from the ISO"
+  tmp="$ROOT/var/cache/pacman/faraday-aur"; mkdir -p "$tmp"; cp -f "${AUR_FILES[@]}" "$tmp/"
+  rel=(); for f in "${AUR_FILES[@]}"; do rel+=("/var/cache/pacman/faraday-aur/$(basename "$f")"); done
+  if ! C "${PAC[@]}" -U --needed "${rel[@]}"; then
+    for f in "${rel[@]}"; do C "${PAC[@]}" -U --needed "$f" >/dev/null || failed+=("$(basename "$f")"); done
+  fi
+  rm -rf "$tmp"
+fi
+
+# ---- 3. NVIDIA driver for every CachyOS kernel ---------------------------------------------
+if lspci -n 2>/dev/null | grep -Eq ' 03[0-9a-f]{2}: 10de:' && C pacman -Qq nvidia-utils >/dev/null 2>&1; then
+  mods=()
+  for pb in "$ROOT"/usr/lib/modules/*/pkgbase; do
+    k="$(cat "$pb" 2>/dev/null)"; [[ "$k" == linux-cachyos* ]] || continue
+    C pacman -Qq "$k-nvidia-open" >/dev/null 2>&1 && continue
+    [[ "$available" == *" $k-nvidia-open "* ]] && mods+=("$k-nvidia-open")
+  done
+  if ((${#mods[@]})); then
+    say "adding NVIDIA driver for: ${mods[*]}"
+    C "${PAC[@]}" -S --needed "${mods[@]}" || failed+=("${mods[@]}")
+  fi
+fi
+
+# ---- 4. FaradayOS files (no live-only settings) --------------------------------------------
+# The installer's Plasma choice adds cachyos-kde-settings, whose defaults override FaradayOS's
+# theme; the FaradayOS ISO doesn't ship it either (commit 1ccfba9)
+if C pacman -Qq cachyos-kde-settings >/dev/null 2>&1; then
+  C "${PAC[@]}" -R cachyos-kde-settings >/dev/null 2>&1 && say "removed cachyos-kde-settings" \
+    || say "kept cachyos-kde-settings (needed by another package)"
+fi
+say "copying FaradayOS files"
+FILES=(
+  /usr/share/faraday/rebrand.sh /usr/share/faraday/logo.png /usr/share/faraday/logo.txt
+  /usr/share/faraday/theme /usr/share/faraday/overlay
+  /usr/share/plasma/look-and-feel/org.faraday.desktop
+  /usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/faradayos-wallpaper.js
+  /usr/share/color-schemes/FaradayOS.colors /usr/share/plymouth/themes/faraday
+  /usr/share/wallpapers/FaradayOS /usr/share/pixmaps/faradayos.png
+  /usr/share/applications/faraday-extras.desktop
+  /usr/local/bin/faraday-extras /usr/local/bin/faraday-vr-check
+  /etc/xdg/kdeglobals /etc/xdg/kscreenlockerrc /etc/xdg/autostart/faraday-vr-check.desktop
+  /etc/sysctl.d/99-faraday-gaming.conf
+  /etc/systemd/system/faraday-rebrand.service /etc/systemd/system/faraday-vr-setup.service
+  /etc/systemd/system/drm-module-load.target.d/faradayos-timeout.conf
+  /etc/pacman.d/hooks/zz-faraday-rebrand.hook
+  /etc/faradayos-version
+  # new-user defaults: theme and splash only (the live USB's skel also disables screen
+  # locking, suspend and the wallet, which an installed system must not inherit)
+  /etc/skel/.config/kdeglobals /etc/skel/.config/ksplashrc /etc/skel/.config/kwinrc
+  /etc/skel/.config/fastfetch /etc/skel/Desktop/faraday-extras.desktop
+)
+for f in "${FILES[@]}"; do
+  [[ -e "$f" ]] || { say "warning: $f missing on the live USB"; continue; }
+  cp -a --parents "$f" "$ROOT/" || say "warning: could not copy $f"
+done
+cp -rT /usr/share/faraday/overlay "$ROOT/"
+
+# ---- 5. services and branding -------------------------------------------------------------
+C systemctl enable faraday-rebrand.service faraday-vr-setup.service >/dev/null 2>&1 || say "warning: could not enable FaradayOS services"
+C pacman -Qq switcheroo-control >/dev/null 2>&1 && C systemctl enable switcheroo-control.service >/dev/null 2>&1
+C /usr/share/faraday/rebrand.sh >/dev/null 2>&1 || say "warning: rebrand.sh reported an error"
+C plymouth-set-default-theme faraday >/dev/null 2>&1 || say "warning: could not set the boot splash"
+
+((${#failed[@]})) && say "could not install, skipped: ${failed[*]}"
+say "done $(date -u '+%F %T UTC')"
+exit 0

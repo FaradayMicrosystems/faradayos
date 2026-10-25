@@ -49,7 +49,10 @@ main() {
 
     local progname="$(basename "$0")"
     local log="/home/liveuser/cachy-install.log"
-    local mode="offline"  # FaradayOS: copy the live system so all FaradayOS packages and settings are installed
+    # FaradayOS: "online" = CachyOS's maintained install (fresh system from the repos), then the
+    # FaradayOS step (faraday-online-setup) adds FaradayOS's packages, AUR apps and settings.
+    # "offline" = copy the live USB (the old route, kept for reference).
+    local mode="online"
 
     local SYSTEM=""
 
@@ -83,14 +86,21 @@ EOF
       sudo sed -i 's/^instances:$/instances:\n- id:       faraday\n  module:   netinstall\n  config:   netinstall-faraday.conf/' /etc/calamares/settings.conf
     grep -q 'netinstall@faraday' /etc/calamares/settings.conf || \
       sudo sed -i '0,/^  - users$/s//  - users\n  - netinstall@faraday/' /etc/calamares/settings.conf
-    grep -q 'shellprocess-faraday-kernels.conf' /etc/calamares/settings.conf || \
-      sudo sed -i 's/^instances:$/instances:\n- id:       faraday_kernels\n  module:   shellprocess\n  config:   shellprocess-faraday-kernels.conf/' /etc/calamares/settings.conf
-    grep -q 'shellprocess@faraday_kernels' /etc/calamares/settings.conf || \
-      sudo sed -i '0,/^  - initcpio$/s//  - shellprocess@faraday_kernels\n  - initcpio/' /etc/calamares/settings.conf
-    grep -q 'shellprocess-faraday-keyring.conf' /etc/calamares/settings.conf || \
-      sudo sed -i 's/^instances:$/instances:\n- id:       faraday_keyring\n  module:   shellprocess\n  config:   shellprocess-faraday-keyring.conf/' /etc/calamares/settings.conf
-    grep -q 'shellprocess@faraday_keyring' /etc/calamares/settings.conf || \
-      sudo sed -i '0,/^  - packages@offline$/s//  - shellprocess@faraday_keyring\n  - packages@offline/' /etc/calamares/settings.conf
+    if [ "$mode" = "online" ]; then
+      grep -q 'shellprocess-faraday-online.conf' /etc/calamares/settings.conf || \
+        sudo sed -i 's/^instances:$/instances:\n- id:       faraday_online\n  module:   shellprocess\n  config:   shellprocess-faraday-online.conf/' /etc/calamares/settings.conf
+      grep -q 'shellprocess@faraday_online' /etc/calamares/settings.conf || \
+        sudo sed -i '0,/^  - initcpiocfg$/s//  - shellprocess@faraday_online\n  - initcpiocfg/' /etc/calamares/settings.conf
+    else
+      grep -q 'shellprocess-faraday-kernels.conf' /etc/calamares/settings.conf || \
+        sudo sed -i 's/^instances:$/instances:\n- id:       faraday_kernels\n  module:   shellprocess\n  config:   shellprocess-faraday-kernels.conf/' /etc/calamares/settings.conf
+      grep -q 'shellprocess@faraday_kernels' /etc/calamares/settings.conf || \
+        sudo sed -i '0,/^  - initcpio$/s//  - shellprocess@faraday_kernels\n  - initcpio/' /etc/calamares/settings.conf
+      grep -q 'shellprocess-faraday-keyring.conf' /etc/calamares/settings.conf || \
+        sudo sed -i 's/^instances:$/instances:\n- id:       faraday_keyring\n  module:   shellprocess\n  config:   shellprocess-faraday-keyring.conf/' /etc/calamares/settings.conf
+      grep -q 'shellprocess@faraday_keyring' /etc/calamares/settings.conf || \
+        sudo sed -i '0,/^  - packages@offline$/s//  - shellprocess@faraday_keyring\n  - packages@offline/' /etc/calamares/settings.conf
+    fi
     exec pkexec-wrapper calamares -D6 >> $log
 }
 

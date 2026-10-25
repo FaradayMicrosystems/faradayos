@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# FaradayOS v0.0.67 ISO builder. Run on CachyOS as your normal user (it asks for your sudo password).
+# FaradayOS v0.0.68 ISO builder. Run on CachyOS as your normal user (it asks for your sudo password).
 #   ./build.sh               build from this folder; asks for your sudo password once
 #   ./build.sh --unattended  update to the latest FaradayOS, then build with no further input:
 #                            after your password, a temporary passwordless-sudo rule is added
@@ -13,7 +13,7 @@ for a in "$@"; do
     *) echo "Unknown option: $a (try --help)"; exit 2 ;;
   esac
 done
-VERSION="0.0.67"
+VERSION="0.0.68"
 HERE="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
 WORK="${WORK:-$HERE/build}"
 OUT="${OUT:-$HERE/out}"
@@ -133,6 +133,23 @@ if ls "$WORK/localrepo"/*.pkg.tar.zst >/dev/null 2>&1; then
     echo "$p" >> "$WORK/profile/packages.x86_64"
   done
 fi
+
+# Online install: the installer's FaradayOS step (faraday-online-setup) installs this package list
+# from the repos, and the AUR apps from these copies (newest version of each; localrepo is kept
+# between builds and can hold older ones)
+INST="$WORK/profile/airootfs/usr/share/faraday/install"
+mkdir -p "$INST/aur"
+cp "$WORK/profile/packages.x86_64" "$INST/packages.x86_64"
+declare -A AUR_FILE=() AUR_VER=()
+for f in "$WORK/localrepo"/*.pkg.tar.zst; do
+  [[ -e $f ]] || continue
+  info=$(bsdtar -xOf "$f" .PKGINFO 2>/dev/null) || continue
+  n=$(sed -n 's/^pkgname = //p' <<<"$info"); v=$(sed -n 's/^pkgver = //p' <<<"$info")
+  [[ -n $n && -n $v ]] || continue
+  if [[ -z ${AUR_VER[$n]:-} ]] || (( $(vercmp "$v" "${AUR_VER[$n]}") > 0 )); then AUR_FILE[$n]=$f; AUR_VER[$n]=$v; fi
+done
+(( ${#AUR_FILE[@]} )) && cp "${AUR_FILE[@]}" "$INST/aur/"
+c "Online install: $(grep -c . "$INST/packages.x86_64") packages listed, ${#AUR_FILE[@]} AUR apps copied to the ISO"
 
 c "Patching mkarchiso (disable Arch keyring timer, like CachyOS does)"
 cp /usr/bin/mkarchiso "$WORK/mkarchiso"

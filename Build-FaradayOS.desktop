@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Build FaradayOS ISO
-Comment=Builds FaradayOSv0.0.67.iso into the out folder
+Comment=Builds FaradayOSv0.0.68.iso into the out folder
 Icon=media-optical
 Exec=sh -c '"$(dirname "$1")/build.sh"' _ %k
 Terminal=false
