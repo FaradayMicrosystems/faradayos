@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# FaradayOS v0.0.65 ISO builder. Run on CachyOS as your normal user (it asks for your sudo password).
+# FaradayOS v0.0.66 ISO builder. Run on CachyOS as your normal user (it asks for your sudo password).
 #   ./build.sh               build from this folder; asks for your sudo password once
 #   ./build.sh --unattended  update to the latest FaradayOS, then build with no further input:
 #                            after your password, a temporary passwordless-sudo rule is added
@@ -13,7 +13,7 @@ for a in "$@"; do
     *) echo "Unknown option: $a (try --help)"; exit 2 ;;
   esac
 done
-VERSION="0.0.65"
+VERSION="0.0.66"
 HERE="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
 WORK="${WORK:-$HERE/build}"
 OUT="${OUT:-$HERE/out}"
@@ -137,6 +137,35 @@ fi
 c "Patching mkarchiso (disable Arch keyring timer, like CachyOS does)"
 cp /usr/bin/mkarchiso "$WORK/mkarchiso"
 sed -i 's/_run_once _make_customize_airootfs/_run_once _make_customize_airootfs\n\trm -f "${pacstrap_dir}\/usr\/lib\/systemd\/system\/timers.target.wants\/archlinux-keyring-wkd-sync.timer"\n/' "$WORK/mkarchiso"
+# A package hook can leave a process running inside the image (chroot). It keeps /proc or /sys
+# mounted there ("umount: .../airootfs/proc: target is busy"), and mkarchiso's cleanup then walks
+# into them and fails ("find: .../airootfs/proc/...: Invalid argument"). Before that cleanup (and
+# before the image is compressed), stop processes running inside the image and unmount leftovers;
+# stop the build if anything stays mounted.
+cat > "$WORK/release-chroot.sh" <<'EOF'
+_faraday_release_chroot() {
+    local dir p root m
+    dir="$(realpath -- "${pacstrap_dir}")"
+    for p in /proc/[0-9]*; do
+        root="$(readlink -- "${p}/root" 2>/dev/null)" || continue
+        [[ "${root}" == "${dir}" || "${root}" == "${dir}/"* ]] || continue
+        _msg_warning "Stopping leftover process ${p#/proc/} in the image: $(tr '\0' ' ' < "${p}/cmdline" 2>/dev/null)"
+        kill -9 "${p#/proc/}" 2>/dev/null || true
+    done
+    sleep 1
+    while read -r m; do
+        _msg_warning "Unmounting leftover ${m}"
+        umount -R -- "${m}" 2>/dev/null || umount -l -- "${m}" 2>/dev/null || true
+    done < <(findmnt -rn -o TARGET | grep -F -- "${dir}/" | sort -r)
+    if findmnt -rn -o TARGET | grep -qF -- "${dir}/"; then
+        _msg_error "Still mounted inside ${dir}; reboot and build again." 1
+    fi
+}
+EOF
+sed -i "/^shopt -s extglob\$/r $WORK/release-chroot.sh" "$WORK/mkarchiso"
+sed -i 's/^_cleanup_pacstrap_dir() {$/&\n    _faraday_release_chroot/' "$WORK/mkarchiso"
+grep -q '^_faraday_release_chroot() {$' "$WORK/mkarchiso" && grep -q '^    _faraday_release_chroot$' "$WORK/mkarchiso" \
+  && bash -O extglob -n "$WORK/mkarchiso" || die "Could not patch mkarchiso (archiso changed?) - send build.log"
 
 c "Building the ISO (20-60 min)"
 wait_pacman_lock
