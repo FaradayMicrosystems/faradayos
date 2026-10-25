@@ -54,7 +54,7 @@ _clean_nvidia_packages() {
   done
   [ ${#pkgs[@]} -gt 0 ] && pacman -Rdd --noconfirm "${pkgs[@]}" || true
 }
-if ! lspci -n 2>/dev/null | grep -Eq ' 03[0-9a-f]{2}: 10de:'; then
+if command -v lspci >/dev/null && ! lspci -n 2>/dev/null | grep -Eq ' 03[0-9a-f]{2}: 10de:'; then   # no lspci: keep drivers
   _clean_nvidia_packages
 fi
 

@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC2034
 
-iso_name="FaradayOSv0.0.66"
+iso_name="FaradayOSv0.0.67"
 iso_label="FARADAY_001"
 iso_publisher="FaradayOS <https://github.com/FaradayMicrosystems>"
 iso_application="FaradayOS Live"
-iso_version="0.0.66"
+iso_version="0.0.67"
 install_dir="arch"
 buildmodes=('iso')
 ## GRUB

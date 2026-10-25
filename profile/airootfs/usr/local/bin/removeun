@@ -41,8 +41,10 @@ local _packages_to_remove=(
   mkinitcpio-archiso
 )
 
-  local _check_nvidia_card="$(chwd --is_nvidia_card | grep -q 'NVIDIA card found!'; echo $?)"
-  if [[ "${_check_nvidia_card}" -ne 0 ]]; then
+  # FaradayOS: chwd 1.25 removed --is_nvidia_card, so the old check failed on every machine and
+  # removed the NVIDIA LTS driver even from NVIDIA systems. Same PCI check as remove-nvidia
+  # (display controller from vendor 10de); if lspci is missing, keep the drivers.
+  if command -v lspci >/dev/null && ! lspci -n 2>/dev/null | grep -Eq ' 03[0-9a-f]{2}: 10de:'; then
     echo "No NVIDIA card detected. Removing nvidia drivers"
     _packages_to_remove+=(linux-cachyos-lts-nvidia-open nvidia-utils egl-wayland)
   fi
