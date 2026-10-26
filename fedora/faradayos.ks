@@ -8,7 +8,7 @@ timezone America/New_York
 selinux --enforcing
 firewall --enabled --service=mdns
 network --bootproto=dhcp --device=link --activate
-rootpw --lock --iscrypted locked
+rootpw --lock
 services --enabled=NetworkManager,ModemManager --disabled=sshd
 bootloader --location=none
 zerombr
