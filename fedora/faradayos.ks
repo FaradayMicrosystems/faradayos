@@ -62,6 +62,7 @@ libdnf5-plugin-actions
 mesa-dri-drivers
 mesa-vulkan-drivers
 vulkan-tools
+akmods
 akmod-nvidia
 xorg-x11-drv-nvidia-cuda
 switcheroo-control
@@ -73,6 +74,21 @@ gamescope
 mangohud
 lutris
 wine
+
+# Full codecs from RPM Fusion instead of Fedora's limited ones
+ffmpeg
+-ffmpeg-free
+-libavcodec-free
+-libavdevice-free
+-libavfilter-free
+-libavformat-free
+-libavutil-free
+-libpostproc-free
+-libswresample-free
+-libswscale-free
+# Hardware video decoding for AMD/Intel
+mesa-va-drivers-freeworld
+-mesa-va-drivers
 
 # Boot splash
 plymouth
@@ -96,17 +112,15 @@ bash /src/fedora/apply-branding.sh "${ANA_INSTALL_PATH:-/mnt/sysimage}" /src
 set -x
 
 # Keep the Steam repo on for updates
-dnf config-manager setopt rpmfusion-nonfree-steam.enabled=1
+dnf config-manager setopt rpmfusion-nonfree-steam.enabled=1 || \
+  sed -i '0,/^enabled=0/s//enabled=1/' /etc/yum.repos.d/rpmfusion-nonfree-steam.repo
 
-# Full codecs (RPM Fusion) and hardware video decoding for AMD/Intel
-dnf -y swap ffmpeg-free ffmpeg --allowerasing || dnf -y install ffmpeg --allowerasing
-dnf -y swap mesa-va-drivers mesa-va-drivers-freeworld --allowerasing || true
-dnf -y swap mesa-vdpau-drivers mesa-vdpau-drivers-freeworld --allowerasing || true
-
-# Build the NVIDIA kernel module now, so it works on first boot of the live USB
+# Build the NVIDIA kernel module now, so it works on first boot of the live USB.
+# Installing akmod-nvidia already starts a build in the background: wait for it, then build if it did not finish.
 KVER=$(rpm -q kernel --qf '%{VERSION}-%{RELEASE}.%{ARCH}\n' | sort -V | tail -1)
-akmods --force --kernels "$KVER"
-ls /lib/modules/"$KVER"/extra/nvidia/nvidia.ko* || { echo "NVIDIA module build failed"; exit 1; }
+while pgrep -x akmods >/dev/null || pgrep -f 'install.*kmod-nvidia' >/dev/null; do sleep 5; done
+rpm -q "kmod-nvidia-$KVER" || akmods --force --kernels "$KVER"
+rpm -q "kmod-nvidia-$KVER" || { echo "NVIDIA module build failed"; exit 1; }
 
 # Live session (from Fedora's KDE live kickstart)
 systemctl enable livesys.service livesys-late.service

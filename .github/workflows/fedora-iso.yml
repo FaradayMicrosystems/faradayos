@@ -22,6 +22,13 @@ jobs:
       - name: Build ISO
         run: ./fedora/build-iso.sh
 
+      - name: Show build errors
+        if: failure()
+        run: |
+          cd out-fedora
+          grep -rh -A12 'Transaction Summary' --include='*.log' . | head -80 || true
+          grep -rhiE 'error|failed|not found|No match|cannot|Problem' --include='*.log' . | grep -v 'Configuring ' | tail -80 || true
+
       - name: Upload build log
         if: always()
         uses: actions/upload-artifact@v4
