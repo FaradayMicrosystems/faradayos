@@ -55,7 +55,7 @@ fastfetch
 # Package repos stay enabled on the installed system
 rpmfusion-free-release
 rpmfusion-nonfree-release
-rpmfusion-nonfree-release-steam
+fedora-workstation-repositories
 libdnf5-plugin-actions
 
 # Graphics: AMD and Intel use Mesa; NVIDIA uses RPM Fusion's driver
@@ -94,6 +94,9 @@ bash /src/fedora/apply-branding.sh "${ANA_INSTALL_PATH:-/mnt/sysimage}" /src
 
 %post --erroronfail
 set -x
+
+# Keep the Steam repo on for updates
+dnf config-manager setopt rpmfusion-nonfree-steam.enabled=1
 
 # Full codecs (RPM Fusion) and hardware video decoding for AMD/Intel
 dnf -y swap ffmpeg-free ffmpeg --allowerasing || dnf -y install ffmpeg --allowerasing
