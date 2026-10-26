@@ -1,0 +1,8 @@
+[Unit]
+Description=FaradayOS branding
+Before=display-manager.service
+[Service]
+Type=oneshot
+ExecStart=/usr/share/faraday/rebrand-fedora.sh
+[Install]
+WantedBy=multi-user.target
