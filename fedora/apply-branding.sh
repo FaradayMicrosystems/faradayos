@@ -21,6 +21,8 @@ copy usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/faradayos-w
 copy usr/share/wallpapers/FaradayOS
 copy usr/share/color-schemes/FaradayOS.colors
 copy usr/share/pixmaps/faradayos.png
+# Logo icon theme: FaradayOS logo on start menu, About and installer icons; Papirus Dark for the rest
+copy usr/share/icons/FaradayOS
 copy usr/share/faraday/logo.png
 copy usr/share/faraday/logo.txt
 copy usr/share/faraday/theme

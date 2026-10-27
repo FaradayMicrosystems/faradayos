@@ -17,4 +17,12 @@ if [ -d $T ]; then
   grep -q '^Theme=org.faraday.desktop' /etc/skel/.config/ksplashrc 2>/dev/null || \
     printf '[KSplash]\nEngine=KSplashQML\nTheme=org.faraday.desktop\n' > /etc/skel/.config/ksplashrc
 fi
+# Installer colours: use the FaradayOS branding whatever the variant, and open it in dark mode
+V=$(. /usr/lib/os-release 2>/dev/null; echo "$VARIANT_ID")
+C=/usr/share/cockpit/branding
+if [ -n "$V" ] && [ "$V" != kde ] && [ -d $C/fedora-kde ]; then ln -sfn fedora-kde "$C/fedora-$V"; fi
+for U in /usr/share/anaconda/firefox-theme/*/user.js; do
+  [ -f "$U" ] || continue
+  grep -q ui.systemUsesDarkTheme "$U" || printf '%s\n' 'user_pref("ui.systemUsesDarkTheme", 1);' 'user_pref("layout.css.prefers-color-scheme.content-override", 0);' >> "$U"
+done
 true

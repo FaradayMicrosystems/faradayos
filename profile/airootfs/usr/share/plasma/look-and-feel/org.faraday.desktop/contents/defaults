@@ -7,7 +7,7 @@ accentColorFromWallpaper=false
 widgetStyle=Breeze
 
 [kdeglobals][Icons]
-Theme=Papirus-Dark
+Theme=FaradayOS
 
 [plasmarc][Theme]
 name=default

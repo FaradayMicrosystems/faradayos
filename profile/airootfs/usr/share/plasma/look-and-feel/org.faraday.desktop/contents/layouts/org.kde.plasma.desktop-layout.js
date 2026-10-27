@@ -13,7 +13,7 @@ panel.floatingApplets = true;
 
 var menu = panel.addWidget("org.kde.plasma.kickoff");
 menu.currentConfigGroup = ["General"];
-menu.writeConfig("icon", "/usr/share/pixmaps/faradayos.png");
+menu.writeConfig("icon", "faradayos");
 
 var tasks = panel.addWidget("org.kde.plasma.icontasks");
 tasks.currentConfigGroup = ["General"];
