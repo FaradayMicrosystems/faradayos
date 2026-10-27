@@ -118,8 +118,16 @@ dnf config-manager setopt rpmfusion-nonfree-steam.enabled=1 || \
 # Build the NVIDIA kernel module now, so it works on first boot of the live USB.
 # Installing akmod-nvidia already starts a build in the background: wait for it, then build if it did not finish.
 KVER=$(rpm -q kernel --qf '%{VERSION}-%{RELEASE}.%{ARCH}\n' | sort -V | tail -1)
-while pgrep -x akmods >/dev/null || pgrep -f 'install.*kmod-nvidia' >/dev/null; do sleep 5; done
-rpm -q "kmod-nvidia-$KVER" || akmods --force --kernels "$KVER"
+for i in $(seq 180); do
+  rpm -q "kmod-nvidia-$KVER" && break
+  pgrep -x akmods >/dev/null || break
+  sleep 5
+done
+pkill -x akmods || true
+pkill -x rpmbuild || true
+pkill -f 'install.*kmod-nvidia' || true
+sleep 5
+rpm -q "kmod-nvidia-$KVER" || timeout 30m akmods --force --kernels "$KVER"
 rpm -q "kmod-nvidia-$KVER" || { echo "NVIDIA module build failed"; exit 1; }
 
 # Live session (from Fedora's KDE live kickstart)
