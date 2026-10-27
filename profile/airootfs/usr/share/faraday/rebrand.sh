@@ -40,8 +40,10 @@ if [ -d $T ]; then
   install -Dm644 $T/kdeglobals /etc/xdg/kdeglobals
   install -Dm644 $T/kdeglobals /etc/skel/.config/kdeglobals
   install -Dm644 $T/kscreenlockerrc /etc/xdg/kscreenlockerrc
+  # Login screen: dark background with the FaradayOS logo
+  sed -i 's|^Image=file:///usr/share/wallpapers/FaradayOS/contents/images/3260x1838.png$|Image=file:///usr/share/faraday/login.png|' /etc/plasmalogin.conf 2>/dev/null
   grep -q '^\[Greeter\]\[Wallpaper\]' /etc/plasmalogin.conf 2>/dev/null || \
-    printf '\n[Greeter][Wallpaper][org.kde.image][General]\nImage=file:///usr/share/wallpapers/FaradayOS/contents/images/3260x1838.png\n' >> /etc/plasmalogin.conf
+    printf '\n[Greeter][Wallpaper][org.kde.image][General]\nImage=file:///usr/share/faraday/login.png\n' >> /etc/plasmalogin.conf
   grep -q '^Theme=org.faraday.desktop' /etc/skel/.config/ksplashrc 2>/dev/null || \
     printf '[KSplash]\nEngine=KSplashQML\nTheme=org.faraday.desktop\n' > /etc/skel/.config/ksplashrc
 fi

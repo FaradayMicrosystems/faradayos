@@ -24,6 +24,7 @@ copy usr/share/pixmaps/faradayos.png
 # Logo icon theme: FaradayOS logo on start menu, About and installer icons; Papirus Dark for the rest
 copy usr/share/icons/FaradayOS
 copy usr/share/faraday/logo.png
+copy usr/share/faraday/login.png
 copy usr/share/faraday/logo.txt
 copy usr/share/faraday/theme
 # System-wide and new-user defaults

@@ -32,7 +32,7 @@ check "KDE splash default for new users"     "grep -q Theme=org.faraday.desktop 
 check "Wallpaper installed"                  "test -s $W"
 check "Wallpaper default for desktop"        "grep -q FaradayOS $R/usr/share/plasma/shells/org.kde.plasma.desktop/contents/updates/faradayos-wallpaper.js"
 check "Wallpaper on lock screen"             "grep -q FaradayOS $R/etc/xdg/kscreenlockerrc"
-check "Wallpaper on login screen"            "grep -q FaradayOS $R/etc/plasmalogin.conf.d/10-faraday.conf"
+check "Logo on login screen"                 "grep -q /usr/share/faraday/login.png $R/etc/plasmalogin.conf.d/10-faraday.conf && test -s $R/usr/share/faraday/login.png"
 check "Colour scheme + global theme default" "grep -q ColorScheme=FaradayOS $R/etc/xdg/kdeglobals && grep -q LookAndFeelPackage=org.faraday.desktop $R/etc/xdg/kdeglobals"
 L=$R/usr/share/plasma/look-and-feel/org.faraday.desktop/contents/layouts/org.kde.plasma.desktop-layout.js
 check "Left panel layout (menu, apps, tray)"  "grep -q location.*left $L && grep -q kickoff $L && grep -q icontasks $L && grep -q systemtray $L"

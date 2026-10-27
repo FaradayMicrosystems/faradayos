@@ -4,6 +4,6 @@ Name=Install FaradayOS
 GenericName=System installer
 Comment=Install FaradayOS to this computer's disk
 Exec=/usr/local/bin/calamares-online.sh
-Icon=/usr/share/faraday/logo.png
+Icon=faradayos
 Terminal=false
 Categories=System;
