@@ -3,7 +3,7 @@ ColorScheme=FaradayOS
 AccentColor=255,122,26
 
 [Icons]
-Theme=breeze-dark
+Theme=Papirus-Dark
 
 [KDE]
 LookAndFeelPackage=org.faraday.desktop

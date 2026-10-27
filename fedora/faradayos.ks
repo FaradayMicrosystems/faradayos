@@ -51,6 +51,8 @@ livesys-scripts
 @libreoffice
 firefox
 fastfetch
+# Zorin-style look: Papirus icons (layout is in the FaradayOS global theme)
+papirus-icon-theme
 
 # Package repos stay enabled on the installed system
 rpmfusion-free-release
