@@ -8,7 +8,12 @@ Included:
 - Graphics: AMD and Intel (Mesa), NVIDIA (RPM Fusion driver, built into the ISO), full codecs and hardware video decoding
 - FaradayOS branding: boot splash (Plymouth), KDE splash, wallpaper, colour scheme, lock and login screens, fastfetch logo. These come from the same files as the CachyOS build (`profile/airootfs`), so changes there apply to both.
 
-## Build the ISO (on your CachyOS PC)
+## Get the ISO
+
+**Option A: download it (no build needed).** Every push to this branch builds the ISO on GitHub and checks it.
+Open [Actions → Build Fedora edition ISO](https://github.com/FaradayMicrosystems/faradayos/actions/workflows/fedora-iso.yml), click the newest green run, and download **FaradayOS-Fedora-ISO** at the bottom (a ~5.9 GB zip; unzip it). Downloads are kept for 7 days.
+
+**Option B: build it yourself (on your CachyOS PC).**
 
 1. Install podman (once):
    ```
@@ -25,6 +30,12 @@ Included:
    ```
    It asks for your sudo password once. Needs about 40 GB free disk space and takes 30 to 90 minutes.
    Result: `out-fedora/FaradayOS-Fedora-44.iso` (+ `.sha256`). Build log: `out-fedora/lmc.log`.
+
+4. Optional: check the ISO (branding, boot splash, wallpaper, NVIDIA module, codecs, Steam):
+   ```
+   ./fedora/verify-iso.sh
+   ```
+   Every line should say PASS.
 
 ## Test
 
@@ -50,6 +61,7 @@ NVIDIA cannot be tested in a VM. Use a USB stick on real hardware for that.
 - `apply-branding.sh`: copies FaradayOS branding into the image
 - `overlay/`: Fedora-only files (rebrand script that re-applies branding after updates, login screen wallpaper)
 - `build-iso.sh`: builds the ISO in a Fedora container
+- `verify-iso.sh`: checks a built ISO
 
 ## Not carried over from the CachyOS build
 - VR setup (WiVRn, ALVR, `faraday-vr-check`): these use Arch packages. Can be added later.
