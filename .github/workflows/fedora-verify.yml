@@ -1,0 +1,27 @@
+name: Verify latest Fedora edition ISO
+
+# Re-checks the newest successful ISO build without rebuilding it.
+on:
+  push:
+    branches: [fedora-mutable]
+    paths: ['fedora/verify-iso.sh', '.github/workflows/fedora-verify.yml']
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download latest ISO
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          RUN=$(gh run list -R "$GITHUB_REPOSITORY" -w fedora-iso.yml -b fedora-mutable -s success -L 1 --json databaseId -q '.[0].databaseId')
+          echo "Checking ISO from build run $RUN"
+          gh run download "$RUN" -R "$GITHUB_REPOSITORY" -n FaradayOS-Fedora-ISO -D out-fedora
+
+      - name: Verify ISO (branding, boot splash, NVIDIA, gaming)
+        run: ./fedora/verify-iso.sh
