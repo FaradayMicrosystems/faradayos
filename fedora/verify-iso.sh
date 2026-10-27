@@ -35,7 +35,7 @@ check "Wallpaper on lock screen"             "grep -q FaradayOS $R/etc/xdg/kscre
 check "Wallpaper on login screen"            "grep -q FaradayOS $R/etc/plasmalogin.conf.d/10-faraday.conf"
 check "Colour scheme + global theme default" "grep -q ColorScheme=FaradayOS $R/etc/xdg/kdeglobals && grep -q LookAndFeelPackage=org.faraday.desktop $R/etc/xdg/kdeglobals"
 L=$R/usr/share/plasma/look-and-feel/org.faraday.desktop/contents/layouts/org.kde.plasma.desktop-layout.js
-check "Zorin-style bottom panel layout"      "grep -q kickoff $L && grep -q icontasks $L && grep -q systemtray $L"
+check "Left panel layout (menu, apps, tray)"  "grep -q location.*left $L && grep -q kickoff $L && grep -q icontasks $L && grep -q systemtray $L"
 check "Papirus icons installed + default"    "test -d $R/usr/share/icons/Papirus-Dark && grep -q Theme=Papirus-Dark $R/etc/xdg/kdeglobals && grep -q Theme=Papirus-Dark $R/etc/skel/.config/kdeglobals"
 check "Colour scheme file"                   "test -f $R/usr/share/color-schemes/FaradayOS.colors"
 check "Branding re-applied after updates"    "test -x $R/usr/share/faraday/rebrand-fedora.sh -a -f $R/etc/dnf/libdnf5-plugins/actions.d/faraday-rebrand.actions"
