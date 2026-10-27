@@ -38,7 +38,7 @@ check "Colour scheme file"                   "test -f $R/usr/share/color-schemes
 check "Branding re-applied after updates"    "test -x $R/usr/share/faraday/rebrand-fedora.sh -a -f $R/etc/dnf/libdnf5-plugins/actions.d/faraday-rebrand.actions"
 check "Branding service enabled"             "ls $R/etc/systemd/system/multi-user.target.wants/faraday-rebrand.service"
 check "NVIDIA kernel module built"           "find $R/usr/lib/modules -name \"nvidia.ko*\" | grep -q ."
-check "Steam installed"                      "test -x $R/usr/bin/steam"
+check "Steam, gamescope, MangoHud, Lutris"  "chroot $R rpm -q steam gamescope mangohud lutris"
 check "Full ffmpeg codecs (RPM Fusion)"      "ls $R/usr/lib64/libavcodec.so.* && ! chroot $R rpm -q libavcodec-free"
 check "Live session configured (KDE)"        "grep -q kde $R/etc/sysconfig/livesys"
 
