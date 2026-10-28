@@ -20,7 +20,7 @@ Included:
 
 ## Get the ISO
 
-**Option A: download it (no build needed).** Every push to this branch builds the ISO on GitHub and checks it.
+**Option A: download it (no build needed).** Every push to `main` builds the ISO on GitHub and checks it.
 Open [Actions → Build Fedora edition ISO](https://github.com/FaradayMicrosystems/faradayos/actions/workflows/fedora-iso.yml), click the newest green run, and download **FaradayOS-Fedora-ISO** at the bottom (a ~5.9 GB zip; unzip it). Downloads are kept for 7 days.
 
 **Option B: build it yourself (on your CachyOS PC).**
@@ -29,9 +29,9 @@ Open [Actions → Build Fedora edition ISO](https://github.com/FaradayMicrosyste
    ```
    sudo pacman -S podman
    ```
-2. Get this branch:
+2. Get the code:
    ```
-   git clone -b fedora-mutable https://github.com/FaradayMicrosystems/faradayos.git faradayos-fedora
+   git clone https://github.com/FaradayMicrosystems/faradayos.git faradayos-fedora
    cd faradayos-fedora
    ```
 3. Build:

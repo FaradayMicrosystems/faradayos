@@ -3,7 +3,7 @@ name: Build Fedora edition ISO
 on:
   workflow_dispatch:
   push:
-    branches: [fedora-mutable, 'claude/**']
+    branches: [main, fedora-mutable, 'claude/**']
     paths: ['fedora/**', '!fedora/README.md', 'profile/airootfs/**', '.github/workflows/fedora-iso.yml']
 
 jobs:
