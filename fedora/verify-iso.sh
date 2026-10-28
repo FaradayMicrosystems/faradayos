@@ -64,7 +64,8 @@ K=$(ls $R/usr/lib/modules | sort -V | tail -1)
 check "Touchpad: libinput + kernel drivers"  "chroot $R rpm -q libinput xorg-x11-drv-libinput && ! for m in i2c-hid-acpi hid-multitouch psmouse; do find $R/usr/lib/modules/$K -name \"\$m.ko*\" | grep -q . || grep -q \"/\$m.ko\" $R/usr/lib/modules/$K/modules.builtin || echo missing; done | grep -q missing"
 check "Touchpad: tap to click default"       "grep -q TapToClick=true $R/etc/xdg/kcminputrc"
 check "Fingerprint: fprintd + PAM installed" "chroot $R rpm -q fprintd fprintd-pam libfprint"
-check "Fingerprint: login uses fingerprint"  "grep -q pam_fprintd $R/etc/pam.d/system-auth"
+# /etc/pam.d/system-auth is an absolute symlink into /etc/authselect, so read the target inside the image
+check "Fingerprint: login uses fingerprint"  "grep -qx with-fingerprint $R/etc/authselect/authselect.conf && grep -q pam_fprintd $R/etc/authselect/system-auth"
 check "Install removes live user + autologin" "test -x $R/usr/share/faraday/remove-liveuser.sh && grep -q remove-liveuser.sh $R/usr/share/anaconda/post-scripts/90-faraday-remove-liveuser.ks && ls $R/etc/systemd/system/multi-user.target.wants/faraday-remove-liveuser.service"
 check "No live user baked into the image"   "! grep -q ^liveuser: $R/etc/passwd && ! grep -rqs ^User=liveuser $R/etc/plasmalogin.conf $R/etc/plasmalogin.conf.d $R/etc/sddm.conf $R/etc/sddm.conf.d"
 check "Live session configured (KDE)"        "grep -q kde $R/etc/sysconfig/livesys"
