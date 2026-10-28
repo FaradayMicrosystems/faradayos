@@ -185,6 +185,8 @@ echo 'livesys_session="kde"' > /etc/sysconfig/livesys
 
 # FaradayOS branding stays after updates
 systemctl enable faraday-rebrand.service
+# Installed systems start at the login screen: the installer and first boot remove the live user and its autologin
+systemctl enable faraday-remove-liveuser.service
 plymouth-set-default-theme faraday
 /usr/share/faraday/rebrand-fedora.sh
 

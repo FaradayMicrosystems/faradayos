@@ -1,0 +1,12 @@
+[Unit]
+Description=FaradayOS: remove the live session user and automatic login on installed systems
+ConditionKernelCommandLine=!rd.live.image
+Before=display-manager.service plasmalogin.service sddm.service systemd-user-sessions.service
+After=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/share/faraday/remove-liveuser.sh
+
+[Install]
+WantedBy=multi-user.target
