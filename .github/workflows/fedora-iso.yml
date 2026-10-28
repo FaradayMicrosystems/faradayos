@@ -3,8 +3,8 @@ name: Build Fedora edition ISO
 on:
   workflow_dispatch:
   push:
-    branches: [fedora-mutable]
-    paths: ['fedora/**', '!fedora/verify-iso.sh', '!fedora/README.md', 'profile/airootfs/**', '.github/workflows/fedora-iso.yml']
+    branches: [main, fedora-mutable, 'claude/**']
+    paths: ['fedora/**', '!fedora/README.md', 'profile/airootfs/**', '.github/workflows/fedora-iso.yml']
 
 jobs:
   iso:
@@ -22,7 +22,7 @@ jobs:
       - name: Build ISO
         run: ./fedora/build-iso.sh
 
-      - name: Verify ISO (branding, boot splash, NVIDIA, gaming)
+      - name: Verify ISO (branding, boot splash, NVIDIA, gaming, VR)
         run: ./fedora/verify-iso.sh
 
       - name: Show build errors
@@ -44,6 +44,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: FaradayOS-Fedora-ISO
-          path: out-fedora/FaradayOS-Fedora-*.iso*
+          path: out-fedora/FaradayOS*.iso*
           compression-level: 0
           retention-days: 7

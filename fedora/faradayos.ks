@@ -24,6 +24,8 @@ repo --name=rpmfusion-free-updates --mirrorlist=https://mirrors.rpmfusion.org/mi
 repo --name=rpmfusion-nonfree --mirrorlist=https://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-$releasever&arch=$basearch
 repo --name=rpmfusion-nonfree-updates --mirrorlist=https://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-updates-released-$releasever&arch=$basearch
 repo --name=rpmfusion-nonfree-steam --mirrorlist=https://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-steam-$releasever&arch=$basearch
+# xrizer (OpenVR games on WiVRn), from the Fedora XR SIG
+repo --name=copr-xr-sig-xrizer --baseurl=https://download.copr.fedorainfracloud.org/results/@xr-sig/xrizer/fedora-$releasever-$basearch/
 
 %packages
 # Live system and installer (from Fedora's fedora-live-base.ks)
@@ -69,6 +71,16 @@ akmod-nvidia
 xorg-x11-drv-nvidia-cuda
 switcheroo-control
 
+# Laptops: touchpad, touchscreen, pen, screen rotation, fingerprint reader
+libinput
+xorg-x11-drv-libinput
+libwacom
+iio-sensor-proxy
+linux-firmware
+fprintd
+fprintd-pam
+libfprint
+
 # Gaming
 steam
 gamemode
@@ -76,6 +88,20 @@ gamescope
 mangohud
 lutris
 wine
+
+# VR: WiVRn (Quest/Pico over Wi-Fi, no SteamVR needed), OpenVR-to-OpenXR layers, headset USB access.
+# ALVR is downloaded in %post; SteamVR comes from Steam ("Set up SteamVR" in the app menu).
+wivrn
+wivrn-dashboard
+xrizer
+opencomposite
+steam-devices
+android-tools
+avahi
+nss-mdns
+libcap
+libva-utils
+xorg-x11-drv-nvidia-cuda-libs
 
 # Full codecs from RPM Fusion instead of Fedora's limited ones
 ffmpeg
@@ -132,12 +158,35 @@ sleep 5
 rpm -q "kmod-nvidia-$KVER" || timeout 30m akmods --force --kernels "$KVER"
 rpm -q "kmod-nvidia-$KVER" || { echo "NVIDIA module build failed"; exit 1; }
 
+# Fingerprint login and sudo (enrol in System Settings > Users)
+authselect current >/dev/null 2>&1 || authselect select local --force
+authselect enable-feature with-fingerprint
+authselect apply-changes
+
+# VR: ALVR streamer (MIT licence, upstream release; works with SteamVR on AMD and NVIDIA)
+mkdir -p /opt/alvr
+curl -fL --retry 5 --retry-delay 10 -o /tmp/alvr.tar.gz \
+  https://github.com/alvr-org/ALVR/releases/latest/download/alvr_streamer_linux.tar.gz
+tar -xzf /tmp/alvr.tar.gz -C /opt/alvr --strip-components=1
+rm -f /tmp/alvr.tar.gz
+test -x /opt/alvr/bin/alvr_dashboard
+ln -sf /opt/alvr/bin/alvr_dashboard /usr/bin/alvr_dashboard
+I=$(find /opt/alvr/share/icons -name 'alvr*.png' 2>/dev/null | sort -V | tail -1)
+[ -n "$I" ] && install -Dm644 "$I" /usr/share/icons/hicolor/256x256/apps/alvr.png
+# VR: open WiVRn/ALVR/mDNS ports, run the boot-time VR setup, let headsets find this PC
+firewall-offline-cmd --add-service=faradayos-vr
+Z=$(firewall-offline-cmd --get-default-zone)
+[ "$Z" = FedoraWorkstation ] || firewall-offline-cmd --zone=FedoraWorkstation --add-service=faradayos-vr || true
+systemctl enable avahi-daemon.service faraday-vr-setup.service
+
 # Live session (from Fedora's KDE live kickstart)
 systemctl enable livesys.service livesys-late.service
 echo 'livesys_session="kde"' > /etc/sysconfig/livesys
 
 # FaradayOS branding stays after updates
 systemctl enable faraday-rebrand.service
+# Installed systems start at the login screen: the installer and first boot remove the live user and its autologin
+systemctl enable faraday-remove-liveuser.service
 plymouth-set-default-theme faraday
 /usr/share/faraday/rebrand-fedora.sh
 

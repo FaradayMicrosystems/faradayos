@@ -1,10 +1,19 @@
 #!/bin/sh
 # Re-applies FaradayOS identity on Fedora after updates overwrite it.
 # ID=fedora is kept so dnf, RPM Fusion and Fedora tools keep working.
+# VERSION_ID stays Fedora's release number: dnf uses it to pick repos.
 O=/usr/lib/os-release
+FV=$(cat /usr/share/faraday/version 2>/dev/null)
 if [ -f $O ]; then
-  sed -i 's/^NAME=.*/NAME="FaradayOS"/; s/^PRETTY_NAME=.*/PRETTY_NAME="FaradayOS"/; s/^LOGO=.*/LOGO=faradayos/; s/^ANSI_COLOR=.*/ANSI_COLOR="38;5;208"/' $O
+  sed -i 's/^NAME=.*/NAME="FaradayOS"/; s/^LOGO=.*/LOGO=faradayos/; s/^ANSI_COLOR=.*/ANSI_COLOR="38;5;208"/' $O
   grep -q '^LOGO=' $O || echo 'LOGO=faradayos' >> $O
+  if [ -n "$FV" ]; then
+    FEDV=$(sed -n 's/^VERSION_ID=//p' $O)
+    sed -i "s/^PRETTY_NAME=.*/PRETTY_NAME=\"FaradayOS v$FV\"/; s/^VERSION=.*/VERSION=\"$FV (Fedora $FEDV)\"/; /^IMAGE_ID=/d; /^IMAGE_VERSION=/d" $O
+    printf 'IMAGE_ID=faradayos\nIMAGE_VERSION=%s\n' "$FV" >> $O
+  else
+    sed -i 's/^PRETTY_NAME=.*/PRETTY_NAME="FaradayOS"/' $O
+  fi
 fi
 # Boot splash
 mkdir -p /etc/plymouth && printf '[Daemon]\nTheme=faraday\nShowDelay=0\n' > /etc/plymouth/plymouthd.conf

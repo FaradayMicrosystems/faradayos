@@ -1,0 +1,10 @@
+[Unit]
+Description=FaradayOS VR setup (firewall ports for WiVRn/ALVR, SteamVR permissions)
+After=network-online.target firewalld.service avahi-daemon.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/faraday-vr-check --fix-system
+
+[Install]
+WantedBy=multi-user.target

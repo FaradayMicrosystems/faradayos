@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Set up SteamVR
+Comment=Install SteamVR through Steam and give it the permissions it needs
+Exec=/usr/bin/faraday-steamvr-setup
+Icon=steam
+Terminal=true
+Categories=Game;

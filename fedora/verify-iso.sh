@@ -1,17 +1,18 @@
 #!/bin/bash
-# Checks a built FaradayOS Fedora ISO: branding, boot splash, NVIDIA driver, gaming apps.
-# Usage: fedora/verify-iso.sh [path/to/FaradayOS-Fedora-44.iso]
+# Checks a built FaradayOS Fedora ISO: branding, boot splash, NVIDIA driver, gaming, VR, touchpad, fingerprint.
+# Usage: fedora/verify-iso.sh [path/to/FaradayOSv<version>.iso]
 # Runs inside a Fedora container (podman or docker). Prints PASS/FAIL per check.
 set -euo pipefail
 
-ISO=$(realpath "${1:-$(dirname "$0")/../out-fedora/FaradayOS-Fedora-${FEDORA:-44}.iso}")
+VERSION=$(cat "$(dirname "$0")/VERSION")
+ISO=$(realpath "${1:-$(dirname "$0")/../out-fedora/FaradayOSv$VERSION.iso}")
 [ -f "$ISO" ] || { echo "ISO not found: $ISO"; exit 1; }
 if command -v podman >/dev/null; then ENGINE=podman; else ENGINE=docker; fi
 SUDO=""; [ "$(id -u)" -eq 0 ] || SUDO=sudo
 
-$SUDO $ENGINE run --rm --privileged -v /dev:/dev -v "$ISO":/iso.iso:ro \
+$SUDO $ENGINE run --rm --privileged -v /dev:/dev -v "$ISO":/iso.iso:ro -e VERSION="$VERSION" \
   "docker.io/library/fedora:${FEDORA:-44}" bash -euc '
-dnf -y -q install dracut squashfs-tools >/dev/null
+dnf -y -q install dracut squashfs-tools xorriso >/dev/null
 mkdir -p /m/iso /m/sq /m/root
 mount -o loop,ro /iso.iso /m/iso
 mount -o loop,ro /m/iso/LiveOS/squashfs.img /m/sq
@@ -23,6 +24,8 @@ check() { # description, command
 }
 W=$R/usr/share/wallpapers/FaradayOS/contents/images/3260x1838.png
 check "OS name is FaradayOS"                 "grep -q ^NAME=\\\"FaradayOS\\\" $R/usr/lib/os-release"
+check "Version is FaradayOS v$VERSION"       "grep -qx \"PRETTY_NAME=.FaradayOS v$VERSION.\" $R/usr/lib/os-release && grep -qx IMAGE_VERSION=$VERSION $R/usr/lib/os-release && grep -qx VERSION_ID=44 $R/usr/lib/os-release"
+check "ISO volume label FaradayOSv${VERSION//./-}" "xorriso -indev /iso.iso -pvd_info 2>&1 | grep -q \"Volume Id *: FaradayOSv${VERSION//./-}\""
 check "Boot splash theme installed"          "test -f $R/usr/share/plymouth/themes/faraday/faraday.script -a -f $R/usr/share/plymouth/themes/faraday/logo.png"
 check "Boot splash set as default"           "grep -q ^Theme=faraday $R/etc/plymouth/plymouthd.conf"
 check "Boot splash inside live initramfs"    "lsinitrd \$(find /m/iso -name initrd.img | head -1) | grep -q plymouth/themes/faraday/faraday.script"
@@ -45,6 +48,26 @@ check "Branding service enabled"             "ls $R/etc/systemd/system/multi-use
 check "NVIDIA kernel module built"           "find $R/usr/lib/modules -name \"nvidia.ko*\" | grep -q ."
 check "Steam, gamescope, MangoHud, Lutris"  "chroot $R rpm -q steam gamescope mangohud lutris"
 check "Full ffmpeg codecs (RPM Fusion)"      "ls $R/usr/lib64/libavcodec.so.* && ! chroot $R rpm -q libavcodec-free"
+Z=$R/etc/firewalld/zones
+check "VR: WiVRn + dashboard installed"      "chroot $R rpm -q wivrn wivrn-dashboard"
+check "VR: xrizer + OpenComposite installed" "chroot $R rpm -q xrizer opencomposite"
+check "VR: ALVR installed, libraries found"  "test -x $R/opt/alvr/bin/alvr_dashboard -a -L $R/usr/bin/alvr_dashboard && ! chroot $R ldd /opt/alvr/bin/alvr_dashboard | grep -q \"not found\""
+check "VR: ALVR SteamVR driver present"      "find $R/opt/alvr -name driver_alvr_server.so | grep -q ."
+check "VR: ALVR in app menu"                 "test -f $R/usr/share/applications/alvr.desktop"
+check "VR: SteamVR setup launcher"           "test -x $R/usr/bin/faraday-steamvr-setup -a -f $R/usr/share/applications/faraday-steamvr-setup.desktop"
+check "VR: readiness check + login notice"   "test -x $R/usr/bin/faraday-vr-check -a -f $R/etc/xdg/autostart/faraday-vr-check.desktop"
+check "VR: firewall ports open (9757, 9943-9944)" "grep -q 9943-9944 $R/usr/lib/firewalld/services/faradayos-vr.xml && grep -qs faradayos-vr $Z/*.xml"
+check "VR: boot setup + Avahi enabled"       "ls $R/etc/systemd/system/multi-user.target.wants/faraday-vr-setup.service && ls $R/etc/systemd/system/multi-user.target.wants/avahi-daemon.service"
+check "VR: headset USB rules + steam-devices" "test -f $R/usr/lib/udev/rules.d/70-faradayos-vr.rules && chroot $R rpm -q steam-devices android-tools"
+check "VR: NVIDIA NVENC + AMD VA-API encode" "ls $R/usr/lib64/libnvidia-encode.so.* && chroot $R rpm -q mesa-va-drivers-freeworld"
+K=$(ls $R/usr/lib/modules | sort -V | tail -1)
+check "Touchpad: libinput + kernel drivers"  "chroot $R rpm -q libinput xorg-x11-drv-libinput && ! for m in i2c-hid-acpi hid-multitouch psmouse; do find $R/usr/lib/modules/$K -name \"\$m.ko*\" | grep -q . || grep -q \"/\$m.ko\" $R/usr/lib/modules/$K/modules.builtin || echo missing; done | grep -q missing"
+check "Touchpad: tap to click default"       "grep -q TapToClick=true $R/etc/xdg/kcminputrc"
+check "Fingerprint: fprintd + PAM installed" "chroot $R rpm -q fprintd fprintd-pam libfprint"
+# /etc/pam.d/system-auth is an absolute symlink into /etc/authselect, so read the target inside the image
+check "Fingerprint: login uses fingerprint"  "grep -qx with-fingerprint $R/etc/authselect/authselect.conf && grep -q pam_fprintd $R/etc/authselect/system-auth"
+check "Install removes live user + autologin" "test -x $R/usr/share/faraday/remove-liveuser.sh && grep -q remove-liveuser.sh $R/usr/share/anaconda/post-scripts/90-faraday-remove-liveuser.ks && ls $R/etc/systemd/system/multi-user.target.wants/faraday-remove-liveuser.service"
+check "No live user baked into the image"   "! grep -q ^liveuser: $R/etc/passwd && ! grep -rqs ^User=liveuser $R/etc/plasmalogin.conf $R/etc/plasmalogin.conf.d $R/etc/sddm.conf $R/etc/sddm.conf.d"
 check "Live session configured (KDE)"        "grep -q kde $R/etc/sysconfig/livesys"
 
 umount -R /m/root 2>/dev/null || true; umount /m/sq /m/iso

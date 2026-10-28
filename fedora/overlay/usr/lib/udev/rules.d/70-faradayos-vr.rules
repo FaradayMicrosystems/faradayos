@@ -1,0 +1,10 @@
+# FaradayOS: let the logged-in user use VR headsets over USB (adb for WiVRn/ALVR wired mode, firmware tools).
+# Meta Quest
+SUBSYSTEM=="usb", ATTR{idVendor}=="2833", TAG+="uaccess"
+# Pico
+SUBSYSTEM=="usb", ATTR{idVendor}=="2d40", TAG+="uaccess"
+# HTC Vive Focus / XR Elite
+SUBSYSTEM=="usb", ATTR{idVendor}=="0bb4", TAG+="uaccess"
+# Bigscreen Beyond
+SUBSYSTEM=="usb", ATTR{idVendor}=="35bd", TAG+="uaccess"
+SUBSYSTEM=="hidraw", ATTRS{idVendor}=="35bd", TAG+="uaccess"
