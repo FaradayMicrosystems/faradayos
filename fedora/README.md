@@ -1,10 +1,19 @@
 # FaradayOS: Fedora edition (not locked down)
 
+Current version: **FaradayOS v0.0.70** (set in `fedora/VERSION`). ISO file: `FaradayOSv0.0.70.iso`.
+
 A normal, writable Fedora 44 KDE system. Install software with `dnf` as usual; nothing is read-only.
 
 Included:
 - KDE Plasma, Firefox, LibreOffice, KDE apps
 - Gaming: Steam, Proton, gamescope, GameMode, MangoHud, Lutris, Wine
+- VR (AMD and NVIDIA):
+  - WiVRn + WiVRn dashboard: stream to Quest/Pico over Wi-Fi, no SteamVR needed
+  - ALVR (in `/opt/alvr`, app menu "ALVR"): stream SteamVR to Quest/Pico
+  - SteamVR: Steam downloads it per user, so open **Set up SteamVR** in the app menu once. It installs SteamVR and gives its compositor realtime priority (`CAP_SYS_NICE`)
+  - xrizer and OpenComposite: run SteamVR (OpenVR) games on WiVRn
+  - Firewall ports opened (WiVRn 9757, ALVR 9943-9944, mDNS 5353), Avahi on, USB access for Quest/Pico/Vive/Bigscreen headsets, `steam-devices` for Index/Vive
+  - **VR readiness check** in the app menu (or `faraday-vr-check`) shows what is missing
 - Graphics: AMD and Intel (Mesa), NVIDIA (RPM Fusion driver, built into the ISO), full codecs and hardware video decoding
 - FaradayOS branding: boot splash (Plymouth), KDE splash, wallpaper, colour scheme, lock and login screens, fastfetch logo. These come from the same files as the CachyOS build (`profile/airootfs`), so changes there apply to both.
 
@@ -29,7 +38,7 @@ Open [Actions → Build Fedora edition ISO](https://github.com/FaradayMicrosyste
    ./fedora/build-iso.sh
    ```
    It asks for your sudo password once. Needs about 40 GB free disk space and takes 30 to 90 minutes.
-   Result: `out-fedora/FaradayOS-Fedora-44.iso` (+ `.sha256`). Build log: `out-fedora/lmc.log`.
+   Result: `out-fedora/FaradayOSv0.0.70.iso` (+ `.sha256`). Build log: `out-fedora/lmc.log`.
 
 4. Optional: check the ISO (branding, boot splash, wallpaper, NVIDIA module, codecs, Steam):
    ```
@@ -45,7 +54,7 @@ NVIDIA cannot be tested in a VM. Use a USB stick on real hardware for that.
 **On real hardware:**
 1. Write the ISO to a USB stick (8 GB+) with Fedora Media Writer, balenaEtcher, or:
    ```
-   sudo dd if=out-fedora/FaradayOS-Fedora-44.iso of=/dev/sdX bs=4M status=progress oflag=sync
+   sudo dd if=out-fedora/FaradayOSv0.0.70.iso of=/dev/sdX bs=4M status=progress oflag=sync
    ```
    Replace `/dev/sdX` with your USB stick. Check with `lsblk` first: `dd` erases the target.
 2. **Turn off Secure Boot** in the BIOS. The NVIDIA driver is not signed, so it will not load with Secure Boot on.
@@ -59,11 +68,11 @@ NVIDIA cannot be tested in a VM. Use a USB stick on real hardware for that.
 ## Files
 - `faradayos.ks`: package list and setup steps (Fedora kickstart)
 - `apply-branding.sh`: copies FaradayOS branding into the image
-- `overlay/`: Fedora-only files (rebrand script that re-applies branding after updates, login screen wallpaper)
+- `VERSION`: FaradayOS version, used for the ISO name, volume label and os-release
+- `overlay/`: Fedora-only files (rebrand script that re-applies branding after updates, login screen wallpaper, VR scripts, firewall service, udev rules)
 - `build-iso.sh`: builds the ISO in a Fedora container
 - `verify-iso.sh`: checks a built ISO
 
 ## Not carried over from the CachyOS build
-- VR setup (WiVRn, ALVR, `faraday-vr-check`): these use Arch packages. Can be added later.
 - GRUB boot menu image: Fedora hides the boot menu by default, so it is not shown.
 - Calamares installer: Fedora uses its own installer (Anaconda).

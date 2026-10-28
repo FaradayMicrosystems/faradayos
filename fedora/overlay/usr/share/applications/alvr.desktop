@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=ALVR
+Comment=Stream SteamVR games to a standalone headset
+Exec=/usr/bin/alvr_dashboard
+Icon=alvr
+Categories=Game;
+StartupWMClass=ALVR

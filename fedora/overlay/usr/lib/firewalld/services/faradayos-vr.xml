@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+  <short>FaradayOS VR streaming</short>
+  <description>WiVRn (9757 TCP/UDP) and ALVR (9943-9944 TCP/UDP) streaming to standalone headsets, plus mDNS so headsets find this PC.</description>
+  <port protocol="tcp" port="9757"/>
+  <port protocol="udp" port="9757"/>
+  <port protocol="tcp" port="9943-9944"/>
+  <port protocol="udp" port="9943-9944"/>
+  <port protocol="udp" port="5353"/>
+</service>

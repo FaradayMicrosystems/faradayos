@@ -37,8 +37,10 @@ copy etc/skel/.config/fastfetch
 # Gaming kernel settings
 copy etc/sysctl.d/99-faraday-gaming.conf
 
-# Fedora-only files: rebrand script, its boot service and dnf hook, login screen wallpaper
+# Fedora-only files: rebrand script, its boot service and dnf hook, login screen wallpaper, VR setup
 cp -a "$REPO/fedora/overlay/." "$ROOT/"
-chmod 755 "$ROOT/usr/share/faraday/rebrand-fedora.sh"
+chmod 755 "$ROOT/usr/share/faraday/rebrand-fedora.sh" "$ROOT/usr/bin/faraday-vr-check" "$ROOT/usr/bin/faraday-steamvr-setup"
+# FaradayOS version (shown in os-release and About)
+install -Dm644 "$REPO/fedora/VERSION" "$ROOT/usr/share/faraday/version"
 
 echo "apply-branding: done"

@@ -1,0 +1,122 @@
+#!/usr/bin/env bash
+# FaradayOS VR readiness check for Steam, SteamVR, WiVRn and ALVR (AMD, NVIDIA and Intel GPUs). Fedora edition.
+#   faraday-vr-check              run the check and print a report
+#   faraday-vr-check --pause      same, then wait for Enter (for the app menu entry)
+#   faraday-vr-check --login      run at login; shows a desktop notice only if something needs attention
+#   faraday-vr-check --fix-system run as root at boot: firewall ports, Avahi, SteamVR compositor permission
+set -uo pipefail
+MODE="${1:-}"
+OK=0; WARN=0; FAIL=0; REPORT=""
+pass(){ REPORT+="  [ OK ] $*\n"; OK=$((OK+1)); }
+warn(){ REPORT+="  [WARN] $*\n"; WARN=$((WARN+1)); }
+fail(){ REPORT+="  [FAIL] $*\n"; FAIL=$((FAIL+1)); }
+have(){ command -v "$1" >/dev/null 2>&1; }
+pkg(){ rpm -q "$1" >/dev/null 2>&1; }
+
+steamvr_dirs(){
+  local h d
+  for h in /home/* /var/home/*; do
+    for d in "$h/.local/share/Steam/steamapps/common/SteamVR" "$h/.steam/steam/steamapps/common/SteamVR"; do
+      [[ -d $d ]] && readlink -f "$d"
+    done
+  done | sort -u
+}
+
+fix_system(){
+  # Open the ports WiVRn (9757 tcp+udp), ALVR (9943-9944 tcp+udp) and mDNS (5353/udp) need, in every active zone.
+  if have firewall-cmd && systemctl is-active --quiet firewalld; then
+    local z
+    for z in $(firewall-cmd --get-default-zone) $(firewall-cmd --get-active-zones 2>/dev/null | grep -v '^[[:space:]]'); do
+      firewall-cmd -q --permanent --zone="$z" --query-service=faradayos-vr || firewall-cmd -q --permanent --zone="$z" --add-service=faradayos-vr
+    done
+    firewall-cmd -q --reload
+  fi
+  systemctl enable --now avahi-daemon.service >/dev/null 2>&1 || true
+  # SteamVR needs CAP_SYS_NICE on its compositor launcher to get realtime GPU priority.
+  # Steam installs SteamVR per user and updates drop the capability, so re-apply on every boot.
+  local d l
+  while read -r d; do
+    l="$d/bin/linux64/vrcompositor-launcher"
+    [[ -f $l ]] && setcap CAP_SYS_NICE=eip "$l" 2>/dev/null
+  done < <(steamvr_dirs)
+  exit 0
+}
+[[ $MODE == --fix-system ]] && { [[ $EUID -eq 0 ]] || { echo "--fix-system needs root"; exit 1; }; fix_system; }
+
+# --- Steam -----------------------------------------------------------------
+pkg steam && pass "Steam installed" || fail "Steam not installed (sudo dnf install steam)"
+pkg steam-devices && pass "Steam VR/controller udev rules (steam-devices)" || warn "steam-devices missing (sudo dnf install steam-devices)"
+for p in mesa-dri-drivers.i686 mesa-vulkan-drivers.i686 pipewire-libs.i686; do
+  pkg "$p" && pass "$p" || warn "$p missing (32-bit, Steam installs it on first start)"
+done
+pkg gamemode && pass "GameMode installed" || warn "GameMode not installed"
+
+# --- GPU / Vulkan / video encoding (AMD, NVIDIA or Intel) ------------------
+GPUS=$(lspci -n 2>/dev/null | grep -E ' 03[0-9a-f]{2}: ' || true)
+if grep -qE ' (1002|8086):' <<<"$GPUS"; then
+  pkg mesa-vulkan-drivers && pass "AMD/Intel Vulkan driver (Mesa)" || fail "mesa-vulkan-drivers missing"
+  pkg mesa-va-drivers-freeworld && pass "AMD/Intel H.264/H.265 video encoding (mesa-va-drivers-freeworld)" \
+    || fail "mesa-va-drivers-freeworld missing: WiVRn/ALVR cannot encode video on AMD"
+fi
+if grep -q ' 10de:' <<<"$GPUS"; then
+  lsmod 2>/dev/null | grep -q '^nvidia_drm' && pass "NVIDIA driver loaded" \
+    || fail "NVIDIA GPU found but its driver isn't loaded (reboot; check Secure Boot is off)"
+  pkg xorg-x11-drv-nvidia-cuda-libs && pass "NVIDIA NVENC video encoding (cuda-libs)" \
+    || fail "xorg-x11-drv-nvidia-cuda-libs missing: WiVRn/ALVR cannot encode video on NVIDIA"
+fi
+if [[ $(grep -c . <<<"$GPUS") -gt 1 ]]; then
+  pass "Hybrid graphics: Steam picks the dedicated GPU via switcheroo-control"
+  systemctl is-active --quiet switcheroo-control || warn "switcheroo-control not running (sudo systemctl enable --now switcheroo-control)"
+fi
+if have vulkaninfo; then
+  vulkaninfo --summary 2>/dev/null | grep -qiE 'PHYSICAL_DEVICE_TYPE_(DISCRETE|INTEGRATED)_GPU' \
+    && pass "Vulkan sees a GPU" || fail "Vulkan cannot see any GPU"
+else warn "vulkaninfo not available, GPU check skipped"; fi
+
+# --- SteamVR ---------------------------------------------------------------
+SVR=$(steamvr_dirs | head -1)
+[[ $EUID -ne 0 ]] && for d in "$HOME/.local/share/Steam/steamapps/common/SteamVR" "$HOME/.steam/steam/steamapps/common/SteamVR"; do
+  [[ -d $d ]] && { SVR=$(readlink -f "$d"); break; }; done
+if [[ -n $SVR ]]; then
+  pass "SteamVR installed ($SVR)"
+  L="$SVR/bin/linux64/vrcompositor-launcher"
+  if getcap "$L" 2>/dev/null | grep -qi cap_sys_nice; then pass "SteamVR compositor has realtime permission"
+  else warn "SteamVR compositor lacks CAP_SYS_NICE (run 'Set up SteamVR', or reboot)"; fi
+else
+  warn "SteamVR not installed yet: open 'Set up SteamVR' from the app menu (needed for ALVR and wired headsets)"
+fi
+
+# --- WiVRn -----------------------------------------------------------------
+pkg wivrn && pass "WiVRn server installed" || fail "WiVRn missing (sudo dnf install wivrn)"
+pkg wivrn-dashboard && pass "WiVRn dashboard installed" || warn "WiVRn dashboard missing (sudo dnf install wivrn-dashboard)"
+systemctl is-active --quiet avahi-daemon && pass "Avahi running (headset can discover this PC)" || fail "Avahi not running (sudo systemctl enable --now avahi-daemon)"
+if pkg xrizer || pkg opencomposite; then pass "OpenVR to OpenXR layer installed (xrizer/OpenComposite)"
+else warn "No xrizer/OpenComposite: SteamVR-only games won't run on WiVRn"; fi
+
+# --- ALVR ------------------------------------------------------------------
+[[ -x /opt/alvr/bin/alvr_dashboard ]] && pass "ALVR installed (/opt/alvr)" || fail "ALVR missing (/opt/alvr/bin/alvr_dashboard)"
+
+# --- Firewall --------------------------------------------------------------
+if have firewall-cmd && systemctl is-active --quiet firewalld; then
+  z=$(firewall-cmd --get-default-zone 2>/dev/null)
+  if firewall-cmd --zone="$z" --query-service=faradayos-vr >/dev/null 2>&1; then pass "Firewall open for WiVRn (9757) and ALVR (9943-9944)"
+  elif [[ -z $z ]]; then warn "Firewall rules not readable without root (applied automatically at boot)"
+  else fail "Firewall blocks VR ports (sudo firewall-cmd --permanent --add-service=faradayos-vr && sudo firewall-cmd --reload)"; fi
+else pass "No active firewall blocking VR ports"; fi
+
+# --- Report ----------------------------------------------------------------
+SUMMARY="VR readiness: $OK ok, $WARN warnings, $FAIL problems"
+if [[ $MODE == --login ]]; then
+  STAMP="${XDG_STATE_HOME:-$HOME/.local/state}/faradayos/vr-ready"
+  (( FAIL == 0 && WARN == 0 )) && { mkdir -p "$(dirname "$STAMP")"; touch "$STAMP"; exit 0; }
+  [[ -f $STAMP ]] && (( FAIL == 0 )) && exit 0
+  # Only nag once about warnings (e.g. SteamVR not installed yet)
+  (( FAIL == 0 )) && { mkdir -p "$(dirname "$STAMP")"; touch "$STAMP"; }
+  if have kdialog; then
+    kdialog --title "FaradayOS VR check" --msgbox "$(printf "%s\n\n%b\nOpen 'VR readiness check' from the app menu any time to re-check." "$SUMMARY" "$REPORT")"
+  elif have notify-send; then notify-send "FaradayOS VR check" "$SUMMARY"; fi
+  exit 0
+fi
+printf "\e[38;5;208mFaradayOS VR readiness check\e[0m\n%b\n%s\n" "$REPORT" "$SUMMARY"
+[[ $MODE == --pause && -t 0 ]] && read -rp "Press Enter to close." _
+(( FAIL == 0 ))

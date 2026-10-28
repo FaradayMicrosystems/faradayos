@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=VR readiness check
+Comment=Check that WiVRn, ALVR, SteamVR and the graphics driver are ready
+Exec=/usr/bin/faraday-vr-check --pause
+Icon=faradayos
+Terminal=true
+Categories=Game;System;

@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+# FaradayOS: install SteamVR through Steam and give its compositor realtime priority.
+# SteamVR is Valve software that Steam downloads per user, so it cannot ship in the ISO.
+set -uo pipefail
+APP=250820   # SteamVR app id
+STEAM_ROOT=""
+for d in "$HOME/.local/share/Steam" "$HOME/.steam/steam"; do [[ -d $d/steamapps ]] && { STEAM_ROOT=$d; break; }; done
+
+find_steamvr(){
+  local lib
+  { [[ -n $STEAM_ROOT ]] && echo "$STEAM_ROOT"
+    [[ -n $STEAM_ROOT && -f $STEAM_ROOT/steamapps/libraryfolders.vdf ]] && \
+      sed -n 's/^[[:space:]]*"path"[[:space:]]*"\(.*\)"/\1/p' "$STEAM_ROOT/steamapps/libraryfolders.vdf"
+  } | sort -u | while read -r lib; do
+    [[ -x $lib/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher ]] && { echo "$lib/steamapps/common/SteamVR"; break; }
+  done
+}
+
+echo "FaradayOS SteamVR setup"
+SVR=$(find_steamvr)
+if [[ -z $SVR ]]; then
+  echo "1. Steam opens and asks to install SteamVR. Log in to Steam if asked, then click Install."
+  steam "steam://install/$APP" >/dev/null 2>&1 &
+  echo "   Waiting for the SteamVR download to finish (Ctrl+C to stop)..."
+  until SVR=$(find_steamvr) && [[ -n $SVR ]]; do
+    sleep 10
+    [[ -z $STEAM_ROOT ]] && for d in "$HOME/.local/share/Steam" "$HOME/.steam/steam"; do [[ -d $d/steamapps ]] && STEAM_ROOT=$d; done
+  done
+  # The launcher appears before the download completes; wait for Steam to mark it installed
+  until grep -qs '"StateFlags"[[:space:]]*"4"' "$(dirname "$(dirname "$SVR")")/appmanifest_$APP.acf"; do sleep 10; done
+fi
+echo "SteamVR found: $SVR"
+
+L=$SVR/bin/linux64/vrcompositor-launcher
+if getcap "$L" 2>/dev/null | grep -qi cap_sys_nice; then
+  echo "2. SteamVR compositor already has realtime priority."
+else
+  echo "2. Giving the SteamVR compositor realtime priority (asks for your password)..."
+  pkexec setcap CAP_SYS_NICE=eip "$L" && echo "   Done." || echo "   Skipped. Run later: sudo setcap CAP_SYS_NICE=eip '$L'"
+fi
+
+cat <<'TXT'
+3. Next steps:
+   - Wired/Lighthouse headsets (Valve Index, HTC Vive, Bigscreen): plug in, then start SteamVR from Steam.
+   - Quest/Pico over Wi-Fi with SteamVR: open "ALVR", follow its setup wizard, then start SteamVR from ALVR.
+   - Quest/Pico over Wi-Fi without SteamVR: open "WiVRn" (works on its own; no SteamVR needed).
+   - Check everything any time: faraday-vr-check
+TXT
+[[ -t 0 ]] && read -rp "Press Enter to close." _
+exit 0
