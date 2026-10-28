@@ -71,6 +71,16 @@ akmod-nvidia
 xorg-x11-drv-nvidia-cuda
 switcheroo-control
 
+# Laptops: touchpad, touchscreen, pen, screen rotation, fingerprint reader
+libinput
+xorg-x11-drv-libinput
+libwacom
+iio-sensor-proxy
+linux-firmware
+fprintd
+fprintd-pam
+libfprint
+
 # Gaming
 steam
 gamemode
@@ -147,6 +157,11 @@ pkill -f 'install.*kmod-nvidia' || true
 sleep 5
 rpm -q "kmod-nvidia-$KVER" || timeout 30m akmods --force --kernels "$KVER"
 rpm -q "kmod-nvidia-$KVER" || { echo "NVIDIA module build failed"; exit 1; }
+
+# Fingerprint login and sudo (enrol in System Settings > Users)
+authselect current >/dev/null 2>&1 || authselect select local --force
+authselect enable-feature with-fingerprint
+authselect apply-changes
 
 # VR: ALVR streamer (MIT licence, upstream release; works with SteamVR on AMD and NVIDIA)
 mkdir -p /opt/alvr

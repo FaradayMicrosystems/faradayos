@@ -1,0 +1,3 @@
+[Libinput][Defaults][Touchpad]
+TapToClick=true
+DisableWhileTyping=true

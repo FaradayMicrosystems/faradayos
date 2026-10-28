@@ -7,6 +7,7 @@ A normal, writable Fedora 44 KDE system. Install software with `dnf` as usual; n
 Included:
 - KDE Plasma, Firefox, LibreOffice, KDE apps
 - Gaming: Steam, Proton, gamescope, GameMode, MangoHud, Lutris, Wine
+- Laptops: touchpad (libinput, tap to click on), touchscreen/pen, screen rotation, fingerprint reader (fprintd; enrol in System Settings > Users, then use it for login, lock screen and sudo)
 - VR (AMD and NVIDIA):
   - WiVRn + WiVRn dashboard: stream to Quest/Pico over Wi-Fi, no SteamVR needed
   - ALVR (in `/opt/alvr`, app menu "ALVR"): stream SteamVR to Quest/Pico

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Checks a built FaradayOS Fedora ISO: branding, boot splash, NVIDIA driver, gaming apps.
+# Checks a built FaradayOS Fedora ISO: branding, boot splash, NVIDIA driver, gaming, VR, touchpad, fingerprint.
 # Usage: fedora/verify-iso.sh [path/to/FaradayOSv<version>.iso]
 # Runs inside a Fedora container (podman or docker). Prints PASS/FAIL per check.
 set -euo pipefail
@@ -60,6 +60,11 @@ check "VR: firewall ports open (9757, 9943-9944)" "grep -q 9943-9944 $R/usr/lib/
 check "VR: boot setup + Avahi enabled"       "ls $R/etc/systemd/system/multi-user.target.wants/faraday-vr-setup.service && ls $R/etc/systemd/system/multi-user.target.wants/avahi-daemon.service"
 check "VR: headset USB rules + steam-devices" "test -f $R/usr/lib/udev/rules.d/70-faradayos-vr.rules && chroot $R rpm -q steam-devices android-tools"
 check "VR: NVIDIA NVENC + AMD VA-API encode" "ls $R/usr/lib64/libnvidia-encode.so.* && chroot $R rpm -q mesa-va-drivers-freeworld"
+K=$(ls $R/usr/lib/modules | sort -V | tail -1)
+check "Touchpad: libinput + kernel drivers"  "chroot $R rpm -q libinput xorg-x11-drv-libinput && ! for m in i2c-hid-acpi hid-multitouch psmouse; do find $R/usr/lib/modules/$K -name \"\$m.ko*\" | grep -q . || grep -q \"/\$m.ko\" $R/usr/lib/modules/$K/modules.builtin || echo missing; done | grep -q missing"
+check "Touchpad: tap to click default"       "grep -q TapToClick=true $R/etc/xdg/kcminputrc"
+check "Fingerprint: fprintd + PAM installed" "chroot $R rpm -q fprintd fprintd-pam libfprint"
+check "Fingerprint: login uses fingerprint"  "grep -q pam_fprintd $R/etc/pam.d/system-auth"
 check "Live session configured (KDE)"        "grep -q kde $R/etc/sysconfig/livesys"
 
 umount -R /m/root 2>/dev/null || true; umount /m/sq /m/iso
