@@ -1,0 +1,2 @@
+# Re-apply FaradayOS branding after every dnf transaction (like the pacman hook on the CachyOS build)
+post_transaction::::/usr/share/faraday/rebrand-fedora.sh

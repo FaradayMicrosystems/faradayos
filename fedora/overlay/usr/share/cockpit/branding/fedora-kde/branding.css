@@ -1,0 +1,52 @@
+/* FaradayOS colours and logo for the installer (Anaconda Web UI).
+   Cockpit picks this over branding/fedora because os-release has ID=fedora, VARIANT_ID=kde. */
+#badge {
+    inline-size: 80px;
+    block-size: 80px;
+    background-image: url("logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#brand::before {
+    content: "FaradayOS";
+}
+
+.anaconda {
+    /* FaradayOS palette: orange, yellow, black */
+    --brand-default-light: #ffc53d;
+    --brand-default: #ff7a1a;
+    --brand-default-dark: #c85a0a;
+    --pf-t--global--color--brand--default: var(--brand-default);
+    --pf-t--global--color--brand--hover: var(--brand-default-light);
+    --pf-t--global--color--brand--clicked: var(--brand-default-dark);
+    --pf-t--global--text--color--link--default: var(--brand-default);
+    --pf-t--global--text--color--link--hover: var(--brand-default-light);
+    --pf-t--global--border--color--clicked: var(--brand-default);
+    --pf-t--global--icon--color--brand--default: var(--brand-default);
+    --pf-t--global--background--color--primary--default: #101010;
+    --pf-t--global--background--color--secondary--default: #0b0b0b;
+    --pf-t--global--background--color--floating--default: #161616;
+    --pf-t--global--text--color--regular: #ededed;
+    --pf-t--global--text--color--on-brand--default: #0b0b0b;
+    background-color: #0b0b0b;
+    color: #ededed;
+
+    /* Our logo is already orange on transparent: show it as is */
+    .logo {
+        background-image: url("logo.png");
+        filter: none;
+        mix-blend-mode: normal;
+    }
+
+    /* Dark header with an orange glow behind the logo */
+    .pf-v6-c-page__main-group > .pf-v6-c-page__main-section:first-child {
+        --_text: #ededed;
+        background: radial-gradient(circle at 2.5rem, #5a2a08 32px, #0b0b0b 100%);
+        border-block-end: 2px solid var(--brand-default);
+    }
+
+    .pf-v6-c-wizard__nav-link.pf-m-current::before {
+        --pf-v6-c-wizard__nav-link--m-current--before--BackgroundColor: var(--brand-default);
+    }
+}

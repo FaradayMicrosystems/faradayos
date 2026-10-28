@@ -1,0 +1,49 @@
+name: Build Fedora edition ISO
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [fedora-mutable]
+    paths: ['fedora/**', '!fedora/verify-iso.sh', '!fedora/README.md', 'profile/airootfs/**', '.github/workflows/fedora-iso.yml']
+
+jobs:
+  iso:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache /usr/local/share/boost
+          sudo docker image prune -af
+          df -h /
+
+      - uses: actions/checkout@v4
+
+      - name: Build ISO
+        run: ./fedora/build-iso.sh
+
+      - name: Verify ISO (branding, boot splash, NVIDIA, gaming)
+        run: ./fedora/verify-iso.sh
+
+      - name: Show build errors
+        if: failure()
+        run: |
+          cd out-fedora
+          grep -rh -A12 'Transaction Summary' --include='*.log' . | head -80 || true
+          grep -rhiE 'error|failed|not found|No match|cannot|Problem' --include='*.log' . | grep -v 'Configuring ' | tail -80 || true
+
+      - name: Upload build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-log
+          path: out-fedora/**/*.log
+          if-no-files-found: ignore
+
+      - name: Upload ISO
+        uses: actions/upload-artifact@v4
+        with:
+          name: FaradayOS-Fedora-ISO
+          path: out-fedora/FaradayOS-Fedora-*.iso*
+          compression-level: 0
+          retention-days: 7
