@@ -52,7 +52,8 @@ check "Full ffmpeg codecs (RPM Fusion)"      "ls $R/usr/lib64/libavcodec.so.* &&
 Z=$R/etc/firewalld/zones
 # Big optional software ships as one-click installers, not in the ISO
 VRPKGS="wivrn wivrn-dashboard xrizer opencomposite android-tools xorg-x11-drv-nvidia-cuda xorg-x11-drv-nvidia-cuda-libs wine lutris"
-lean() { ! chroot $R rpm -q wivrn wine lutris xorg-x11-drv-nvidia-cuda-libs | grep -qv "not installed" && ! test -e $R/opt/alvr; }
+# (xorg-x11-drv-nvidia-cuda-libs is not checked: the NVIDIA driver itself requires it)
+lean() { ! chroot $R rpm -q wivrn wivrn-dashboard xrizer wine lutris | grep -qv "not installed" && ! test -e $R/opt/alvr; }
 installers() {
   for f in usr/bin/faraday-install-vr usr/bin/faraday-install-wine usr/libexec/faraday/install-vr-system; do
     test -x "$R/$f" && bash -n "$R/$f" || return 1
