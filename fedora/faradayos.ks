@@ -49,6 +49,11 @@ livesys-scripts
 @kde-apps
 @kde-media
 @libreoffice
+# Keep the ISO small: drop large extras that office/desktop work does not need (install with dnf if wanted)
+-libreoffice-base
+-java-*-openjdk*
+-digikam*
+-proj-data-*
 firefox
 fastfetch
 # Papirus icons (desktop layout is in the FaradayOS global theme)
