@@ -20,8 +20,12 @@ Included:
 
 ## Get the ISO
 
-**Option A: download it (no build needed).** Every push to `main` builds the ISO on GitHub and checks it.
-Open [Actions → Build Fedora edition ISO](https://github.com/FaradayMicrosystems/faradayos/actions/workflows/fedora-iso.yml), click the newest green run, and download **FaradayOS-Fedora-ISO** at the bottom (a ~5.9 GB zip; unzip it). Downloads are kept for 7 days.
+**Option A: download it (no build needed).** Every push to `main` builds the ISO, checks it and publishes it.
+1. Open the [latest release](https://github.com/FaradayMicrosystems/faradayos/releases/latest) and download every `FaradayOSv<version>.iso.part*` file (each under 2 GB; downloads can resume).
+2. Join the parts into one ISO, in the download folder:
+   - Linux: `cat FaradayOSv0.0.70.iso.part* > FaradayOSv0.0.70.iso`
+   - Windows (Command Prompt): `copy /b FaradayOSv0.0.70.iso.part0 + FaradayOSv0.0.70.iso.part1 + FaradayOSv0.0.70.iso.part2 FaradayOSv0.0.70.iso` (list every part you downloaded, in order)
+3. Optional check: `sha256sum -c FaradayOSv0.0.70.iso.sha256` prints `OK`.
 
 **Option B: build it yourself (on your CachyOS PC).**
 
