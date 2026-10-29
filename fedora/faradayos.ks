@@ -49,11 +49,6 @@ livesys-scripts
 @kde-apps
 @kde-media
 @libreoffice
-# Keep the ISO small: drop large extras that office/desktop work does not need (install with dnf if wanted)
--libreoffice-base
--java-*-openjdk*
--digikam*
--proj-data-*
 firefox
 fastfetch
 # Papirus icons (desktop layout is in the FaradayOS global theme)
@@ -163,6 +158,11 @@ firewall-offline-cmd --add-service=faradayos-vr
 Z=$(firewall-offline-cmd --get-default-zone)
 [ "$Z" = FedoraWorkstation ] || firewall-offline-cmd --zone=FedoraWorkstation --add-service=faradayos-vr || true
 systemctl enable avahi-daemon.service faraday-vr-setup.service
+
+# Keep the ISO small: remove large extras that office/desktop work does not need (dnf install them if wanted).
+# Done here, not in %packages, because they are members of the KDE/LibreOffice groups.
+dnf -y remove 'digikam*' 'proj-data-*' libreoffice-base 'java-*-openjdk*' || true
+rpm -q libreoffice-writer libreoffice-calc libreoffice-impress dolphin konsole
 
 # Live session (from Fedora's KDE live kickstart)
 systemctl enable livesys.service livesys-late.service
