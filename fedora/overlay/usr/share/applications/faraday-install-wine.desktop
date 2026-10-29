@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Install Wine and Lutris
+Comment=Run Windows apps and non-Steam games
+Exec=/usr/bin/faraday-install-wine
+Icon=faradayos
+Terminal=true
+Categories=Game;System;

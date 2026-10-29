@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# FaradayOS: one-click install of Wine (Windows apps) and Lutris (game launcher for non-Steam games).
+set -uo pipefail
+echo "FaradayOS: installing Wine and Lutris. Download is about 0.5 GB. Enter your password when asked."
+if pkexec dnf -y install wine lutris; then echo "Done. Open Lutris from the app menu."; else echo "Install failed (see messages above)."; fi
+[[ -t 0 ]] && read -rp "Press Enter to close." _
