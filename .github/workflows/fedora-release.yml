@@ -1,0 +1,71 @@
+name: Publish Fedora edition release
+
+# Publishes the ISO from a green build on main as a GitHub Release (faster, resumable downloads).
+# Release files are limited to 2 GB, so the ISO is split into parts with checksums.
+on:
+  workflow_run:
+    workflows: [Build Fedora edition ISO]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Build run to publish (empty = newest green build on main)
+        required: false
+
+jobs:
+  release:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache /usr/local/share/boost
+          df -h .
+
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Download ISO from the build
+        run: |
+          RUN=${{ github.event.workflow_run.id || inputs.run_id }}
+          [ -n "$RUN" ] || RUN=$(gh run list -R "$GITHUB_REPOSITORY" -w fedora-iso.yml -b main -s success -L 1 --json databaseId -q '.[0].databaseId')
+          echo "Publishing ISO from build run $RUN"
+          echo "RUN=$RUN" >> "$GITHUB_ENV"
+          gh run download "$RUN" -R "$GITHUB_REPOSITORY" -n FaradayOS-Fedora-ISO -D iso
+          ls -l iso
+
+      - name: Split ISO into parts
+        run: |
+          V=$(cat fedora/VERSION); ISO=FaradayOSv$V.iso
+          cd iso
+          sha256sum -c "$ISO.sha256"
+          split -b 1900M -d -a 1 "$ISO" "$ISO.part"
+          rm "$ISO"
+          sha256sum "$ISO".part[0-9] > SHA256SUMS-parts.txt
+          ls -l
+
+      - name: Publish release
+        run: |
+          V=$(cat fedora/VERSION); ISO=FaradayOSv$V.iso; TAG=v$V
+          PARTS=$(ls iso/"$ISO".part[0-9] | xargs -n1 basename | tr '\n' ' ')
+          cat > notes.md <<EOF
+          FaradayOS v$V (Fedora 44 KDE edition). Built by [run $RUN]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$RUN).
+
+          **Download all \`$ISO.part*\` files below**, then join them into one ISO:
+
+          - Linux: \`cat $ISO.part* > $ISO\`
+          - Windows (Command Prompt, in the download folder): \`copy /b $(echo $PARTS | sed 's/ / + /g') $ISO\`
+
+          Check it (optional): \`sha256sum -c $ISO.sha256\` should print \`OK\`.
+          Then write \`$ISO\` to a USB stick (Fedora Media Writer or balenaEtcher). See fedora/README.md.
+          EOF
+          gh release delete "$TAG" -R "$GITHUB_REPOSITORY" -y --cleanup-tag 2>/dev/null || true
+          gh release create "$TAG" -R "$GITHUB_REPOSITORY" --target "$(git rev-parse HEAD)" \
+            -t "FaradayOS v$V" -F notes.md --latest iso/*
