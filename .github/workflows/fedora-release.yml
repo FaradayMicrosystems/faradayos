@@ -60,6 +60,9 @@ jobs:
 
           **Download all \`$ISO.part*\` files below**, then join them into one ISO:
 
+          Fastest download (many connections at once; Linux \`sudo dnf install aria2\` or \`sudo pacman -S aria2\`):
+          \`aria2c -Z -x16 -s16 $(for p in $PARTS; do printf '%s ' "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases/download/$TAG/$p"; done)\`
+
           - Linux: \`cat $ISO.part* > $ISO\`
           - Windows (Command Prompt, in the download folder): \`copy /b $(echo $PARTS | sed 's/ / + /g') $ISO\`
 

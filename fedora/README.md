@@ -6,15 +6,11 @@ A normal, writable Fedora 44 KDE system. Install software with `dnf` as usual; n
 
 Included:
 - KDE Plasma, Firefox, LibreOffice, KDE apps
-- Gaming: Steam, Proton, gamescope, GameMode, MangoHud, Lutris, Wine
-- Laptops: touchpad (libinput, tap to click on), touchscreen/pen, screen rotation, fingerprint reader (fprintd; enrol in System Settings > Users, then use it for login, lock screen and sudo)
-- VR (AMD and NVIDIA):
-  - WiVRn + WiVRn dashboard: stream to Quest/Pico over Wi-Fi, no SteamVR needed
-  - ALVR (in `/opt/alvr`, app menu "ALVR"): stream SteamVR to Quest/Pico
-  - SteamVR: Steam downloads it per user, so open **Set up SteamVR** in the app menu once. It installs SteamVR and gives its compositor realtime priority (`CAP_SYS_NICE`)
-  - xrizer and OpenComposite: run SteamVR (OpenVR) games on WiVRn
-  - Firewall ports opened (WiVRn 9757, ALVR 9943-9944, mDNS 5353), Avahi on, USB access for Quest/Pico/Vive/Bigscreen headsets, `steam-devices` for Index/Vive
-  - **VR readiness check** in the app menu (or `faraday-vr-check`) shows what is missing
+- Gaming: Steam, Proton, gamescope, GameMode, MangoHud
+- One-click installers in the app menu (kept out of the ISO so it stays small):
+  - **Install VR tools**: WiVRn + dashboard (Quest/Pico over Wi-Fi), ALVR (SteamVR streaming), xrizer + OpenComposite (SteamVR games on WiVRn), adb for wired headsets, NVIDIA video encoding/CUDA libraries on NVIDIA PCs, then installs SteamVR through Steam and gives it realtime priority
+  - **Install Wine and Lutris**: Windows apps and non-Steam games
+  - Already in the ISO for VR: firewall ports (WiVRn 9757, ALVR 9943-9944, mDNS 5353), Avahi, headset USB access, `steam-devices`, **Set up SteamVR**, **VR readiness check** (`faraday-vr-check`)
 - Graphics: AMD and Intel (Mesa), NVIDIA (RPM Fusion driver, built into the ISO), full codecs and hardware video decoding
 - FaradayOS branding: boot splash (Plymouth), KDE splash, wallpaper, colour scheme, lock and login screens, fastfetch logo. These come from the same files as the CachyOS build (`profile/airootfs`), so changes there apply to both.
 
@@ -66,7 +62,7 @@ NVIDIA cannot be tested in a VM. Use a USB stick on real hardware for that.
 3. Boot the USB. Check:
    - FaradayOS boot splash appears during boot
    - FaradayOS wallpaper, KDE splash and orange colour scheme in the live session
-   - `nvidia-smi` (NVIDIA) or `vulkaninfo --summary` (AMD) shows your graphics card
+   - `vulkaninfo --summary` shows your graphics card (NVIDIA or AMD)
    - Steam opens and a game runs
 4. To install to disk: open **Install to Hard Drive** on the desktop.
 
@@ -74,7 +70,7 @@ NVIDIA cannot be tested in a VM. Use a USB stick on real hardware for that.
 - `faradayos.ks`: package list and setup steps (Fedora kickstart)
 - `apply-branding.sh`: copies FaradayOS branding into the image
 - `VERSION`: FaradayOS version, used for the ISO name, volume label and os-release
-- `overlay/`: Fedora-only files (rebrand script that re-applies branding after updates, login screen wallpaper, VR scripts, firewall service, udev rules)
+- `overlay/`: Fedora-only files (rebrand script that re-applies branding after updates, login screen wallpaper, VR and Wine installers, firewall service, udev rules)
 - `build-iso.sh`: builds the ISO in a Fedora container
 - `verify-iso.sh`: checks a built ISO
 

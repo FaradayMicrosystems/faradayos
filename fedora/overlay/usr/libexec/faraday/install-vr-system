@@ -1,0 +1,24 @@
+#!/bin/bash
+# FaradayOS: system part of "Install VR tools" (runs as root via pkexec).
+# WiVRn + dashboard, xrizer + OpenComposite (SteamVR games on WiVRn), adb for wired headsets,
+# NVIDIA NVENC/CUDA libraries on NVIDIA PCs, ALVR streamer in /opt/alvr, firewall ports.
+set -euo pipefail
+[ "$(id -u)" -eq 0 ] || { echo "Run through faraday-install-vr"; exit 1; }
+PKGS="wivrn wivrn-dashboard xrizer opencomposite android-tools steam-devices libva-utils"
+lspci -n | grep -qE ' 03[0-9a-f]{2}: 10de:' && PKGS="$PKGS xorg-x11-drv-nvidia-cuda xorg-x11-drv-nvidia-cuda-libs"
+echo "== Installing: $PKGS"
+dnf -y install $PKGS
+
+echo "== Installing ALVR (latest release) into /opt/alvr"
+T=$(mktemp -d); trap 'rm -rf "$T"' EXIT
+curl -fL --retry 5 --retry-delay 5 -o "$T/alvr.tar.gz" \
+  https://github.com/alvr-org/ALVR/releases/latest/download/alvr_streamer_linux.tar.gz
+rm -rf /opt/alvr && mkdir -p /opt/alvr
+tar -xzf "$T/alvr.tar.gz" -C /opt/alvr --strip-components=1
+ln -sf /opt/alvr/bin/alvr_dashboard /usr/bin/alvr_dashboard
+I=$(find /opt/alvr/share/icons -name 'alvr*.png' 2>/dev/null | sort -V | tail -1)
+[ -n "$I" ] && install -Dm644 "$I" /usr/share/icons/hicolor/256x256/apps/alvr.png
+install -Dm644 /usr/share/faraday/vr/alvr.desktop /usr/share/applications/alvr.desktop
+
+echo "== Opening VR ports and applying SteamVR permissions"
+/usr/bin/faraday-vr-check --fix-system

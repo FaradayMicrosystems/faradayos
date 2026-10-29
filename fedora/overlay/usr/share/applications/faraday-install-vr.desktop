@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Install VR tools
+Comment=Install WiVRn, ALVR and SteamVR with everything they need
+Exec=/usr/bin/faraday-install-vr
+Icon=faradayos
+Terminal=true
+Categories=Game;System;

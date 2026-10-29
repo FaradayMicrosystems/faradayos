@@ -1,0 +1,48 @@
+name: Fedora ISO size report
+
+# Lists what takes space in a built ISO (largest packages and folders), to keep the ISO small.
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Build run to inspect (empty = newest green build on main)
+        required: false
+  push:
+    branches: ['claude/**']
+    paths: ['.github/workflows/fedora-size-report.yml']
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Download ISO
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache /usr/local/share/boost
+          RUN=${{ inputs.run_id }}
+          [ -n "$RUN" ] || RUN=$(gh run list -R "$GITHUB_REPOSITORY" -w fedora-iso.yml -b main -s success -L 1 --json databaseId -q '.[0].databaseId')
+          echo "Inspecting ISO from build run $RUN"
+          gh run download "$RUN" -R "$GITHUB_REPOSITORY" -n FaradayOS-Fedora-ISO -D iso
+
+      - name: Report
+        run: |
+          ISO=$(ls iso/*.iso)
+          sudo docker run --rm --privileged -v /dev:/dev -v "$PWD/$ISO":/iso.iso:ro docker.io/library/fedora:44 bash -euc '
+            dnf -y -q install squashfs-tools >/dev/null
+            mkdir -p /m/iso /m/sq /m/root
+            mount -o loop,ro /iso.iso /m/iso
+            mount -o loop,ro /m/iso/LiveOS/squashfs.img /m/sq
+            if [ -f /m/sq/LiveOS/rootfs.img ]; then mount -o loop,ro /m/sq/LiveOS/rootfs.img /m/root; R=/m/root; else R=/m/sq; fi
+            echo "== ISO $(du -h /iso.iso | cut -f1), squashfs $(du -h /m/iso/LiveOS/squashfs.img | cut -f1)"
+            unsquashfs -s /m/iso/LiveOS/squashfs.img | head -12
+            echo "== Installed size total: $(du -sh $R 2>/dev/null | cut -f1)"
+            echo "== Largest 60 packages (installed MB)"
+            chroot $R rpm -qa --qf "%{SIZE} %{NAME}.%{ARCH}\n" | sort -rn | head -60 | awk "{printf \"%8.0f  %s\n\", \$1/1048576, \$2}"
+            echo "== 32-bit packages: $(chroot $R rpm -qa --qf "%{ARCH}\n" | grep -c i686), $(chroot $R rpm -qa --qf "%{SIZE} %{ARCH}\n" | awk "\$2==\"i686\"{s+=\$1} END{printf \"%.0f MB\", s/1048576}")"
+            echo "== Largest folders"
+            du -xm --max-depth=3 $R/usr $R/var $R/opt 2>/dev/null | sort -rn | head -40
+          '

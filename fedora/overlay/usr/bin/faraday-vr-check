@@ -42,6 +42,8 @@ fix_system(){
   exit 0
 }
 [[ $MODE == --fix-system ]] && { [[ $EUID -eq 0 ]] || { echo "--fix-system needs root"; exit 1; }; fix_system; }
+# VR tools are optional: stay quiet at login until they are installed
+[[ $MODE == --login ]] && ! pkg wivrn && exit 0
 
 # --- Steam -----------------------------------------------------------------
 pkg steam && pass "Steam installed" || fail "Steam not installed (sudo dnf install steam)"
@@ -62,7 +64,7 @@ if grep -q ' 10de:' <<<"$GPUS"; then
   lsmod 2>/dev/null | grep -q '^nvidia_drm' && pass "NVIDIA driver loaded" \
     || fail "NVIDIA GPU found but its driver isn't loaded (reboot; check Secure Boot is off)"
   pkg xorg-x11-drv-nvidia-cuda-libs && pass "NVIDIA NVENC video encoding (cuda-libs)" \
-    || fail "xorg-x11-drv-nvidia-cuda-libs missing: WiVRn/ALVR cannot encode video on NVIDIA"
+    || fail "NVIDIA video encoding libraries missing (open 'Install VR tools')"
 fi
 if [[ $(grep -c . <<<"$GPUS") -gt 1 ]]; then
   pass "Hybrid graphics: Steam picks the dedicated GPU via switcheroo-control"
@@ -87,14 +89,14 @@ else
 fi
 
 # --- WiVRn -----------------------------------------------------------------
-pkg wivrn && pass "WiVRn server installed" || fail "WiVRn missing (sudo dnf install wivrn)"
-pkg wivrn-dashboard && pass "WiVRn dashboard installed" || warn "WiVRn dashboard missing (sudo dnf install wivrn-dashboard)"
+pkg wivrn && pass "WiVRn server installed" || fail "WiVRn missing (open 'Install VR tools' from the app menu)"
+pkg wivrn-dashboard && pass "WiVRn dashboard installed" || warn "WiVRn dashboard missing (open 'Install VR tools')"
 systemctl is-active --quiet avahi-daemon && pass "Avahi running (headset can discover this PC)" || fail "Avahi not running (sudo systemctl enable --now avahi-daemon)"
 if pkg xrizer || pkg opencomposite; then pass "OpenVR to OpenXR layer installed (xrizer/OpenComposite)"
 else warn "No xrizer/OpenComposite: SteamVR-only games won't run on WiVRn"; fi
 
 # --- ALVR ------------------------------------------------------------------
-[[ -x /opt/alvr/bin/alvr_dashboard ]] && pass "ALVR installed (/opt/alvr)" || fail "ALVR missing (/opt/alvr/bin/alvr_dashboard)"
+[[ -x /opt/alvr/bin/alvr_dashboard ]] && pass "ALVR installed (/opt/alvr)" || fail "ALVR missing (open 'Install VR tools' from the app menu)"
 
 # --- Firewall --------------------------------------------------------------
 if have firewall-cmd && systemctl is-active --quiet firewalld; then

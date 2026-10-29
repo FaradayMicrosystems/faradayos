@@ -1,5 +1,5 @@
 #!/bin/bash
-# Checks a built FaradayOS Fedora ISO: branding, boot splash, NVIDIA driver, gaming, VR, touchpad, fingerprint.
+# Checks a built FaradayOS Fedora ISO: branding, boot splash, NVIDIA driver, gaming, VR installers, touchpad, fingerprint.
 # Usage: fedora/verify-iso.sh [path/to/FaradayOSv<version>.iso]
 # Runs inside a Fedora container (podman or docker). Prints PASS/FAIL per check.
 set -euo pipefail
@@ -13,6 +13,7 @@ SUDO=""; [ "$(id -u)" -eq 0 ] || SUDO=sudo
 $SUDO $ENGINE run --rm --privileged -v /dev:/dev -v "$ISO":/iso.iso:ro -e VERSION="$VERSION" \
   "docker.io/library/fedora:${FEDORA:-44}" bash -euc '
 dnf -y -q install dracut squashfs-tools xorriso >/dev/null
+echo "ISO size: $(du -h /iso.iso | cut -f1)"
 mkdir -p /m/iso /m/sq /m/root
 mount -o loop,ro /iso.iso /m/iso
 mount -o loop,ro /m/iso/LiveOS/squashfs.img /m/sq
@@ -46,20 +47,33 @@ check "Colour scheme file"                   "test -f $R/usr/share/color-schemes
 check "Branding re-applied after updates"    "test -x $R/usr/share/faraday/rebrand-fedora.sh -a -f $R/etc/dnf/libdnf5-plugins/actions.d/faraday-rebrand.actions"
 check "Branding service enabled"             "ls $R/etc/systemd/system/multi-user.target.wants/faraday-rebrand.service"
 check "NVIDIA kernel module built"           "find $R/usr/lib/modules -name \"nvidia.ko*\" | grep -q ."
-check "Steam, gamescope, MangoHud, Lutris"  "chroot $R rpm -q steam gamescope mangohud lutris"
+check "Steam, gamescope, MangoHud, GameMode" "chroot $R rpm -q steam gamescope mangohud gamemode"
 check "Full ffmpeg codecs (RPM Fusion)"      "ls $R/usr/lib64/libavcodec.so.* && ! chroot $R rpm -q libavcodec-free"
 Z=$R/etc/firewalld/zones
-check "VR: WiVRn + dashboard installed"      "chroot $R rpm -q wivrn wivrn-dashboard"
-check "VR: xrizer + OpenComposite installed" "chroot $R rpm -q xrizer opencomposite"
-check "VR: ALVR installed, libraries found"  "test -x $R/opt/alvr/bin/alvr_dashboard -a -L $R/usr/bin/alvr_dashboard && ! chroot $R ldd /opt/alvr/bin/alvr_dashboard | grep -q \"not found\""
-check "VR: ALVR SteamVR driver present"      "find $R/opt/alvr -name driver_alvr_server.so | grep -q ."
-check "VR: ALVR in app menu"                 "test -f $R/usr/share/applications/alvr.desktop"
+# Big optional software ships as one-click installers, not in the ISO
+VRPKGS="wivrn wivrn-dashboard xrizer opencomposite android-tools xorg-x11-drv-nvidia-cuda xorg-x11-drv-nvidia-cuda-libs wine lutris"
+# (xorg-x11-drv-nvidia-cuda-libs is not checked: the NVIDIA driver itself requires it)
+lean() { ! chroot $R rpm -q wivrn wivrn-dashboard xrizer wine lutris | grep -qv "not installed" && ! test -e $R/opt/alvr; }
+installers() {
+  for f in usr/bin/faraday-install-vr usr/bin/faraday-install-wine usr/libexec/faraday/install-vr-system; do
+    test -x "$R/$f" && bash -n "$R/$f" || return 1
+  done
+  test -f $R/usr/share/applications/faraday-install-vr.desktop -a -f $R/usr/share/applications/faraday-install-wine.desktop -a -f $R/usr/share/faraday/vr/alvr.desktop
+}
+installer_pkgs() {
+  n=$(dnf -q --setopt=reposdir=$R/etc/yum.repos.d --setopt=cachedir=/tmp/dnfc repoquery --available --qf "%{name}\n" $VRPKGS 2>/dev/null | sort -u | grep -c .)
+  [ "$n" -eq $(echo $VRPKGS | wc -w) ]
+}
+check "Lean ISO: VR apps, Wine, Lutris, CUDA not preinstalled" lean
+check "Installers: VR tools + Wine/Lutris in app menu" installers
+check "Installers: all their packages are downloadable" installer_pkgs
+check "Installers: ALVR download link works" "curl -fsIL -o /dev/null https://github.com/alvr-org/ALVR/releases/latest/download/alvr_streamer_linux.tar.gz"
 check "VR: SteamVR setup launcher"           "test -x $R/usr/bin/faraday-steamvr-setup -a -f $R/usr/share/applications/faraday-steamvr-setup.desktop"
 check "VR: readiness check + login notice"   "test -x $R/usr/bin/faraday-vr-check -a -f $R/etc/xdg/autostart/faraday-vr-check.desktop"
 check "VR: firewall ports open (9757, 9943-9944)" "grep -q 9943-9944 $R/usr/lib/firewalld/services/faradayos-vr.xml && grep -qs faradayos-vr $Z/*.xml"
 check "VR: boot setup + Avahi enabled"       "ls $R/etc/systemd/system/multi-user.target.wants/faraday-vr-setup.service && ls $R/etc/systemd/system/multi-user.target.wants/avahi-daemon.service"
-check "VR: headset USB rules + steam-devices" "test -f $R/usr/lib/udev/rules.d/70-faradayos-vr.rules && chroot $R rpm -q steam-devices android-tools"
-check "VR: NVIDIA NVENC + AMD VA-API encode" "ls $R/usr/lib64/libnvidia-encode.so.* && chroot $R rpm -q mesa-va-drivers-freeworld"
+check "VR: headset USB rules + steam-devices" "test -f $R/usr/lib/udev/rules.d/70-faradayos-vr.rules && chroot $R rpm -q steam-devices"
+check "AMD/Intel VA-API video encode"       "chroot $R rpm -q mesa-va-drivers-freeworld"
 K=$(ls $R/usr/lib/modules | sort -V | tail -1)
 check "Touchpad: libinput + kernel drivers"  "chroot $R rpm -q libinput xorg-x11-drv-libinput && ! for m in i2c-hid-acpi hid-multitouch psmouse; do find $R/usr/lib/modules/$K -name \"\$m.ko*\" | grep -q . || grep -q \"/\$m.ko\" $R/usr/lib/modules/$K/modules.builtin || echo missing; done | grep -q missing"
 check "Touchpad: tap to click default"       "grep -q TapToClick=true $R/etc/xdg/kcminputrc"

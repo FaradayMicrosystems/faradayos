@@ -31,6 +31,7 @@ $SUDO $ENGINE run --rm --privileged \
       --ks /src/fedora/faradayos.ks \
       --project FaradayOS --releasever $FEDORA --volid $VOLID \
       --iso-name $ISO \
+      --compression xz --compress-arg=-Xbcj --compress-arg=x86 --compress-arg=-b --compress-arg=1M \
       --extra-boot-args 'rd.driver.blacklist=nouveau modprobe.blacklist=nouveau' \
       --resultdir /out/result --logfile /out/lmc.log
     mv /out/result/$ISO /out/$ISO
