@@ -58,6 +58,8 @@ jobs:
           cat > notes.md <<EOF
           FaradayOS v$V (Fedora 44 KDE edition). Built by [run $RUN]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$RUN).
 
+          **Version numbering changed:** versions are now \`v0.<number>\` (this is v$V). Earlier releases named \`v0.0.<number>\` (such as v0.0.70) used the wrong format; that was Claude's error. All new releases use the new format.
+
           **Download all \`$ISO.part*\` files below**, then join them into one ISO:
 
           Fastest download (many connections at once; Linux \`sudo dnf install aria2\` or \`sudo pacman -S aria2\`):
