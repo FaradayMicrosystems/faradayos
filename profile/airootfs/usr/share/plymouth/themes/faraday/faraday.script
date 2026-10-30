@@ -1,7 +1,8 @@
-Window.SetBackgroundTopColor(0.043, 0.043, 0.043);
-Window.SetBackgroundBottomColor(0.043, 0.043, 0.043);
-# animated logo: frame-000.png .. frame-179.png (25 fps), plays once, then holds the last frame
-FRAMES = 180;
+# black, to match the animation frames
+Window.SetBackgroundTopColor(0, 0, 0);
+Window.SetBackgroundBottomColor(0, 0, 0);
+# animated logo: frame-000.png .. frame-215.png (30 fps), plays once, then holds the last frame
+FRAMES = 216;
 first = Image("frame-000.png");
 sw = Window.GetWidth(); sh = Window.GetHeight();
 scale = Math.Min(sw * 0.6 / first.GetWidth(), 1);
@@ -20,8 +21,8 @@ logo.sprite = Sprite(logo.image);
 logo.sprite.SetPosition((sw - fw) / 2, (sh - fh) / 2 - 40, 1);
 tick = 0;
 fun refresh_cb() {
-  # Plymouth refreshes at 50 Hz, so advance one frame every 2 refreshes
-  f = Math.Int(global.tick / 2); if (f > FRAMES - 1) f = FRAMES - 1;
+  # Plymouth refreshes at 50 Hz; the animation runs at 30 fps
+  f = Math.Int(global.tick * 30 / 50); if (f > FRAMES - 1) f = FRAMES - 1;
   global.logo.sprite.SetImage(global.frames[f]);
   global.tick = global.tick + 1;
 }
