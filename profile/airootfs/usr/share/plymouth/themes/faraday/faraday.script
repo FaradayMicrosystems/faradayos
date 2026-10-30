@@ -1,29 +1,31 @@
 # black, to match the animation frames
 Window.SetBackgroundTopColor(0, 0, 0);
 Window.SetBackgroundBottomColor(0, 0, 0);
-# animated logo: frame-000.png .. frame-215.png (30 fps), plays once, then holds the last frame
-FRAMES = 216;
+# animated logo: frame-000.png .. frame-536.png (30 fps), plays once, then holds the last frame.
+# Frames are loaded one at a time (loading all 537 up front would use too much memory).
+FRAMES = 537;
 first = Image("frame-000.png");
 sw = Window.GetWidth(); sh = Window.GetHeight();
 scale = Math.Min(sw * 0.6 / first.GetWidth(), 1);
 fw = Math.Int(first.GetWidth() * scale); fh = Math.Int(first.GetHeight() * scale);
 digit[0] = "0"; digit[1] = "1"; digit[2] = "2"; digit[3] = "3"; digit[4] = "4";
 digit[5] = "5"; digit[6] = "6"; digit[7] = "7"; digit[8] = "8"; digit[9] = "9";
-i = 0;
-while (i < FRAMES) {
+fun frame_image(i) {
   h = Math.Int(i / 100); t = Math.Int(i / 10) - h * 10; u = i - Math.Int(i / 10) * 10;
-  n = digit[h] + digit[t] + digit[u];
-  frames[i] = Image("frame-" + n + ".png").Scale(fw, fh);
-  i = i + 1;
+  return Image("frame-" + global.digit[h] + global.digit[t] + global.digit[u] + ".png").Scale(global.fw, global.fh);
 }
-logo.image = frames[0];
+logo.image = first.Scale(fw, fh);
 logo.sprite = Sprite(logo.image);
 logo.sprite.SetPosition((sw - fw) / 2, (sh - fh) / 2 - 40, 1);
+shown = 0;
 tick = 0;
 fun refresh_cb() {
   # Plymouth refreshes at 50 Hz; the animation runs at 30 fps
-  f = Math.Int(global.tick * 30 / 50); if (f > FRAMES - 1) f = FRAMES - 1;
-  global.logo.sprite.SetImage(global.frames[f]);
+  f = Math.Int(global.tick * 30 / 50); if (f > global.FRAMES - 1) f = global.FRAMES - 1;
+  if (f != global.shown) {
+    global.logo.sprite.SetImage(frame_image(f));
+    global.shown = f;
+  }
   global.tick = global.tick + 1;
 }
 Plymouth.SetRefreshFunction(refresh_cb);
