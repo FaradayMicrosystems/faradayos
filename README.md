@@ -1,48 +1,40 @@
 # FaradayOS
 
-CachyOS-based gaming distro: KDE Plasma (Wayland), supports AMD, NVIDIA (RTX 20 / GTX 16 series and newer) and Intel graphics, including hybrid laptops, live USB + Calamares disk install, FaradayOS branding throughout.
+FaradayOS is a gaming- and VR-ready Linux system for work and play, built on **Fedora 44 KDE Plasma**. It is a normal, writable Fedora: install software with `dnf` as usual, nothing is locked down.
 
-## Build the ISO (on your CachyOS PC)
+Current version: **v0.72**. Versions use the format `v0.<number>` (v0.72, v0.73, ...). Earlier releases named `v0.0.<number>` used the wrong format.
 
-```fish
-git clone https://github.com/FaradayMicrosystems/faradayos.git
-cd faradayos
-```
-Then **double-click `Build-FaradayOS.desktop`** (or `build.sh`) in Dolphin. KDE asks once whether to trust/execute it: say yes.
-Or run `./build.sh` in a terminal.
+## Download
+1. Open the [latest release](https://github.com/FaradayMicrosystems/faradayos/releases/latest) and download every `FaradayOSv0.72.iso.part*` file (about 3.7 GB in total, each part under 2 GB).
+   Fastest: `aria2c -Z -x16 -s16 <part URLs>` (the release notes have the full command).
+2. Join the parts in the download folder:
+   - Linux: `cat FaradayOSv0.72.iso.part* > FaradayOSv0.72.iso`
+   - Windows (Command Prompt): `copy /b FaradayOSv0.72.iso.part0 + FaradayOSv0.72.iso.part1 FaradayOSv0.72.iso`
+3. Write `FaradayOSv0.72.iso` to a USB stick (8 GB+) with Fedora Media Writer or balenaEtcher.
+4. Turn off Secure Boot (the NVIDIA driver is not signed), boot the USB, and open **Install to Hard Drive**.
 
-### Unattended build
-```
-./build.sh --unattended
-```
-(or double-click **Build-FaradayOS-Unattended.desktop**). It pulls the latest FaradayOS, asks for your sudo password once, then needs nothing else. For the length of the build it adds a temporary passwordless-sudo rule for your user (`/etc/sudoers.d/zz-faradayos-build`), which is removed when the build finishes, fails or is cancelled. If removal ever fails, the build says so and gives you the `sudo rm` command.
+Every push to `main` builds the ISO on GitHub Actions, checks it, and publishes it as a release.
 
-One command, from scratch or to update an existing clone:
-```
-bash -c '[ -d faradayos ] || git clone https://github.com/FaradayMicrosystems/faradayos.git; cd faradayos && ./build.sh --unattended'
-```
+## What you get
+- **Desktop:** KDE Plasma, Firefox, LibreOffice, KDE apps, Papirus icons, floating left panel
+- **Gaming:** Steam (Proton), GameMode, gamescope, MangoHud
+- **Graphics:** AMD and Intel (Mesa), NVIDIA (RPM Fusion driver, prebuilt in the ISO), hybrid laptops (`switcheroo-control`), full codecs and hardware video decoding
+- **Laptops:** touchpad (tap-to-click, disable while typing), fingerprint login (`fprintd`), touchscreen, pen and screen rotation
+- **VR, one click:** **Install VR tools** in the app menu adds WiVRn + dashboard, ALVR, xrizer, OpenComposite, adb and, on NVIDIA PCs, the NVENC/CUDA libraries, then installs SteamVR through Steam. Firewall ports, headset USB access and the **VR readiness check** (`faraday-vr-check`) are already in the ISO.
+- **Wine and Lutris, one click:** **Install Wine and Lutris** in the app menu
+- **FaradayOS look:** animated boot screen, KDE splash, wallpaper, colour scheme (black `#0B0B0B`, orange `#FF7A1A`, yellow `#FFC53D`, jade `#00A86B`), lock and login screens, logo icons. Branding is re-applied after updates.
+- After install, the computer starts at the login screen; the live user is removed.
 
-It asks for your sudo password once, needs ~45 GB free and takes 20-60 min. Output:
-`out/FaradayOSv0.0.1.iso` + `.sha256`. Log in `build.log`.
+Big optional software ships as one-click installers, not in the ISO, to keep the download small.
 
-## Install
-Boot the USB and open the installer. It copies the live system, so every FaradayOS package and setting comes along. An **Optional apps** page offers the big apps that aren't on the ISO (LibreOffice, GIMP, Krita, Darktable, FreeCAD); they're ticked by default and downloaded during install. With no internet they're skipped and the install still completes. Installer overrides live in `profile/airootfs/usr/share/faraday/calamares/` and are applied by the launcher after it updates the installer.
+## Build it yourself
+See [fedora/README.md](fedora/README.md): `./fedora/build-iso.sh` builds the ISO in a Fedora container (podman or docker, about 40 GB free disk, 30 to 90 minutes), and `./fedora/verify-iso.sh` checks it.
 
-## Layout
-- `profile/` archiso profile (CachyOS live profile + FaradayOS changes)
-  - `packages.x86_64` package list
-  - `airootfs/` files baked into the system: branding, Plymouth splash, KDE splash, fastfetch dragon, gaming sysctl, Calamares branding
-  - `airootfs/root/customize_airootfs.sh` runs inside the image after packages install
-- `aur-packages.txt` AUR packages built locally and baked in; failures are skipped and offered via the desktop "Install Faraday extras" icon
-- `profile/airootfs/usr/local/bin/faraday-vr-check` VR readiness check (Steam, SteamVR, WiVRn, ALVR, AMD Vulkan, firewall). Runs at boot (`--fix-system`: opens WiVRn/ALVR ports, gives SteamVR's compositor realtime priority) and at login (pops up only if something needs attention). Run `faraday-vr-check` any time.
-- Theme: `org.faraday.desktop` global theme, `FaradayOS` colour scheme (black `#0B0B0B`, orange `#FF7A1A`, yellow `#FFC53D`, jade `#00A86B`), `FaradayOS` wallpaper (desktop, lock and login screens), Plymouth + KDE splash with the Faraday Microsystems logo. `rebrand.sh` re-applies the defaults after updates.
-- Extra wallpapers: Ubuntu (`ubuntu-wallpapers`) and Kali (`kali-wallpapers`) from the AUR. They install to GNOME folders, so `rebrand.sh` links them into `/usr/share/wallpapers/Ubuntu` and `/Kali` for the KDE wallpaper picker, and refreshes the links after updates.
-- `assets/` logo + splash source images
+## Repository layout
+- `fedora/`: the FaradayOS build (kickstart `faradayos.ks`, `VERSION`, build and check scripts, Fedora-only files in `overlay/`)
+- `profile/airootfs/`: branding shared with the Fedora build (Plymouth boot animation, KDE global theme `org.faraday.desktop`, colour scheme, wallpaper, icons)
+- `assets/`: logo and splash source images
+- `.github/workflows/`: ISO build, release publishing, ISO check and size report
 
-CachyOS repo, keyring and mirrorlist names are kept so `pacman -Syu` keeps working. A pacman hook re-applies FaradayOS branding after updates.
-
-## VR
-Steam, WiVRn (server + dashboard), ALVR and xrizer/OpenComposite are preinstalled. SteamVR itself is installed from inside Steam (it needs your Steam account): open Steam, install **SteamVR**, then reboot once so FaradayOS can grant it realtime priority.
-
-## Graphics hardware
-The ISO carries drivers for AMD (RADV), NVIDIA (open kernel modules, RTX 20 / GTX 16 series and newer), Intel (ANV) and the Nouveau fallback, plus `switcheroo-control` so hybrid laptops run games on the dedicated GPU. On install, NVIDIA's ~1.5 GB of drivers are removed from machines without an NVIDIA card. Older NVIDIA cards (GTX 10 series and earlier) need NVIDIA's legacy driver, which isn't included.
+## Legacy CachyOS build
+FaradayOS started on CachyOS (Arch). That build (`build.sh`, `profile/`, `aur-packages.txt`, `Build-FaradayOS*.desktop`) is no longer developed; FaradayOS moved to Fedora for stability. Its files stay because the Fedora build reuses the branding in `profile/airootfs/`.
