@@ -20,7 +20,7 @@ Included:
 1. Open the [latest release](https://github.com/FaradayMicrosystems/faradayos/releases/latest) and download every `FaradayOSv<version>.iso.part*` file (each under 2 GB; downloads can resume).
 2. Join the parts into one ISO, in the download folder:
    - Linux: `cat FaradayOSv0.0.70.iso.part* > FaradayOSv0.0.70.iso`
-   - Windows (Command Prompt): `copy /b FaradayOSv0.0.70.iso.part0 + FaradayOSv0.0.70.iso.part1 + FaradayOSv0.0.70.iso.part2 FaradayOSv0.0.70.iso` (list every part you downloaded, in order)
+   - Windows (Command Prompt): `copy /b FaradayOSv0.0.70.iso.part0 + FaradayOSv0.0.70.iso.part1 FaradayOSv0.0.70.iso` (the release notes list the exact parts)
 3. Optional check: `sha256sum -c FaradayOSv0.0.70.iso.sha256` prints `OK`.
 
 **Option B: build it yourself (on your CachyOS PC).**
