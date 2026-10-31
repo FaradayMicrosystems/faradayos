@@ -43,7 +43,7 @@ check "Left panel layout (menu, apps, tray)"  "grep -q location.*left $L && grep
 check "Papirus icons installed"              "test -d $R/usr/share/icons/Papirus-Dark"
 check "FaradayOS logo icons are the default"  "test -s $R/usr/share/icons/FaradayOS/48x48/apps/start-here-kde-symbolic.png && grep -q Theme=FaradayOS $R/etc/xdg/kdeglobals && grep -q Theme=FaradayOS $R/etc/skel/.config/kdeglobals"
 check "Installer uses FaradayOS colours"     "grep -q ff7a1a $R/usr/share/cockpit/branding/fedora-kde/branding.css && test -s $R/usr/share/cockpit/branding/fedora-kde/logo.png -a -f $R/usr/share/plymouth/themes/faraday/frame-536.png"
-V=$(. $R/usr/lib/os-release; echo "$VARIANT_ID"); B=$R/usr/share/cockpit/branding/fedora${V:+-$V}
+V=$(. $R/usr/lib/os-release; echo "${VARIANT_ID:-}"); B=$R/usr/share/cockpit/branding/fedora${V:+-$V}
 check "Installer actually loads FaradayOS colours" "grep -q ff7a1a $B/branding.css && test -s $B/logo.png -a ! -L $B/logo.png"
 check "Colour scheme file"                   "test -f $R/usr/share/color-schemes/FaradayOS.colors"
 check "Branding re-applied after updates"    "test -x $R/usr/share/faraday/rebrand-fedora.sh -a -f $R/etc/dnf/libdnf5-plugins/actions.d/faraday-rebrand.actions"
