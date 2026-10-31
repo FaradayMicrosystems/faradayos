@@ -48,6 +48,8 @@ check "Installer actually loads FaradayOS colours" "grep -q ff7a1a $B/branding.c
 check "Colour scheme file"                   "test -f $R/usr/share/color-schemes/FaradayOS.colors"
 check "Branding re-applied after updates"    "test -x $R/usr/share/faraday/rebrand-fedora.sh -a -f $R/etc/dnf/libdnf5-plugins/actions.d/faraday-rebrand.actions"
 check "Branding service enabled"             "ls $R/etc/systemd/system/multi-user.target.wants/faraday-rebrand.service"
+check "Boot menu entries named FaradayOS"     "test -x $R/usr/lib/kernel/install.d/99-faraday-titles.install -a -x $R/usr/share/faraday/grub-titles.sh && ! grep -rqi \"^title.*fedora\" $R/boot/loader/entries"
+check "Live ISO boot menu says FaradayOS"     "! grep -rhi \"^ *menuentry.*fedora\" /m/iso/EFI/BOOT/grub.cfg /m/iso/boot/grub2/grub.cfg 2>/dev/null | grep -q ."
 check "NVIDIA kernel module built"           "find $R/usr/lib/modules -name \"nvidia.ko*\" | grep -q ."
 check "Steam, gamescope, MangoHud, GameMode" "chroot $R rpm -q steam gamescope mangohud gamemode"
 check "Full ffmpeg codecs (RPM Fusion)"      "ls $R/usr/lib64/libavcodec.so.* && ! chroot $R rpm -q libavcodec-free"
