@@ -13,6 +13,7 @@ ap.add_argument("out")
 ap.add_argument("--mem", type=int, default=4096)
 ap.add_argument("--minutes", type=int, default=6, help="how long to watch after the installer starts")
 ap.add_argument("--boot-timeout", type=int, default=1500)
+ap.add_argument("--prep", default="", help="shell command to run as root in the live system before the installer starts")
 a = ap.parse_args()
 
 os.makedirs(a.out, exist_ok=True)
@@ -138,7 +139,7 @@ def shot(name):
 
 
 def report(title, text):
-    open(f"{W}/{title.split()[0]}.txt", "w").write(text)
+    open(f"{W}/{re.sub(r'[^a-z0-9]+', '-', title.lower()).strip('-')}.txt", "w").write(text)
     print(f"::group::{title}\n{text}\n::endgroup::", flush=True)
 
 
@@ -171,6 +172,9 @@ try:
         "ls -la ~liveuser/Desktop; head -3 /etc/sudoers.d/*; ls /etc/polkit-1/rules.d"))
     kwin_before = run("pgrep -x kwin_wayland").strip()
     shell_before = run("pgrep -u liveuser -x plasmashell").strip()
+
+    if a.prep:
+        report("prep", run(a.prep + " 2>&1 | tail -n 30", 900))
 
     # Start the installer the way the desktop icon and the Welcome app do (Exec=liveinst, in the Plasma session)
     say("starting installer")

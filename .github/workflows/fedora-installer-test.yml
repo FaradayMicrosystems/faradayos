@@ -1,6 +1,6 @@
 name: Test Fedora edition live installer
 
-# Boots the ISO in a virtual machine, starts the installer like the desktop icon does,
+# Boots the latest release (or a build run's ISO) in a virtual machine, starts the installer like the desktop icon does,
 # and checks that the live desktop keeps running. Screenshots and logs are uploaded.
 on:
   workflow_dispatch:
@@ -8,16 +8,12 @@ on:
       run_id:
         description: ISO build run to test (empty = latest release)
         required: false
-  workflow_run:
-    workflows: [Build Fedora edition ISO]
-    types: [completed]
   push:
     branches: [main, 'claude/**']
     paths: ['fedora/test/**', '.github/workflows/fedora-installer-test.yml']
 
 jobs:
   test:
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 90
     permissions:
@@ -28,7 +24,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        mem: [4096, 8192]
+        include:
+          - name: as-is
+            prep: ''
+          - name: with-installer-translations
+            prep: 'dnf -y -q reinstall anaconda-core anaconda-webui || dnf -y -q upgrade anaconda-core anaconda-webui; ls /usr/share/locale/de/LC_MESSAGES/anaconda.mo' 
     steps:
       - uses: actions/checkout@v4
 
@@ -42,7 +42,7 @@ jobs:
 
       - name: Get ISO
         run: |
-          RUN=${{ github.event.workflow_run.id || inputs.run_id }}
+          RUN=${{ inputs.run_id }}
           mkdir iso
           if [ -n "$RUN" ]; then
             echo "Testing ISO from build run $RUN"
@@ -56,13 +56,15 @@ jobs:
           ls -l iso
 
       - name: Boot live ISO and start the installer
-        run: python3 fedora/test/live-installer-test.py iso/*.iso out --mem ${{ matrix.mem }} --minutes 6
+        env:
+          PREP: ${{ matrix.prep }}
+        run: python3 fedora/test/live-installer-test.py iso/*.iso out --mem 8192 --minutes 6 --prep "$PREP"
 
       - name: Upload screenshots and logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: installer-test-${{ matrix.mem }}MB
+          name: installer-test-${{ matrix.name }}
           path: |
             out/*.png
             out/*.txt
