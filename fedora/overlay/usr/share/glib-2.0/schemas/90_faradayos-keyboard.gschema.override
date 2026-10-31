@@ -1,5 +1,5 @@
 # FaradayOS: the installer reads the live session's keyboard layout from this GNOME setting, even on KDE.
-# Left empty, it resets the layout to nothing, the installer page resets it back, and the two loop forever:
-# the desktop reloads its keymap nonstop (frozen mouse and touchscreen) until the installer and the session crash.
+# Empty, it logs an error and falls back to a guess. This gives it a real starting layout (US);
+# the installer's keyboard page can change it.
 [org.gnome.desktop.input-sources]
 sources=[('xkb', 'us')]
