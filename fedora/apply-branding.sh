@@ -39,9 +39,10 @@ copy etc/skel/.config/fastfetch
 # Gaming kernel settings
 copy etc/sysctl.d/99-faraday-gaming.conf
 
-# Fedora-only files: rebrand script, its boot service and dnf hook, login screen wallpaper, VR setup
+# Fedora-only files: rebrand script, its boot service and dnf hook, login screen wallpaper, VR setup, add-ons icon
+# (desktop icons must be executable, or Plasma asks whether to trust them)
 cp -a --no-preserve=ownership "$REPO/fedora/overlay/." "$ROOT/"
-chmod 755 "$ROOT/usr/share/faraday/rebrand-fedora.sh" "$ROOT/usr/bin/faraday-vr-check" "$ROOT/usr/bin/faraday-steamvr-setup" "$ROOT/usr/share/faraday/remove-liveuser.sh" "$ROOT/usr/bin/faraday-install-vr" "$ROOT/usr/bin/faraday-install-wine" "$ROOT/usr/libexec/faraday/install-vr-system"
+chmod 755 "$ROOT/usr/share/faraday/rebrand-fedora.sh" "$ROOT/usr/bin/faraday-vr-check" "$ROOT/usr/bin/faraday-steamvr-setup" "$ROOT/usr/share/faraday/remove-liveuser.sh" "$ROOT/usr/bin/faraday-install-vr" "$ROOT/usr/bin/faraday-install-wine" "$ROOT/usr/libexec/faraday/install-vr-system" "$ROOT/usr/bin/faraday-addons" "$ROOT/etc/skel/Desktop/faraday-addons.desktop"
 # FaradayOS version (shown in os-release and About)
 install -Dm644 "$REPO/fedora/VERSION" "$ROOT/usr/share/faraday/version"
 
