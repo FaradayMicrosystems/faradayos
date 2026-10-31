@@ -30,6 +30,12 @@ fi
 V=$(. /usr/lib/os-release 2>/dev/null; echo "$VARIANT_ID")
 C=/usr/share/cockpit/branding
 if [ -n "$V" ] && [ "$V" != kde ] && [ -d $C/fedora-kde ]; then ln -sfn fedora-kde "$C/fedora-$V"; fi
+# With no VARIANT_ID (our case) the installer uses branding/fedora, Fedora's blue theme: put ours there too.
+# rm first: Fedora's logo.png is a symlink to a system logo, and copying through it would overwrite that logo.
+if [ -z "$V" ] && [ -d $C/fedora-kde ]; then
+  mkdir -p $C/fedora
+  for F in branding.css logo.png; do rm -f "$C/fedora/$F"; install -m644 "$C/fedora-kde/$F" "$C/fedora/$F"; done
+fi
 for U in /usr/share/anaconda/firefox-theme/*/user.js; do
   [ -f "$U" ] || continue
   grep -q ui.systemUsesDarkTheme "$U" || printf '%s\n' 'user_pref("ui.systemUsesDarkTheme", 1);' 'user_pref("layout.css.prefers-color-scheme.content-override", 0);' >> "$U"
