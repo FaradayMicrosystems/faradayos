@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Install FaradayOS add-ons
+Comment=VR tools, Wine and Lutris: optional software kept out of the ISO
+Exec=/usr/bin/faraday-addons
+Icon=faradayos
+Terminal=false
+Categories=System;Game;

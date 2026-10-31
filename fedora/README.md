@@ -9,7 +9,7 @@ A normal, writable Fedora 44 KDE system. Install software with `dnf` as usual; n
 Included:
 - KDE Plasma, Firefox, LibreOffice, KDE apps
 - Gaming: Steam, Proton, gamescope, GameMode, MangoHud
-- One-click installers in the app menu (kept out of the ISO so it stays small):
+- One-click installers (kept out of the ISO so it stays small). **Install FaradayOS add-ons** on the desktop lets you pick them; each is also in the app menu:
   - **Install VR tools**: WiVRn + dashboard (Quest/Pico over Wi-Fi), ALVR (SteamVR streaming), xrizer + OpenComposite (SteamVR games on WiVRn), adb for wired headsets, NVIDIA video encoding/CUDA libraries on NVIDIA PCs, then installs SteamVR through Steam and gives it realtime priority
   - **Install Wine and Lutris**: Windows apps and non-Steam games
   - Already in the ISO for VR: firewall ports (WiVRn 9757, ALVR 9943-9944, mDNS 5353), Avahi, headset USB access, `steam-devices`, **Set up SteamVR**, **VR readiness check** (`faraday-vr-check`)
