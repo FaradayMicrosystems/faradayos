@@ -1,5 +1,5 @@
 /* FaradayOS colours and logo for the installer (Anaconda Web UI).
-   Cockpit picks this over branding/fedora because os-release has ID=fedora, VARIANT_ID=kde. */
+   os-release has no VARIANT_ID, so cockpit loads branding/fedora: rebrand-fedora.sh copies this file there. */
 #badge {
     inline-size: 80px;
     block-size: 80px;
