@@ -1,6 +1,8 @@
 #!/bin/bash
 # Copies FaradayOS branding into a Fedora root.
 # Usage: apply-branding.sh <target-root> <repo-dir>
+# Files are copied owned by root: the repo checkout belongs to a normal user (1001 on GitHub's builders),
+# and keeping that owner made /, /etc and /usr belong to that user in the ISO and in installed systems.
 # Branding files are shared with the CachyOS build (profile/airootfs); Fedora-only files live in fedora/overlay.
 set -euo pipefail
 ROOT=${1:?target root}
@@ -10,7 +12,7 @@ A=$REPO/profile/airootfs
 copy() { # copy a file or folder from profile/airootfs to the same path in ROOT
   [ -e "$A/$1" ] || { echo "apply-branding: missing $A/$1" >&2; exit 1; }
   mkdir -p "$ROOT/$(dirname "$1")"
-  cp -a "$A/$1" "$ROOT/$(dirname "$1")/"
+  cp -a --no-preserve=ownership "$A/$1" "$ROOT/$(dirname "$1")/"
 }
 
 # Boot splash (Plymouth)
@@ -38,7 +40,7 @@ copy etc/skel/.config/fastfetch
 copy etc/sysctl.d/99-faraday-gaming.conf
 
 # Fedora-only files: rebrand script, its boot service and dnf hook, login screen wallpaper, VR setup
-cp -a "$REPO/fedora/overlay/." "$ROOT/"
+cp -a --no-preserve=ownership "$REPO/fedora/overlay/." "$ROOT/"
 chmod 755 "$ROOT/usr/share/faraday/rebrand-fedora.sh" "$ROOT/usr/bin/faraday-vr-check" "$ROOT/usr/bin/faraday-steamvr-setup" "$ROOT/usr/share/faraday/remove-liveuser.sh" "$ROOT/usr/bin/faraday-install-vr" "$ROOT/usr/bin/faraday-install-wine" "$ROOT/usr/libexec/faraday/install-vr-system"
 # FaradayOS version (shown in os-release and About)
 install -Dm644 "$REPO/fedora/VERSION" "$ROOT/usr/share/faraday/version"

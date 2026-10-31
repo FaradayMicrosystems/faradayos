@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main, fedora-mutable, 'claude/**']
-    paths: ['fedora/**', '!fedora/README.md', 'profile/airootfs/**', '.github/workflows/fedora-iso.yml']
+    paths: ['fedora/**', '!fedora/README.md', '!fedora/test/**', 'profile/airootfs/**', '.github/workflows/fedora-iso.yml']
 
 jobs:
   iso:
@@ -47,3 +47,23 @@ jobs:
           path: out-fedora/FaradayOS*.iso*
           compression-level: 0
           retention-days: 7
+
+      # A failed installer test fails the build, so a broken ISO is never published as a release
+      - name: Test the live installer in a virtual machine
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q qemu-system-x86 qemu-utils p7zip-full python3-pil
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
+          python3 fedora/test/live-installer-test.py out-fedora/FaradayOS*.iso installer-test --mem 8192 --minutes 6
+
+      - name: Upload installer test screenshots and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: installer-test
+          path: |
+            installer-test/*.png
+            installer-test/*.txt
+            installer-test/result.json
+          if-no-files-found: ignore

@@ -82,6 +82,9 @@ check "Fingerprint: fprintd + PAM installed" "chroot $R rpm -q fprintd fprintd-p
 check "Fingerprint: login uses fingerprint"  "grep -qx with-fingerprint $R/etc/authselect/authselect.conf && grep -q pam_fprintd $R/etc/authselect/system-auth"
 check "Install removes live user + autologin" "test -x $R/usr/share/faraday/remove-liveuser.sh && grep -q remove-liveuser.sh $R/usr/share/anaconda/post-scripts/90-faraday-remove-liveuser.ks && ls $R/etc/systemd/system/multi-user.target.wants/faraday-remove-liveuser.service"
 check "No live user baked into the image"   "! grep -q ^liveuser: $R/etc/passwd && ! grep -rqs ^User=liveuser $R/etc/plasmalogin.conf $R/etc/plasmalogin.conf.d $R/etc/sddm.conf $R/etc/sddm.conf.d"
+check "Installer has its translations (all languages)" "test -f $R/usr/share/locale/de/LC_MESSAGES/anaconda.mo -a -f $R/usr/share/locale/ja/LC_MESSAGES/anaconda.mo"
+check "System files owned by root (none by a normal user)" "! find $R -xdev -uid +999 -print -quit | grep -q ."
+check "Installer keyboard: live layout readable" "chroot $R env GSETTINGS_BACKEND=memory gsettings get org.gnome.desktop.input-sources sources | grep -q xkb"
 check "Live session configured (KDE)"        "grep -q kde $R/etc/sysconfig/livesys"
 
 umount -R /m/root 2>/dev/null || true; umount /m/sq /m/iso

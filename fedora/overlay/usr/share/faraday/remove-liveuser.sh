@@ -9,7 +9,6 @@ for f in /etc/plasmalogin.conf /etc/plasmalogin.conf.d/*.conf /etc/sddm.conf /et
 done
 rm -f /etc/sudoers.d/liveuser /etc/systemd/system/getty@tty1.service.d/autologin.conf
 if id liveuser >/dev/null 2>&1; then
-  pkill -KILL -u liveuser 2>/dev/null
   userdel -r -f liveuser 2>/dev/null || userdel -f liveuser
 fi
 systemctl disable livesys.service livesys-late.service >/dev/null 2>&1

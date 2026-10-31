@@ -26,6 +26,9 @@ $SUDO $ENGINE run --rm --privileged \
   -v /dev:/dev -v "$REPO":/src:ro -v "$OUT":/out \
   "docker.io/library/fedora:$FEDORA" bash -euc "
     dnf -y install lorax-lmc-novirt pykickstart policycoreutils
+    # The Fedora container image keeps only English translations (rpm macro %_install_langs).
+    # Without this line the ISO inherits that: the installer finds no languages and crashes the live session.
+    rm -f /etc/rpm/macros.image-language-conf
     ksvalidator /src/fedora/faradayos.ks
     livemedia-creator --make-iso --no-virt --iso-only --isfinal \
       --ks /src/fedora/faradayos.ks \

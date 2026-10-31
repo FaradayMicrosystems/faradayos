@@ -168,6 +168,9 @@ rpm -q libreoffice-writer libreoffice-calc libreoffice-impress dolphin konsole
 systemctl enable livesys.service livesys-late.service
 echo 'livesys_session="kde"' > /etc/sysconfig/livesys
 
+# Installer starting keyboard layout (see /usr/share/glib-2.0/schemas/90_faradayos-keyboard.gschema.override)
+glib-compile-schemas /usr/share/glib-2.0/schemas
+
 # FaradayOS branding stays after updates
 systemctl enable faraday-rebrand.service
 # Installed systems start at the login screen: the installer and first boot remove the live user and its autologin
