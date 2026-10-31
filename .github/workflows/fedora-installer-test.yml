@@ -1,0 +1,71 @@
+name: Test Fedora edition live installer
+
+# Boots the ISO in a virtual machine, starts the installer like the desktop icon does,
+# and checks that the live desktop keeps running. Screenshots and logs are uploaded.
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: ISO build run to test (empty = latest release)
+        required: false
+  workflow_run:
+    workflows: [Build Fedora edition ISO]
+    types: [completed]
+  push:
+    branches: [main, 'claude/**']
+    paths: ['fedora/test/**', '.github/workflows/fedora-installer-test.yml']
+
+jobs:
+  test:
+    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      actions: read
+      contents: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+    strategy:
+      fail-fast: false
+      matrix:
+        mem: [4096, 8192]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install QEMU
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q qemu-system-x86 qemu-utils p7zip-full python3-pil
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
+          ls -l /dev/kvm
+
+      - name: Get ISO
+        run: |
+          RUN=${{ github.event.workflow_run.id || inputs.run_id }}
+          mkdir iso
+          if [ -n "$RUN" ]; then
+            echo "Testing ISO from build run $RUN"
+            gh run download "$RUN" -R "$GITHUB_REPOSITORY" -n FaradayOS-Fedora-ISO -D iso
+          else
+            TAG=$(gh release view -R "$GITHUB_REPOSITORY" --json tagName -q .tagName)
+            echo "Testing release $TAG"
+            gh release download "$TAG" -R "$GITHUB_REPOSITORY" -p '*.iso.part*' -D iso
+            cat iso/*.iso.part* > iso/FaradayOS.iso && rm iso/*.iso.part*
+          fi
+          ls -l iso
+
+      - name: Boot live ISO and start the installer
+        run: python3 fedora/test/live-installer-test.py iso/*.iso out --mem ${{ matrix.mem }} --minutes 6
+
+      - name: Upload screenshots and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: installer-test-${{ matrix.mem }}MB
+          path: |
+            out/*.png
+            out/*.txt
+            out/*.log
+            out/result.json
+          if-no-files-found: ignore

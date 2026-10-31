@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main, fedora-mutable, 'claude/**']
-    paths: ['fedora/**', '!fedora/README.md', 'profile/airootfs/**', '.github/workflows/fedora-iso.yml']
+    paths: ['fedora/**', '!fedora/README.md', '!fedora/test/**', 'profile/airootfs/**', '.github/workflows/fedora-iso.yml']
 
 jobs:
   iso:
