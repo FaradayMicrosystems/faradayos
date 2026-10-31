@@ -174,6 +174,7 @@ try:
 
     # Start the installer the way the desktop icon and the Welcome app do (Exec=liveinst, in the Plasma session)
     say("starting installer")
+    run("date +%s > /tmp/faraday-t0")
     run("systemd-run --user -M liveuser@.host --unit=faraday-test-liveinst --collect liveinst")
     t0 = time.time()
     while time.time() - t0 < a.minutes * 60 * mult:
@@ -201,7 +202,15 @@ try:
                           "cut -c1-260 | tail -300", 300))
     report("oom", run("journalctl -b --no-pager -o short-monotonic -u systemd-oomd | tail -40; "
                       "dmesg | grep -iE 'oom|killed process' | tail -20", 120))
-    report("anaconda.log", run("tail -n 60 /tmp/anaconda.log; ls -la /tmp", 120))
+    report("anaconda.log", run("tail -n 30 /tmp/anaconda.log; ls -la /tmp", 120))
+    report("dbus.log + webui log", run("cat /tmp/dbus.log; tail -n 80 /tmp/anaconda-webui.log", 120))
+    report("journal: first events after the installer started", run(
+        "journalctl -b --no-pager -o short-monotonic --since=@$(cat /tmp/faraday-t0) | grep -v audit | "
+        "grep -viE 'slitherer.*(Uncaught|ErrorBoundary)|^ +(Traceback|File|#)' | cut -c1-260 | head -250", 300))
+    report("journal: keyboard and session", run(
+        "journalctl -b --no-pager -o short-monotonic --since=@$(cat /tmp/faraday-t0) | "
+        "grep -iE 'locale|kxkb|keyboard|layout|logout|ksmserver|Stopping|startplasma|plasmalogin|logind' | "
+        "grep -v audit | cut -c1-260 | head -150", 300))
 except Exception as e:  # noqa: BLE001
     say("test error:", repr(e))
     shot("error")
