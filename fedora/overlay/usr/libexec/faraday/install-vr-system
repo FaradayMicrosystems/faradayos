@@ -5,9 +5,25 @@
 set -euo pipefail
 [ "$(id -u)" -eq 0 ] || { echo "Run through faraday-install-vr"; exit 1; }
 PKGS="wivrn wivrn-dashboard xrizer opencomposite android-tools steam-devices libva-utils"
-lspci -n | grep -qE ' 03[0-9a-f]{2}: 10de:' && PKGS="$PKGS xorg-x11-drv-nvidia-cuda xorg-x11-drv-nvidia-cuda-libs"
+NVIDIA=0; lspci -n | grep -qE ' 03[0-9a-f]{2}: 10de:' && NVIDIA=1
+# On NVIDIA, CUDA may pull a newer driver. Update the whole driver set together (64-bit, 32-bit for Steam,
+# kernel module source), so the 32-bit libraries Steam uses never stay on the old version.
+NVPKGS="akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-nvidia-libs.i686 xorg-x11-drv-nvidia-cuda xorg-x11-drv-nvidia-cuda-libs xorg-x11-drv-nvidia-cuda-libs.i686"
+nvver(){ rpm -q --qf '%{VERSION}\n' xorg-x11-drv-nvidia 2>/dev/null | head -1; }
+OLDNV=$(nvver)
+(( NVIDIA )) && PKGS="$PKGS $NVPKGS"
 echo "== Installing: $PKGS"
 dnf -y install $PKGS
+if (( NVIDIA )); then
+  dnf -y upgrade $NVPKGS || true
+  NEWNV=$(nvver)
+  if [ "$NEWNV" != "$OLDNV" ]; then
+    echo "== NVIDIA driver updated $OLDNV -> $NEWNV: building its kernel module (a few minutes)"
+    akmods --force --kernels "$(uname -r)" || echo "Kernel module build failed; it is retried at next boot."
+    # The old module stays loaded until reboot; Steam and games fail to start until then.
+    touch /run/faraday-reboot-required
+  fi
+fi
 
 echo "== Installing ALVR (latest release) into /opt/alvr"
 T=$(mktemp -d); trap 'rm -rf "$T"' EXIT

@@ -63,6 +63,13 @@ fi
 if grep -q ' 10de:' <<<"$GPUS"; then
   lsmod 2>/dev/null | grep -q '^nvidia_drm' && pass "NVIDIA driver loaded" \
     || fail "NVIDIA GPU found but its driver isn't loaded (reboot; check Secure Boot is off)"
+  # Steam is a 32-bit program: it needs the 32-bit NVIDIA libraries, at the same version as the running driver
+  NVRUN=$(head -1 /proc/driver/nvidia/version 2>/dev/null | grep -oE '[[:space:]][0-9]{3}\.[0-9]+(\.[0-9]+)?[[:space:]]' | head -1 | tr -d '[:space:]')
+  NV32=$(rpm -q --qf '%{VERSION}\n' xorg-x11-drv-nvidia-libs.i686 2>/dev/null | head -1)
+  if ! pkg xorg-x11-drv-nvidia-libs.i686; then fail "32-bit NVIDIA libraries missing: Steam cannot start (sudo dnf install xorg-x11-drv-nvidia-libs.i686)"
+  elif [[ -n $NVRUN && $NV32 != "$NVRUN" ]]; then fail "NVIDIA driver $NVRUN running but 32-bit libraries are $NV32: Steam cannot start (sudo dnf upgrade 'xorg-x11-drv-nvidia*' akmod-nvidia, then restart)"
+  else pass "32-bit NVIDIA libraries for Steam ($NV32)"; fi
+  [[ -e /run/faraday-reboot-required ]] && fail "NVIDIA driver was updated: restart the computer before starting Steam"
   pkg xorg-x11-drv-nvidia-cuda-libs && pass "NVIDIA NVENC video encoding (cuda-libs)" \
     || fail "NVIDIA video encoding libraries missing (open 'Install VR tools')"
 fi

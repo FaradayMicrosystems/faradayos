@@ -66,6 +66,8 @@ mesa-vulkan-drivers
 vulkan-tools
 akmods
 akmod-nvidia
+# Steam is 32-bit: it needs the 32-bit NVIDIA libraries (already pulled in today; listed so it stays that way)
+xorg-x11-drv-nvidia-libs.i686
 switcheroo-control
 
 # Laptops: touchpad, touchscreen, pen, screen rotation, fingerprint reader
