@@ -7,7 +7,13 @@ if pkexec /usr/libexec/faraday/install-vr-system; then
   echo; echo "System part done. Now SteamVR (needed for ALVR and wired headsets):"
   /usr/bin/faraday-steamvr-setup
 else
-  echo "VR install failed (see messages above). Check your internet connection and try again."
+  rc=$?
+  echo
+  if [ $rc -eq 126 ] || [ $rc -eq 127 ]; then
+    echo "VR install cancelled: the password prompt was closed or the password was not accepted."
+  else
+    echo "VR install failed. The FAILED line above says which step stopped. Running this again is safe."
+  fi
   [[ -t 0 ]] && read -rp "Press Enter to close." _
   exit 1
 fi
