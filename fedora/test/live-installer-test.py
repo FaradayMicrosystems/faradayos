@@ -5,7 +5,7 @@ Checks that the live desktop survives the installer starting, and saves screensh
 Usage: live-installer-test.py ISO OUTDIR [--mem MiB] [--minutes N]
 Needs: qemu-system-x86_64, 7z, python3-pil. Uses KVM when /dev/kvm is usable.
 """
-import argparse, base64, json, lzma, os, re, socket, subprocess, sys, time
+import argparse, json, os, re, socket, subprocess, sys, time
 
 ap = argparse.ArgumentParser()
 ap.add_argument("iso")
@@ -111,7 +111,8 @@ def run(cmd, timeout=120):
     mark = f"__END{n}__"
     send(f"{cmd}; echo {mark[:5]}''{mark[5:]}\r")
     out = read_until(re.escape(mark) + r"\r?\n", timeout)
-    return out.split("\n", 1)[1] if "\n" in out else out
+    out = re.sub(r"\x1b\][^\x07\x1b]*(\x07|\x1b\\)|\x1b\[[0-9;?]*[a-zA-Z]|\r", "", out)  # terminal escapes
+    return "\n".join(l for l in out.split("\n") if "__END" not in l).strip("\n")
 
 
 shot_n = 0
@@ -134,16 +135,6 @@ def shot(name):
         return round(ImageStat.Stat(im.convert("L")).mean[0])  # 0 = black screen
     except Exception as e:  # noqa: BLE001
         say("screenshot failed:", e)
-
-
-def fetch(cmd, name, timeout=600):
-    """Copies a command's output to OUTDIR/name over the serial console (xz + base64)."""
-    out = run(f"{cmd} 2>&1 | xz -T0 -6 | base64 -w0; echo", timeout)
-    try:
-        data = lzma.decompress(base64.b64decode(re.sub(r"[^A-Za-z0-9+/=]", "", out)))
-        open(f"{W}/{name}", "wb").write(data)
-    except Exception as e:  # noqa: BLE001
-        say(f"could not fetch {name}:", e)
 
 
 def report(title, text):
@@ -201,19 +192,16 @@ try:
         "free -m; loginctl list-sessions; systemctl --failed --no-pager; coredumpctl list --no-pager; "
         "ps -eo pid,user,rss,cmd --sort=-rss | head -30; systemctl --user -M liveuser@.host status faraday-test-liveinst --no-pager -l; "
         "coredumpctl info --no-pager 2>/dev/null | grep -E 'Executable:|Signal:|Timestamp:|Stack trace|^ +#([0-9]|1[0-9]) ' | head -150", 300))
-    fetch("journalctl -b --no-pager -o short-monotonic", "journal.txt")
-    fetch("cat /tmp/anaconda.log /tmp/storage.log /tmp/program.log /tmp/packaging.log", "anaconda-logs.txt")
-    fetch("cat /tmp/webui-desktop.log /tmp/*.log 2>/dev/null; ls -la /tmp", "tmp-logs.txt")
-    # The job log is the only output some readers can see, so print the important parts there too
-    rx = re.compile(r"kwin|plasmashell|KCrash|dumped core|segfault|SIG(SEGV|ABRT|KILL)|oom|Out of memory|liveinst|pkexec|"
-                    r"anaconda|webui|slitherer|polkit|Wayland connection|Removed session|session closed|plasmalogin|"
-                    r"drm|nvidia|gpu|Failed to start|Traceback|Error", re.I)
-    try:
-        lines = [l for l in open(f"{W}/journal.txt", errors="replace") if rx.search(l) and "audit" not in l]
-        report("journal (filtered, last 250)", "".join(l[:260] + "\n" if len(l) > 260 else l for l in lines[-250:]))
-        report("anaconda.log (last 60)", "".join(open(f"{W}/anaconda-logs.txt", errors="replace").readlines()[-60:]))
-    except OSError as e:
-        say("no logs:", e)
+    # The job log is the only output some readers can see, so print the important parts there (filtered in the VM:
+    # the serial line is too slow for the whole journal)
+    pat = ("kwin|plasmashell|KCrash|dumped core|segfault|oom|Out of memory|Killed process|liveinst|pkexec|anaconda|"
+           "webui|slitherer|Wayland connection|Removed session|session closed|plasmalogin|startplasma|nvidia|"
+           "Failed to start|Traceback|memory pressure")
+    report("journal", run(f"journalctl -b --no-pager -o short-monotonic | grep -iE '{pat}' | grep -v audit | "
+                          "cut -c1-260 | tail -300", 300))
+    report("oom", run("journalctl -b --no-pager -o short-monotonic -u systemd-oomd | tail -40; "
+                      "dmesg | grep -iE 'oom|killed process' | tail -20", 120))
+    report("anaconda.log", run("tail -n 60 /tmp/anaconda.log; ls -la /tmp", 120))
 except Exception as e:  # noqa: BLE001
     say("test error:", repr(e))
     shot("error")
