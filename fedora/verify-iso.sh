@@ -49,6 +49,8 @@ check "Colour scheme file"                   "test -f $R/usr/share/color-schemes
 check "Branding re-applied after updates"    "test -x $R/usr/share/faraday/rebrand-fedora.sh -a -f $R/etc/dnf/libdnf5-plugins/actions.d/faraday-rebrand.actions"
 check "Branding service enabled"             "ls $R/etc/systemd/system/multi-user.target.wants/faraday-rebrand.service"
 check "NVIDIA kernel module built"           "find $R/usr/lib/modules -name \"nvidia.ko*\" | grep -q ."
+check "NVIDIA: nouveau kept off (modprobe + boot image)" "grep -qx \"blacklist nouveau\" $R/usr/lib/modprobe.d/faraday-nvidia.conf && grep -q nouveau $R/usr/lib/dracut/dracut.conf.d/90-faraday-nvidia.conf"
+check "NVIDIA: installed system boots without nouveau" "test -x $R/usr/share/faraday/nvidia-boot-setup.sh && grep -q nvidia-boot-setup.sh $R/usr/share/anaconda/post-scripts/91-faraday-nvidia.ks && grep -q modprobe.blacklist=nouveau $R/usr/share/faraday/nvidia-boot-setup.sh"
 check "Steam, gamescope, MangoHud, GameMode" "chroot $R rpm -q steam gamescope mangohud gamemode"
 check "Steam 32-bit graphics: NVIDIA + Mesa"  "chroot $R rpm -q xorg-x11-drv-nvidia-libs.i686 mesa-dri-drivers.i686 mesa-vulkan-drivers.i686 && test \$(chroot $R rpm -q --qf %{VERSION} xorg-x11-drv-nvidia-libs.i686) = \$(chroot $R rpm -q --qf %{VERSION} xorg-x11-drv-nvidia-libs.x86_64)"
 check "Full ffmpeg codecs (RPM Fusion)"      "ls $R/usr/lib64/libavcodec.so.* && ! chroot $R rpm -q libavcodec-free"
