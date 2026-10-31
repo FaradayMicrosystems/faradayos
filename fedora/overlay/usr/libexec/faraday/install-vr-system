@@ -4,6 +4,10 @@
 # NVIDIA NVENC/CUDA libraries on NVIDIA PCs, ALVR streamer in /opt/alvr, firewall ports.
 set -euo pipefail
 [ "$(id -u)" -eq 0 ] || { echo "Run through faraday-install-vr"; exit 1; }
+# Name the step that failed, so the error says what actually went wrong
+STEP="starting"
+step() { STEP="$1"; echo "== $1"; }
+trap 'rc=$?; echo; echo "FAILED while: $STEP (exit code $rc, line $LINENO)"' ERR
 PKGS="wivrn wivrn-dashboard xrizer opencomposite android-tools steam-devices libva-utils"
 NVIDIA=0; lspci -n | grep -qE ' 03[0-9a-f]{2}: 10de:' && NVIDIA=1
 # On NVIDIA, CUDA may pull a newer driver. Update the whole driver set together (64-bit, 32-bit for Steam,
@@ -12,29 +16,33 @@ NVPKGS="akmod-nvidia xorg-x11-drv-nvidia xorg-x11-drv-nvidia-libs xorg-x11-drv-n
 nvver(){ rpm -q --qf '%{VERSION}\n' xorg-x11-drv-nvidia 2>/dev/null | head -1; }
 OLDNV=$(nvver)
 (( NVIDIA )) && PKGS="$PKGS $NVPKGS"
-echo "== Installing: $PKGS"
+step "Installing packages: $PKGS"
 dnf -y install $PKGS
 if (( NVIDIA )); then
   dnf -y upgrade $NVPKGS || true
   NEWNV=$(nvver)
   if [ "$NEWNV" != "$OLDNV" ]; then
-    echo "== NVIDIA driver updated $OLDNV -> $NEWNV: building its kernel module (a few minutes)"
+    step "NVIDIA driver updated $OLDNV -> $NEWNV: building its kernel module (a few minutes)"
     akmods --force --kernels "$(uname -r)" || echo "Kernel module build failed; it is retried at next boot."
     # The old module stays loaded until reboot; Steam and games fail to start until then.
     touch /run/faraday-reboot-required
   fi
 fi
 
-echo "== Installing ALVR (latest release) into /opt/alvr"
+step "Downloading ALVR (latest release)"
 T=$(mktemp -d); trap 'rm -rf "$T"' EXIT
 curl -fL --retry 5 --retry-delay 5 -o "$T/alvr.tar.gz" \
   https://github.com/alvr-org/ALVR/releases/latest/download/alvr_streamer_linux.tar.gz
+step "Unpacking ALVR into /opt/alvr"
 rm -rf /opt/alvr && mkdir -p /opt/alvr
 tar -xzf "$T/alvr.tar.gz" -C /opt/alvr --strip-components=1
+[ -x /opt/alvr/bin/alvr_dashboard ] || { echo "ALVR download has no bin/alvr_dashboard; its layout changed"; false; }
+step "Adding ALVR to the app menu"
 ln -sf /opt/alvr/bin/alvr_dashboard /usr/bin/alvr_dashboard
-I=$(find /opt/alvr/share/icons -name 'alvr*.png' 2>/dev/null | sort -V | tail -1)
-[ -n "$I" ] && install -Dm644 "$I" /usr/share/icons/hicolor/256x256/apps/alvr.png
+# Recent ALVR releases ship no icon; use one only if present (a failed find must not stop the install)
+I=$(find /opt/alvr/share/icons -name 'alvr*.png' 2>/dev/null | sort -V | tail -1 || true)
+if [ -n "$I" ]; then install -Dm644 "$I" /usr/share/icons/hicolor/256x256/apps/alvr.png; fi
 install -Dm644 /usr/share/faraday/vr/alvr.desktop /usr/share/applications/alvr.desktop
 
-echo "== Opening VR ports and applying SteamVR permissions"
+step "Opening VR ports and applying SteamVR permissions"
 /usr/bin/faraday-vr-check --fix-system

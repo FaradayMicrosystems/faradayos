@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# FaradayOS add-ons: one place to install the optional software kept out of the ISO (it stays small).
+# Opened from the "Install FaradayOS add-ons" icon on the desktop and in the app menu.
+set -uo pipefail
+if [[ $USER == liveuser ]]; then
+  kdialog --title "FaradayOS add-ons" --warningcontinuecancel \
+    "You are in the live session. Add-ons installed here are lost when you restart, and large ones can fill the memory.
+Install FaradayOS first (Install to Hard Drive), then install add-ons there." --continue-label "Install anyway" || exit 0
+fi
+choice=$(kdialog --title "FaradayOS add-ons" --separate-output --checklist "Choose what to install:" \
+  vr "VR tools: WiVRn, ALVR and SteamVR (download about 0.5 to 1 GB)" off \
+  wine "Wine and Lutris: Windows apps and non-Steam games (about 0.5 GB)" off) || exit 0
+cmds=()
+for c in $choice; do
+  case $c in
+    vr) cmds+=(/usr/bin/faraday-install-vr) ;;
+    wine) cmds+=(/usr/bin/faraday-install-wine) ;;
+  esac
+done
+[[ ${#cmds[@]} -gt 0 ]] || exit 0
+# The installers ask for the password and show progress in a terminal window
+exec konsole -e bash -c 'for c in "$@"; do "$c" </dev/null; echo; done; read -rp "Finished. Press Enter to close." _' faraday-addons "${cmds[@]}"
