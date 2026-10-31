@@ -27,8 +27,21 @@ jobs:
         include:
           - name: as-is
             prep: ''
-          - name: with-installer-translations
-            prep: 'dnf -y -q reinstall anaconda-core anaconda-webui || dnf -y -q upgrade anaconda-core anaconda-webui; ls /usr/share/locale/de/LC_MESSAGES/anaconda.mo' 
+          # The v0.73 keyboard fix (fedora/overlay/usr/share/glib-2.0/schemas/90_faradayos-keyboard.gschema.override)
+          - name: with-keyboard-fix
+            prep: >-
+              printf "[org.gnome.desktop.input-sources]\nsources=[('xkb', 'us')]\n"
+              > /usr/share/glib-2.0/schemas/90_faradayos-keyboard.gschema.override
+              && glib-compile-schemas /usr/share/glib-2.0/schemas
+              && runuser -u liveuser -- gsettings get org.gnome.desktop.input-sources sources
+          - name: with-keyboard-fix-and-translations
+            prep: >-
+              printf "[org.gnome.desktop.input-sources]\nsources=[('xkb', 'us')]\n"
+              > /usr/share/glib-2.0/schemas/90_faradayos-keyboard.gschema.override
+              && glib-compile-schemas /usr/share/glib-2.0/schemas
+              && runuser -u liveuser -- gsettings get org.gnome.desktop.input-sources sources;
+              dnf -y -q reinstall anaconda-core anaconda-webui || dnf -y -q upgrade anaconda-core anaconda-webui;
+              ls /usr/share/locale/de/LC_MESSAGES/anaconda.mo
     steps:
       - uses: actions/checkout@v4
 

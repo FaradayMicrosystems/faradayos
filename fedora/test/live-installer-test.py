@@ -113,7 +113,8 @@ def run(cmd, timeout=120):
     send(f"{cmd}; echo {mark[:5]}''{mark[5:]}\r")
     out = read_until(re.escape(mark) + r"\r?\n", timeout)
     out = re.sub(r"\x1b\][^\x07\x1b]*(\x07|\x1b\\)|\x1b\[[0-9;?]*[a-zA-Z]|\r", "", out)  # terminal escapes
-    return "\n".join(l for l in out.split("\n") if "__END" not in l).strip("\n")
+    out = "\n".join(l for l in out.split("\n") if "__END" not in l).strip("\n")
+    return re.sub(r"^(\$ )+", "", out)  # the shell prompt printed after the previous command
 
 
 shot_n = 0
@@ -143,7 +144,10 @@ def report(title, text):
     print(f"::group::{title}\n{text}\n::endgroup::", flush=True)
 
 
-result = {"booted": False, "desktop": False, "installer_window": False, "session_survived": False}
+result = {"booted": False, "desktop": False, "installer_window": False, "session_survived": False,
+          "installer_calm": False}
+# The v0.72 crash: the installer's keyboard page looped, starting thousands of keyboard tasks. A normal start needs a few.
+MAX_TASKS = 300
 try:
     read_until(r"login: ", a.boot_timeout)
     say("serial login prompt")
@@ -185,13 +189,18 @@ try:
         time.sleep(15)
         st = run("echo kwin=$(pgrep -x kwin_wayland) shell=$(pgrep -u liveuser -x plasmashell) "
                  "anaconda=$(pgrep -f -c 'bin/anaconda') win=$(pgrep -c -f 'slitherer|firefox') "
-                 "mem=$(free -m | awk '/Mem:/{print $7}')MB")
+                 "mem=$(free -m | awk '/Mem:/{print $7}')MB "
+                 "tasks=$(grep -o 'Localization/Task/[0-9]*' /tmp/anaconda-webui.log 2>/dev/null | tail -1 | cut -d/ -f3)")
         say(st.strip(), "screen brightness:", shot("installer"))
         if "win=0" not in st:
             result["installer_window"] = True
     st = run("echo kwin=$(pgrep -x kwin_wayland) shell=$(pgrep -u liveuser -x plasmashell)")
-    result["session_survived"] = (f"kwin={kwin_before}" in st and f"shell={shell_before}" in st)
+    result["session_survived"] = bool(kwin_before and shell_before) and \
+        (f"kwin={kwin_before} " in st + " " and f"shell={shell_before} " in st + " ")
     say("session survived:", result["session_survived"])
+    tasks = run("grep -o 'Localization/Task/[0-9]*' /tmp/anaconda-webui.log | tail -1 | cut -d/ -f3").strip()
+    result["installer_calm"] = tasks.isdigit() and int(tasks) < MAX_TASKS
+    say(f"installer keyboard tasks: {tasks or 'none'} (fewer than {MAX_TASKS} expected)")
 
     report("after", run(
         "free -m; loginctl list-sessions; systemctl --failed --no-pager; coredumpctl list --no-pager; "
