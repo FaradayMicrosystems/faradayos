@@ -5,7 +5,7 @@ FaradayOS is a gaming- and VR-ready Linux system for work and play, built on **F
 Current version: **v0.73**. Versions use the format `v0.<number>` (v0.72, v0.73, ...). Earlier releases named `v0.0.<number>` used the wrong format.
 
 ## Download
-1. Open the [latest release](https://github.com/FaradayMicrosystems/faradayos/releases/latest) and download every `FaradayOSv0.73.iso.part*` file (about 3.7 GB in total, each part under 2 GB).
+1. Open the [latest release](https://github.com/FaradayMicrosystems/faradayos/releases/latest) and download every `FaradayOSv0.73.iso.part*` file (about 3.9 GB in total, each part under 2 GB).
    Fastest: `aria2c -Z -x16 -s16 <part URLs>` (the release notes have the full command).
 2. Join the parts in the download folder:
    - Linux: `cat FaradayOSv0.73.iso.part* > FaradayOSv0.73.iso`

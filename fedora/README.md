@@ -21,7 +21,7 @@ Included:
 ## Get the ISO
 
 **Option A: download it (no build needed).** Every push to `main` builds the ISO, checks it and publishes it.
-1. Open the [latest release](https://github.com/FaradayMicrosystems/faradayos/releases/latest) and download every `FaradayOSv<version>.iso.part*` file (about 3.7 GB in total, each under 2 GB; downloads can resume). Fastest: the `aria2c` command in the release notes.
+1. Open the [latest release](https://github.com/FaradayMicrosystems/faradayos/releases/latest) and download every `FaradayOSv<version>.iso.part*` file (about 3.9 GB in total, each under 2 GB; downloads can resume). Fastest: the `aria2c` command in the release notes.
 2. Join the parts into one ISO, in the download folder:
    - Linux: `cat FaradayOSv0.73.iso.part* > FaradayOSv0.73.iso`
    - Windows (Command Prompt): `copy /b FaradayOSv0.73.iso.part0 + FaradayOSv0.73.iso.part1 FaradayOSv0.73.iso` (the release notes list the exact parts)
