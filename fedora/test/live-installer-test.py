@@ -128,7 +128,10 @@ def shot(name):
             break
     try:
         from PIL import Image
-        Image.open(ppm).save(f"{W}/{shot_n:02d}-{name}.png")
+        from PIL import ImageStat
+        im = Image.open(ppm)
+        im.save(f"{W}/{shot_n:02d}-{name}.png")
+        return round(ImageStat.Stat(im.convert("L")).mean[0])  # 0 = black screen
     except Exception as e:  # noqa: BLE001
         say("screenshot failed:", e)
 
@@ -143,19 +146,24 @@ def fetch(cmd, name, timeout=600):
         say(f"could not fetch {name}:", e)
 
 
+def report(title, text):
+    open(f"{W}/{title.split()[0]}.txt", "w").write(text)
+    print(f"::group::{title}\n{text}\n::endgroup::", flush=True)
+
+
 result = {"booted": False, "desktop": False, "installer_window": False, "session_survived": False}
 try:
     read_until(r"login: ", a.boot_timeout)
     say("serial login prompt")
     time.sleep(3)
-    send("liveuser\r")
-    if read_until(r"(Password: |\$ )", 120, want_hit=True).endswith("Password: "):
-        send("\r")  # the live user has no password
-        read_until(r"\$ ", 60)
-    send("export PS1='$ ' TERM=dumb; stty -echo cols 250; sudo dmesg -n 1\r")
+    send("root\r")  # the live system's root account has no password
+    if read_until(r"(Password: |# )", 120, want_hit=True).endswith("Password: "):
+        send("\r")
+        read_until(r"# ", 60)
+    send("export PS1='$ ' TERM=dumb; bind 'set enable-bracketed-paste off'; stty -echo cols 250; dmesg -n 1\r")
     read_until(r"\$ ", 30)
     result["booted"] = True
-    say("logged in on serial console")
+    say("logged in as root on serial console")
 
     # Wait for the live desktop (Plasma) to be up
     for _ in range(120):
@@ -164,39 +172,48 @@ try:
             break
         time.sleep(5)
     time.sleep(20 * mult)
-    shot("desktop")
     result["desktop"] = "UP" in p
-    say("desktop up:", result["desktop"])
-    open(f"{W}/before.txt", "w").write(run(
+    say("desktop up:", result["desktop"], "screen brightness:", shot("desktop"))
+    report("before", run(
         "uname -r; free -m; cat /proc/cmdline; loginctl list-sessions; systemctl --failed --no-pager; "
-        "ps -eo pid,user,rss,cmd --sort=-rss | head -25; ls -la ~/Desktop; "
-        "cat ~/Desktop/*.desktop /etc/sudoers.d/* 2>&1; sudo ls /etc/polkit-1/rules.d"))
+        "ps -eo pid,user,rss,cmd --sort=-rss | head -25; "
+        "ls -la ~liveuser/Desktop; head -3 /etc/sudoers.d/*; ls /etc/polkit-1/rules.d"))
     kwin_before = run("pgrep -x kwin_wayland").strip()
     shell_before = run("pgrep -u liveuser -x plasmashell").strip()
 
     # Start the installer the way the desktop icon and the Welcome app do (Exec=liveinst, in the Plasma session)
     say("starting installer")
-    run("systemd-run --user --unit=faraday-test-liveinst --collect liveinst")
+    run("systemd-run --user -M liveuser@.host --unit=faraday-test-liveinst --collect liveinst")
     t0 = time.time()
     while time.time() - t0 < a.minutes * 60 * mult:
         time.sleep(15)
         st = run("echo kwin=$(pgrep -x kwin_wayland) shell=$(pgrep -u liveuser -x plasmashell) "
                  "anaconda=$(pgrep -f -c 'bin/anaconda') win=$(pgrep -c -f 'slitherer|firefox') "
                  "mem=$(free -m | awk '/Mem:/{print $7}')MB")
-        say(st.strip())
-        shot("installer")
+        say(st.strip(), "screen brightness:", shot("installer"))
         if "win=0" not in st:
             result["installer_window"] = True
     st = run("echo kwin=$(pgrep -x kwin_wayland) shell=$(pgrep -u liveuser -x plasmashell)")
     result["session_survived"] = (f"kwin={kwin_before}" in st and f"shell={shell_before}" in st)
     say("session survived:", result["session_survived"])
 
-    open(f"{W}/after.txt", "w").write(run(
+    report("after", run(
         "free -m; loginctl list-sessions; systemctl --failed --no-pager; coredumpctl list --no-pager; "
-        "ps -eo pid,user,rss,cmd --sort=-rss | head -30; systemctl --user status faraday-test-liveinst --no-pager -l", 300))
-    fetch("sudo journalctl -b --no-pager -o short-monotonic", "journal.txt")
-    fetch("sudo cat /tmp/anaconda.log /tmp/storage.log /tmp/program.log /tmp/packaging.log", "anaconda-logs.txt")
-    fetch("sudo cat /tmp/webui-desktop.log /tmp/*.log 2>/dev/null; sudo ls -la /tmp", "tmp-logs.txt")
+        "ps -eo pid,user,rss,cmd --sort=-rss | head -30; systemctl --user -M liveuser@.host status faraday-test-liveinst --no-pager -l; "
+        "coredumpctl info --no-pager 2>/dev/null | grep -E 'Executable:|Signal:|Timestamp:|Stack trace|^ +#([0-9]|1[0-9]) ' | head -150", 300))
+    fetch("journalctl -b --no-pager -o short-monotonic", "journal.txt")
+    fetch("cat /tmp/anaconda.log /tmp/storage.log /tmp/program.log /tmp/packaging.log", "anaconda-logs.txt")
+    fetch("cat /tmp/webui-desktop.log /tmp/*.log 2>/dev/null; ls -la /tmp", "tmp-logs.txt")
+    # The job log is the only output some readers can see, so print the important parts there too
+    rx = re.compile(r"kwin|plasmashell|KCrash|dumped core|segfault|SIG(SEGV|ABRT|KILL)|oom|Out of memory|liveinst|pkexec|"
+                    r"anaconda|webui|slitherer|polkit|Wayland connection|Removed session|session closed|plasmalogin|"
+                    r"drm|nvidia|gpu|Failed to start|Traceback|Error", re.I)
+    try:
+        lines = [l for l in open(f"{W}/journal.txt", errors="replace") if rx.search(l) and "audit" not in l]
+        report("journal (filtered, last 250)", "".join(l[:260] + "\n" if len(l) > 260 else l for l in lines[-250:]))
+        report("anaconda.log (last 60)", "".join(open(f"{W}/anaconda-logs.txt", errors="replace").readlines()[-60:]))
+    except OSError as e:
+        say("no logs:", e)
 except Exception as e:  # noqa: BLE001
     say("test error:", repr(e))
     shot("error")
