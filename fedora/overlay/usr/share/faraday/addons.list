@@ -16,10 +16,13 @@
 remmina     | dnf     | remmina remmina-plugins-rdp remmina-plugins-vnc | Remmina: remote desktop (RDP, VNC)
 qbittorrent | dnf     | qbittorrent                 | qBittorrent: torrent downloads
 kdeconnect  | dnf     | kde-connect                 | KDE Connect: phone and PC together (files, notifications, clipboard)
+gnomedisks  | dnf     | gnome-disk-utility          | GNOME Disks: format, check and image disks and USB sticks
 fingerprint | dnf     | fprintd fprintd-pam libfprint | Fingerprint readers: drivers (fprintd, libfprint) and fingerprint login
 wine        | dnf     | wine lutris                 | Wine and Lutris: Windows apps and non-Steam games (about 0.5 GB)
 winboat     | root    | /usr/libexec/faraday/addon-winboat | WinBoat: Windows apps in a small Windows VM (needs virtualization on, 4 GB+ RAM) | rpm -q winboat
 ckan        | root    | /usr/libexec/faraday/addon-ckan | CKAN: mod manager for Kerbal Space Program | rpm -q ckan
+lmstudio    | root    | /usr/libexec/faraday/addon-lmstudio | LM Studio: run AI language models on this PC (download about 500 MB) | test -x /opt/lmstudio/LM-Studio.AppImage
+popsicle    | flatpak | com.system76.Popsicle       | Popsicle: write one ISO to several USB sticks at once (Flathub)
 discord     | flatpak | com.discordapp.Discord      | Discord: chat and voice (Flathub)
 telegram    | flatpak | org.telegram.desktop        | Telegram: messaging (Flathub)
 obsidian    | flatpak | md.obsidian.Obsidian        | Obsidian: notes (Flathub)

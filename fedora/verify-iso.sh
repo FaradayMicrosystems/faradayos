@@ -90,6 +90,17 @@ check "Add-ons: Flathub apps in the list exist" flathub_ids
 check "Add-ons: root add-on scripts present" root_addons
 check "Add-ons: WinBoat release has an x86_64 .rpm" "curl -fsSL --retry 3 https://api.github.com/repos/TibixDev/winboat/releases/latest | grep -qE \"browser_download_url.*x86_64[.]rpm\""
 check "Add-ons: CKAN repository reachable" "curl -fsSL --retry 3 https://ksp-ckan.s3-us-west-2.amazonaws.com/rpm/stable/ckan_stable.repo | grep -q baseurl"
+check "Add-ons: LM Studio download link works" "curl -fsIL --retry 3 -o /dev/null https://lmstudio.ai/download/latest/linux/x64"
+# Trial install of every dnf add-on, WinBoat and CKAN with all their dependencies (resolve only, nothing installed)
+deps_resolve() {
+  rm -rf /tmp/repos && mkdir -p /tmp/repos && cp $R/etc/yum.repos.d/*.repo /tmp/repos/
+  curl -fsSL --retry 3 -o /tmp/repos/ckan_stable.repo https://ksp-ckan.s3-us-west-2.amazonaws.com/rpm/stable/ckan_stable.repo
+  WB=$(curl -fsSL --retry 3 https://api.github.com/repos/TibixDev/winboat/releases/latest | grep -oE "https://[^\"]+x86_64[.]rpm" | head -1)
+  dnf -y --nogpgcheck --setopt=reposdir=/tmp/repos --setopt=cachedir=/tmp/dnfc install --assumeno $VRPKGS fuse-libs ckan $WB >/tmp/deps.log 2>&1 || true
+  grep -qi "transaction summary" /tmp/deps.log && ! grep -qiE "^ *problem|nothing provides|no match for" /tmp/deps.log
+}
+check "Add-ons: all dnf add-ons, WinBoat and CKAN install with their dependencies" deps_resolve
+grep -iE -A3 "^ *problem|nothing provides|no match for" /tmp/deps.log 2>/dev/null | head -20 || true
 check "Installers: ALVR download link works" "curl -fsIL -o /dev/null https://github.com/alvr-org/ALVR/releases/latest/download/alvr_streamer_linux.tar.gz"
 check "VR: SteamVR setup launcher"           "test -x $R/usr/bin/faraday-steamvr-setup -a -f $R/usr/share/applications/faraday-steamvr-setup.desktop"
 check "VR: readiness check + login notice"   "test -x $R/usr/bin/faraday-vr-check -a -f $R/etc/xdg/autostart/faraday-vr-check.desktop"
