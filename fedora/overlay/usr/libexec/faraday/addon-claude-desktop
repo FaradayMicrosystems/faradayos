@@ -1,0 +1,35 @@
+#!/bin/bash
+# FaradayOS add-on (runs as root from install-addons-system): Claude Desktop, Anthropic's official desktop app.
+# Anthropic publishes it for Linux only as a .deb (Debian/Ubuntu, beta). FaradayOS takes that official package
+# from Anthropic's signed apt repository, checks its signature and checksum, and unpacks it into /usr.
+# To update later: sudo /usr/libexec/faraday/addon-claude-desktop
+#   --check  verify and download only, then confirm the package has the app (used by the ISO checks)
+set -euo pipefail
+CHECK=0; [ "${1:-}" = --check ] && CHECK=1
+STEP="starting"; step(){ STEP="$1"; echo "== $1"; }
+trap 'echo "FAILED while: $STEP"' ERR
+REPO=https://downloads.claude.ai/claude-desktop/apt/stable
+step "Installing what Claude Desktop needs (dpkg to unpack, tray icon support)"
+(( CHECK )) || dnf -y install dpkg gnupg2 libayatana-appindicator-gtk3 gtk3 nss alsa-lib xdg-utils
+T=$(mktemp -d); trap 'rm -rf "$T"' EXIT
+step "Checking Anthropic's signed package list"
+curl -fsSL --retry 5 https://downloads.claude.ai/claude-desktop/key.asc | gpg --dearmor > "$T/key.gpg"
+curl -fsSL --retry 5 -o "$T/InRelease" "$REPO/dists/stable/InRelease"
+gpgv --keyring "$T/key.gpg" "$T/InRelease" 2>/dev/null || { echo "Package list signature is not valid"; false; }
+curl -fsSL --retry 5 -o "$T/Packages" "$REPO/dists/stable/main/binary-amd64/Packages"
+PSUM=$(sha256sum "$T/Packages" | cut -d' ' -f1)
+grep -q "$PSUM .* main/binary-amd64/Packages\$" "$T/InRelease" || { echo "Package list checksum does not match the signed list"; false; }
+# Newest claude-desktop entry: its file name and checksum
+read -r FILE SUM < <(awk '/^Package: /{p=($2=="claude-desktop")} p&&/^Version: /{v=$2} p&&/^Filename: /{f=$2} p&&/^SHA256: /{print v, f, $2}' "$T/Packages" | sort -V | tail -1 | cut -d' ' -f2-)
+[ -n "${FILE:-}" ] || { echo "No claude-desktop package in Anthropic's list"; false; }
+step "Downloading Claude Desktop ($(basename "$FILE"))"
+curl -fL --retry 5 -o "$T/claude-desktop.deb" "$REPO/$FILE"
+echo "$SUM  $T/claude-desktop.deb" | sha256sum -c --quiet || { echo "Download checksum does not match"; false; }
+step "Installing Claude Desktop"
+mkdir "$T/x" && dpkg-deb -x "$T/claude-desktop.deb" "$T/x"
+[ -e "$T/x/usr/bin/claude-desktop" ] || { echo "Package has no usr/bin/claude-desktop; its layout changed"; false; }
+(( CHECK )) && { echo "Check OK: $(basename "$FILE")"; exit 0; }
+cp -a "$T/x/usr/." /usr/
+chown -R root:root /usr/lib/claude-desktop 2>/dev/null || true
+update-desktop-database -q /usr/share/applications 2>/dev/null || true
+echo "Claude Desktop installed. Open \"Claude\" from the app menu (needs a paid Claude plan). To update: sudo /usr/libexec/faraday/addon-claude-desktop"
