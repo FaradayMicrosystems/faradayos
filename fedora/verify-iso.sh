@@ -65,11 +65,14 @@ VRPKGS="wivrn wivrn-dashboard xrizer opencomposite android-tools xorg-x11-drv-nv
 # (xorg-x11-drv-nvidia-cuda-libs is not checked: the NVIDIA driver itself requires it)
 lean() { ! chroot $R rpm -q wivrn wivrn-dashboard xrizer wine lutris | grep -qv "not installed" && ! test -e $R/opt/alvr; }
 installers() {
-  for f in usr/bin/faraday-install-vr usr/bin/faraday-install-wine usr/libexec/faraday/install-vr-system; do
+  for f in usr/bin/faraday-install-vr usr/bin/faraday-install-wine usr/libexec/faraday/install-vr-system usr/libexec/faraday/install-addons-system usr/bin/faraday-addons; do
     test -x "$R/$f" && bash -n "$R/$f" || return 1
   done
   test -f $R/usr/share/applications/faraday-install-vr.desktop -a -f $R/usr/share/applications/faraday-install-wine.desktop -a -f $R/usr/share/faraday/vr/alvr.desktop
 }
+# Every dnf package named in the add-ons list must be downloadable too
+ADDONPKGS=$(awk -F'|' '!/^[[:space:]]*#/ && $2 ~ /dnf/ {print $3}' $R/usr/share/faraday/addons.list)
+VRPKGS=$(echo $VRPKGS $ADDONPKGS | tr ' ' '\n' | sort -u | tr '\n' ' ')
 installer_pkgs() {
   n=$(dnf -q --setopt=reposdir=$R/etc/yum.repos.d --setopt=cachedir=/tmp/dnfc repoquery --available --qf "%{name}\n" $VRPKGS 2>/dev/null | sort -u | grep -c .)
   [ "$n" -eq $(echo $VRPKGS | wc -w) ]
@@ -90,6 +93,7 @@ check "Touchpad: tap to click default"       "grep -q TapToClick=true $R/etc/xdg
 check "Fingerprint: fprintd + PAM installed" "chroot $R rpm -q fprintd fprintd-pam libfprint"
 # /etc/pam.d/system-auth is an absolute symlink into /etc/authselect, so read the target inside the image
 check "Fingerprint: login uses fingerprint"  "grep -qx with-fingerprint $R/etc/authselect/authselect.conf && grep -q pam_fprintd $R/etc/authselect/system-auth"
+check "Add-ons list readable (every entry listed)" "S=\$(chroot $R env HOME=/root /usr/bin/faraday-addons --status) && grep -qw wine <<<\"\$S\" && grep -qw vr <<<\"\$S\""
 check "Add-ons installer icon on the desktop for new users" "test -x $R/etc/skel/Desktop/faraday-addons.desktop -a -x $R/usr/bin/faraday-addons && grep -q Exec=/usr/bin/faraday-addons $R/etc/skel/Desktop/faraday-addons.desktop && chroot $R rpm -q kdialog konsole"
 check "Install removes live user + autologin" "test -x $R/usr/share/faraday/remove-liveuser.sh && grep -q remove-liveuser.sh $R/usr/share/anaconda/post-scripts/90-faraday-remove-liveuser.ks && ls $R/etc/systemd/system/multi-user.target.wants/faraday-remove-liveuser.service"
 check "No live user baked into the image"   "! grep -q ^liveuser: $R/etc/passwd && ! grep -rqs ^User=liveuser $R/etc/plasmalogin.conf $R/etc/plasmalogin.conf.d $R/etc/sddm.conf $R/etc/sddm.conf.d"

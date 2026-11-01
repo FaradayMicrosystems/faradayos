@@ -2,5 +2,16 @@
 # FaradayOS: one-click install of Wine (Windows apps) and Lutris (game launcher for non-Steam games).
 set -uo pipefail
 echo "FaradayOS: installing Wine and Lutris. Download is about 0.5 GB. Enter your password when asked."
-if pkexec dnf -y install wine lutris; then echo "Done. Open Lutris from the app menu."; else echo "Install failed (see messages above)."; fi
+if pkexec dnf -y install wine lutris; then
+  echo "Done. Open Lutris from the app menu."; rc=0
+else
+  rc=$?
+  if [ $rc -eq 126 ] || [ $rc -eq 127 ]; then
+    echo "Wine and Lutris install cancelled: the password prompt was closed or the password was not accepted."
+  else
+    echo "Wine and Lutris install failed (dnf exit code $rc, see messages above). Running this again is safe."
+  fi
+  rc=1
+fi
 [[ -t 0 ]] && read -rp "Press Enter to close." _
+exit $rc

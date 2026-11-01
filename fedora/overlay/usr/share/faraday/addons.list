@@ -1,0 +1,16 @@
+# FaradayOS add-ons list, read by "Install FaradayOS add-ons" (/usr/bin/faraday-addons).
+# Nothing here is in the ISO: each add-on downloads only when ticked.
+# To add software, add ONE line. Add-ons install in the order listed.
+#
+#   id | type | what to install | text shown in the checklist | check (optional)
+#
+#   type dnf      what = Fedora/RPM Fusion package names, space separated   (e.g. obs-studio)
+#   type flatpak  what = Flathub app ids, space separated                   (e.g. com.discordapp.Discord)
+#   type script   what = installer program to run as the user               (it asks for the password itself)
+#   check         shell test that succeeds when already installed. Leave empty for dnf and flatpak:
+#                 they count as installed when every package or app in "what" is installed.
+#
+# dnf and flatpak add-ons all install under ONE password prompt. VR goes last because its
+# SteamVR step waits for a Steam download.
+wine | dnf    | wine lutris                 | Wine and Lutris: Windows apps and non-Steam games (about 0.5 GB)
+vr   | script | /usr/bin/faraday-install-vr | VR tools: WiVRn, ALVR and SteamVR (download about 0.5 to 1 GB) | rpm -q wivrn wivrn-dashboard && test -x /opt/alvr/bin/alvr_dashboard && ls "$HOME"/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher "$HOME"/.steam/steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher

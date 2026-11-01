@@ -1,22 +1,107 @@
 #!/usr/bin/env bash
 # FaradayOS add-ons: one place to install the optional software kept out of the ISO (it stays small).
 # Opened from the "Install FaradayOS add-ons" icon on the desktop and in the app menu.
+# The add-ons are listed in /usr/share/faraday/addons.list (one line each). This shows them as a
+# checklist, then installs the chosen ones in a terminal window, one after another:
+#   - add-ons that are already installed are skipped,
+#   - all dnf/Flathub add-ons install under one password prompt,
+#   - a failed add-on is named, and the others still install,
+#   - a summary at the end lists each add-on as OK, SKIPPED or FAILED.
+# Each separate installer (Install VR tools, Install Wine and Lutris) still works on its own.
+#   faraday-addons              open the checklist
+#   faraday-addons --run ID...  install add-ons in this terminal (used by the checklist)
+#   faraday-addons --status     print each add-on and whether it is installed
 set -uo pipefail
+LIST=${FARADAY_ADDONS_LIST:-/usr/share/faraday/addons.list}
+HELPER=/usr/libexec/faraday/install-addons-system
+
+trim(){ local s=$1; s=${s#"${s%%[![:space:]]*}"}; printf '%s' "${s%"${s##*[![:space:]]}"}"; }
+# Load the list into arrays (index = order in the file)
+IDS=(); TYPE=(); WHAT=(); LABEL=(); CHECK=()
+while IFS='|' read -r id type what label check; do
+  id=$(trim "$id"); [[ -z $id || $id == \#* ]] && continue
+  IDS+=("$id"); TYPE+=("$(trim "$type")"); WHAT+=("$(trim "$what")"); LABEL+=("$(trim "$label")"); CHECK+=("$(trim "${check:-}")")
+done < "$LIST"
+idx(){ local i; for i in "${!IDS[@]}"; do [[ ${IDS[$i]} == "$1" ]] && { echo "$i"; return 0; }; done; return 1; }
+short(){ echo "${LABEL[$1]%%:*}"; }   # "Wine and Lutris: Windows apps..." -> "Wine and Lutris"
+installed(){
+  local i=$1 p
+  if [[ -n ${CHECK[$i]} ]]; then bash -c "${CHECK[$i]}" >/dev/null 2>&1; return; fi
+  case ${TYPE[$i]} in
+    dnf) for p in ${WHAT[$i]}; do rpm -q "$p" >/dev/null 2>&1 || return 1; done ;;
+    flatpak) for p in ${WHAT[$i]}; do flatpak info "$p" >/dev/null 2>&1 || return 1; done ;;
+    *) return 1 ;;
+  esac
+}
+
+run(){
+  local id i rc results=() todo=() sys=() line
+  declare -A res=()
+  for id in "$@"; do
+    if ! i=$(idx "$id"); then res[$id]="[FAILED ] $id: not in the add-ons list"; continue; fi
+    if installed "$i"; then res[$id]="[SKIPPED] $(short "$i"): already installed"; echo "$(short "$i"): already installed, skipping."; continue; fi
+    todo+=("$id")
+    [[ ${TYPE[$i]} == dnf || ${TYPE[$i]} == flatpak ]] && sys+=("$id")
+  done
+  # 1. All dnf and Flathub add-ons together: one password prompt
+  if (( ${#sys[@]} )); then
+    echo "Installing: $(for id in "${sys[@]}"; do i=$(idx "$id"); printf '%s, ' "$(short "$i")"; done | sed 's/, $//')"
+    echo "Enter your password when asked."
+    while IFS= read -r line; do
+      if [[ $line == "@@EXIT "* ]]; then :
+      elif [[ $line == "@@RESULT "* ]]; then
+        read -r _ id st rc <<<"$line"; i=$(idx "$id")
+        [[ $st == ok ]] && res[$id]="[  OK   ] $(short "$i")" || res[$id]="[FAILED ] $(short "$i") (exit code $rc): see its === section above"
+      else printf '%s\n' "$line"; fi
+    done < <(pkexec "$HELPER" "${sys[@]}" 2>&1; echo "@@EXIT $?")
+    for id in "${sys[@]}"; do
+      [[ -n ${res[$id]:-} ]] || res[$id]="[FAILED ] $(short "$(idx "$id")"): not installed (password prompt closed or not accepted)"
+    done
+  fi
+  # 2. Script add-ons (e.g. VR), in list order; each asks for the password itself
+  for id in "${todo[@]}"; do
+    i=$(idx "$id"); [[ ${TYPE[$i]} == script ]] || continue
+    printf '\n\e[38;5;208m=== Add-on: %s ===\e[0m\n' "$(short "$i")"
+    "${WHAT[$i]}" </dev/null; rc=$?
+    if (( rc == 0 )); then res[$id]="[  OK   ] $(short "$i")"
+    else echo "Add-on \"$(short "$i")\" FAILED (exit code $rc)."; res[$id]="[FAILED ] $(short "$i") (exit code $rc): see its === section above"; fi
+  done
+  for id in "$@"; do results+=("${res[$id]}"); done
+  printf '\n\e[38;5;208m=== FaradayOS add-ons summary ===\e[0m\n'
+  printf '  %s\n' "${results[@]}"
+  [[ -e /run/faraday-reboot-required ]] && echo "  RESTART the computer: the NVIDIA driver was updated."
+  local failed=0; printf '%s\n' "${results[@]}" | grep -q FAILED && failed=1
+  (( failed )) && echo "Running add-ons again is safe: finished ones are skipped."
+  [[ -t 0 ]] && read -rp "Finished. Press Enter to close." _
+  return $failed
+}
+
+case ${1:-} in
+  --run) shift; run "$@"; exit $? ;;
+  --status) for i in "${!IDS[@]}"; do installed "$i" && s=installed || s="not installed"; printf '%-12s %-30s %s\n' "${IDS[$i]}" "$(short "$i")" "$s"; done; exit 0 ;;
+esac
+
 if [[ $USER == liveuser ]]; then
   kdialog --title "FaradayOS add-ons" --warningcontinuecancel \
     "You are in the live session. Add-ons installed here are lost when you restart, and large ones can fill the memory.
 Install FaradayOS first (Install to Hard Drive), then install add-ons there." --continue-label "Install anyway" || exit 0
 fi
-choice=$(kdialog --title "FaradayOS add-ons" --separate-output --checklist "Choose what to install:" \
-  vr "VR tools: WiVRn, ALVR and SteamVR (download about 0.5 to 1 GB)" off \
-  wine "Wine and Lutris: Windows apps and non-Steam games (about 0.5 GB)" off) || exit 0
-cmds=()
-for c in $choice; do
-  case $c in
-    vr) cmds+=(/usr/bin/faraday-install-vr) ;;
-    wine) cmds+=(/usr/bin/faraday-install-wine) ;;
-  esac
+
+# Installed add-ons are listed but unticked and marked, so it is clear nothing will happen to them
+items=(); pending=0
+for i in "${!IDS[@]}"; do
+  if installed "$i"; then items+=("${IDS[$i]}" "${LABEL[$i]} [already installed]" off)
+  else items+=("${IDS[$i]}" "${LABEL[$i]}" off); pending=$((pending+1)); fi
 done
-[[ ${#cmds[@]} -gt 0 ]] || exit 0
-# The installers ask for the password and show progress in a terminal window
-exec konsole -e bash -c 'for c in "$@"; do "$c" </dev/null; echo; done; read -rp "Finished. Press Enter to close." _' faraday-addons "${cmds[@]}"
+if (( pending == 0 )); then
+  kdialog --title "FaradayOS add-ons" --msgbox "All add-ons are already installed.
+To repair VR or Wine, open its own installer from the app menu."
+  exit 0
+fi
+choice=$(kdialog --title "FaradayOS add-ons" --separate-output --checklist \
+  "Tick what to install. Everything ticked installs one after another." "${items[@]}") || exit 0
+sel=()
+for id in "${IDS[@]}"; do grep -qx "$id" <<<"$choice" && sel+=("$id"); done
+[[ ${#sel[@]} -gt 0 ]] || exit 0
+# Progress and password prompts show in a terminal window
+exec konsole -e /usr/bin/faraday-addons --run "${sel[@]}"
