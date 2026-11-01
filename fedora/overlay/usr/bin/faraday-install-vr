@@ -4,6 +4,13 @@ set -uo pipefail
 echo "FaradayOS: installing VR tools (WiVRn, ALVR, SteamVR). Download is about 0.5-1 GB."
 echo "Enter your password when asked."
 if pkexec /usr/libexec/faraday/install-vr-system; then
+  if [[ -e /run/faraday-reboot-required ]]; then
+    # A new NVIDIA driver is installed but the old one is still running: Steam would not start.
+    echo; echo "System part done. The NVIDIA driver was updated: RESTART the computer now."
+    echo "After the restart, open 'Set up SteamVR' from the app menu to finish."
+    [[ -t 0 ]] && read -rp "Press Enter to close." _
+    exit 0
+  fi
   echo; echo "System part done. Now SteamVR (needed for ALVR and wired headsets):"
   /usr/bin/faraday-steamvr-setup
 else
