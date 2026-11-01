@@ -7,8 +7,10 @@ trap 'echo "FAILED while: $STEP"' ERR
 step "Installing Podman, podman-compose and FreeRDP"
 dnf -y install podman podman-compose freerdp
 step "Finding the latest WinBoat release"
-URL=$(curl -fsSL --retry 5 https://api.github.com/repos/TibixDev/winboat/releases/latest \
-  | grep -oE '"browser_download_url": *"[^"]+x86_64\.rpm"' | grep -oE 'https://[^"]+' | head -1)
+# Read the release page (no GitHub API: its rate limit can block the download)
+LATEST=$(curl -fsSLI --retry 5 -o /dev/null -w '%{url_effective}' https://github.com/TibixDev/winboat/releases/latest)
+URL=$(curl -fsSL --retry 5 "${LATEST/\/tag\//\/expanded_assets\/}" | grep -oE '/[^"]+/releases/download/[^"]+x86_64\.rpm' | head -1 || true)
+[ -n "$URL" ] && URL="https://github.com$URL"
 [ -n "$URL" ] || { echo "No WinBoat .rpm found in the latest release"; false; }
 step "Installing WinBoat ($URL)"
 dnf -y install "$URL"

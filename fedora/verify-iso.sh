@@ -88,14 +88,17 @@ flathub_ids() { for a in $ADDONFLATPAKS; do curl -fsS --retry 3 -o /dev/null htt
 root_addons() { for f in $(addons_of root); do test -x "$R/$f" && bash -n "$R/$f" || return 1; done; }
 check "Add-ons: Flathub apps in the list exist" flathub_ids
 check "Add-ons: root add-on scripts present" root_addons
-check "Add-ons: WinBoat release has an x86_64 .rpm" "curl -fsSL --retry 3 https://api.github.com/repos/TibixDev/winboat/releases/latest | grep -qE \"browser_download_url.*x86_64[.]rpm\""
+# Same lookup as the WinBoat add-on script (release page, not the rate-limited GitHub API)
+winboat_rpm() { L=$(curl -fsSLI --retry 3 -o /dev/null -w %{url_effective} https://github.com/TibixDev/winboat/releases/latest); U=$(curl -fsSL --retry 3 "${L/\/tag\//\/expanded_assets\/}" | grep -oE "/[^\"]+/releases/download/[^\"]+x86_64[.]rpm" | head -1); [ -n "$U" ] && echo "https://github.com$U"; }
+check "Add-ons: WinBoat release has an x86_64 .rpm" "winboat_rpm | grep -q rpm"
 check "Add-ons: CKAN repository reachable" "curl -fsSL --retry 3 https://ksp-ckan.s3-us-west-2.amazonaws.com/rpm/stable/ckan_stable.repo | grep -q baseurl"
 check "Add-ons: LM Studio download link works" "curl -fsIL --retry 3 -o /dev/null https://lmstudio.ai/download/latest/linux/x64"
 # Trial install of every dnf add-on, WinBoat and CKAN with all their dependencies (resolve only, nothing installed)
 deps_resolve() {
   rm -rf /tmp/repos && mkdir -p /tmp/repos && cp $R/etc/yum.repos.d/*.repo /tmp/repos/
   curl -fsSL --retry 3 -o /tmp/repos/ckan_stable.repo https://ksp-ckan.s3-us-west-2.amazonaws.com/rpm/stable/ckan_stable.repo
-  WB=$(curl -fsSL --retry 3 https://api.github.com/repos/TibixDev/winboat/releases/latest | grep -oE "https://[^\"]+x86_64[.]rpm" | head -1)
+  WB=$(winboat_rpm)
+  [ -n "$WB" ] || return 1
   dnf -y --nogpgcheck --setopt=reposdir=/tmp/repos --setopt=cachedir=/tmp/dnfc install --assumeno $VRPKGS fuse-libs ckan $WB >/tmp/deps.log 2>&1 || true
   grep -qi "transaction summary" /tmp/deps.log && ! grep -qiE "^ *problem|nothing provides|no match for" /tmp/deps.log
 }
