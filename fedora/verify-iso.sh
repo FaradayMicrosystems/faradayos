@@ -96,14 +96,20 @@ check "Add-ons: LM Studio download link works" "curl -fsIL --retry 3 -o /dev/nul
 # Trial install of every dnf add-on, WinBoat and CKAN with all their dependencies (resolve only, nothing installed)
 deps_resolve() {
   rm -rf /tmp/repos && mkdir -p /tmp/repos && cp $R/etc/yum.repos.d/*.repo /tmp/repos/
+  printf "[claude-code]\nname=Claude Code\nbaseurl=https://downloads.claude.ai/claude-code/rpm/stable\nenabled=1\n" > /tmp/repos/claude-code.repo
   curl -fsSL --retry 3 -o /tmp/repos/ckan_stable.repo https://ksp-ckan.s3-us-west-2.amazonaws.com/rpm/stable/ckan_stable.repo
   WB=$(winboat_rpm)
   [ -n "$WB" ] || return 1
-  dnf -y --nogpgcheck --setopt=reposdir=/tmp/repos --setopt=cachedir=/tmp/dnfc install --assumeno $VRPKGS fuse-libs ckan $WB >/tmp/deps.log 2>&1 || true
+  dnf -y --nogpgcheck --setopt=reposdir=/tmp/repos --setopt=cachedir=/tmp/dnfc install --assumeno $VRPKGS fuse-libs ckan $WB claude-code git gh ripgrep jq nodejs npm uv dpkg gnupg2 libayatana-appindicator-gtk3 gtk3 nss alsa-lib xdg-utils >/tmp/deps.log 2>&1 || true
   grep -qi "transaction summary" /tmp/deps.log && ! grep -qiE "^ *problem|nothing provides|no match for" /tmp/deps.log
 }
 check "Add-ons: all dnf add-ons, WinBoat and CKAN install with their dependencies" deps_resolve
 grep -iE -A3 "^ *problem|nothing provides|no match for" /tmp/deps.log 2>/dev/null | head -20 || true
+check "Add-ons: Claude Code repository has claude-code" "curl -fsSL --retry 3 https://downloads.claude.ai/claude-code/rpm/stable/repodata/repomd.xml | grep -q primary"
+# Full Claude Desktop path: signed package list, checksum, download, app inside the package
+claude_desktop() { dnf -y -q install dpkg gnupg2 >/dev/null 2>&1; bash $R/usr/libexec/faraday/addon-claude-desktop --check >/tmp/claude-desktop.log 2>&1; }
+check "Add-ons: Claude Desktop official package verifies and unpacks" claude_desktop
+tail -3 /tmp/claude-desktop.log 2>/dev/null || true
 check "Installers: ALVR download link works" "curl -fsIL -o /dev/null https://github.com/alvr-org/ALVR/releases/latest/download/alvr_streamer_linux.tar.gz"
 check "VR: SteamVR setup launcher"           "test -x $R/usr/bin/faraday-steamvr-setup -a -f $R/usr/share/applications/faraday-steamvr-setup.desktop"
 check "VR: readiness check + login notice"   "test -x $R/usr/bin/faraday-vr-check -a -f $R/etc/xdg/autostart/faraday-vr-check.desktop"

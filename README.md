@@ -2,17 +2,17 @@
 
 FaradayOS is a gaming- and VR-ready Linux system for work and play, built on **Fedora 44 KDE Plasma**. It is a normal, writable Fedora: install software with `dnf` as usual, nothing is locked down.
 
-Current version: **v0.78** (set in `fedora/VERSION`). Versions use the format `vX.YY` (v0.76, v0.77, v0.78, ...). Earlier releases named `v0.0.<number>` used the wrong format.
+Current version: **v0.79** (set in `fedora/VERSION`). Versions use the format `vX.YY` (v0.77, v0.78, v0.79, ...). Earlier releases named `v0.0.<number>` used the wrong format.
 
 **Status: alpha.** v0.76 was the first release that works fully out of the box: it installs, boots and runs on real hardware, including NVIDIA graphics (confirmed on a real NVIDIA PC). Some rough edges remain.
 
 ## Download
-1. Open the [latest release](https://github.com/FaradayMicrosystems/faradayos/releases/latest) and download every `FaradayOSv0.78.iso.part*` file (about 3.9 GB in total, each part under 2 GB).
+1. Open the [latest release](https://github.com/FaradayMicrosystems/faradayos/releases/latest) and download every `FaradayOSv0.79.iso.part*` file (about 3.9 GB in total, each part under 2 GB).
    Fastest: `aria2c -Z -x16 -s16 <part URLs>` (the release notes have the full command).
 2. Join the parts in the download folder:
-   - Linux: `cat FaradayOSv0.78.iso.part* > FaradayOSv0.78.iso`
-   - Windows (Command Prompt): `copy /b FaradayOSv0.78.iso.part0 + FaradayOSv0.78.iso.part1 FaradayOSv0.78.iso`
-3. Write `FaradayOSv0.78.iso` to a USB stick (8 GB+) with Fedora Media Writer or balenaEtcher.
+   - Linux: `cat FaradayOSv0.79.iso.part* > FaradayOSv0.79.iso`
+   - Windows (Command Prompt): `copy /b FaradayOSv0.79.iso.part0 + FaradayOSv0.79.iso.part1 FaradayOSv0.79.iso`
+3. Write `FaradayOSv0.79.iso` to a USB stick (8 GB+) with Fedora Media Writer or balenaEtcher.
 4. Turn off Secure Boot (the NVIDIA driver is not signed), boot the USB, and open **Install to Hard Drive**.
 
 Every push to `main` builds the ISO on GitHub Actions, checks it, and publishes it as a release.
@@ -45,6 +45,8 @@ Big optional software is not in the ISO, so the download stays small. After inst
 | WinBoat | Windows apps in a small Windows VM, with Podman and FreeRDP 3. Needs virtualization turned on in the BIOS and 4 GB+ RAM. | WinBoat GitHub release |
 | CKAN | Mod manager for Kerbal Space Program | CKAN's own repository (updates come with system updates) |
 | LM Studio | Run AI language models on this PC (about 500 MB) | lmstudio.ai (AppImage in `/opt/lmstudio`) |
+| Claude Code | Anthropic's AI coding assistant for the terminal, plus git, GitHub CLI, Node.js/npm, uv, ripgrep and jq. Needs a paid Claude plan. | Anthropic's official dnf repository (updates come with system updates) |
+| Claude Desktop | Anthropic's Claude app. Anthropic's Linux beta is built for Ubuntu/Debian only; FaradayOS verifies Anthropic's signed package and unpacks it. Needs a paid Claude plan. To update: `sudo /usr/libexec/faraday/addon-claude-desktop` | Anthropic's official apt repository |
 | Popsicle | Write one ISO to several USB sticks at once | Flathub |
 | OnlyOffice | Documents, spreadsheets, slides (good Microsoft Office compatibility) | Flathub |
 | Heroic Games Launcher | Epic, GOG and Amazon games | Flathub |
