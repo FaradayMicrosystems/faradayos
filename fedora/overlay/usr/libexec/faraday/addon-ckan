@@ -1,0 +1,12 @@
+#!/bin/bash
+# FaradayOS add-on (runs as root from install-addons-system): CKAN, the Kerbal Space Program mod manager.
+# Installed from CKAN's own RPM repository, so dnf keeps it updated.
+set -euo pipefail
+STEP="starting"; step(){ STEP="$1"; echo "== $1"; }
+trap 'echo "FAILED while: $STEP"' ERR
+step "Adding the CKAN repository"
+[ -f /etc/yum.repos.d/ckan_stable.repo ] || \
+  dnf config-manager addrepo --from-repofile=https://ksp-ckan.s3-us-west-2.amazonaws.com/rpm/stable/ckan_stable.repo
+step "Installing CKAN"
+dnf -y install ckan
+echo "CKAN installed. Open CKAN from the app menu and point it at your Kerbal Space Program folder."

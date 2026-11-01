@@ -71,8 +71,11 @@ installers() {
   test -f $R/usr/share/applications/faraday-install-vr.desktop -a -f $R/usr/share/applications/faraday-install-wine.desktop -a -f $R/usr/share/faraday/vr/alvr.desktop
 }
 # Every dnf package named in the add-ons list must be downloadable too
-ADDONPKGS=$(awk -F'|' '!/^[[:space:]]*#/ && $2 ~ /dnf/ {print $3}' $R/usr/share/faraday/addons.list)
-VRPKGS=$(echo $VRPKGS $ADDONPKGS | tr ' ' '\n' | sort -u | tr '\n' ' ')
+# (this script runs inside bash -c with single quotes: use no single quotes here)
+addons_of() { grep -v "^[[:space:]]*#" $R/usr/share/faraday/addons.list | grep -E "^[^|]*[|][[:space:]]*$1[[:space:]]*[|]" | cut -d"|" -f3; }
+ADDONPKGS=$(addons_of dnf)
+# (the WinBoat add-on script installs podman, podman-compose and freerdp)
+VRPKGS=$(echo $VRPKGS $ADDONPKGS podman podman-compose freerdp | xargs -n1 | sort -u | xargs)
 installer_pkgs() {
   n=$(dnf -q --setopt=reposdir=$R/etc/yum.repos.d --setopt=cachedir=/tmp/dnfc repoquery --available --qf "%{name}\n" $VRPKGS 2>/dev/null | sort -u | grep -c .)
   [ "$n" -eq $(echo $VRPKGS | wc -w) ]
@@ -80,6 +83,13 @@ installer_pkgs() {
 check "Lean ISO: VR apps, Wine, Lutris, CUDA not preinstalled" lean
 check "Installers: VR tools + Wine/Lutris in app menu" installers
 check "Installers: all their packages are downloadable" installer_pkgs
+ADDONFLATPAKS=$(addons_of flatpak)
+flathub_ids() { for a in $ADDONFLATPAKS; do curl -fsS --retry 3 -o /dev/null https://flathub.org/api/v2/appstream/$a || { echo "not on Flathub: $a"; return 1; }; done; }
+root_addons() { for f in $(addons_of root); do test -x "$R/$f" && bash -n "$R/$f" || return 1; done; }
+check "Add-ons: Flathub apps in the list exist" flathub_ids
+check "Add-ons: root add-on scripts present" root_addons
+check "Add-ons: WinBoat release has an x86_64 .rpm" "curl -fsSL --retry 3 https://api.github.com/repos/TibixDev/winboat/releases/latest | grep -qE \"browser_download_url.*x86_64[.]rpm\""
+check "Add-ons: CKAN repository reachable" "curl -fsSL --retry 3 https://ksp-ckan.s3-us-west-2.amazonaws.com/rpm/stable/ckan_stable.repo | grep -q baseurl"
 check "Installers: ALVR download link works" "curl -fsIL -o /dev/null https://github.com/alvr-org/ALVR/releases/latest/download/alvr_streamer_linux.tar.gz"
 check "VR: SteamVR setup launcher"           "test -x $R/usr/bin/faraday-steamvr-setup -a -f $R/usr/share/applications/faraday-steamvr-setup.desktop"
 check "VR: readiness check + login notice"   "test -x $R/usr/bin/faraday-vr-check -a -f $R/etc/xdg/autostart/faraday-vr-check.desktop"

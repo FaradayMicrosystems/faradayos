@@ -1,0 +1,16 @@
+#!/bin/bash
+# FaradayOS add-on (runs as root from install-addons-system): WinBoat, Windows apps in a small Windows VM.
+# Uses Podman (Fedora's own container tool, no extra user group needed) and FreeRDP 3.
+set -euo pipefail
+STEP="starting"; step(){ STEP="$1"; echo "== $1"; }
+trap 'echo "FAILED while: $STEP"' ERR
+step "Installing Podman, podman-compose and FreeRDP"
+dnf -y install podman podman-compose freerdp
+step "Finding the latest WinBoat release"
+URL=$(curl -fsSL --retry 5 https://api.github.com/repos/TibixDev/winboat/releases/latest \
+  | grep -oE '"browser_download_url": *"[^"]+x86_64\.rpm"' | grep -oE 'https://[^"]+' | head -1)
+[ -n "$URL" ] || { echo "No WinBoat .rpm found in the latest release"; false; }
+step "Installing WinBoat ($URL)"
+dnf -y install "$URL"
+[ -e /dev/kvm ] || echo "NOTE: /dev/kvm is missing. Turn on virtualization (VT-x / AMD-V / SVM) in the BIOS, or WinBoat cannot start Windows."
+echo "WinBoat installed. Open WinBoat from the app menu and choose Podman in its setup."

@@ -4,7 +4,7 @@
 # The add-ons are listed in /usr/share/faraday/addons.list (one line each). This shows them as a
 # checklist, then installs the chosen ones in a terminal window, one after another:
 #   - add-ons that are already installed are skipped,
-#   - all dnf/Flathub add-ons install under one password prompt,
+#   - all dnf, Flathub and root-script add-ons install under one password prompt,
 #   - a failed add-on is named, and the others still install,
 #   - a summary at the end lists each add-on as OK, SKIPPED or FAILED.
 # Each separate installer (Install VR tools, Install Wine and Lutris) still works on its own.
@@ -41,9 +41,9 @@ run(){
     if ! i=$(idx "$id"); then res[$id]="[FAILED ] $id: not in the add-ons list"; continue; fi
     if installed "$i"; then res[$id]="[SKIPPED] $(short "$i"): already installed"; echo "$(short "$i"): already installed, skipping."; continue; fi
     todo+=("$id")
-    [[ ${TYPE[$i]} == dnf || ${TYPE[$i]} == flatpak ]] && sys+=("$id")
+    [[ ${TYPE[$i]} == dnf || ${TYPE[$i]} == flatpak || ${TYPE[$i]} == root ]] && sys+=("$id")
   done
-  # 1. All dnf and Flathub add-ons together: one password prompt
+  # 1. All dnf, Flathub and root-script add-ons together: one password prompt
   if (( ${#sys[@]} )); then
     echo "Installing: $(for id in "${sys[@]}"; do i=$(idx "$id"); printf '%s, ' "$(short "$i")"; done | sed 's/, $//')"
     echo "Enter your password when asked."

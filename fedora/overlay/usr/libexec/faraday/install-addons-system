@@ -1,6 +1,6 @@
 #!/bin/bash
 # FaradayOS: system part of "Install FaradayOS add-ons" (runs as root via pkexec, one password for all).
-# Installs the dnf and flatpak add-ons named on the command line, one at a time, from the root-owned
+# Installs the dnf, flatpak and root-script add-ons named on the command line, one at a time, from the root-owned
 # list /usr/share/faraday/addons.list (only ids from that list are accepted, never commands).
 # Prints "@@RESULT <id> ok|failed <exit code>" per add-on so the caller can show a summary.
 set -uo pipefail
@@ -17,8 +17,16 @@ for want in "$@"; do
     case $type in
       dnf) dnf -y install $what || rc=$? ;;
       flatpak)
-        flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || rc=$?
+        command -v flatpak >/dev/null || dnf -y install flatpak || rc=$?
+        (( rc )) || flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || rc=$?
+        (( rc )) || flatpak remote-modify --enable flathub || rc=$?
         (( rc )) || flatpak install -y --noninteractive flathub $what || rc=$? ;;
+      root)
+        # Only FaradayOS's own root-owned add-on scripts, never a path from elsewhere
+        case $what in
+          /usr/libexec/faraday/addon-*) [ -x "$what" ] && "$what" || rc=$? ;;
+          *) echo "Refusing to run $what: not a FaradayOS add-on script"; rc=2 ;;
+        esac ;;
       *) echo "Add-on type '$type' is not installed by this helper"; rc=2 ;;
     esac
     if (( rc == 0 )); then echo "@@RESULT $id ok 0"
