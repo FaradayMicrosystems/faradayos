@@ -2,17 +2,17 @@
 
 FaradayOS is a gaming- and VR-ready Linux system for work and play, built on **Fedora 44 KDE Plasma**. It is a normal, writable Fedora: install software with `dnf` as usual, nothing is locked down.
 
-Current version: **v0.77** (set in `fedora/VERSION`). Versions use the format `vX.YY` (v0.75, v0.76, v0.77, ...). Earlier releases named `v0.0.<number>` used the wrong format.
+Current version: **v0.78** (set in `fedora/VERSION`). Versions use the format `vX.YY` (v0.76, v0.77, v0.78, ...). Earlier releases named `v0.0.<number>` used the wrong format.
 
 **Status: alpha.** v0.76 was the first release that works fully out of the box: it installs, boots and runs on real hardware, including NVIDIA graphics (confirmed on a real NVIDIA PC). Some rough edges remain.
 
 ## Download
-1. Open the [latest release](https://github.com/FaradayMicrosystems/faradayos/releases/latest) and download every `FaradayOSv0.77.iso.part*` file (about 3.9 GB in total, each part under 2 GB).
+1. Open the [latest release](https://github.com/FaradayMicrosystems/faradayos/releases/latest) and download every `FaradayOSv0.78.iso.part*` file (about 3.9 GB in total, each part under 2 GB).
    Fastest: `aria2c -Z -x16 -s16 <part URLs>` (the release notes have the full command).
 2. Join the parts in the download folder:
-   - Linux: `cat FaradayOSv0.77.iso.part* > FaradayOSv0.77.iso`
-   - Windows (Command Prompt): `copy /b FaradayOSv0.77.iso.part0 + FaradayOSv0.77.iso.part1 FaradayOSv0.77.iso`
-3. Write `FaradayOSv0.77.iso` to a USB stick (8 GB+) with Fedora Media Writer or balenaEtcher.
+   - Linux: `cat FaradayOSv0.78.iso.part* > FaradayOSv0.78.iso`
+   - Windows (Command Prompt): `copy /b FaradayOSv0.78.iso.part0 + FaradayOSv0.78.iso.part1 FaradayOSv0.78.iso`
+3. Write `FaradayOSv0.78.iso` to a USB stick (8 GB+) with Fedora Media Writer or balenaEtcher.
 4. Turn off Secure Boot (the NVIDIA driver is not signed), boot the USB, and open **Install to Hard Drive**.
 
 Every push to `main` builds the ISO on GitHub Actions, checks it, and publishes it as a release.
@@ -38,10 +38,18 @@ Big optional software is not in the ISO, so the download stays small. After inst
 | Remmina | Remote desktop (RDP, VNC) | Fedora |
 | qBittorrent | Torrent downloads | Fedora |
 | KDE Connect | Phone and PC together (files, notifications, clipboard) | Fedora |
+| GNOME Disks | Format, check and image disks and USB sticks | Fedora |
+| Timeshift | System snapshots: roll back after a bad update | Fedora |
 | Fingerprint readers | Drivers (`fprintd`, `libfprint`) and fingerprint login. Already in the ISO. | Fedora |
 | Wine and Lutris | Windows apps and non-Steam games | Fedora |
 | WinBoat | Windows apps in a small Windows VM, with Podman and FreeRDP 3. Needs virtualization turned on in the BIOS and 4 GB+ RAM. | WinBoat GitHub release |
 | CKAN | Mod manager for Kerbal Space Program | CKAN's own repository (updates come with system updates) |
+| LM Studio | Run AI language models on this PC (about 500 MB) | lmstudio.ai (AppImage in `/opt/lmstudio`) |
+| Popsicle | Write one ISO to several USB sticks at once | Flathub |
+| OnlyOffice | Documents, spreadsheets, slides (good Microsoft Office compatibility) | Flathub |
+| Heroic Games Launcher | Epic, GOG and Amazon games | Flathub |
+| ProtonUp-Qt | Install Proton-GE and other Proton/Wine versions | Flathub |
+| Flatseal | Manage Flathub app permissions | Flathub |
 | Discord | Chat and voice | Flathub |
 | Telegram | Messaging | Flathub |
 | Obsidian | Notes | Flathub |
@@ -50,7 +58,7 @@ Big optional software is not in the ISO, so the download stays small. After inst
 
 VR tools and Wine and Lutris also have their own entries in the app menu (**Install VR tools**, **Install Wine and Lutris**, **Set up SteamVR**).
 
-**Adding an add-on:** add one line to [`fedora/overlay/usr/share/faraday/addons.list`](fedora/overlay/usr/share/faraday/addons.list). The format is explained at the top of that file. Each ISO build checks that every add-on in the list can still be downloaded.
+**Adding an add-on:** add one line to [`fedora/overlay/usr/share/faraday/addons.list`](fedora/overlay/usr/share/faraday/addons.list). The format is explained at the top of that file. Each ISO build checks that every add-on in the list can still be downloaded, and does a trial install of all of them to prove their dependencies resolve.
 
 ## Build it yourself
 See [fedora/README.md](fedora/README.md): `./fedora/build-iso.sh` builds the ISO in a Fedora container (podman or docker, about 40 GB free disk, 30 to 90 minutes), and `./fedora/verify-iso.sh` checks it.

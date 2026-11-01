@@ -1,0 +1,30 @@
+#!/bin/bash
+# FaradayOS add-on (runs as root from install-addons-system): LM Studio, run AI language models on this PC.
+# LM Studio ships for Linux only as an AppImage (about 500 MB), so it goes into /opt/lmstudio with an app menu entry.
+set -euo pipefail
+STEP="starting"; step(){ STEP="$1"; echo "== $1"; }
+trap 'echo "FAILED while: $STEP"' ERR
+step "Installing fuse-libs (lets AppImages start)"
+dnf -y install fuse-libs
+step "Downloading LM Studio (about 500 MB)"
+T=$(mktemp -d); trap 'rm -rf "$T"' EXIT
+curl -fL --retry 5 --retry-delay 5 -o "$T/LM-Studio.AppImage" https://lmstudio.ai/download/latest/linux/x64
+head -c 4 "$T/LM-Studio.AppImage" | grep -q ELF || { echo "Download is not an AppImage"; false; }
+step "Installing LM Studio into /opt/lmstudio"
+install -Dm755 "$T/LM-Studio.AppImage" /opt/lmstudio/LM-Studio.AppImage
+# Icon from inside the AppImage (best effort: a missing icon must not stop the install)
+( cd "$T" && /opt/lmstudio/LM-Studio.AppImage --appimage-extract '*.png' >/dev/null 2>&1 || true
+  I=$(find "$T/squashfs-root" -maxdepth 1 -name '*.png' 2>/dev/null | head -1)
+  [ -n "$I" ] && install -Dm644 "$I" /usr/share/icons/hicolor/256x256/apps/lmstudio.png ) || true
+step "Adding LM Studio to the app menu"
+cat > /usr/share/applications/lmstudio.desktop <<'DESKTOP'
+[Desktop Entry]
+Type=Application
+Name=LM Studio
+Comment=Run AI language models on this PC
+Exec=/opt/lmstudio/LM-Studio.AppImage %U
+Icon=lmstudio
+Terminal=false
+Categories=Development;Science;
+DESKTOP
+echo "LM Studio installed. Open it from the app menu."
