@@ -1,0 +1,27 @@
+# FaradayOS add-ons list, read by "Install FaradayOS add-ons" (/usr/bin/faraday-addons).
+# Nothing here is in the ISO: each add-on downloads only when ticked.
+# To add software, add ONE line. Add-ons install in the order listed.
+#
+#   id | type | what to install | text shown in the checklist | check (optional)
+#
+#   type dnf      what = Fedora/RPM Fusion package names, space separated   (e.g. obs-studio)
+#   type flatpak  what = Flathub app ids, space separated                   (e.g. com.discordapp.Discord)
+#   type root     what = a FaradayOS add-on script /usr/libexec/faraday/addon-* (runs as root; give a check)
+#   type script   what = installer program to run as the user               (it asks for the password itself)
+#   check         shell test that succeeds when already installed. Leave empty for dnf and flatpak:
+#                 they count as installed when every package or app in "what" is installed.
+#
+# dnf, flatpak and root add-ons all install under ONE password prompt, before any script add-on.
+# VR goes last because its SteamVR step waits for a Steam download.
+remmina     | dnf     | remmina remmina-plugins-rdp remmina-plugins-vnc | Remmina: remote desktop (RDP, VNC)
+qbittorrent | dnf     | qbittorrent                 | qBittorrent: torrent downloads
+kdeconnect  | dnf     | kde-connect                 | KDE Connect: phone and PC together (files, notifications, clipboard)
+fingerprint | dnf     | fprintd fprintd-pam libfprint | Fingerprint readers: drivers (fprintd, libfprint) and fingerprint login
+wine        | dnf     | wine lutris                 | Wine and Lutris: Windows apps and non-Steam games (about 0.5 GB)
+winboat     | root    | /usr/libexec/faraday/addon-winboat | WinBoat: Windows apps in a small Windows VM (needs virtualization on, 4 GB+ RAM) | rpm -q winboat
+ckan        | root    | /usr/libexec/faraday/addon-ckan | CKAN: mod manager for Kerbal Space Program | rpm -q ckan
+discord     | flatpak | com.discordapp.Discord      | Discord: chat and voice (Flathub)
+telegram    | flatpak | org.telegram.desktop        | Telegram: messaging (Flathub)
+obsidian    | flatpak | md.obsidian.Obsidian        | Obsidian: notes (Flathub)
+tidal       | flatpak | com.mastermindzh.tidal-hifi | TIDAL: music streaming, community app tidal-hifi (Flathub)
+vr          | script  | /usr/bin/faraday-install-vr | VR tools: WiVRn, ALVR and SteamVR (download about 0.5 to 1 GB) | rpm -q wivrn wivrn-dashboard && test -x /opt/alvr/bin/alvr_dashboard && ls "$HOME"/.local/share/Steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher "$HOME"/.steam/steam/steamapps/common/SteamVR/bin/linux64/vrcompositor-launcher
