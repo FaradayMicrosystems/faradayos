@@ -39,12 +39,17 @@ Big optional software is not in the ISO, so the download stays small. After inst
 | qBittorrent | Torrent downloads | Fedora |
 | KDE Connect | Phone and PC together (files, notifications, clipboard) | Fedora |
 | GNOME Disks | Format, check and image disks and USB sticks | Fedora |
+| Timeshift | System snapshots: roll back after a bad update | Fedora |
 | Fingerprint readers | Drivers (`fprintd`, `libfprint`) and fingerprint login. Already in the ISO. | Fedora |
 | Wine and Lutris | Windows apps and non-Steam games | Fedora |
 | WinBoat | Windows apps in a small Windows VM, with Podman and FreeRDP 3. Needs virtualization turned on in the BIOS and 4 GB+ RAM. | WinBoat GitHub release |
 | CKAN | Mod manager for Kerbal Space Program | CKAN's own repository (updates come with system updates) |
 | LM Studio | Run AI language models on this PC (about 500 MB) | lmstudio.ai (AppImage in `/opt/lmstudio`) |
 | Popsicle | Write one ISO to several USB sticks at once | Flathub |
+| OnlyOffice | Documents, spreadsheets, slides (good Microsoft Office compatibility) | Flathub |
+| Heroic Games Launcher | Epic, GOG and Amazon games | Flathub |
+| ProtonUp-Qt | Install Proton-GE and other Proton/Wine versions | Flathub |
+| Flatseal | Manage Flathub app permissions | Flathub |
 | Discord | Chat and voice | Flathub |
 | Telegram | Messaging | Flathub |
 | Obsidian | Notes | Flathub |
