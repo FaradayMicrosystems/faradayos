@@ -1,6 +1,6 @@
 # FaradayOS: Fedora build
 
-Current version: **FaradayOS v0.75** (set in `fedora/VERSION`). ISO file: `FaradayOSv0.75.iso`.
+Current version: **FaradayOS v0.76** (set in `fedora/VERSION`). ISO file: `FaradayOSv0.76.iso`.
 
 **Version numbering changed:** versions are now `v0.<number>` (for example v0.72, then v0.73). Earlier releases named `v0.0.<number>` (such as v0.0.70) used the wrong format; that was Claude's error. All new releases use the new format.
 
@@ -23,9 +23,9 @@ Included:
 **Option A: download it (no build needed).** Every push to `main` builds the ISO, checks it and publishes it.
 1. Open the [latest release](https://github.com/FaradayMicrosystems/faradayos/releases/latest) and download every `FaradayOSv<version>.iso.part*` file (about 3.9 GB in total, each under 2 GB; downloads can resume). Fastest: the `aria2c` command in the release notes.
 2. Join the parts into one ISO, in the download folder:
-   - Linux: `cat FaradayOSv0.75.iso.part* > FaradayOSv0.75.iso`
-   - Windows (Command Prompt): `copy /b FaradayOSv0.75.iso.part0 + FaradayOSv0.75.iso.part1 FaradayOSv0.75.iso` (the release notes list the exact parts)
-3. Optional check: `sha256sum -c FaradayOSv0.75.iso.sha256` prints `OK`.
+   - Linux: `cat FaradayOSv0.76.iso.part* > FaradayOSv0.76.iso`
+   - Windows (Command Prompt): `copy /b FaradayOSv0.76.iso.part0 + FaradayOSv0.76.iso.part1 FaradayOSv0.76.iso` (the release notes list the exact parts)
+3. Optional check: `sha256sum -c FaradayOSv0.76.iso.sha256` prints `OK`.
 
 **Option B: build it yourself (on any Linux PC).**
 
@@ -44,7 +44,7 @@ Included:
    ./fedora/build-iso.sh
    ```
    It asks for your sudo password once. Needs about 40 GB free disk space and takes 30 to 90 minutes.
-   Result: `out-fedora/FaradayOSv0.75.iso` (+ `.sha256`). Build log: `out-fedora/lmc.log`.
+   Result: `out-fedora/FaradayOSv0.76.iso` (+ `.sha256`). Build log: `out-fedora/lmc.log`.
 
 4. Optional: check the ISO (branding, boot splash, wallpaper, NVIDIA module, codecs, Steam):
    ```
@@ -60,7 +60,7 @@ NVIDIA cannot be tested in a VM. Use a USB stick on real hardware for that.
 **On real hardware:**
 1. Write the ISO to a USB stick (8 GB+) with Fedora Media Writer, balenaEtcher, or:
    ```
-   sudo dd if=out-fedora/FaradayOSv0.75.iso of=/dev/sdX bs=4M status=progress oflag=sync
+   sudo dd if=out-fedora/FaradayOSv0.76.iso of=/dev/sdX bs=4M status=progress oflag=sync
    ```
    Replace `/dev/sdX` with your USB stick. Check with `lsblk` first: `dd` erases the target.
 2. **Turn off Secure Boot** in the BIOS. The NVIDIA driver is not signed, so it will not load with Secure Boot on.
@@ -75,7 +75,7 @@ NVIDIA cannot be tested in a VM. Use a USB stick on real hardware for that.
 - `faradayos.ks`: package list and setup steps (Fedora kickstart)
 - `apply-branding.sh`: copies FaradayOS branding into the image
 - `VERSION`: FaradayOS version, used for the ISO name, volume label and os-release
-- `overlay/`: Fedora-only files (rebrand script that re-applies branding after updates, login screen wallpaper, VR and Wine installers, firewall service, udev rules)
+- `overlay/`: Fedora-only files (rebrand script that re-applies branding after updates, boot menu hook that names every GRUB entry FaradayOS, login screen wallpaper, VR and Wine installers, firewall service, udev rules)
 - `build-iso.sh`: builds the ISO in a Fedora container
 - `verify-iso.sh`: checks a built ISO
 - Workflows in `.github/workflows/`: `fedora-iso.yml` (build + check), `fedora-release.yml` (publish release parts), `fedora-verify.yml`, `fedora-size-report.yml`

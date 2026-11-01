@@ -15,6 +15,8 @@ if [ -f $O ]; then
     sed -i 's/^PRETTY_NAME=.*/PRETTY_NAME="FaradayOS"/' $O
   fi
 fi
+# Boot menu: every GRUB entry is named FaradayOS
+/usr/share/faraday/grub-titles.sh
 # Boot splash
 mkdir -p /etc/plymouth && printf '[Daemon]\nTheme=faraday\nShowDelay=0\n' > /etc/plymouth/plymouthd.conf
 # KDE theme, lock screen and splash defaults

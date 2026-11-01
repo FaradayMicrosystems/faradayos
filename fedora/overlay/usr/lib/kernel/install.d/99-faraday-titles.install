@@ -1,0 +1,4 @@
+#!/bin/sh
+# kernel-install hook: runs after Fedora's 20-grub and 51-dracut-rescue hooks, so new kernels are also named FaradayOS.
+[ "$1" = add ] || exit 0
+exec /usr/share/faraday/grub-titles.sh
