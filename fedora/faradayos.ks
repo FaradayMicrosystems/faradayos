@@ -28,9 +28,6 @@ repo --name=rpmfusion-nonfree-steam --mirrorlist=https://mirrors.rpmfusion.org/m
 # Ryoku desktop: its signed Fedora repo, and the Hyprland COPR limited to the packages Ryoku's installer takes from it
 repo --name=ryoku --baseurl=https://repo.ryoku.dev/stable/fedora/$releasever/x86_64
 repo --name=ryoku-copr-sdegler-hyprland --baseurl=https://download.copr.fedorainfracloud.org/results/sdegler/hyprland/fedora-$releasever-$basearch/ --includepkgs=aquamarine,hyprcursor,hyprgraphics,hypridle,hyprland,hyprland-guiutils,hyprland-qt-support,hyprland-uwsm,hyprlang,hyprpicker,hyprpolkitagent,hyprsunset,hyprtoolkit,hyprutils,hyprwire,uwsm,xdg-desktop-portal-hyprland
-# Fallback for two Hyprland tools: sdegler's current Fedora 44 builds of them need a newer C++ runtime
-# (GLIBCXX_3.4.36) than Fedora 44 has. dnf takes whichever build installs.
-repo --name=copr-solopasha-hyprland --baseurl=https://download.copr.fedorainfracloud.org/results/solopasha/hyprland/fedora-$releasever-$basearch/ --includepkgs=hyprpicker,xdg-desktop-portal-hyprland
 
 %packages
 # Live system and installer (from Fedora's fedora-live-base.ks)
@@ -65,7 +62,9 @@ livesys-scripts
 ryoku
 ryoku-keyring
 ryoku-desktop
-ryoku-desktop-hyprland
+# Compositor: niri for now (Ryoku's Hyprland packages for Fedora 44 are broken upstream; switch back to
+# ryoku-desktop-hyprland when they install again, and set Session=hyprland.desktop in livesys-ryoku)
+ryoku-desktop-niri
 sddm
 kitty
 nautilus
@@ -160,7 +159,7 @@ cp -L /etc/resolv.conf "$R"
 bash /src/fedora/apply-branding.sh "${ANA_INSTALL_PATH:-/mnt/sysimage}" /src
 # Quickshell edition files: Ryoku/Hyprland repos for updates, SDDM login screen, live session
 cp -a --no-preserve=ownership /src/fedora/quickshell/overlay/. "${ANA_INSTALL_PATH:-/mnt/sysimage}/"
-chmod 755 "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/livesys/sessions.d/livesys-hyprland"
+chmod 755 "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/livesys/sessions.d/livesys-ryoku"
 %end
 
 %post --erroronfail
@@ -204,9 +203,9 @@ rpm -q libreoffice-writer libreoffice-calc libreoffice-impress nautilus kitty ||
 rpm -q plasma-workspace && exit 1
 
 # Live session: liveuser logs straight into the Ryoku desktop (fedora/quickshell/overlay/usr/libexec/livesys/sessions.d)
-test -x /usr/libexec/livesys/sessions.d/livesys-hyprland || exit 1
+test -x /usr/libexec/livesys/sessions.d/livesys-ryoku || exit 1
 systemctl enable livesys.service livesys-late.service
-echo 'livesys_session="hyprland"' > /etc/sysconfig/livesys
+echo 'livesys_session="ryoku"' > /etc/sysconfig/livesys
 
 # Ryoku desktop setup (what Ryoku's own installer does, done once for every future user)
 # Trust Ryoku's repo for updates only if ryoku-keyring holds Ryoku's published signing key

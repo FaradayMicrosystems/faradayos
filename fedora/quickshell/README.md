@@ -6,11 +6,16 @@ Branch `experimental/quickshell`. Never merged into `main`.
 
 - **No KDE Plasma.** The desktop is [Ryoku](https://ryoku.dev) (GPL-3.0): a hand-written
   Quickshell shell running on the Hyprland compositor.
-- **Why Hyprland:** Quickshell is only a shell (bar, launcher, panels). It needs a Wayland
-  compositor underneath. Ryoku's look (blur, animations, its Hyprland plugins) is built for
-  Hyprland, and Ryoku's Fedora packages are tested on it. niri is Ryoku's other option.
-- **Packages:** Ryoku's signed Fedora repo (`repo.ryoku.dev`) plus the `sdegler/hyprland` COPR,
-  limited to the Hyprland packages, as Ryoku's own installer does. Both stay enabled so updates work.
+- **Compositor:** Quickshell is only a shell (bar, launcher, panels). It needs a Wayland
+  compositor underneath. Ryoku's default is Hyprland, but as of 2026-11-03 Ryoku's Fedora 44
+  Hyprland plugins (hyprglass) need libaquamarine.so.14 while the Hyprland COPR has moved to .so.15,
+  so they cannot install. Until Ryoku rebuilds them this branch uses **niri**, Ryoku's other
+  supported compositor (packaged by Fedora itself). To switch back: `ryoku-desktop-niri` ->
+  `ryoku-desktop-hyprland` in the kickstart, `Session=hyprland.desktop` in `livesys-ryoku`,
+  `--compositor Hyprland` in `fedora/test/desktop-args`, and the niri checks in `verify-iso.sh`.
+  The probe workflow (`quickshell-probe.yml`) shows in 2 minutes whether Hyprland resolves again.
+- **Packages:** Ryoku's signed Fedora repo (`repo.ryoku.dev`) plus the `sdegler/hyprland` COPR
+  (Ryoku still needs hypridle and hyprpicker from it), limited to the Hyprland packages, as Ryoku's own installer does. Both stay enabled so updates work.
 - **Login screen:** SDDM with Ryoku's greeter theme (main uses Plasma Login).
 - **Default apps (Ryoku's picks):** kitty terminal, Nautilus files, Firefox, fish, btop.
 - **Kept from main:** FaradayOS boot splash, GRUB names, os-release, NVIDIA driver, gaming,
@@ -22,7 +27,7 @@ Branch `experimental/quickshell`. Never merged into `main`.
 
 - `fedora/faradayos.ks`: package list and Ryoku setup in `%post` (search for "Ryoku").
 - `fedora/quickshell/overlay/`: repo files, SDDM config, live-session script; copied into the image.
-- `fedora/test/desktop-args`: tells the VM installer test to look for Hyprland and Quickshell.
+- `fedora/test/desktop-args`: tells the VM installer test which compositor and shell to look for.
 
 ## Keeping up with main
 

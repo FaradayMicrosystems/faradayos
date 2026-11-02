@@ -1,1 +1,1 @@
---compositor Hyprland --shell qs|quickshell
+--compositor niri --shell qs|quickshell
