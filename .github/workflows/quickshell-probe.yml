@@ -1,63 +1,35 @@
 name: Quickshell edition package probe
 
-# Quick check (2-3 min) of where the Ryoku/Hyprland packages can come from on Fedora 44
+# Quick check (2-5 min): resolves the kickstart's whole package list with its repos, like the ISO build does
 on:
   workflow_dispatch:
   push:
     branches: ['experimental/**']
-    paths: ['.github/workflows/quickshell-probe.yml']
+    paths: ['.github/workflows/quickshell-probe.yml', 'fedora/faradayos.ks']
 
 jobs:
   probe:
     runs-on: ubuntu-latest
     container: fedora:44
     steps:
-      - name: Probe
+      - uses: actions/checkout@v4
+      - name: Resolve the kickstart package list
         run: |
-          set -x
           set +e
-          dnf -y -q install dnf5-plugins python3 jq curl >/dev/null
-          echo "== Fedora 44 libstdc++ ABI versions"
-          dnf -q repoquery --provides 'libstdc++' | grep -o 'GLIBCXX_3.4.[0-9]*' | sort -uV | tail -3
-          echo "== libstdc++ builds per arch (Steam pulls the 32-bit one; both must match)"
-          dnf -q repoquery --qf '%{name}-%{evr}.%{arch} %{repoid}\n' libstdc++ libstdc++.i686 gcc-libs 2>/dev/null || true
-          dnf -q repoquery --whatprovides 'libstdc++.so.6(GLIBCXX_3.4.36)(64bit)' --qf '%{name}-%{evr}.%{arch} %{repoid}\n'
-          echo "== Fedora's own hyprland packages"
-          dnf -q repoquery hyprland hyprpicker xdg-desktop-portal-hyprland || true
-          cat > /etc/yum.repos.d/sdegler.repo <<'R'
-          [sdegler]
-          name=sdegler
-          baseurl=https://download.copr.fedorainfracloud.org/results/sdegler/hyprland/fedora-44-x86_64/
-          gpgcheck=0
-          R
-          cat > /etc/yum.repos.d/ryoku.repo <<'R'
-          [ryoku]
-          name=ryoku
-          baseurl=https://repo.ryoku.dev/stable/fedora/44/x86_64
-          gpgcheck=0
-          R
-          echo "== All builds of the two tools in sdegler and ryoku"
-          dnf -q list --showduplicates hyprpicker xdg-desktop-portal-hyprland hyprland hyprutils || true
-          for p in hyprpicker xdg-desktop-portal-hyprland hyprland; do echo "-- $p needs:"; dnf -q repoquery --requires $p | grep -i glibcxx | sort -uV | tail -2; done
-          echo "== Ryoku desktop requirements resolve?"
-          dnf -y --setopt=install_weak_deps=False install --assumeno ryoku-desktop ryoku-desktop-hyprland libstdc++.i686 2>&1 | tail -25; dnf -y --setopt=install_weak_deps=False install --assumeno ryoku-desktop ryoku-desktop-hyprland 2>&1 | grep -iE 'problem|nothing provides|requires|Transaction Summary|Install +[0-9]' | head -30 || true
-          echo "== Which aquamarine/hyprgraphics sonames exist"
-          dnf -q repoquery --provides aquamarine hyprgraphics | grep -E 'so\.[0-9]+\(' | sort -u
-          echo "== Ryoku testing channel"
-          cat > /etc/yum.repos.d/ryoku-testing.repo <<'R'
-          [ryoku-testing]
-          name=ryoku-testing
-          baseurl=https://repo.ryoku.dev/stable/fedora/44/channels/testing/x86_64
-          gpgcheck=0
-          R
-          dnf -q list --showduplicates ryoku-desktop-hyprland hyprglass 2>&1 | tail -8
-          dnf -q repoquery --requires hyprglass --repo ryoku-testing 2>&1 | grep -E 'aquamarine|hyprgraphics'
-          dnf -y --setopt=install_weak_deps=False install --assumeno ryoku-desktop ryoku-desktop-hyprland libstdc++.i686 2>&1 | tail -12
-          curl -fsS https://repo.ryoku.dev/stable/fedora/44/releases/index.json | head -c 1500; echo
-          curl -fsS https://repo.ryoku.dev/stable/fedora/44/channels/testing/index.json | head -c 800; echo
-          echo "== niri variant resolves?"
-          rm -f /etc/yum.repos.d/ryoku-testing.repo
-          dnf -q repoquery niri --qf '%{name}-%{evr} %{repoid}\n'
-          dnf -y --setopt=install_weak_deps=False install --assumeno ryoku ryoku-keyring ryoku-desktop ryoku-desktop-niri libstdc++.i686 2>&1 | grep -iE 'problem|nothing provides|requires|Transaction Summary|Install +[0-9]|Total size|Installed size' | head -30
-          echo "== COPR projects with Hyprland for Fedora 44"
-          curl -fsS 'https://copr.fedorainfracloud.org/api_3/project/search?query=hyprland&limit=40' | jq -r '.items[] | select(.chroot_repos | keys | any(. == "fedora-44-x86_64")) | .full_name' || true
+          KS=fedora/faradayos.ks
+          mkdir -p /tmp/repos
+          # repos from the kickstart (url + repo lines)
+          sed -n 's/^url --metalink=\(.*\)/fedora \1 metalink/p; s/^repo --name=\([^ ]*\) --\(metalink\|mirrorlist\|baseurl\)=\([^ ]*\)\(.*\)/\1 \3 \2\4/p' $KS |
+          while read -r name url kind rest; do
+            inc=$(echo "$rest" | sed -n 's/.*--includepkgs=\([^ ]*\).*/\1/p' | tr , ' ')
+            printf '[%s]\nname=%s\n%s=%s\ngpgcheck=0\n%s\n' "$name" "$name" "$kind" "$url" "${inc:+includepkgs=$inc}" > /tmp/repos/$name.repo
+          done
+          cat /tmp/repos/*.repo
+          PKGS=$(sed -n '/^%packages/,/^%end/p' $KS | grep -v '^%\|^#\|^-\|^$' | xargs)
+          EXCL=$(sed -n '/^%packages/,/^%end/p' $KS | sed -n 's/^-//p' | xargs -I{} echo --exclude={} | xargs)
+          dnf -y --releasever=44 --installroot=/tmp/root --use-host-config --setopt=reposdir=/tmp/repos --setopt=install_weak_deps=True \
+            $EXCL install --assumeno $PKGS > /tmp/out.txt 2>&1
+          grep -iE 'problem|nothing provides|conflict|requires|No match' /tmp/out.txt | head -40
+          grep -E 'Transaction Summary|Total size|After this' /tmp/out.txt
+          grep -E '^ *(libstdc\+\+|hyprpicker|niri|hyprland|ryoku-desktop)' /tmp/out.txt | head
+          dnf -q --releasever=44 --setopt=reposdir=/tmp/repos repoquery --qf '%{name}-%{evr}.%{arch} %{repoid}\n' libstdc++ hyprpicker
