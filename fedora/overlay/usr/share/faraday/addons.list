@@ -23,6 +23,8 @@ wine        | dnf     | wine lutris                 | Wine and Lutris: Windows a
 winboat     | root    | /usr/libexec/faraday/addon-winboat | WinBoat: Windows apps in a small Windows VM (needs virtualization on, 4 GB+ RAM) | rpm -q winboat
 ckan        | root    | /usr/libexec/faraday/addon-ckan | CKAN: mod manager for Kerbal Space Program | rpm -q ckan
 lmstudio    | root    | /usr/libexec/faraday/addon-lmstudio | LM Studio: run AI language models on this PC (download about 500 MB) | test -x /opt/lmstudio/LM-Studio.AppImage
+claudecode  | root    | /usr/libexec/faraday/addon-claude-code | Claude Code: Anthropic's AI coding assistant for the terminal, with git, GitHub CLI, Node.js, uv, ripgrep, jq (official Anthropic repo) | rpm -q claude-code
+claudedesk  | root    | /usr/libexec/faraday/addon-claude-desktop | Claude Desktop: Anthropic's Claude app (official Linux beta package, made for Ubuntu; unpacked for FaradayOS) | test -x /usr/bin/claude-desktop
 popsicle    | flatpak | com.system76.Popsicle       | Popsicle: write one ISO to several USB sticks at once (Flathub)
 onlyoffice  | flatpak | org.onlyoffice.desktopeditors | OnlyOffice: documents, spreadsheets, slides, good Microsoft Office compatibility (Flathub)
 heroic      | flatpak | com.heroicgameslauncher.hgl | Heroic Games Launcher: Epic, GOG and Amazon games (Flathub)

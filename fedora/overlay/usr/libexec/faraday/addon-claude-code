@@ -1,0 +1,27 @@
+#!/bin/bash
+# FaradayOS add-on (runs as root from install-addons-system): Claude Code, Anthropic's AI coding assistant,
+# from Anthropic's official signed dnf repository (stable channel; updates come with normal system updates).
+# Also installs tools Claude Code and its MCP servers commonly use: git, GitHub CLI, ripgrep, jq, Node.js/npm, uv.
+set -euo pipefail
+STEP="starting"; step(){ STEP="$1"; echo "== $1"; }
+trap 'echo "FAILED while: $STEP"' ERR
+FPR=31DDDE24DDFAB679F42D7BD2BAA929FF1A7ECACE   # Anthropic Claude Code release signing key
+KEY=https://downloads.claude.ai/keys/claude-code.asc
+step "Checking Anthropic's signing key"
+T=$(mktemp -d); trap 'rm -rf "$T"' EXIT
+curl -fsSL --retry 5 -o "$T/claude-code.asc" "$KEY"
+gpg --show-keys --with-colons "$T/claude-code.asc" 2>/dev/null | grep -q "^fpr:::::::::$FPR:" \
+  || { echo "Signing key fingerprint does not match $FPR"; false; }
+rpm --import "$T/claude-code.asc"
+step "Adding Anthropic's Claude Code repository"
+cat > /etc/yum.repos.d/claude-code.repo <<REPO
+[claude-code]
+name=Claude Code
+baseurl=https://downloads.claude.ai/claude-code/rpm/stable
+enabled=1
+gpgcheck=1
+gpgkey=$KEY
+REPO
+step "Installing Claude Code and its tools (git, GitHub CLI, ripgrep, jq, Node.js, npm, uv)"
+dnf -y install claude-code git gh ripgrep jq nodejs npm uv
+echo "Claude Code installed. Open a terminal and run: claude   (needs a Claude Pro, Max, Team or Enterprise plan)"
