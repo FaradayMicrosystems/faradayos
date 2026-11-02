@@ -41,5 +41,19 @@ jobs:
           for p in hyprpicker xdg-desktop-portal-hyprland hyprland; do echo "-- $p needs:"; dnf -q repoquery --requires $p | grep -i glibcxx | sort -uV | tail -2; done
           echo "== Ryoku desktop requirements resolve?"
           dnf -y --setopt=install_weak_deps=False install --assumeno ryoku-desktop ryoku-desktop-hyprland libstdc++.i686 2>&1 | tail -25; dnf -y --setopt=install_weak_deps=False install --assumeno ryoku-desktop ryoku-desktop-hyprland 2>&1 | grep -iE 'problem|nothing provides|requires|Transaction Summary|Install +[0-9]' | head -30 || true
+          echo "== Which aquamarine/hyprgraphics sonames exist"
+          dnf -q repoquery --provides aquamarine hyprgraphics | grep -E 'so\.[0-9]+\(' | sort -u
+          echo "== Ryoku testing channel"
+          cat > /etc/yum.repos.d/ryoku-testing.repo <<'R'
+          [ryoku-testing]
+          name=ryoku-testing
+          baseurl=https://repo.ryoku.dev/stable/fedora/44/channels/testing/x86_64
+          gpgcheck=0
+          R
+          dnf -q list --showduplicates ryoku-desktop-hyprland hyprglass 2>&1 | tail -8
+          dnf -q repoquery --requires hyprglass --repo ryoku-testing 2>&1 | grep -E 'aquamarine|hyprgraphics'
+          dnf -y --setopt=install_weak_deps=False install --assumeno ryoku-desktop ryoku-desktop-hyprland libstdc++.i686 2>&1 | tail -12
+          curl -fsS https://repo.ryoku.dev/stable/fedora/44/releases/index.json | head -c 1500; echo
+          curl -fsS https://repo.ryoku.dev/stable/fedora/44/channels/testing/index.json | head -c 800; echo
           echo "== COPR projects with Hyprland for Fedora 44"
           curl -fsS 'https://copr.fedorainfracloud.org/api_3/project/search?query=hyprland&limit=40' | jq -r '.items[] | select(.chroot_repos | keys | any(. == "fedora-44-x86_64")) | .full_name' || true
