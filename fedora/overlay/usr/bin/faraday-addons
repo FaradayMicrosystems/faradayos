@@ -104,4 +104,6 @@ sel=()
 for id in "${IDS[@]}"; do grep -qx "$id" <<<"$choice" && sel+=("$id"); done
 [[ ${#sel[@]} -gt 0 ]] || exit 0
 # Progress and password prompts show in a terminal window
-exec konsole -e /usr/bin/faraday-addons --run "${sel[@]}"
+# Terminal: Konsole on KDE, kitty on the Quickshell edition
+if command -v konsole >/dev/null; then exec konsole -e /usr/bin/faraday-addons --run "${sel[@]}"; fi
+exec kitty -e /usr/bin/faraday-addons --run "${sel[@]}"

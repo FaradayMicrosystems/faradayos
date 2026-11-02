@@ -1,0 +1,10 @@
+# Hyprland compositor stack (Fedora does not package it). Same COPR and package list Ryoku's own installer uses.
+[ryoku-copr-sdegler-hyprland]
+name=Ryoku dependency: sdegler/hyprland
+baseurl=https://download.copr.fedorainfracloud.org/results/sdegler/hyprland/fedora-$releasever-$basearch/
+enabled=1
+gpgcheck=1
+repo_gpgcheck=0
+gpgkey=https://download.copr.fedorainfracloud.org/results/sdegler/hyprland/pubkey.gpg
+includepkgs=aquamarine hyprcursor hyprgraphics hypridle hyprland hyprland-guiutils hyprland-qt-support hyprland-uwsm hyprlang hyprpicker hyprpolkitagent hyprsunset hyprtoolkit hyprutils hyprwire uwsm xdg-desktop-portal-hyprland
+skip_if_unavailable=1

@@ -1,0 +1,17 @@
+#!/bin/sh
+# FaradayOS Quickshell edition: live USB logs liveuser straight into the Ryoku (Hyprland) desktop.
+# Run by livesys.service after it creates liveuser. faraday-remove-liveuser removes this on installed systems.
+mkdir -p /etc/sddm.conf.d
+cat > /etc/sddm.conf.d/zz-faraday-live.conf <<'CONF'
+[Autologin]
+User=liveuser
+Session=hyprland.desktop
+Relogin=false
+CONF
+# Installer icon on the live desktop and in the app launcher
+mkdir -p ~liveuser/Desktop
+if [ -f /usr/share/applications/liveinst.desktop ]; then
+  cp /usr/share/applications/liveinst.desktop ~liveuser/Desktop/
+  chmod +x ~liveuser/Desktop/liveinst.desktop
+fi
+chown -R liveuser:liveuser ~liveuser/Desktop

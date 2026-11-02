@@ -3,7 +3,7 @@ name: Build Fedora edition ISO
 on:
   workflow_dispatch:
   push:
-    branches: [main, fedora-mutable, 'claude/**']
+    branches: [main, fedora-mutable, 'claude/**', 'experimental/**']
     paths: ['fedora/**', '!fedora/README.md', '!fedora/test/**', 'profile/airootfs/**', '.github/workflows/fedora-iso.yml']
 
 jobs:
@@ -43,7 +43,8 @@ jobs:
       - name: Upload ISO
         uses: actions/upload-artifact@v4
         with:
-          name: FaradayOS-Fedora-ISO
+          # The experimental Quickshell branch gets its own artifact name so it is never mixed up with the main ISO
+          name: ${{ startsWith(github.ref_name, 'experimental/') && 'FaradayOS-Quickshell-ISO' || 'FaradayOS-Fedora-ISO' }}
           path: out-fedora/FaradayOS*.iso*
           compression-level: 0
           retention-days: 7
@@ -55,7 +56,7 @@ jobs:
           sudo apt-get install -y -q qemu-system-x86 qemu-utils p7zip-full python3-pil
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
           sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
-          python3 fedora/test/live-installer-test.py out-fedora/FaradayOS*.iso installer-test --mem 8192 --minutes 6
+          python3 fedora/test/live-installer-test.py out-fedora/FaradayOS*.iso installer-test --mem 8192 --minutes 6 $(cat fedora/test/desktop-args 2>/dev/null)
 
       - name: Upload installer test screenshots and logs
         if: always()

@@ -124,13 +124,21 @@ check "Fingerprint: fprintd + PAM installed" "chroot $R rpm -q fprintd fprintd-p
 # /etc/pam.d/system-auth is an absolute symlink into /etc/authselect, so read the target inside the image
 check "Fingerprint: login uses fingerprint"  "grep -qx with-fingerprint $R/etc/authselect/authselect.conf && grep -q pam_fprintd $R/etc/authselect/system-auth"
 check "Add-ons list readable (every entry listed)" "S=\$(chroot $R env HOME=/root /usr/bin/faraday-addons --status) && grep -qw wine <<<\"\$S\" && grep -qw vr <<<\"\$S\""
-check "Add-ons installer icon on the desktop for new users" "test -x $R/etc/skel/Desktop/faraday-addons.desktop -a -x $R/usr/bin/faraday-addons && grep -q Exec=/usr/bin/faraday-addons $R/etc/skel/Desktop/faraday-addons.desktop && chroot $R rpm -q kdialog konsole"
+check "Add-ons installer icon on the desktop for new users" "test -x $R/etc/skel/Desktop/faraday-addons.desktop -a -x $R/usr/bin/faraday-addons && grep -q Exec=/usr/bin/faraday-addons $R/etc/skel/Desktop/faraday-addons.desktop && chroot $R rpm -q kdialog kitty"
 check "Install removes live user + autologin" "test -x $R/usr/share/faraday/remove-liveuser.sh && grep -q remove-liveuser.sh $R/usr/share/anaconda/post-scripts/90-faraday-remove-liveuser.ks && ls $R/etc/systemd/system/multi-user.target.wants/faraday-remove-liveuser.service"
 check "No live user baked into the image"   "! grep -q ^liveuser: $R/etc/passwd && ! grep -rqs ^User=liveuser $R/etc/plasmalogin.conf $R/etc/plasmalogin.conf.d $R/etc/sddm.conf $R/etc/sddm.conf.d"
 check "Installer has its translations (all languages)" "test -f $R/usr/share/locale/de/LC_MESSAGES/anaconda.mo -a -f $R/usr/share/locale/ja/LC_MESSAGES/anaconda.mo"
 check "System files owned by root (none by a normal user)" "! find $R -xdev -uid +999 -print -quit | grep -q ."
 check "Installer keyboard: live layout readable" "chroot $R env GSETTINGS_BACKEND=memory gsettings get org.gnome.desktop.input-sources sources | grep -q xkb"
-check "Live session configured (KDE)"        "grep -q kde $R/etc/sysconfig/livesys"
+check "Live session configured (Hyprland)"   "grep -q hyprland $R/etc/sysconfig/livesys && test -x $R/usr/libexec/livesys/sessions.d/livesys-hyprland"
+# Quickshell edition (experimental branch): Ryoku desktop on Hyprland instead of KDE Plasma
+check "Ryoku desktop: Quickshell + Hyprland installed" "chroot $R rpm -q ryoku-desktop ryoku-desktop-hyprland ryoku-shell quickshell hyprland sddm"
+check "KDE Plasma not installed"             "! chroot $R rpm -q plasma-workspace"
+check "Hyprland login session present"       "test -f $R/usr/share/wayland-sessions/hyprland.desktop"
+check "Ryoku config laid down at first login" "test -e $R/etc/systemd/user/default.target.wants/ryoku-bootstrap.service"
+check "Login screen: SDDM with Ryoku theme"  "ls $R/etc/systemd/system/display-manager.service -l | grep -q sddm && grep -q Current=ryoku $R/etc/sddm.conf.d/99-ryoku.conf && test -d $R/usr/share/sddm/themes/ryoku"
+check "Ryoku updates: signed repo + key"     "grep -q gpgcheck=1 $R/etc/yum.repos.d/ryoku.repo && test -s $R/etc/pki/rpm-gpg/RPM-GPG-KEY-ryoku"
+check "Installer (web UI) installed"         "chroot $R rpm -q anaconda-webui firefox"
 
 umount -R /m/root 2>/dev/null || true; umount /m/sq /m/iso
 echo; [ $fails -eq 0 ] && echo "All checks passed." || { echo "$fails check(s) failed."; exit 1; }

@@ -13,8 +13,11 @@ ap.add_argument("out")
 ap.add_argument("--mem", type=int, default=4096)
 ap.add_argument("--minutes", type=int, default=6, help="how long to watch after the installer starts")
 ap.add_argument("--boot-timeout", type=int, default=1500)
+ap.add_argument("--compositor", default="kwin_wayland", help="compositor process name (pgrep -x)")
+ap.add_argument("--shell", default="plasmashell", help="desktop shell process name of liveuser (pgrep -x pattern)")
 ap.add_argument("--prep", default="", help="shell command to run as root in the live system before the installer starts")
 a = ap.parse_args()
+COMP, SHELL = a.compositor, a.shell
 
 os.makedirs(a.out, exist_ok=True)
 W = os.path.abspath(a.out)
@@ -161,9 +164,9 @@ try:
     result["booted"] = True
     say("logged in as root on serial console")
 
-    # Wait for the live desktop (Plasma) to be up
+    # Wait for the live desktop (Plasma, or the --compositor/--shell given) to be up
     for _ in range(120):
-        p = run("pgrep -u liveuser -x plasmashell >/dev/null && pgrep -x kwin_wayland >/dev/null && echo UP || echo DOWN")
+        p = run(f"pgrep -u liveuser -x '{SHELL}' >/dev/null && pgrep -x {COMP} >/dev/null && echo UP || echo DOWN")
         if "UP" in p:
             break
         time.sleep(5)
@@ -174,8 +177,8 @@ try:
         "uname -r; free -m; cat /proc/cmdline; loginctl list-sessions; systemctl --failed --no-pager; "
         "ps -eo pid,user,rss,cmd --sort=-rss | head -25; "
         "ls -la ~liveuser/Desktop; head -3 /etc/sudoers.d/*; ls /etc/polkit-1/rules.d"))
-    kwin_before = run("pgrep -x kwin_wayland").strip()
-    shell_before = run("pgrep -u liveuser -x plasmashell").strip()
+    kwin_before = run(f"pgrep -x {COMP}").strip()
+    shell_before = run(f"pgrep -u liveuser -x '{SHELL}'").strip()
 
     if a.prep:
         report("prep", run(a.prep + " 2>&1 | tail -n 30", 900))
@@ -187,14 +190,14 @@ try:
     t0 = time.time()
     while time.time() - t0 < a.minutes * 60 * mult:
         time.sleep(15)
-        st = run("echo kwin=$(pgrep -x kwin_wayland) shell=$(pgrep -u liveuser -x plasmashell) "
+        st = run(f"echo kwin=$(pgrep -x {COMP}) shell=$(pgrep -u liveuser -x '{SHELL}') "
                  "anaconda=$(pgrep -f -c 'bin/anaconda') win=$(pgrep -c -f 'slitherer|firefox') "
                  "mem=$(free -m | awk '/Mem:/{print $7}')MB "
                  "tasks=$(grep -o 'Localization/Task/[0-9]*' /tmp/anaconda-webui.log 2>/dev/null | tail -1 | cut -d/ -f3)")
         say(st.strip(), "screen brightness:", shot("installer"))
         if "win=0" not in st:
             result["installer_window"] = True
-    st = run("echo kwin=$(pgrep -x kwin_wayland) shell=$(pgrep -u liveuser -x plasmashell)")
+    st = run(f"echo kwin=$(pgrep -x {COMP}) shell=$(pgrep -u liveuser -x '{SHELL}')")
     result["session_survived"] = bool(kwin_before and shell_before) and \
         (f"kwin={kwin_before} " in st + " " and f"shell={shell_before} " in st + " ")
     say("session survived:", result["session_survived"])
