@@ -28,6 +28,9 @@ repo --name=rpmfusion-nonfree-steam --mirrorlist=https://mirrors.rpmfusion.org/m
 # Ryoku desktop: its signed Fedora repo, and the Hyprland COPR limited to the packages Ryoku's installer takes from it
 repo --name=ryoku --baseurl=https://repo.ryoku.dev/stable/fedora/$releasever/x86_64
 repo --name=ryoku-copr-sdegler-hyprland --baseurl=https://download.copr.fedorainfracloud.org/results/sdegler/hyprland/fedora-$releasever-$basearch/ --includepkgs=aquamarine,hyprcursor,hyprgraphics,hypridle,hyprland,hyprland-guiutils,hyprland-qt-support,hyprland-uwsm,hyprlang,hyprpicker,hyprpolkitagent,hyprsunset,hyprtoolkit,hyprutils,hyprwire,uwsm,xdg-desktop-portal-hyprland
+# Fallback for two Hyprland tools: sdegler's current Fedora 44 builds of them need a newer C++ runtime
+# (GLIBCXX_3.4.36) than Fedora 44 has. dnf takes whichever build installs.
+repo --name=copr-solopasha-hyprland --baseurl=https://download.copr.fedorainfracloud.org/results/solopasha/hyprland/fedora-$releasever-$basearch/ --includepkgs=hyprpicker,xdg-desktop-portal-hyprland
 
 %packages
 # Live system and installer (from Fedora's fedora-live-base.ks)
