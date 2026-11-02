@@ -1,0 +1,42 @@
+name: Quickshell edition package probe
+
+# Quick check (2-3 min) of where the Ryoku/Hyprland packages can come from on Fedora 44
+on:
+  workflow_dispatch:
+  push:
+    branches: ['experimental/**']
+    paths: ['.github/workflows/quickshell-probe.yml']
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    container: fedora:44
+    steps:
+      - name: Probe
+        run: |
+          set -x
+          dnf -y -q install dnf5-plugins python3 jq curl >/dev/null
+          echo "== Fedora 44 libstdc++ ABI versions"
+          dnf -q repoquery --provides 'libstdc++' | grep -o 'GLIBCXX_3.4.[0-9]*' | sort -uV | tail -3
+          dnf -q repoquery --provides 'libstdc++' --repo updates-testing --enablerepo updates-testing | grep -o 'GLIBCXX_3.4.[0-9]*' | sort -uV | tail -2 || true
+          echo "== Fedora's own hyprland packages"
+          dnf -q repoquery hyprland hyprpicker xdg-desktop-portal-hyprland || true
+          cat > /etc/yum.repos.d/sdegler.repo <<'R'
+          [sdegler]
+          name=sdegler
+          baseurl=https://download.copr.fedorainfracloud.org/results/sdegler/hyprland/fedora-44-x86_64/
+          gpgcheck=0
+          R
+          cat > /etc/yum.repos.d/ryoku.repo <<'R'
+          [ryoku]
+          name=ryoku
+          baseurl=https://repo.ryoku.dev/stable/fedora/44/x86_64
+          gpgcheck=0
+          R
+          echo "== All builds of the two tools in sdegler and ryoku"
+          dnf -q repoquery --showduplicates --qf '%{name}-%{evr} %{repoid}\n' hyprpicker xdg-desktop-portal-hyprland hyprland hyprutils
+          for p in hyprpicker xdg-desktop-portal-hyprland hyprland; do echo "-- $p needs:"; dnf -q repoquery --requires --showduplicates $p | grep -i glibcxx | sort -uV | tail -2; done
+          echo "== Ryoku desktop requirements resolve?"
+          dnf -y --setopt=install_weak_deps=False install --assumeno ryoku-desktop ryoku-desktop-hyprland 2>&1 | grep -iE 'problem|nothing provides|requires|Transaction Summary|Install +[0-9]' | head -30 || true
+          echo "== COPR projects with Hyprland for Fedora 44"
+          curl -fsS 'https://copr.fedorainfracloud.org/api_3/project/search?query=hyprland&limit=40' | jq -r '.items[] | select(.chroot_repos | keys | any(. == "fedora-44-x86_64")) | .full_name' || true
