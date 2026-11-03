@@ -164,7 +164,8 @@ systemctl enable avahi-daemon.service faraday-vr-setup.service
 
 # Keep the ISO small: remove large extras that office/desktop work does not need (dnf install them if wanted).
 # Done here, not in %packages, because they are members of the KDE/LibreOffice groups.
-dnf -y remove 'digikam*' 'proj-data-*' libreoffice-base 'java-*-openjdk*' || true
+# (Java stays: with Fedora updates, LibreOffice 26.2 needs it, and removing it takes LibreOffice too)
+dnf -y remove 'digikam*' 'proj-data-*' libreoffice-base || true
 rpm -q libreoffice-writer libreoffice-calc libreoffice-impress dolphin konsole
 
 # Live session (from Fedora's KDE live kickstart)
