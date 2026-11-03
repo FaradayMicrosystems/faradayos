@@ -22,6 +22,13 @@ jobs:
       - name: Build ISO
         run: ./fedora/build-iso.sh
 
+      - name: Show package repos used
+        if: always()
+        run: |
+          cd out-fedora 2>/dev/null || exit 0
+          # Proves every kickstart repo was loaded (anaconda silently skips some repo names)
+          grep -rhiE 'fedora-updates|cisco-openh264|rpmfusion|steam' --include='*.log' . | grep -iE 'repo|load|add|enabl' | sed -E 's/^[0-9:,. -]+//' | sort -u | head -40 || true
+
       - name: Verify ISO (branding, boot splash, NVIDIA, gaming, VR)
         run: ./fedora/verify-iso.sh
 
