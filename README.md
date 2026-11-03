@@ -7,7 +7,7 @@ Current version: **v0.80** (set in `fedora/VERSION`). Versions use the format `v
 **Status: alpha.** v0.76 was the first release that works fully out of the box: it installs, boots and runs on real hardware, including NVIDIA graphics (confirmed on a real NVIDIA PC). Some rough edges remain.
 
 ## Download
-1. Open the [latest release](https://github.com/FaradayMicrosystems/faradayos/releases/latest) and download every `FaradayOSv0.80.iso.part*` file (about 3.9 GB in total, each part under 2 GB).
+1. Open the [latest release](https://github.com/FaradayMicrosystems/faradayos/releases/latest) and download every `FaradayOSv0.80.iso.part*` file (about 4.1 GB in total, each part under 2 GB).
    Fastest: `aria2c -Z -x16 -s16 <part URLs>` (the release notes have the full command).
 2. Join the parts in the download folder:
    - Linux: `cat FaradayOSv0.80.iso.part* > FaradayOSv0.80.iso`
