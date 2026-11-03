@@ -139,6 +139,7 @@ check "Ryoku config laid down at first login" "find $R/etc/systemd/user $R/usr/l
 check "Login screen: SDDM with Ryoku theme"  "ls $R/etc/systemd/system/display-manager.service -l | grep -q sddm && grep -q Current=ryoku $R/etc/sddm.conf.d/99-ryoku.conf && test -d $R/usr/share/sddm/themes/ryoku"
 check "Ryoku updates: signed repo + key"     "grep -q gpgcheck=1 $R/etc/yum.repos.d/ryoku.repo && test -s $R/etc/pki/rpm-gpg/RPM-GPG-KEY-ryoku"
 check "Installer (web UI) installed"         "chroot $R rpm -q anaconda-webui firefox"
+check "Installer window: session env has no shell-quoted values" "grep -qx QT_QPA_PLATFORM=wayland $R/etc/environment.d/99-zz-faradayos.conf"
 
 umount -R /m/root 2>/dev/null || true; umount /m/sq /m/iso
 echo; [ $fails -eq 0 ] && echo "All checks passed." || { echo "$fails check(s) failed."; exit 1; }
