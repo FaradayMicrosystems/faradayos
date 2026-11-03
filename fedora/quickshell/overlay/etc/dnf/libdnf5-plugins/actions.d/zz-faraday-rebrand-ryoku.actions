@@ -1,0 +1,3 @@
+# FaradayOS Quickshell edition: put FaradayOS branding back over the Ryoku desktop after every dnf transaction
+# (a Ryoku update reinstalls its own names, logos and wallpaper). See /usr/share/faraday/rebrand-ryoku.py
+post_transaction::::/usr/share/faraday/rebrand-ryoku.py

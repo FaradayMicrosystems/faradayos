@@ -85,6 +85,8 @@ fastfetch
 papirus-icon-theme
 # Dialogs for the add-ons installer and VR check (small; no Plasma)
 kdialog
+# rebrand-ryoku.py (FaradayOS branding over Ryoku, also run after every update)
+python3
 
 # Package repos stay enabled on the installed system
 rpmfusion-free-release
@@ -160,7 +162,7 @@ cp -L /etc/resolv.conf "$R"
 bash /src/fedora/apply-branding.sh "${ANA_INSTALL_PATH:-/mnt/sysimage}" /src
 # Quickshell edition files: Ryoku/Hyprland repos for updates, SDDM login screen, live session
 cp -a --no-preserve=ownership /src/fedora/quickshell/overlay/. "${ANA_INSTALL_PATH:-/mnt/sysimage}/"
-chmod 755 "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/livesys/sessions.d/livesys-ryoku"
+chmod 755 "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/livesys/sessions.d/livesys-ryoku" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/share/faraday/rebrand-ryoku.py"
 %end
 
 %post --erroronfail
@@ -228,6 +230,10 @@ systemctl enable sddm.service
 systemctl enable ryoku-greeter-guard.service 2>/dev/null || true
 # Keep the FaradayOS boot menu and boot splash (Ryoku's package themes GRUB and Plymouth as its own)
 /usr/bin/ryoku-grub-menu purge || true
+# FaradayOS branding over the Ryoku desktop: names, logos, wallpaper, bar mark, fastfetch.
+# Runs again after every dnf update (etc/dnf/libdnf5-plugins/actions.d/zz-faraday-rebrand-ryoku.actions).
+FARADAY_NO_MKCONFIG=1 /usr/share/faraday/rebrand-ryoku.py
+/usr/share/faraday/rebrand-ryoku.py --check || exit 1
 
 # Installer starting keyboard layout (see /usr/share/glib-2.0/schemas/90_faradayos-keyboard.gschema.override)
 glib-compile-schemas /usr/share/glib-2.0/schemas
