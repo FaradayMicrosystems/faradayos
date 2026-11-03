@@ -139,7 +139,7 @@ check "Ryoku config laid down at first login" "find $R/etc/systemd/user $R/usr/l
 check "Login screen: SDDM with Ryoku theme"  "ls $R/etc/systemd/system/display-manager.service -l | grep -q sddm && grep -q Current=ryoku $R/etc/sddm.conf.d/99-ryoku.conf && test -d $R/usr/share/sddm/themes/ryoku"
 check "Ryoku updates: signed repo + key"     "grep -q gpgcheck=1 $R/etc/yum.repos.d/ryoku.repo && test -s $R/etc/pki/rpm-gpg/RPM-GPG-KEY-ryoku"
 check "FaradayOS branding over Ryoku: no Ryoku names on screen" "chroot $R /usr/share/faraday/rebrand-ryoku.py --check"
-check "FaradayOS branding: Hub name, wallpaper, bar mark" "grep -qx \"Name=FaradayOS Hub\" $R/usr/share/applications/ryoku-hub.desktop && cmp -s $R/usr/share/faraday/brand/wall.webp $R/usr/share/ryoku/rices/default/wall.webp && grep -q '/usr/share/faraday/brand/mark.png' $R/usr/share/ryoku/rices/default/rice.json"
+check "FaradayOS branding: Hub name, wallpaper, bar mark" "grep -qx \"Name=FaradayOS Hub\" $R/usr/share/applications/ryoku-hub.desktop && cmp -s $R/usr/share/faraday/brand/wall.webp $R/usr/share/ryoku/rices/default/wall.webp && grep -q /usr/share/faraday/brand/mark.png $R/usr/share/ryoku/rices/default/rice.json"
 check "FaradayOS branding re-applied after updates" "grep -q rebrand-ryoku.py $R/etc/dnf/libdnf5-plugins/actions.d/zz-faraday-rebrand-ryoku.actions"
 check "Installer (web UI) installed"         "chroot $R rpm -q anaconda-webui firefox"
 check "Installer window: session env has no shell-quoted values" "grep -qx QT_QPA_PLATFORM=wayland $R/etc/environment.d/99-zz-faradayos.conf"
