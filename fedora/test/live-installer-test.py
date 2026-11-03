@@ -219,6 +219,7 @@ try:
     report("oom", run("journalctl -b --no-pager -o short-monotonic -u systemd-oomd | tail -40; "
                       "dmesg | grep -iE 'oom|killed process' | tail -20", 120))
     report("anaconda.log", run("tail -n 30 /tmp/anaconda.log; ls -la /tmp", 120))
+    report("installer window errors", run("grep -ihE -B2 -A6 'qt[.]qpa|platform plugin|slitherer|webui-desktop|cannot open display' /tmp/*.log 2>/dev/null | tail -60", 120))
     report("dbus.log + webui log", run("cat /tmp/dbus.log; tail -n 80 /tmp/anaconda-webui.log", 120))
     report("journal: first events after the installer started", run(
         "journalctl -b --no-pager -o short-monotonic --since=@$(cat /tmp/faraday-t0) | grep -v audit | "
