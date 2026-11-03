@@ -15,9 +15,11 @@ ap.add_argument("--minutes", type=int, default=6, help="how long to watch after 
 ap.add_argument("--boot-timeout", type=int, default=1500)
 ap.add_argument("--compositor", default="kwin_wayland", help="compositor process name (pgrep -x)")
 ap.add_argument("--shell", default="plasmashell", help="desktop shell process name of liveuser (pgrep -x pattern)")
+ap.add_argument("--shell-cmdline", action="store_true", help="match --shell against the full command line (pgrep -f)")
 ap.add_argument("--prep", default="", help="shell command to run as root in the live system before the installer starts")
 a = ap.parse_args()
 COMP, SHELL = a.compositor, a.shell
+SHOPT = "-f" if a.shell_cmdline else "-x"
 
 os.makedirs(a.out, exist_ok=True)
 W = os.path.abspath(a.out)
@@ -166,7 +168,7 @@ try:
 
     # Wait for the live desktop (Plasma, or the --compositor/--shell given) to be up
     for _ in range(120):
-        p = run(f"pgrep -u liveuser -x '{SHELL}' >/dev/null && pgrep -x {COMP} >/dev/null && echo UP || echo DOWN")
+        p = run(f"pgrep -u liveuser {SHOPT} '{SHELL}' >/dev/null && pgrep -x {COMP} >/dev/null && echo UP || echo DOWN")
         if "UP" in p:
             break
         time.sleep(5)
@@ -178,7 +180,7 @@ try:
         "ps -eo pid,user,rss,cmd --sort=-rss | head -25; "
         "ls -la ~liveuser/Desktop; head -3 /etc/sudoers.d/*; ls /etc/polkit-1/rules.d"))
     kwin_before = run(f"pgrep -x {COMP}").strip()
-    shell_before = run(f"pgrep -u liveuser -x '{SHELL}'").strip()
+    shell_before = run(f"pgrep -u liveuser {SHOPT} '{SHELL}'").strip()
 
     if a.prep:
         report("prep", run(a.prep + " 2>&1 | tail -n 30", 900))
@@ -190,14 +192,14 @@ try:
     t0 = time.time()
     while time.time() - t0 < a.minutes * 60 * mult:
         time.sleep(15)
-        st = run(f"echo kwin=$(pgrep -x {COMP}) shell=$(pgrep -u liveuser -x '{SHELL}') "
+        st = run(f"echo kwin=$(pgrep -x {COMP}) shell=$(pgrep -u liveuser {SHOPT} '{SHELL}') "
                  "anaconda=$(pgrep -f -c 'bin/anaconda') win=$(pgrep -c -f 'slitherer|firefox') "
                  "mem=$(free -m | awk '/Mem:/{print $7}')MB "
                  "tasks=$(grep -o 'Localization/Task/[0-9]*' /tmp/anaconda-webui.log 2>/dev/null | tail -1 | cut -d/ -f3)")
         say(st.strip(), "screen brightness:", shot("installer"))
         if "win=0" not in st:
             result["installer_window"] = True
-    st = run(f"echo kwin=$(pgrep -x {COMP}) shell=$(pgrep -u liveuser -x '{SHELL}')")
+    st = run(f"echo kwin=$(pgrep -x {COMP}) shell=$(pgrep -u liveuser {SHOPT} '{SHELL}')")
     result["session_survived"] = bool(kwin_before and shell_before) and \
         (f"kwin={kwin_before} " in st + " " and f"shell={shell_before} " in st + " ")
     say("session survived:", result["session_survived"])

@@ -1,1 +1,1 @@
---compositor niri --shell qs|quickshell
+--compositor niri --shell-cmdline --shell ^qs.-c.shell$
