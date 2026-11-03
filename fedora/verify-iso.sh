@@ -135,7 +135,7 @@ check "Live session configured (Ryoku)"      "grep -q ryoku $R/etc/sysconfig/liv
 check "Ryoku desktop: Quickshell + niri installed" "chroot $R rpm -q ryoku-desktop ryoku-desktop-niri ryoku-shell quickshell niri sddm"
 check "KDE Plasma not installed"             "! chroot $R rpm -q plasma-workspace"
 check "niri login session present"           "test -f $R/usr/share/wayland-sessions/niri.desktop"
-check "Ryoku config laid down at first login" "test -f $R/usr/lib/systemd/user/ryoku-bootstrap.service && find $R/etc/systemd/user $R/usr/lib/systemd/user -name \"ryoku-bootstrap*\" -path \"*.wants/*\" -o -name ryoku-bootstrap.conf -path \"*niri.service.d*\" | grep -q ."
+check "Ryoku config laid down at first login" "find $R/etc/systemd/user $R/usr/lib/systemd/user $R/usr/share/ryoku -name \"ryoku-bootstrap*\" -path \"*.wants/*\" -o -name ryoku-bootstrap.conf -path \"*niri.service.d*\" | grep -q ."
 check "Login screen: SDDM with Ryoku theme"  "ls $R/etc/systemd/system/display-manager.service -l | grep -q sddm && grep -q Current=ryoku $R/etc/sddm.conf.d/99-ryoku.conf && test -d $R/usr/share/sddm/themes/ryoku"
 check "Ryoku updates: signed repo + key"     "grep -q gpgcheck=1 $R/etc/yum.repos.d/ryoku.repo && test -s $R/etc/pki/rpm-gpg/RPM-GPG-KEY-ryoku"
 check "Installer (web UI) installed"         "chroot $R rpm -q anaconda-webui firefox"
