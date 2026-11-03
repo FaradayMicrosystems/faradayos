@@ -17,8 +17,9 @@ part / --size=20480 --fstype=ext4
 shutdown
 
 url --metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch
-repo --name=updates --metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-f$releasever&arch=$basearch
-repo --name=fedora-cisco-openh264 --metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-cisco-openh264-$releasever&arch=$basearch
+# Not named "updates" or "fedora-cisco-openh264": anaconda silently skips kickstart repos with those names
+repo --name=fedora-updates --metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-f$releasever&arch=$basearch
+repo --name=cisco-openh264 --metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-cisco-openh264-$releasever&arch=$basearch
 repo --name=rpmfusion-free --mirrorlist=https://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-$releasever&arch=$basearch
 repo --name=rpmfusion-free-updates --mirrorlist=https://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-updates-released-$releasever&arch=$basearch
 repo --name=rpmfusion-nonfree --mirrorlist=https://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-$releasever&arch=$basearch
@@ -163,7 +164,8 @@ systemctl enable avahi-daemon.service faraday-vr-setup.service
 
 # Keep the ISO small: remove large extras that office/desktop work does not need (dnf install them if wanted).
 # Done here, not in %packages, because they are members of the KDE/LibreOffice groups.
-dnf -y remove 'digikam*' 'proj-data-*' libreoffice-base 'java-*-openjdk*' || true
+# (Java stays: with Fedora updates, LibreOffice 26.2 needs it, and removing it takes LibreOffice too)
+dnf -y remove 'digikam*' 'proj-data-*' libreoffice-base || true
 rpm -q libreoffice-writer libreoffice-calc libreoffice-impress dolphin konsole
 
 # Live session (from Fedora's KDE live kickstart)

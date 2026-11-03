@@ -20,6 +20,7 @@ mount -o loop,ro /m/iso/LiveOS/squashfs.img /m/sq
 if [ -f /m/sq/LiveOS/rootfs.img ]; then mount -o loop,ro /m/sq/LiveOS/rootfs.img /m/root; R=/m/root; else R=/m/sq; fi
 
 fails=0
+echo "Package versions: $(chroot $R rpm -q kernel akmod-nvidia libreoffice-core | xargs)"
 check() { # description, command
   if eval "$2" >/dev/null 2>&1; then echo "PASS  $1"; else echo "FAIL  $1"; fails=$((fails+1)); fi
 }
