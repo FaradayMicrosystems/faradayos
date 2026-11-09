@@ -1,0 +1,12 @@
+[Unit]
+Description=FaradayOS: show the TTY2 login (FaradayOS desktop) at startup
+# TTY4 has the KDE Plasma login; TTY1 stays a text console.
+Wants=getty@tty2.service getty@tty4.service
+After=getty@tty2.service systemd-user-sessions.service plymouth-quit-wait.service livesys.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/chvt 2
+
+[Install]
+WantedBy=graphical.target

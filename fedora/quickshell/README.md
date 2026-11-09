@@ -16,7 +16,13 @@ Branch `experimental/quickshell`. Never merged into `main`.
   The probe workflow (`quickshell-probe.yml`) shows in 2 minutes whether Hyprland resolves again.
 - **Packages:** Ryoku's signed Fedora repo (`repo.ryoku.dev`) plus the `sdegler/hyprland` COPR
   (Ryoku still needs hypridle and hyprpicker from it), limited to the Hyprland packages, as Ryoku's own installer does. Both stay enabled so updates work.
-- **Login screen:** SDDM with Ryoku's greeter theme (main uses Plasma Login).
+- **One desktop per TTY (Aurora, 2026-11-10):** no graphical login screen. Sign in on **TTY2**
+  (Ctrl+Alt+F2) for the FaradayOS desktop (Ryoku's Quickshell shell; Hyprland when installed, niri
+  until Ryoku's Hyprland packages for Fedora 44 install again), or on **TTY4** (Ctrl+Alt+F4) for
+  **KDE Plasma**. The PC starts on TTY2; TTY1 and the rest stay text consoles. The live USB signs
+  liveuser in on TTY2 by itself. Files: `overlay/usr/libexec/faraday/tty-session`,
+  `overlay/etc/profile.d/faraday-tty-session.sh`, `overlay/etc/fish/conf.d/faraday-tty-session.fish`,
+  `overlay/usr/lib/systemd/system/faraday-tty2.service`, `overlay/usr/libexec/livesys/sessions.d/livesys-ryoku`.
 - **Default apps (Ryoku's picks):** kitty terminal, Nautilus files, Firefox, fish, btop.
 - **Kept from main:** FaradayOS boot splash, GRUB names, os-release, NVIDIA driver, gaming,
   VR and add-ons installers, LibreOffice, the installer.

@@ -1,13 +1,17 @@
 #!/bin/sh
-# FaradayOS Quickshell edition: live USB logs liveuser straight into the Ryoku desktop (niri compositor).
-# Run by livesys.service after it creates liveuser. faraday-remove-liveuser removes this on installed systems.
-mkdir -p /etc/sddm.conf.d
-cat > /etc/sddm.conf.d/zz-faraday-live.conf <<'CONF'
-[Autologin]
-User=liveuser
-Session=niri.desktop
-Relogin=false
+# FaradayOS Quickshell edition, live USB: liveuser is signed in on TTY2 automatically, which starts the
+# FaradayOS (Hyprland) desktop. TTY4 offers KDE Plasma (sign in as liveuser, no password).
+# Run by livesys.service after it creates liveuser. The autologin lives in /run, so it only exists while
+# the live USB runs and is never copied to an installed system.
+D=/run/systemd/system/getty@tty2.service.d
+mkdir -p $D
+cat > $D/zz-faraday-live-autologin.conf <<'CONF'
+[Service]
+ExecStart=
+ExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin liveuser %I $TERM
 CONF
+systemctl daemon-reload
+systemctl --no-block restart getty@tty2.service
 # Installer icon on the live desktop and in the app launcher
 mkdir -p ~liveuser/Desktop
 if [ -f /usr/share/applications/liveinst.desktop ]; then

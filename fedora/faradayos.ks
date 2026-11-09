@@ -64,7 +64,10 @@ livesys-scripts
 ryoku
 ryoku-keyring
 ryoku-desktop
-ryoku-desktop-hyprland
+# Compositor: niri for now. Ryoku's Fedora 44 Hyprland packages are broken upstream (hyprglass needs
+# libaquamarine.so.14, the COPR ships .so.15). When the probe workflow shows they install, change this line
+# to ryoku-desktop-hyprland; tty-session then starts Hyprland on TTY2 by itself.
+ryoku-desktop-niri
 @kde-desktop
 kitty
 nautilus
@@ -159,9 +162,9 @@ cp -L /etc/resolv.conf "$R"
 # FaradayOS branding: boot splash, KDE splash, wallpaper, colours, login and lock screen
 %post --nochroot --erroronfail
 bash /src/fedora/apply-branding.sh "${ANA_INSTALL_PATH:-/mnt/sysimage}" /src
-# Quickshell edition files: Ryoku/Hyprland repos for updates, SDDM login screen, live session
+# Quickshell edition files: Ryoku/Hyprland repos for updates, TTY2/TTY4 desktops, live session
 cp -a --no-preserve=ownership /src/fedora/quickshell/overlay/. "${ANA_INSTALL_PATH:-/mnt/sysimage}/"
-chmod 755 "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/livesys/sessions.d/livesys-ryoku" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/share/faraday/rebrand-ryoku.py"
+chmod 755 "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/livesys/sessions.d/livesys-ryoku" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/share/faraday/rebrand-ryoku.py" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/faraday/tty-session"
 %end
 
 %post --erroronfail
@@ -202,10 +205,11 @@ systemctl enable avahi-daemon.service faraday-vr-setup.service
 # (Java stays: with Fedora updates, LibreOffice 26.2 needs it, and removing it takes LibreOffice too)
 dnf -y remove 'digikam*' 'proj-data-*' libreoffice-base || true
 rpm -q libreoffice-writer libreoffice-calc libreoffice-impress nautilus kitty || exit 1
-# This is the Quickshell edition: KDE Plasma must not be in the image
-rpm -q plasma-workspace && exit 1
+# Both desktops must be in the image: FaradayOS (Ryoku on Hyprland or niri) on TTY2, KDE Plasma on TTY4
+rpm -q ryoku-desktop plasma-workspace || exit 1
+rpm -q hyprland || rpm -q niri || exit 1
 
-# Live session: liveuser logs straight into the Ryoku desktop (fedora/quickshell/overlay/usr/libexec/livesys/sessions.d)
+# Live session: liveuser is signed in on TTY2, which starts the FaradayOS (Hyprland) desktop (fedora/quickshell/overlay/usr/libexec/livesys/sessions.d)
 test -x /usr/libexec/livesys/sessions.d/livesys-ryoku || exit 1
 systemctl enable livesys.service livesys-late.service
 echo 'livesys_session="ryoku"' > /etc/sysconfig/livesys
@@ -216,17 +220,14 @@ gpg --batch --with-colons --show-keys /etc/pki/rpm-gpg/RPM-GPG-KEY-ryoku | grep 
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-ryoku
 # Each user's Ryoku config is laid down at their first login
 systemctl --global enable ryoku-bootstrap.service
-# Login screen: SDDM with Ryoku's greeter theme
-G=/usr/share/ryoku/lockscreen/qylock
-if [ -x $G/sddm-host/install-greeter-theme ]; then
-  $G/sddm-host/install-greeter-theme $G/themes/clockwork/orbital /usr/share/sddm/themes/ryoku false
-fi
-test -d /usr/share/sddm/themes/ryoku || exit 1
 mkdir -p /usr/share/icons/default
 [ -e /usr/share/icons/default/index.theme ] || printf '[Icon Theme]\nName=Default\nInherits=Bibata-Modern-Ice\n' > /usr/share/icons/default/index.theme
-systemctl disable plasmalogin.service 2>/dev/null || true
-systemctl enable sddm.service
-systemctl enable ryoku-greeter-guard.service 2>/dev/null || true
+# No graphical login screen: each desktop has its own TTY with a text login
+#   TTY2 (Ctrl+Alt+F2) -> FaradayOS desktop, TTY4 (Ctrl+Alt+F4) -> KDE Plasma; the PC starts on TTY2.
+#   See fedora/quickshell/overlay/usr/libexec/faraday/tty-session
+systemctl disable plasmalogin.service sddm.service ryoku-greeter-guard.service 2>/dev/null || true
+rm -f /etc/systemd/system/display-manager.service
+systemctl enable getty@tty2.service getty@tty4.service faraday-tty2.service
 # Keep the FaradayOS boot menu and boot splash (Ryoku's package themes GRUB and Plymouth as its own)
 /usr/bin/ryoku-grub-menu purge || true
 # FaradayOS branding over the Ryoku desktop: names, logos, wallpaper, bar mark, fastfetch.

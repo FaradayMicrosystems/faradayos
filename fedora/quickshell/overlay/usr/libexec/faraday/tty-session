@@ -1,0 +1,41 @@
+#!/bin/bash
+# FaradayOS Quickshell edition: one desktop per TTY.
+#   TTY2 (Ctrl+Alt+F2): FaradayOS desktop (Ryoku's Quickshell shell on Hyprland, or niri until Hyprland installs)
+#   TTY4 (Ctrl+Alt+F4): KDE Plasma
+# Started from the login shell (etc/profile.d/faraday-tty-session.sh and the fish equivalent)
+# after a person signs in on that TTY. Any other TTY stays a plain text console.
+set -u
+gen=/usr/lib/systemd/user-environment-generators/30-systemd-environment-d-generator
+
+case "$(tty)" in
+/dev/tty2)
+  # Plasma may have taken Ryoku's Qt/GTK settings out of the user manager (below); put them back.
+  if [ -x "$gen" ]; then
+    "$gen" 2>/dev/null | grep '=' | xargs -r -d '\n' systemctl --user set-environment 2>/dev/null
+  fi
+  # Hyprland when installed; niri until Ryoku's Hyprland packages for Fedora install again
+  if command -v Hyprland >/dev/null 2>&1; then
+    export XDG_SESSION_TYPE=wayland XDG_CURRENT_DESKTOP=Hyprland XDG_SESSION_DESKTOP=Hyprland
+    cmd=Hyprland
+    command -v start-hyprland >/dev/null 2>&1 && cmd=start-hyprland
+  else
+    export XDG_SESSION_TYPE=wayland XDG_CURRENT_DESKTOP=niri XDG_SESSION_DESKTOP=niri
+    cmd=niri-session
+  fi
+  # Ryoku's session launcher: imports Ryoku's session settings, lays the per-user config on the
+  # first login, picks the NVIDIA or software renderer when needed. No SDDM script to wrap.
+  RYOKU_WAYLAND_SESSION_DEFAULT=/nonexistent exec /usr/share/ryoku/lockscreen/ryoku-wayland-session "$cmd"
+  ;;
+/dev/tty4)
+  # Ryoku's settings (qt6ct theme, no window borders, its own polkit agent) would make Plasma
+  # look and act wrong; drop them for this session.
+  drop="QT_QPA_PLATFORMTHEME QT_WAYLAND_DISABLE_WINDOWDECORATION RYOKU_POLKIT_AGENT GSK_RENDERER QT_QPA_PLATFORM GDK_BACKEND"
+  systemctl --user unset-environment $drop 2>/dev/null
+  unset $drop
+  export XDG_SESSION_TYPE=wayland
+  if [ -x /usr/libexec/plasma-dbus-run-session-if-needed ]; then
+    exec /usr/libexec/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland
+  fi
+  exec /usr/bin/startplasma-wayland
+  ;;
+esac
