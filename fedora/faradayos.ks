@@ -59,14 +59,13 @@ livesys-scripts
 @networkmanager-submodules
 @printing
 @guest-desktop-agents
-# Desktop: Ryoku (Quickshell shell on Hyprland), SDDM login screen, Ryoku's default apps
+# Desktops: Ryoku (Quickshell shell on Hyprland) logs in on TTY2, KDE Plasma on TTY4 (no graphical login screen;
+# see fedora/quickshell/overlay/etc/profile.d/faraday-tty-session.sh)
 ryoku
 ryoku-keyring
 ryoku-desktop
-# Compositor: niri for now (Ryoku's Hyprland packages for Fedora 44 are broken upstream; switch back to
-# ryoku-desktop-hyprland when they install again, and set Session=hyprland.desktop in livesys-ryoku)
-ryoku-desktop-niri
-sddm
+ryoku-desktop-hyprland
+@kde-desktop
 kitty
 nautilus
 nautilus-python
