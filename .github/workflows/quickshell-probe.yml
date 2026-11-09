@@ -33,3 +33,12 @@ jobs:
           grep -E 'Transaction Summary|Total size|After this' /tmp/out.txt
           grep -E '^ *(libstdc\+\+|hyprpicker|niri|hyprland|ryoku-desktop)' /tmp/out.txt | head
           dnf -q --releasever=44 --setopt=reposdir=/tmp/repos repoquery --qf '%{name}-%{evr}.%{arch} %{repoid}\n' libstdc++ hyprpicker
+      - name: Hyprland status (Ryoku stable + testing, COPR versions)
+        run: |
+          set +e
+          printf '[ryoku-testing]\nname=ryoku-testing\nbaseurl=https://repo.ryoku.dev/testing/fedora/44/x86_64\ngpgcheck=0\n' > /tmp/repos/ryoku-testing.repo
+          Q="dnf -q --releasever=44 --setopt=reposdir=/tmp/repos repoquery"
+          $Q --showduplicates --qf '%{name}-%{evr} %{repoid}\n' ryoku-desktop-hyprland hyprglass aquamarine hyprgraphics hyprland
+          echo "== hyprglass needs"; $Q --showduplicates --requires hyprglass | grep -i 'aquamarine\|hyprgraphics\|hyprland'
+          echo "== who provides libaquamarine.so.14"; $Q --whatprovides 'libaquamarine.so.14()(64bit)'
+          echo "== ryoku-desktop-hyprland needs"; $Q --requires ryoku-desktop-hyprland
