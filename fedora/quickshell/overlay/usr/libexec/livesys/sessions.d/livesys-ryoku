@@ -3,6 +3,21 @@
 # FaradayOS (Hyprland) desktop. TTY4 offers KDE Plasma (sign in as liveuser, no password).
 # Run by livesys.service after it creates liveuser. The autologin lives in /run, so it only exists while
 # the live USB runs and is never copied to an installed system.
+# Installer in the FaradayOS app launcher. Fedora's liveinst.desktop has NoDisplay=true (GNOME and KDE
+# show the installer their own way), and Ryoku's launcher hides NoDisplay entries, so the installer could
+# not be found in the FaradayOS desktop. A copy in liveuser's own applications folder overrides it for
+# the live USB only (never copied to an installed system). Also on ~/Desktop for KDE Plasma on TTY4.
+if [ -f /usr/share/applications/liveinst.desktop ]; then
+  A=~liveuser/.local/share/applications
+  mkdir -p $A ~liveuser/Desktop
+  sed -e '/^NoDisplay=/d' -e 's/^Name=.*/Name=Install FaradayOS/' \
+      -e '/^\[Desktop Entry\]/a NoDisplay=false' \
+      /usr/share/applications/liveinst.desktop > $A/liveinst.desktop
+  cp /usr/share/applications/liveinst.desktop ~liveuser/Desktop/
+  chmod +x ~liveuser/Desktop/liveinst.desktop
+  chown -R liveuser:liveuser ~liveuser/.local ~liveuser/Desktop
+fi
+# Sign liveuser in on TTY2 (after the launcher entry exists, so the desktop sees it at start)
 D=/run/systemd/system/getty@tty2.service.d
 mkdir -p $D
 cat > $D/zz-faraday-live-autologin.conf <<'CONF'
@@ -12,10 +27,3 @@ ExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin liveuser %I $TER
 CONF
 systemctl daemon-reload
 systemctl --no-block restart getty@tty2.service
-# Installer icon on the live desktop and in the app launcher
-mkdir -p ~liveuser/Desktop
-if [ -f /usr/share/applications/liveinst.desktop ]; then
-  cp /usr/share/applications/liveinst.desktop ~liveuser/Desktop/
-  chmod +x ~liveuser/Desktop/liveinst.desktop
-fi
-chown -R liveuser:liveuser ~liveuser/Desktop

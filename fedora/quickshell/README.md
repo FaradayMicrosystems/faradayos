@@ -23,6 +23,10 @@ Branch `experimental/quickshell`. Never merged into `main`.
   liveuser in on TTY2 by itself. Files: `overlay/usr/libexec/faraday/tty-session`,
   `overlay/etc/profile.d/faraday-tty-session.sh`, `overlay/etc/fish/conf.d/faraday-tty-session.fish`,
   `overlay/usr/lib/systemd/system/faraday-tty2.service`, `overlay/usr/libexec/livesys/sessions.d/livesys-ryoku`.
+- **Installer on the live USB:** open the app launcher and pick **Install FaradayOS**. Fedora's
+  `liveinst.desktop` is marked `NoDisplay=true` and Ryoku's launcher hides such entries, so
+  `livesys-ryoku` puts a visible copy in liveuser's `~/.local/share/applications` (live USB only).
+  The VM test checks it (`--launcher-entry` in `fedora/test/desktop-args`).
 - **Default apps (Ryoku's picks):** kitty terminal, Nautilus files, Firefox, fish, btop.
 - **Kept from main:** FaradayOS boot splash, GRUB names, os-release, NVIDIA driver, gaming,
   VR and add-ons installers, LibreOffice, the installer.

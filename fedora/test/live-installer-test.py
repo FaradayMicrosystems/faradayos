@@ -16,6 +16,9 @@ ap.add_argument("--boot-timeout", type=int, default=1500)
 ap.add_argument("--compositor", default="kwin_wayland", help="compositor process name (pgrep -x)")
 ap.add_argument("--shell", default="plasmashell", help="desktop shell process name of liveuser (pgrep -x pattern)")
 ap.add_argument("--shell-cmdline", action="store_true", help="match --shell against the full command line (pgrep -f)")
+ap.add_argument("--launcher-entry", action="store_true",
+                help="the desktop has no desktop icons: the installer must be listed in the app launcher "
+                     "(liveuser's liveinst.desktop without NoDisplay=true or Hidden=true)")
 ap.add_argument("--prep", default="", help="shell command to run as root in the live system before the installer starts")
 a = ap.parse_args()
 COMP, SHELL = a.compositor, a.shell
@@ -151,6 +154,8 @@ def report(title, text):
 
 result = {"booted": False, "desktop": False, "installer_window": False, "session_survived": False,
           "installer_calm": False}
+if a.launcher_entry:
+    result["installer_in_launcher"] = False
 # The v0.72 crash: the installer's keyboard page looped, starting thousands of keyboard tasks. A normal start needs a few.
 MAX_TASKS = 300
 try:
@@ -179,6 +184,15 @@ try:
         "uname -r; free -m; cat /proc/cmdline; loginctl list-sessions; systemctl --failed --no-pager; "
         "ps -eo pid,user,rss,cmd --sort=-rss | head -25; "
         "ls -la ~liveuser/Desktop; head -3 /etc/sudoers.d/*; ls /etc/polkit-1/rules.d"))
+    if a.launcher_entry:
+        # The launcher uses the first liveinst.desktop in liveuser's XDG data dirs; it skips NoDisplay/Hidden entries
+        st = run("for d in ~liveuser/.local/share /usr/local/share /usr/share; do f=$d/applications/liveinst.desktop; "
+                 "[ -f \"$f\" ] && { echo \"entry=$f\"; grep -E '^(Name|Exec|NoDisplay|Hidden)=' \"$f\"; "
+                 "grep -qE '^(NoDisplay|Hidden)=true' \"$f\" && echo LAUNCHER=HIDDEN || echo LAUNCHER=SHOWN; break; }; done; "
+                 "grep -E '^NoDisplay=' /usr/share/applications/liveinst.desktop")
+        report("installer in the app launcher", st)
+        result["installer_in_launcher"] = "LAUNCHER=SHOWN" in st
+        say("installer listed in the app launcher:", result["installer_in_launcher"])
     kwin_before = run(f"pgrep -x {COMP}").strip()
     shell_before = run(f"pgrep -u liveuser {SHOPT} '{SHELL}'").strip()
 
