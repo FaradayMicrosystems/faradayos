@@ -41,7 +41,7 @@ Included:
    ```
    ./fedora/build-iso.sh
    ```
-   It asks for your sudo password once. Needs about 40 GB free disk space and takes 30 to 90 minutes.
+   It asks for your sudo password once at the start, then runs unattended: it keeps the PC awake, retries once if a mirror fails, logs to `out-fedora/build.log` and shows a notification when done. Needs about 40 GB free disk space and takes 30 to 90 minutes.
    Result: `out-fedora/FaradayOSv0.81.iso` (+ `.sha256`). Build log: `out-fedora/lmc.log`.
 
 4. Optional: check the ISO (branding, boot splash, wallpaper, NVIDIA module, codecs, Steam):
