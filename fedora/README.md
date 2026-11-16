@@ -2,7 +2,7 @@
 
 Current version: **FaradayOS v0.82** (set in `fedora/VERSION`). ISO file: `FaradayOSv0.82.iso`.
 
-**Version numbering changed:** versions are now `vX.YY` (for example v0.80, then v0.82). Earlier releases named `v0.0.<number>` (such as v0.0.70) used the wrong format; that was Claude's error. All new releases use the new format.
+**Version numbering changed:** versions are now `vX.YY` (for example v0.80, then v0.81). Earlier releases named `v0.0.<number>` (such as v0.0.70) used the wrong format; that was Claude's error. All new releases use the new format.
 
 A normal, writable Fedora 44 KDE system. Install software with `dnf` as usual; nothing is read-only.
 
