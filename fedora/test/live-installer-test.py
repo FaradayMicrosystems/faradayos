@@ -19,6 +19,9 @@ ap.add_argument("--shell-cmdline", action="store_true", help="match --shell agai
 ap.add_argument("--launcher-entry", action="store_true",
                 help="the desktop has no desktop icons: the installer must be listed in the app launcher "
                      "(liveuser's liveinst.desktop without NoDisplay=true or Hidden=true)")
+ap.add_argument("--account-page", action="store_true",
+                help="the installer itself must ask for the user account: its 'Create account' page must not be "
+                     "hidden (nothing else on the installed system creates a user)")
 ap.add_argument("--prep", default="", help="shell command to run as root in the live system before the installer starts")
 a = ap.parse_args()
 COMP, SHELL = a.compositor, a.shell
@@ -156,6 +159,8 @@ result = {"booted": False, "desktop": False, "installer_window": False, "session
           "installer_calm": False}
 if a.launcher_entry:
     result["installer_in_launcher"] = False
+if a.account_page:
+    result["installer_asks_for_user"] = False
 # The v0.72 crash: the installer's keyboard page looped, starting thousands of keyboard tasks. A normal start needs a few.
 MAX_TASKS = 300
 try:
@@ -220,6 +225,19 @@ try:
     tasks = run("grep -o 'Localization/Task/[0-9]*' /tmp/anaconda-webui.log | tail -1 | cut -d/ -f3").strip()
     result["installer_calm"] = tasks.isdigit() and int(tasks) < MAX_TASKS
     say(f"installer keyboard tasks: {tasks or 'none'} (fewer than {MAX_TASKS} expected)")
+    if a.account_page:
+        # The installer's final settings (profile + /etc/anaconda/conf.d) are in /run/anaconda/anaconda.conf;
+        # the web installer also logs every page it leaves out
+        st = run("echo profile=$(sed -n 's/^profile_id *= *//p' /run/anaconda/anaconda.conf); "
+                 "sed -n '/^hidden_webui_pages/,/^[^[:space:]]/p' /run/anaconda/anaconda.conf; "
+                 "echo pages_loaded=$(grep -c 'Loading initial data' /tmp/anaconda-webui.log); "
+                 "echo accounts_hidden_in_log=$(grep -c \"Screen 'anaconda-screen-accounts' will not be displayed\" "
+                 "/tmp/anaconda-webui.log)")
+        report("installer: create account page", st)
+        hidden = st.split("pages_loaded=")[0]
+        result["installer_asks_for_user"] = ("hidden_webui_pages" in hidden and "anaconda-screen-accounts" not in hidden
+                                             and "accounts_hidden_in_log=0" in st and "pages_loaded=0" not in st)
+        say("installer asks for a user account:", result["installer_asks_for_user"])
 
     report("after", run(
         "free -m; loginctl list-sessions; systemctl --failed --no-pager; coredumpctl list --no-pager; "

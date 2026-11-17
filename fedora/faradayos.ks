@@ -228,6 +228,10 @@ mkdir -p /usr/share/icons/default
 systemctl disable plasmalogin.service sddm.service ryoku-greeter-guard.service 2>/dev/null || true
 rm -f /etc/systemd/system/display-manager.service
 systemctl enable getty@tty2.service getty@tty4.service faraday-tty2.service
+# No graphical login screen means Fedora KDE's first-boot account setup (plasma-setup) never runs, so the
+# installer itself asks for the user account (etc/anaconda/conf.d/90-faradayos-accounts.conf)
+systemctl disable plasma-setup.service 2>/dev/null || true
+grep -q anaconda-screen-network /etc/anaconda/conf.d/90-faradayos-accounts.conf || exit 1
 # Keep the FaradayOS boot menu and boot splash (Ryoku's package themes GRUB and Plymouth as its own)
 /usr/bin/ryoku-grub-menu purge || true
 # FaradayOS branding over the Ryoku desktop: names, logos, wallpaper, bar mark, fastfetch.
