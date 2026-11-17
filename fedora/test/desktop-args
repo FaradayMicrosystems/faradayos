@@ -1,1 +1,1 @@
---compositor niri --shell-cmdline --shell ^qs.-c.shell$ --launcher-entry
+--compositor niri --shell-cmdline --shell ^qs.-c.shell$ --launcher-entry --account-page
