@@ -37,6 +37,27 @@ CATALOG_DIRS = [SHARE + "/i18n"] + glob.glob("/home/*/.local/share/ryoku/i18n")
 # QML module path such as Ryoku.Ui, an identifier (RyokuPower) or a URL/owner
 # (github.com/Ryoku-dev; ryoku.dev is lower case and never matches).
 WORD = re.compile(r"(?<![A-Za-z0-9_@/.-])Ryoku(?![.][A-Za-z]|[A-Z0-9_]|-dev)")
+# Ryoku's app store, shown as "Ryostore" (the command "ryostore" is lower case).
+STORE = re.compile(r"(?<![A-Za-z0-9_@/.-])Ryostore(?![A-Za-z0-9_])")
+STORE_NAME = NAME + " Store"
+# Upper-case labels ("RYOKU", "RYOKU DEFAULT"). Catalog values only: in QML an
+# upper-case "RYOKU" is also an option value code compares against.
+WORD_UP = re.compile(r"(?<![A-Za-z0-9_@/.$-])RYOKU(?![A-Za-z0-9_])")
+
+# The first-run tour. Its window title is a catalog string ("Welcome to Ryoku"),
+# and Ryoku's niri config floats it by that exact title. Once the title says
+# FaradayOS that rule no longer matches and niri tiles the tour into a column
+# instead (off-centre, next to empty black space). This rule floats it again.
+WELCOME_TITLE = "Welcome to " + NAME
+NIRI_MARK = "// faradayos: first-run tour"
+NIRI_RULE = NIRI_MARK + """ (managed by /usr/share/faraday/rebrand-ryoku.py)
+window-rule {
+    match title="^%s$"
+    open-floating true
+    default-column-width { fixed 1180; }
+    default-window-height { fixed 760; }
+}
+""" % WELCOME_TITLE
 
 # String literals that are not shown as text: notification app ids, a virtual
 # camera/mic/hotspot name other code matches on, log messages, paths.
@@ -62,7 +83,11 @@ def read(path):
 
 
 def brand_text(s):
-    return WORD.sub(NAME, s)
+    return STORE.sub(STORE_NAME, WORD.sub(NAME, s))
+
+
+def brand_label(s):
+    return WORD_UP.sub(NAME.upper(), brand_text(s))
 
 
 # 1. Translation catalogs: change the shown text (values), keep the lookup keys.
@@ -72,7 +97,7 @@ def catalogs():
             if path.endswith("/langs.json"):
                 continue
             old = read(path)
-            if old is None or "Ryoku" not in old:
+            if old is None or ("Ryoku" not in old and "RYOKU" not in old and "Ryostore" not in old):
                 continue
             try:
                 data = json.loads(old)
@@ -80,7 +105,7 @@ def catalogs():
                 continue
             if not isinstance(data, dict):
                 continue
-            new = {k: brand_text(v) if isinstance(v, str) else v for k, v in data.items()}
+            new = {k: brand_label(v) if isinstance(v, str) else v for k, v in data.items()}
             if new != data:
                 write_if_changed(path, json.dumps(new, ensure_ascii=False, indent=2) + "\n", old)
 
@@ -95,7 +120,7 @@ def qml_literal(m, text):
     before = text[max(0, m.start() - 9):m.start()]
     if s == "Ryoku" and before.endswith(("? ", "author: ")):
         return '"%s"' % NAME       # shown values: style ? "Ryoku" : ..., author: "Ryoku"
-    if "Ryoku" not in s or SKIP_LITERAL.search(s):
+    if ("Ryoku" not in s and "Ryostore" not in s) or SKIP_LITERAL.search(s):
         return m.group(0)
     if before.endswith("tr(") or before.endswith(".t("):
         return m.group(0)          # catalog key: translated through step 1
@@ -110,11 +135,15 @@ def qml():
                     continue
                 path = os.path.join(dirpath, fn)
                 old = read(path)
-                if old is None or ("Ryoku" not in old and "markImage" not in old):
+                if old is None or ("Ryoku" not in old and "Ryostore" not in old
+                                   and "markImage" not in old and "launcherLogoTextLabel" not in old):
                     continue
                 new = LITERAL.sub(lambda m: qml_literal(m, old), old)
                 new = re.sub(r'(property string name:\s*)"Ryoku"', r'\1"%s"' % NAME, new)
                 new = re.sub(r'(property string markImage:\s*)""', r'\1"%s"' % MARK_PNG, new)
+                # QS Bar's launcher button spells the logo id in capitals: "ryoku" -> RYOKU.
+                new = re.sub(r'(function launcherLogoTextLabel\(id\) \{\s*return )String\(id\)\.toUpperCase\(\)',
+                             r'\1id === "ryoku" ? "%s" : String(id).toUpperCase()' % NAME.upper(), new)
                 write_if_changed(path, new, old)
 
 
@@ -122,7 +151,7 @@ def qml():
 def desktop_files():
     for path in glob.glob("/usr/share/applications/*.desktop"):
         old = read(path)
-        if old is None or "Ryoku" not in old:
+        if old is None or ("Ryoku" not in old and "Ryostore" not in old):
             continue
         new = re.sub(r"^((?:Name|GenericName|Comment|Keywords)(?:\[[^]]*\])?=.*)$",
                      lambda m: brand_text(m.group(1)), old, flags=re.M)
@@ -209,7 +238,21 @@ def rices():
         write_if_changed(path, new, old)
 
 
-# 6. Boot: keep the FaradayOS splash and a GRUB menu with only FaradayOS entries.
+# 6. niri: float the first-run tour under its FaradayOS title. user.kdl is the
+#    file niri reads last; Ryoku seeds it once per account from SHARE/config.
+def niri_user_files():
+    return glob.glob(SHARE + "/config/niri/user.kdl") + glob.glob("/home/*/.config/niri/user.kdl")
+
+
+def niri():
+    for path in niri_user_files():
+        old = read(path)
+        if old is None or NIRI_MARK in old:
+            continue
+        write_if_changed(path, old.rstrip("\n") + "\n\n" + NIRI_RULE, old)
+
+
+# 7. Boot: keep the FaradayOS splash and a GRUB menu with only FaradayOS entries.
 #    ryoku-desktop's update script re-themes both; undo that.
 def boot():
     stamp = "/var/lib/ryoku/plymouth-theme.stamp"
@@ -243,12 +286,14 @@ def check():
                 data = json.load(open(path, encoding="utf-8"))
             except (OSError, ValueError):
                 continue
-            n = sum(1 for v in data.values() if isinstance(v, str) and WORD.search(v))
+            n = sum(1 for v in data.values() if isinstance(v, str) and
+                    (WORD.search(v) or WORD_UP.search(v) or STORE.search(v)))
             if n:
                 left.append("%s: %d translated strings" % (path, n))
     for path in glob.glob("/usr/share/applications/*.desktop"):
         for line in (read(path) or "").splitlines():
-            if re.match(r"(Name|GenericName|Comment)(\[[^]]*\])?=", line) and WORD.search(line):
+            if re.match(r"(Name|GenericName|Comment)(\[[^]]*\])?=", line) and \
+                    (WORD.search(line) or STORE.search(line)):
                 left.append("%s: %s" % (path, line))
     for path in glob.glob(SHARE + "/rices/*/rice.json"):
         brand = ((json.load(open(path)).get("layers") or {}).get("brand")) or {}
@@ -261,6 +306,14 @@ def check():
                     t = read(os.path.join(dirpath, fn)) or ""
                     if re.search(r'property string name:\s*"Ryoku"', t):
                         left.append("%s: default brand name" % os.path.join(dirpath, fn))
+                    if re.search(r'function launcherLogoTextLabel\(id\) \{\s*return String\(id\)', t):
+                        left.append("%s: bar launcher label" % os.path.join(dirpath, fn))
+    seeds = glob.glob(SHARE + "/config/niri/user.kdl")
+    if os.path.isdir(SHARE) and glob.glob(SHARE + "/config/niri/*.kdl") and not seeds:
+        left.append(SHARE + "/config/niri/user.kdl: missing, first-run tour would tile")
+    for path in seeds:
+        if NIRI_MARK not in (read(path) or ""):
+            left.append("%s: first-run tour float rule" % path)
     for line in left:
         print("still Ryoku:", line)
     return 1 if left else 0
@@ -271,7 +324,7 @@ def main():
         sys.exit(check())
     if not os.path.isdir(SHARE):
         return                      # Ryoku is not installed: nothing to do
-    for step in (catalogs, qml, desktop_files, logos, rices, boot):
+    for step in (catalogs, qml, desktop_files, logos, rices, niri, boot):
         try:
             step()
         except Exception as e:      # one failed step must not stop the others or dnf

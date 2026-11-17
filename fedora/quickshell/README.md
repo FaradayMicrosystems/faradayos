@@ -44,6 +44,9 @@ Branch `experimental/quickshell`. Never merged into `main`.
   names stay `ryoku` so updates keep working. It runs in the kickstart and after every dnf update
   (`zz-faraday-rebrand-ryoku.actions`); `rebrand-ryoku.py --check` lists anything left, and the ISO
   build fails if something is. Logos and wallpaper: `overlay/usr/share/faraday/brand/`.
+  Also: "RYOKU" labels (bar launcher button, first-run header) become "FARADAYOS", "Ryostore" becomes
+  "FaradayOS Store", and a niri rule in `niri/user.kdl` floats the first-run tour under its new
+  title (Ryoku's own rule matches only "Welcome to Ryoku"; without it niri tiles the tour).
   Not covered: text printed by Ryoku's compiled programs (the `ryoku` command and Hub backend).
 - **Credit:** the desktop is based on Ryoku by the Ryoku contributors, GPL-3.0
   (https://github.com/Ryoku-dev/ryoku). Its links to ryoku.dev and GitHub are kept.
