@@ -137,6 +137,7 @@ check "KDE Plasma installed (TTY4)"          "chroot $R rpm -q plasma-workspace 
 check "TTY2 starts Hyprland, TTY4 starts Plasma" "test -x $R/usr/libexec/faraday/tty-session && grep -q tty2 $R/etc/profile.d/faraday-tty-session.sh && grep -q tty4 $R/etc/fish/conf.d/faraday-tty-session.fish && test -x $R/usr/share/ryoku/lockscreen/ryoku-wayland-session && grep -q Hyprland $R/usr/libexec/faraday/tty-session && grep -q startplasma-wayland $R/usr/libexec/faraday/tty-session"
 check "Starts on TTY2, logins on TTY2 + TTY4" "test -L $R/etc/systemd/system/graphical.target.wants/faraday-tty2.service && test -L $R/etc/systemd/system/getty.target.wants/getty@tty2.service && test -L $R/etc/systemd/system/getty.target.wants/getty@tty4.service"
 check "No graphical login screen"           "! test -e $R/etc/systemd/system/display-manager.service"
+check "Installer asks for a user account (Create account page not hidden)" "test -f $R/etc/anaconda/conf.d/90-faradayos-accounts.conf && ! sed -n \"/^hidden_webui_pages/,/^[^[:space:]]/p\" $R/etc/anaconda/conf.d/90-faradayos-accounts.conf | grep -q anaconda-screen-accounts"
 check "Live USB signs in on TTY2 by itself"  "grep -q autologin $R/usr/libexec/livesys/sessions.d/livesys-ryoku && grep -q tty2 $R/usr/libexec/livesys/sessions.d/livesys-ryoku"
 check "Ryoku updates: signed repo + key"     "grep -q gpgcheck=1 $R/etc/yum.repos.d/ryoku.repo && test -s $R/etc/pki/rpm-gpg/RPM-GPG-KEY-ryoku"
 check "FaradayOS branding over Ryoku: no Ryoku names on screen" "chroot $R /usr/share/faraday/rebrand-ryoku.py --check"

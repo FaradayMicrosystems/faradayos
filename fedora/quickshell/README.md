@@ -27,6 +27,12 @@ Branch `experimental/quickshell`. Never merged into `main`.
   `liveinst.desktop` is marked `NoDisplay=true` and Ryoku's launcher hides such entries, so
   `livesys-ryoku` puts a visible copy in liveuser's `~/.local/share/applications` (live USB only).
   The VM test checks it (`--launcher-entry` in `fedora/test/desktop-args`).
+- **Installer asks for the user account (v0.83):** the ISO matches Anaconda's `fedora-kde` profile,
+  which hides the installer's "Create account" page because Fedora KDE makes the user at first boot
+  (plasma-setup, before the KDE login screen). This edition has no login screen, so that never ran and
+  installs had no user. `overlay/etc/anaconda/conf.d/90-faradayos-accounts.conf` shows the page again
+  (admin user in `wheel`; the installer will not continue without a user or root password).
+  `verify-iso.sh` and the VM test (`--account-page`) check it.
 - **Default apps (Ryoku's picks):** kitty terminal, Nautilus files, Firefox, fish, btop.
 - **Kept from main:** FaradayOS boot splash, GRUB names, os-release, NVIDIA driver, gaming,
   VR and add-ons installers, LibreOffice, the installer.
