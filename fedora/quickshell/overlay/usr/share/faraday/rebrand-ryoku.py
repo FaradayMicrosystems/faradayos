@@ -252,7 +252,27 @@ def niri():
         write_if_changed(path, old.rstrip("\n") + "\n\n" + NIRI_RULE, old)
 
 
-# 7. Boot: keep the FaradayOS splash and a GRUB menu with only FaradayOS entries.
+# 7. KDE-only helpers that autostart in niri. niri-session starts systemd's
+#    xdg-desktop-autostart.target, so /etc/xdg/autostart entries run in niri too.
+#    KDE's "Wayland to X11 Video Bridge" (xwaylandvideobridge) has no OnlyShowIn;
+#    KWin hides its window, niri cannot, so it shows as an empty black window.
+KDE_ONLY_AUTOSTART = ["/etc/xdg/autostart/*xwaylandvideobridge*.desktop"]
+
+
+def kde_only_files():
+    return [p for g in KDE_ONLY_AUTOSTART for p in glob.glob(g)]
+
+
+def kde_only():
+    for path in kde_only_files():
+        old = read(path)
+        if old is None or re.search(r"^OnlyShowIn=", old, flags=re.M):
+            continue
+        new = re.sub(r"^\[Desktop Entry\]\n", "[Desktop Entry]\nOnlyShowIn=KDE;\n", old, count=1, flags=re.M)
+        write_if_changed(path, new, old)
+
+
+# 8. Boot: keep the FaradayOS splash and a GRUB menu with only FaradayOS entries.
 #    ryoku-desktop's update script re-themes both; undo that.
 def boot():
     stamp = "/var/lib/ryoku/plymouth-theme.stamp"
@@ -314,6 +334,9 @@ def check():
     for path in seeds:
         if NIRI_MARK not in (read(path) or ""):
             left.append("%s: first-run tour float rule" % path)
+    for path in kde_only_files():
+        if not re.search(r"^OnlyShowIn=", read(path) or "", flags=re.M):
+            left.append("%s: autostarts outside KDE (black window in niri)" % path)
     for line in left:
         print("still Ryoku:", line)
     return 1 if left else 0
@@ -324,7 +347,7 @@ def main():
         sys.exit(check())
     if not os.path.isdir(SHARE):
         return                      # Ryoku is not installed: nothing to do
-    for step in (catalogs, qml, desktop_files, logos, rices, niri, boot):
+    for step in (catalogs, qml, desktop_files, logos, rices, niri, kde_only, boot):
         try:
             step()
         except Exception as e:      # one failed step must not stop the others or dnf
