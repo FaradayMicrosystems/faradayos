@@ -47,6 +47,8 @@ Branch `experimental/quickshell`. Never merged into `main`.
   Also: "RYOKU" labels (bar launcher button, first-run header) become "FARADAYOS", "Ryostore" becomes
   "FaradayOS Store", and a niri rule in `niri/user.kdl` floats the first-run tour under its new
   title (Ryoku's own rule matches only "Welcome to Ryoku"; without it niri tiles the tour).
+  It also limits KDE's "Wayland to X11 Video Bridge" (xwaylandvideobridge) autostart to KDE:
+  niri-session runs XDG autostart entries, and in niri that bridge shows as an empty black window.
   Not covered: text printed by Ryoku's compiled programs (the `ryoku` command and Hub backend).
 - **Credit:** the desktop is based on Ryoku by the Ryoku contributors, GPL-3.0
   (https://github.com/Ryoku-dev/ryoku). Its links to ryoku.dev and GitHub are kept.
