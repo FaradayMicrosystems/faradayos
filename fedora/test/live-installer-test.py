@@ -189,6 +189,14 @@ try:
         "uname -r; free -m; cat /proc/cmdline; loginctl list-sessions; systemctl --failed --no-pager; "
         "ps -eo pid,user,rss,cmd --sort=-rss | head -25; "
         "ls -la ~liveuser/Desktop; head -3 /etc/sudoers.d/*; ls /etc/polkit-1/rules.d"))
+    # How long the desktop took to come up after the TTY2 sign-in, and what it waited on
+    report("session start", run(
+        "journalctl -b --no-pager -o short-monotonic | grep -iE 'session opened for user liveuser|user@1000|"
+        "import-environment|niri|ryoku-bootstrap|graphical-session|xdg-desktop-autostart|wireplumber|Startup finished' | "
+        "grep -v audit | cut -c1-220 | head -80; "
+        "systemd-analyze --user -M liveuser@.host critical-chain niri.service --no-pager 2>&1 | head -30; "
+        "systemd-analyze --user -M liveuser@.host blame --no-pager 2>&1 | head -20; "
+        "journalctl -b --no-pager -o short-monotonic _UID=1000 | cut -c1-220 | head -60", 300))
     if a.launcher_entry:
         # The launcher uses the first liveinst.desktop in liveuser's XDG data dirs; it skips NoDisplay/Hidden entries
         st = run("for d in ~liveuser/.local/share /usr/local/share /usr/share; do f=$d/applications/liveinst.desktop; "

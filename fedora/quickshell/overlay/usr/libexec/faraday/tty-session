@@ -20,7 +20,7 @@ case "$(tty)" in
     command -v start-hyprland >/dev/null 2>&1 && cmd=start-hyprland
   else
     export XDG_SESSION_TYPE=wayland XDG_CURRENT_DESKTOP=niri XDG_SESSION_DESKTOP=niri
-    cmd=niri-session
+    cmd=/usr/libexec/faraday/niri-session
   fi
   # Ryoku's session launcher: imports Ryoku's session settings, lays the per-user config on the
   # first login, picks the NVIDIA or software renderer when needed. No SDDM script to wrap.
