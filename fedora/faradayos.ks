@@ -218,8 +218,11 @@ echo 'livesys_session="ryoku"' > /etc/sysconfig/livesys
 # Trust Ryoku's repo for updates only if ryoku-keyring holds Ryoku's published signing key
 gpg --batch --with-colons --show-keys /etc/pki/rpm-gpg/RPM-GPG-KEY-ryoku | grep -q '^fpr:*EB6D3C0F55A7B3CABA6B2838847B274F025DD6E3:' || exit 1
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-ryoku
-# Each user's Ryoku config is laid down at their first login
-systemctl --global enable ryoku-bootstrap.service
+# Each user's Ryoku config is laid down at their first login, by Ryoku's session launcher (tty-session) before niri
+# starts. ryoku-bootstrap.service stays pulled in by niri.service (it skips itself once the config exists), but is not
+# enabled for every login: started with the user manager it ran a second copy of the same config copy at the same time
+# and failed on the first sign-in (rename ... .ryoku-tmp: no such file).
+systemctl --global disable ryoku-bootstrap.service 2>/dev/null || true
 mkdir -p /usr/share/icons/default
 [ -e /usr/share/icons/default/index.theme ] || printf '[Icon Theme]\nName=Default\nInherits=Bibata-Modern-Ice\n' > /usr/share/icons/default/index.theme
 # No graphical login screen: each desktop has its own TTY with a text login
