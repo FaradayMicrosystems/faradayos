@@ -2,17 +2,17 @@
 
 FaradayOS is a gaming- and VR-ready Linux system for work and play, built on **Fedora 44 KDE Plasma**. It is a normal, writable Fedora: install software with `dnf` as usual, nothing is locked down.
 
-Current version: **v0.80** (set in `fedora/VERSION`). Versions use the format `vX.YY` (v0.77, v0.78, v0.79, v0.80, ...). Earlier releases named `v0.0.<number>` used the wrong format.
+Current version: **v0.88** (set in `fedora/VERSION`). Versions use the format `vX.YY` (v0.80, v0.81, ... v0.88, ...). Earlier releases named `v0.0.<number>` used the wrong format.
 
 **Status: alpha.** v0.76 was the first release that works fully out of the box: it installs, boots and runs on real hardware, including NVIDIA graphics (confirmed on a real NVIDIA PC). Some rough edges remain.
 
 ## Download
-1. Open the [latest release](https://github.com/FaradayMicrosystems/faradayos/releases/latest) and download every `FaradayOSv0.80.iso.part*` file (about 4.1 GB in total, each part under 2 GB).
+1. Open the [latest release](https://github.com/FaradayMicrosystems/faradayos/releases/latest) and download every `FaradayOSv0.88.iso.part*` file (about 4.1 GB in total, each part under 2 GB).
    Fastest: `aria2c -Z -x16 -s16 <part URLs>` (the release notes have the full command).
 2. Join the parts in the download folder:
-   - Linux: `cat FaradayOSv0.80.iso.part* > FaradayOSv0.80.iso`
-   - Windows (Command Prompt): `copy /b FaradayOSv0.80.iso.part0 + FaradayOSv0.80.iso.part1 FaradayOSv0.80.iso`
-3. Write `FaradayOSv0.80.iso` to a USB stick (8 GB+) with Fedora Media Writer or balenaEtcher.
+   - Linux: `cat FaradayOSv0.88.iso.part* > FaradayOSv0.88.iso`
+   - Windows (Command Prompt): `copy /b FaradayOSv0.88.iso.part0 + FaradayOSv0.88.iso.part1 FaradayOSv0.88.iso`
+3. Write `FaradayOSv0.88.iso` to a USB stick (8 GB+) with Fedora Media Writer or balenaEtcher.
 4. Turn off Secure Boot (the NVIDIA driver is not signed), boot the USB, and open **Install to Hard Drive**.
 
 Every push to `main` builds the ISO on GitHub Actions, checks it, and publishes it as a release.
@@ -70,6 +70,7 @@ See [fedora/README.md](fedora/README.md): `./fedora/build-iso.sh` builds the ISO
 - `profile/airootfs/`: branding shared with the Fedora build (Plymouth boot animation, KDE global theme `org.faraday.desktop`, colour scheme, wallpaper, icons)
 - `assets/`: logo and splash source images
 - `.github/workflows/`: ISO build, release publishing, ISO check and size report
+- `docs/`: full project documentation ([FARADAYOS.md](docs/FARADAYOS.md)) and the handover file ([HANDOVER.md](docs/HANDOVER.md))
 
 ## Legacy CachyOS build
 FaradayOS started on CachyOS (Arch). **Do not use it**: that build (`build.sh`, `profile/`, `aur-packages.txt`, `Build-FaradayOS*.desktop`) is no longer developed; FaradayOS moved to Fedora for stability. Its files stay because the Fedora build reuses the branding in `profile/airootfs/`.
