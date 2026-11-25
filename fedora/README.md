@@ -1,10 +1,10 @@
 # FaradayOS: Fedora build
 
-Current version: **FaradayOS v0.88** (set in `fedora/VERSION`). ISO file: `FaradayOSv0.88.iso`.
+Current version: **FaradayOS v0.89e** (set in `fedora/VERSION`). ISO file: `FaradayOSv0.89e.iso`.
 
-**Version numbering changed:** versions are now `vX.YY` (for example v0.78, then v0.79). Earlier releases named `v0.0.<number>` (such as v0.0.70) used the wrong format; that was Claude's error. All new releases use the new format.
+**Version numbering changed:** versions are now `vX.YY` (for example v0.88, then v0.89e). Earlier releases named `v0.0.<number>` (such as v0.0.70) used the wrong format; that was Claude's error. All new releases use the new format.
 
-A normal, writable Fedora 44 KDE system. Install software with `dnf` as usual; nothing is read-only.
+A normal, writable Fedora 44 system: FaradayOS (Quickshell) desktop on TTY2, KDE Plasma on TTY4 (see `fedora/quickshell/README.md`). Install software with `dnf` as usual; nothing is read-only.
 
 Included:
 - KDE Plasma, Firefox, LibreOffice, KDE apps
@@ -21,9 +21,9 @@ Included:
 **Option A: download it (no build needed).** Every push to `main` builds the ISO, checks it and publishes it.
 1. Open the [latest release](https://github.com/FaradayMicrosystems/faradayos/releases/latest) and download every `FaradayOSv<version>.iso.part*` file (about 4.1 GB in total, each under 2 GB; downloads can resume). Fastest: the `aria2c` command in the release notes.
 2. Join the parts into one ISO, in the download folder:
-   - Linux: `cat FaradayOSv0.88.iso.part* > FaradayOSv0.88.iso`
-   - Windows (Command Prompt): `copy /b FaradayOSv0.88.iso.part0 + FaradayOSv0.88.iso.part1 FaradayOSv0.88.iso` (the release notes list the exact parts)
-3. Optional check: `sha256sum -c FaradayOSv0.88.iso.sha256` prints `OK`.
+   - Linux: `cat FaradayOSv0.89e.iso.part* > FaradayOSv0.89e.iso`
+   - Windows (Command Prompt): `copy /b FaradayOSv0.89e.iso.part0 + FaradayOSv0.89e.iso.part1 FaradayOSv0.89e.iso` (the release notes list the exact parts)
+3. Optional check: `sha256sum -c FaradayOSv0.89e.iso.sha256` prints `OK`.
 
 **Option B: build it yourself (on any Linux PC).**
 
@@ -32,17 +32,16 @@ Included:
    sudo dnf install podman      # Fedora
    sudo pacman -S podman        # Arch / CachyOS
    ```
-2. Get the code:
+2. Get the code (first time only):
    ```
-   git clone https://github.com/FaradayMicrosystems/faradayos.git faradayos-fedora
-   cd faradayos-fedora
+   git clone https://github.com/FaradayMicrosystems/faradayos.git ~/faradayos
    ```
-3. Build:
+3. Build (the same command every time, run WITHOUT sudo):
    ```
-   ./fedora/build-iso.sh
+   cd ~/faradayos && git pull && ./fedora/build-iso.sh
    ```
-   It asks for your sudo password once. Needs about 40 GB free disk space and takes 30 to 90 minutes.
-   Result: `out-fedora/FaradayOSv0.88.iso` (+ `.sha256`). Build log: `out-fedora/lmc.log`.
+   It asks for your sudo password once at the start, then runs unattended: it keeps the PC awake, retries once if a mirror fails, logs to `out-fedora/build.log` and shows a notification when done. Needs about 40 GB free disk space and takes 30 to 90 minutes.
+   Result: `out-fedora/FaradayOSv0.89e.iso` (+ `.sha256`). Build log: `out-fedora/lmc.log`.
 
 4. Optional: check the ISO (branding, boot splash, wallpaper, NVIDIA module, codecs, Steam):
    ```
@@ -58,7 +57,7 @@ NVIDIA cannot be tested in a VM. Use a USB stick on real hardware for that.
 **On real hardware:**
 1. Write the ISO to a USB stick (8 GB+) with Fedora Media Writer, balenaEtcher, or:
    ```
-   sudo dd if=out-fedora/FaradayOSv0.88.iso of=/dev/sdX bs=4M status=progress oflag=sync
+   sudo dd if=out-fedora/FaradayOSv0.89e.iso of=/dev/sdX bs=4M status=progress oflag=sync
    ```
    Replace `/dev/sdX` with your USB stick. Check with `lsblk` first: `dd` erases the target.
 2. **Turn off Secure Boot** in the BIOS. The NVIDIA driver is not signed, so it will not load with Secure Boot on.

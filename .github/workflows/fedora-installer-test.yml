@@ -9,7 +9,7 @@ on:
         description: ISO build run to test (empty = latest release)
         required: false
   push:
-    branches: [main, 'claude/**']
+    branches: [main, 'claude/**', 'experimental/**']
     paths: ['fedora/test/**', '.github/workflows/fedora-installer-test.yml']
 
 jobs:
@@ -25,23 +25,17 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          # Quickshell edition: show the session environment the installer inherits
           - name: as-is
-            prep: ''
-          # v0.72 had system folders (/, /etc, /usr...) owned by user 1001, so the keyboard service could not save the layout
-          - name: with-ownership-fix
             prep: >-
-              find / -xdev \( -path /home -o -path /proc -o -path /run -o -path /tmp \) -prune -o -uid 1001 ! -user liveuser -print0
-              | xargs -0 chown -h root:root; chown root:root /; id liveuser; ls -lnd / /etc /etc/X11/xorg.conf.d
-          # Everything v0.73 changes
-          - name: with-all-v0.73-fixes
+              systemctl --user -M liveuser@.host show-environment | grep -E "DISPLAY|QT_|XDG_RUNTIME|XDG_SESSION|XDG_CURRENT";
+              ls -la /run/user/1000/ | grep -i wayland
+          # Same, with the display variables put into the user manager first
+          - name: with-display-env
             prep: >-
-              find / -xdev \( -path /home -o -path /proc -o -path /run -o -path /tmp \) -prune -o -uid 1001 ! -user liveuser -print0
-              | xargs -0 chown -h root:root; chown root:root /; id liveuser; ls -lnd / /etc /etc/X11/xorg.conf.d;
-              printf "[org.gnome.desktop.input-sources]\nsources=[('xkb', 'us')]\n"
-              > /usr/share/glib-2.0/schemas/90_faradayos-keyboard.gschema.override
-              && glib-compile-schemas /usr/share/glib-2.0/schemas 2>/dev/null;
-              dnf -y -q reinstall anaconda-core anaconda-webui >/dev/null || dnf -y -q upgrade anaconda-core anaconda-webui;
-              ls /usr/share/locale/de/LC_MESSAGES/anaconda.mo
+              W=$(ls /run/user/1000/ | grep -E "^wayland-[0-9]+$" | head -1);
+              systemctl --user -M liveuser@.host set-environment WAYLAND_DISPLAY=$W DISPLAY=:0 XDG_SESSION_TYPE=wayland;
+              systemctl --user -M liveuser@.host show-environment | grep -E "DISPLAY|QT_|XDG_SESSION"
     steps:
       - uses: actions/checkout@v4
 
@@ -59,7 +53,7 @@ jobs:
           mkdir iso
           if [ -n "$RUN" ]; then
             echo "Testing ISO from build run $RUN"
-            gh run download "$RUN" -R "$GITHUB_REPOSITORY" -n FaradayOS-Fedora-ISO -D iso
+            gh run download "$RUN" -R "$GITHUB_REPOSITORY" -n FaradayOS-Fedora-ISO -D iso || gh run download "$RUN" -R "$GITHUB_REPOSITORY" -n FaradayOS-Quickshell-ISO -D iso
           else
             TAG=$(gh release view -R "$GITHUB_REPOSITORY" --json tagName -q .tagName)
             echo "Testing release $TAG"
@@ -71,7 +65,7 @@ jobs:
       - name: Boot live ISO and start the installer
         env:
           PREP: ${{ matrix.prep }}
-        run: python3 fedora/test/live-installer-test.py iso/*.iso out --mem 8192 --minutes 6 --prep "$PREP"
+        run: python3 fedora/test/live-installer-test.py iso/*.iso out --mem 8192 --minutes 6 --prep "$PREP" $(cat fedora/test/desktop-args 2>/dev/null)
 
       - name: Upload screenshots and logs
         if: always()

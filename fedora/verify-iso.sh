@@ -125,13 +125,29 @@ check "Fingerprint: fprintd + PAM installed" "chroot $R rpm -q fprintd fprintd-p
 # /etc/pam.d/system-auth is an absolute symlink into /etc/authselect, so read the target inside the image
 check "Fingerprint: login uses fingerprint"  "grep -qx with-fingerprint $R/etc/authselect/authselect.conf && grep -q pam_fprintd $R/etc/authselect/system-auth"
 check "Add-ons list readable (every entry listed)" "S=\$(chroot $R env HOME=/root /usr/bin/faraday-addons --status) && grep -qw wine <<<\"\$S\" && grep -qw vr <<<\"\$S\""
-check "Add-ons installer icon on the desktop for new users" "test -x $R/etc/skel/Desktop/faraday-addons.desktop -a -x $R/usr/bin/faraday-addons && grep -q Exec=/usr/bin/faraday-addons $R/etc/skel/Desktop/faraday-addons.desktop && chroot $R rpm -q kdialog konsole"
+check "Add-ons installer icon on the desktop for new users" "test -x $R/etc/skel/Desktop/faraday-addons.desktop -a -x $R/usr/bin/faraday-addons && grep -q Exec=/usr/bin/faraday-addons $R/etc/skel/Desktop/faraday-addons.desktop && chroot $R rpm -q kdialog kitty"
 check "Install removes live user + autologin" "test -x $R/usr/share/faraday/remove-liveuser.sh && grep -q remove-liveuser.sh $R/usr/share/anaconda/post-scripts/90-faraday-remove-liveuser.ks && ls $R/etc/systemd/system/multi-user.target.wants/faraday-remove-liveuser.service"
 check "No live user baked into the image"   "! grep -q ^liveuser: $R/etc/passwd && ! grep -rqs ^User=liveuser $R/etc/plasmalogin.conf $R/etc/plasmalogin.conf.d $R/etc/sddm.conf $R/etc/sddm.conf.d"
 check "Installer has its translations (all languages)" "test -f $R/usr/share/locale/de/LC_MESSAGES/anaconda.mo -a -f $R/usr/share/locale/ja/LC_MESSAGES/anaconda.mo"
 check "System files owned by root (none by a normal user)" "! find $R -xdev -uid +999 -print -quit | grep -q ."
 check "Installer keyboard: live layout readable" "chroot $R env GSETTINGS_BACKEND=memory gsettings get org.gnome.desktop.input-sources sources | grep -q xkb"
-check "Live session configured (KDE)"        "grep -q kde $R/etc/sysconfig/livesys"
+check "Live session configured (Ryoku)"      "grep -q ryoku $R/etc/sysconfig/livesys && test -x $R/usr/libexec/livesys/sessions.d/livesys-ryoku"
+# Quickshell edition (experimental branch): FaradayOS desktop (Ryoku on Hyprland) on TTY2, KDE Plasma on TTY4
+check "FaradayOS desktop: Quickshell + compositor installed" "chroot $R rpm -q ryoku-desktop ryoku-shell quickshell && { chroot $R rpm -q ryoku-desktop-hyprland hyprland || chroot $R rpm -q ryoku-desktop-niri niri; }"
+check "KDE Plasma installed (TTY4)"          "chroot $R rpm -q plasma-workspace plasma-desktop && test -x $R/usr/bin/startplasma-wayland"
+check "TTY2 starts Hyprland, TTY4 starts Plasma" "test -x $R/usr/libexec/faraday/tty-session && grep -q tty2 $R/etc/profile.d/faraday-tty-session.sh && grep -q tty4 $R/etc/fish/conf.d/faraday-tty-session.fish && test -x $R/usr/share/ryoku/lockscreen/ryoku-wayland-session && grep -q Hyprland $R/usr/libexec/faraday/tty-session && grep -q startplasma-wayland $R/usr/libexec/faraday/tty-session"
+check "niri starts without the import-environment warning" "test -x $R/usr/libexec/faraday/niri-session && grep -q /usr/libexec/faraday/niri-session $R/usr/libexec/faraday/tty-session && grep -q \"dbus-update-activation-environment --systemd --all\" $R/usr/libexec/faraday/niri-session"
+check "Ryoku config copied once at first sign-in (bootstrap not run by every login)" "! test -e $R/etc/systemd/user/default.target.wants/ryoku-bootstrap.service"
+check "Starts on TTY2, logins on TTY2 + TTY4" "test -L $R/etc/systemd/system/graphical.target.wants/faraday-tty2.service && test -L $R/etc/systemd/system/getty.target.wants/getty@tty2.service && test -L $R/etc/systemd/system/getty.target.wants/getty@tty4.service"
+check "No graphical login screen"           "! test -e $R/etc/systemd/system/display-manager.service"
+check "Installer asks for a user account (Create account page not hidden)" "test -f $R/etc/anaconda/conf.d/90-faradayos-accounts.conf && ! sed -n \"/^hidden_webui_pages/,/^[^[:space:]]/p\" $R/etc/anaconda/conf.d/90-faradayos-accounts.conf | grep -q anaconda-screen-accounts"
+check "Live USB signs in on TTY2 by itself"  "grep -q autologin $R/usr/libexec/livesys/sessions.d/livesys-ryoku && grep -q tty2 $R/usr/libexec/livesys/sessions.d/livesys-ryoku"
+check "Ryoku updates: signed repo + key"     "grep -q gpgcheck=1 $R/etc/yum.repos.d/ryoku.repo && test -s $R/etc/pki/rpm-gpg/RPM-GPG-KEY-ryoku"
+check "FaradayOS branding over Ryoku: no Ryoku names on screen" "chroot $R /usr/share/faraday/rebrand-ryoku.py --check"
+check "FaradayOS branding: Hub name, wallpaper, bar mark" "grep -qx \"Name=FaradayOS Hub\" $R/usr/share/applications/ryoku-hub.desktop && cmp -s $R/usr/share/faraday/brand/wall.webp $R/usr/share/ryoku/rices/default/wall.webp && grep -q /usr/share/faraday/brand/mark.png $R/usr/share/ryoku/rices/default/rice.json"
+check "FaradayOS branding re-applied after updates" "grep -q rebrand-ryoku.py $R/etc/dnf/libdnf5-plugins/actions.d/zz-faraday-rebrand-ryoku.actions"
+check "Installer (web UI) installed"         "chroot $R rpm -q anaconda-webui firefox"
+check "Installer window: session env has no shell-quoted values" "grep -qx QT_QPA_PLATFORM=wayland $R/etc/environment.d/99-zz-faradayos.conf"
 
 umount -R /m/root 2>/dev/null || true; umount /m/sq /m/iso
 echo; [ $fails -eq 0 ] && echo "All checks passed." || { echo "$fails check(s) failed."; exit 1; }

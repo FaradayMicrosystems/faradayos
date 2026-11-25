@@ -1,18 +1,18 @@
 # FaradayOS
 
-FaradayOS is a gaming- and VR-ready Linux system for work and play, built on **Fedora 44 KDE Plasma**. It is a normal, writable Fedora: install software with `dnf` as usual, nothing is locked down.
+FaradayOS is a gaming- and VR-ready Linux system for work and play, built on **Fedora 44**. Desktop: the FaradayOS (Quickshell) desktop on TTY2, KDE Plasma on TTY4. It is a normal, writable Fedora: install software with `dnf` as usual, nothing is locked down.
 
-Current version: **v0.88** (set in `fedora/VERSION`). Versions use the format `vX.YY` (v0.80, v0.81, ... v0.88, ...). Earlier releases named `v0.0.<number>` used the wrong format.
+Current version: **v0.89e** (set in `fedora/VERSION`). Versions use the format `vX.YY`, with an `e` suffix for experimental releases (v0.88, v0.89e, ...). Earlier releases named `v0.0.<number>` used the wrong format.
 
 **Status: alpha.** v0.76 was the first release that works fully out of the box: it installs, boots and runs on real hardware, including NVIDIA graphics (confirmed on a real NVIDIA PC). Some rough edges remain.
 
 ## Download
-1. Open the [latest release](https://github.com/FaradayMicrosystems/faradayos/releases/latest) and download every `FaradayOSv0.88.iso.part*` file (about 4.1 GB in total, each part under 2 GB).
+1. Open the [latest release](https://github.com/FaradayMicrosystems/faradayos/releases/latest) and download every `FaradayOSv0.89e.iso.part*` file (about 3.9 GB in total, each part under 2 GB).
    Fastest: `aria2c -Z -x16 -s16 <part URLs>` (the release notes have the full command).
 2. Join the parts in the download folder:
-   - Linux: `cat FaradayOSv0.88.iso.part* > FaradayOSv0.88.iso`
-   - Windows (Command Prompt): `copy /b FaradayOSv0.88.iso.part0 + FaradayOSv0.88.iso.part1 FaradayOSv0.88.iso`
-3. Write `FaradayOSv0.88.iso` to a USB stick (8 GB+) with Fedora Media Writer or balenaEtcher.
+   - Linux: `cat FaradayOSv0.89e.iso.part* > FaradayOSv0.89e.iso`
+   - Windows (Command Prompt): `copy /b FaradayOSv0.89e.iso.part0 + FaradayOSv0.89e.iso.part1 FaradayOSv0.89e.iso`
+3. Write `FaradayOSv0.89e.iso` to a USB stick (8 GB+) with Fedora Media Writer or balenaEtcher.
 4. Turn off Secure Boot (the NVIDIA driver is not signed), boot the USB, and open **Install to Hard Drive**.
 
 Every push to `main` builds the ISO on GitHub Actions, checks it, and publishes it as a release.

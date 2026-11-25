@@ -1,0 +1,20 @@
+#!/bin/sh
+# FaradayOS: start niri as a systemd user service (what /usr/bin/niri-session does), minus two problems:
+#  - Fedora's niri-session runs a bare `systemctl --user import-environment`, which prints
+#    "Calling import-environment without a list of variable names is deprecated." on the console.
+#    `dbus-update-activation-environment --systemd --all` passes the same variables to both systemd and
+#    D-Bus without the warning (niri upstream made the same change).
+#  - It restarts itself inside a second login shell; tty-session already runs from the login shell.
+if systemctl --user -q is-active niri.service; then
+  echo 'A niri session is already running.'
+  exit 1
+fi
+systemctl --user reset-failed
+if command -v dbus-update-activation-environment >/dev/null 2>&1; then
+  dbus-update-activation-environment --systemd --all
+else
+  env | sed -n 's/^\([A-Za-z_][A-Za-z0-9_]*\)=.*/\1/p' | xargs -r systemctl --user import-environment
+fi
+systemctl --user --wait start niri.service
+systemctl --user start --job-mode=replace-irreversibly niri-shutdown.target
+systemctl --user unset-environment WAYLAND_DISPLAY DISPLAY XDG_SESSION_TYPE XDG_CURRENT_DESKTOP NIRI_SOCKET

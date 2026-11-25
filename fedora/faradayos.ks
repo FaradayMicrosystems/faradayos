@@ -1,4 +1,5 @@
-# FaradayOS (Fedora edition): normal, writable Fedora KDE system.
+# FaradayOS (Fedora edition), EXPERIMENTAL Quickshell branch: normal, writable Fedora system with the
+# Ryoku desktop (Quickshell shell on the Hyprland compositor) instead of KDE Plasma. See fedora/quickshell/README.md.
 # Built into a live ISO by fedora/build-iso.sh (livemedia-creator --no-virt).
 # The repo is mounted at /src inside the build container; branding is copied from there.
 
@@ -17,7 +18,7 @@ part / --size=20480 --fstype=ext4
 shutdown
 
 url --metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch
-# Not named "updates" or "fedora-cisco-openh264": anaconda silently skips kickstart repos with those names
+# Not named "updates" / "fedora-cisco-openh264": anaconda silently skips kickstart repos with those names
 repo --name=fedora-updates --metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-f$releasever&arch=$basearch
 repo --name=cisco-openh264 --metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-cisco-openh264-$releasever&arch=$basearch
 repo --name=rpmfusion-free --mirrorlist=https://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-$releasever&arch=$basearch
@@ -25,6 +26,9 @@ repo --name=rpmfusion-free-updates --mirrorlist=https://mirrors.rpmfusion.org/mi
 repo --name=rpmfusion-nonfree --mirrorlist=https://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-$releasever&arch=$basearch
 repo --name=rpmfusion-nonfree-updates --mirrorlist=https://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-updates-released-$releasever&arch=$basearch
 repo --name=rpmfusion-nonfree-steam --mirrorlist=https://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-steam-$releasever&arch=$basearch
+# Ryoku desktop: its signed Fedora repo, and the Hyprland COPR limited to the packages Ryoku's installer takes from it
+repo --name=ryoku --baseurl=https://repo.ryoku.dev/stable/fedora/$releasever/x86_64
+repo --name=ryoku-copr-sdegler-hyprland --baseurl=https://download.copr.fedorainfracloud.org/results/sdegler/hyprland/fedora-$releasever-$basearch/ --includepkgs=aquamarine,hyprcursor,hyprgraphics,hypridle,hyprland,hyprland-guiutils,hyprland-qt-support,hyprland-uwsm,hyprlang,hyprpicker,hyprpolkitagent,hyprsunset,hyprtoolkit,hyprutils,hyprwire,uwsm,xdg-desktop-portal-hyprland
 
 %packages
 # Live system and installer (from Fedora's fedora-live-base.ks)
@@ -45,15 +49,46 @@ dracut-live
 glibc-all-langpacks
 livesys-scripts
 
-# Desktop: KDE Plasma and everyday work apps
-@^kde-desktop-environment
-@kde-apps
-@kde-media
+# Base desktop system (what the KDE environment group brought in, minus KDE itself)
+@core
+@standard
+@hardware-support
+@base-graphical
+@fonts
+@multimedia
+@networkmanager-submodules
+@printing
+@guest-desktop-agents
+# Desktops: Ryoku (Quickshell shell on Hyprland) logs in on TTY2, KDE Plasma on TTY4 (no graphical login screen;
+# see fedora/quickshell/overlay/etc/profile.d/faraday-tty-session.sh)
+ryoku
+ryoku-keyring
+ryoku-desktop
+# Compositor: niri for now. Ryoku's Fedora 44 Hyprland packages are broken upstream (hyprglass needs
+# libaquamarine.so.14, the COPR ships .so.15). When the probe workflow shows they install, change this line
+# to ryoku-desktop-hyprland; tty-session then starts Hyprland on TTY2 by itself.
+ryoku-desktop-niri
+@kde-desktop
+kitty
+nautilus
+nautilus-python
+fish
+btop
+pavucontrol
+pipewire-pulseaudio
+wireplumber
+gnome-keyring
+xdg-user-dirs
+# Installer (KDE group brought this in before) and everyday work apps
+anaconda-webui
 @libreoffice
 firefox
 fastfetch
-# Papirus icons (desktop layout is in the FaradayOS global theme)
 papirus-icon-theme
+# Dialogs for the add-ons installer and VR check (small; no Plasma)
+kdialog
+# rebrand-ryoku.py (FaradayOS branding over Ryoku, also run after every update)
+python3
 
 # Package repos stay enabled on the installed system
 rpmfusion-free-release
@@ -127,6 +162,9 @@ cp -L /etc/resolv.conf "$R"
 # FaradayOS branding: boot splash, KDE splash, wallpaper, colours, login and lock screen
 %post --nochroot --erroronfail
 bash /src/fedora/apply-branding.sh "${ANA_INSTALL_PATH:-/mnt/sysimage}" /src
+# Quickshell edition files: Ryoku/Hyprland repos for updates, TTY2/TTY4 desktops, live session
+cp -a --no-preserve=ownership /src/fedora/quickshell/overlay/. "${ANA_INSTALL_PATH:-/mnt/sysimage}/"
+chmod 755 "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/livesys/sessions.d/livesys-ryoku" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/share/faraday/rebrand-ryoku.py" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/faraday/tty-session" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/faraday/niri-session"
 %end
 
 %post --erroronfail
@@ -166,11 +204,43 @@ systemctl enable avahi-daemon.service faraday-vr-setup.service
 # Done here, not in %packages, because they are members of the KDE/LibreOffice groups.
 # (Java stays: with Fedora updates, LibreOffice 26.2 needs it, and removing it takes LibreOffice too)
 dnf -y remove 'digikam*' 'proj-data-*' libreoffice-base || true
-rpm -q libreoffice-writer libreoffice-calc libreoffice-impress dolphin konsole
+rpm -q libreoffice-writer libreoffice-calc libreoffice-impress nautilus kitty || exit 1
+# Both desktops must be in the image: FaradayOS (Ryoku on Hyprland or niri) on TTY2, KDE Plasma on TTY4
+rpm -q ryoku-desktop plasma-workspace || exit 1
+rpm -q hyprland || rpm -q niri || exit 1
 
-# Live session (from Fedora's KDE live kickstart)
+# Live session: liveuser is signed in on TTY2, which starts the FaradayOS (Hyprland) desktop (fedora/quickshell/overlay/usr/libexec/livesys/sessions.d)
+test -x /usr/libexec/livesys/sessions.d/livesys-ryoku || exit 1
 systemctl enable livesys.service livesys-late.service
-echo 'livesys_session="kde"' > /etc/sysconfig/livesys
+echo 'livesys_session="ryoku"' > /etc/sysconfig/livesys
+
+# Ryoku desktop setup (what Ryoku's own installer does, done once for every future user)
+# Trust Ryoku's repo for updates only if ryoku-keyring holds Ryoku's published signing key
+gpg --batch --with-colons --show-keys /etc/pki/rpm-gpg/RPM-GPG-KEY-ryoku | grep -q '^fpr:*EB6D3C0F55A7B3CABA6B2838847B274F025DD6E3:' || exit 1
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-ryoku
+# Each user's Ryoku config is laid down at their first login, by Ryoku's session launcher (tty-session) before niri
+# starts. ryoku-bootstrap.service stays pulled in by niri.service (it skips itself once the config exists), but is not
+# enabled for every login: started with the user manager it ran a second copy of the same config copy at the same time
+# and failed on the first sign-in (rename ... .ryoku-tmp: no such file).
+systemctl --global disable ryoku-bootstrap.service 2>/dev/null || true
+mkdir -p /usr/share/icons/default
+[ -e /usr/share/icons/default/index.theme ] || printf '[Icon Theme]\nName=Default\nInherits=Bibata-Modern-Ice\n' > /usr/share/icons/default/index.theme
+# No graphical login screen: each desktop has its own TTY with a text login
+#   TTY2 (Ctrl+Alt+F2) -> FaradayOS desktop, TTY4 (Ctrl+Alt+F4) -> KDE Plasma; the PC starts on TTY2.
+#   See fedora/quickshell/overlay/usr/libexec/faraday/tty-session
+systemctl disable plasmalogin.service sddm.service ryoku-greeter-guard.service 2>/dev/null || true
+rm -f /etc/systemd/system/display-manager.service
+systemctl enable getty@tty2.service getty@tty4.service faraday-tty2.service
+# No graphical login screen means Fedora KDE's first-boot account setup (plasma-setup) never runs, so the
+# installer itself asks for the user account (etc/anaconda/conf.d/90-faradayos-accounts.conf)
+systemctl disable plasma-setup.service 2>/dev/null || true
+grep -q anaconda-screen-network /etc/anaconda/conf.d/90-faradayos-accounts.conf || exit 1
+# Keep the FaradayOS boot menu and boot splash (Ryoku's package themes GRUB and Plymouth as its own)
+/usr/bin/ryoku-grub-menu purge || true
+# FaradayOS branding over the Ryoku desktop: names, logos, wallpaper, bar mark, fastfetch.
+# Runs again after every dnf update (etc/dnf/libdnf5-plugins/actions.d/zz-faraday-rebrand-ryoku.actions).
+FARADAY_NO_MKCONFIG=1 /usr/share/faraday/rebrand-ryoku.py
+/usr/share/faraday/rebrand-ryoku.py --check || exit 1
 
 # Installer starting keyboard layout (see /usr/share/glib-2.0/schemas/90_faradayos-keyboard.gschema.override)
 glib-compile-schemas /usr/share/glib-2.0/schemas

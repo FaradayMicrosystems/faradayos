@@ -13,8 +13,19 @@ ap.add_argument("out")
 ap.add_argument("--mem", type=int, default=4096)
 ap.add_argument("--minutes", type=int, default=6, help="how long to watch after the installer starts")
 ap.add_argument("--boot-timeout", type=int, default=1500)
+ap.add_argument("--compositor", default="kwin_wayland", help="compositor process name (pgrep -x)")
+ap.add_argument("--shell", default="plasmashell", help="desktop shell process name of liveuser (pgrep -x pattern)")
+ap.add_argument("--shell-cmdline", action="store_true", help="match --shell against the full command line (pgrep -f)")
+ap.add_argument("--launcher-entry", action="store_true",
+                help="the desktop has no desktop icons: the installer must be listed in the app launcher "
+                     "(liveuser's liveinst.desktop without NoDisplay=true or Hidden=true)")
+ap.add_argument("--account-page", action="store_true",
+                help="the installer itself must ask for the user account: its 'Create account' page must not be "
+                     "hidden (nothing else on the installed system creates a user)")
 ap.add_argument("--prep", default="", help="shell command to run as root in the live system before the installer starts")
 a = ap.parse_args()
+COMP, SHELL = a.compositor, a.shell
+SHOPT = "-f" if a.shell_cmdline else "-x"
 
 os.makedirs(a.out, exist_ok=True)
 W = os.path.abspath(a.out)
@@ -146,6 +157,10 @@ def report(title, text):
 
 result = {"booted": False, "desktop": False, "installer_window": False, "session_survived": False,
           "installer_calm": False}
+if a.launcher_entry:
+    result["installer_in_launcher"] = False
+if a.account_page:
+    result["installer_asks_for_user"] = False
 # The v0.72 crash: the installer's keyboard page looped, starting thousands of keyboard tasks. A normal start needs a few.
 MAX_TASKS = 300
 try:
@@ -161,9 +176,9 @@ try:
     result["booted"] = True
     say("logged in as root on serial console")
 
-    # Wait for the live desktop (Plasma) to be up
+    # Wait for the live desktop (Plasma, or the --compositor/--shell given) to be up
     for _ in range(120):
-        p = run("pgrep -u liveuser -x plasmashell >/dev/null && pgrep -x kwin_wayland >/dev/null && echo UP || echo DOWN")
+        p = run(f"pgrep -u liveuser {SHOPT} '{SHELL}' >/dev/null && pgrep -x {COMP} >/dev/null && echo UP || echo DOWN")
         if "UP" in p:
             break
         time.sleep(5)
@@ -174,8 +189,25 @@ try:
         "uname -r; free -m; cat /proc/cmdline; loginctl list-sessions; systemctl --failed --no-pager; "
         "ps -eo pid,user,rss,cmd --sort=-rss | head -25; "
         "ls -la ~liveuser/Desktop; head -3 /etc/sudoers.d/*; ls /etc/polkit-1/rules.d"))
-    kwin_before = run("pgrep -x kwin_wayland").strip()
-    shell_before = run("pgrep -u liveuser -x plasmashell").strip()
+    # How long the desktop took to come up after the TTY2 sign-in, and what it waited on
+    report("session start", run(
+        "journalctl -b --no-pager -o short-monotonic | grep -iE 'session opened for user liveuser|user@1000|"
+        "import-environment|niri|ryoku-bootstrap|graphical-session|xdg-desktop-autostart|wireplumber|Startup finished' | "
+        "grep -v audit | cut -c1-220 | head -80; "
+        "systemd-analyze --user -M liveuser@.host critical-chain niri.service --no-pager 2>&1 | head -30; "
+        "systemd-analyze --user -M liveuser@.host blame --no-pager 2>&1 | head -20; "
+        "journalctl -b --no-pager -o short-monotonic _UID=1000 | cut -c1-220 | head -60", 300))
+    if a.launcher_entry:
+        # The launcher uses the first liveinst.desktop in liveuser's XDG data dirs; it skips NoDisplay/Hidden entries
+        st = run("for d in ~liveuser/.local/share /usr/local/share /usr/share; do f=$d/applications/liveinst.desktop; "
+                 "[ -f \"$f\" ] && { echo \"entry=$f\"; grep -E '^(Name|Exec|NoDisplay|Hidden)=' \"$f\"; "
+                 "grep -qE '^(NoDisplay|Hidden)=true' \"$f\" && echo LAUNCHER=HIDDEN || echo LAUNCHER=SHOWN; break; }; done; "
+                 "grep -E '^NoDisplay=' /usr/share/applications/liveinst.desktop")
+        report("installer in the app launcher", st)
+        result["installer_in_launcher"] = "LAUNCHER=SHOWN" in st
+        say("installer listed in the app launcher:", result["installer_in_launcher"])
+    kwin_before = run(f"pgrep -x {COMP}").strip()
+    shell_before = run(f"pgrep -u liveuser {SHOPT} '{SHELL}'").strip()
 
     if a.prep:
         report("prep", run(a.prep + " 2>&1 | tail -n 30", 900))
@@ -187,20 +219,33 @@ try:
     t0 = time.time()
     while time.time() - t0 < a.minutes * 60 * mult:
         time.sleep(15)
-        st = run("echo kwin=$(pgrep -x kwin_wayland) shell=$(pgrep -u liveuser -x plasmashell) "
+        st = run(f"echo kwin=$(pgrep -x {COMP}) shell=$(pgrep -u liveuser {SHOPT} '{SHELL}') "
                  "anaconda=$(pgrep -f -c 'bin/anaconda') win=$(pgrep -c -f 'slitherer|firefox') "
                  "mem=$(free -m | awk '/Mem:/{print $7}')MB "
                  "tasks=$(grep -o 'Localization/Task/[0-9]*' /tmp/anaconda-webui.log 2>/dev/null | tail -1 | cut -d/ -f3)")
         say(st.strip(), "screen brightness:", shot("installer"))
         if "win=0" not in st:
             result["installer_window"] = True
-    st = run("echo kwin=$(pgrep -x kwin_wayland) shell=$(pgrep -u liveuser -x plasmashell)")
+    st = run(f"echo kwin=$(pgrep -x {COMP}) shell=$(pgrep -u liveuser {SHOPT} '{SHELL}')")
     result["session_survived"] = bool(kwin_before and shell_before) and \
         (f"kwin={kwin_before} " in st + " " and f"shell={shell_before} " in st + " ")
     say("session survived:", result["session_survived"])
     tasks = run("grep -o 'Localization/Task/[0-9]*' /tmp/anaconda-webui.log | tail -1 | cut -d/ -f3").strip()
     result["installer_calm"] = tasks.isdigit() and int(tasks) < MAX_TASKS
     say(f"installer keyboard tasks: {tasks or 'none'} (fewer than {MAX_TASKS} expected)")
+    if a.account_page:
+        # The installer's final settings (profile + /etc/anaconda/conf.d) are in /run/anaconda/anaconda.conf;
+        # the web installer also logs every page it leaves out
+        st = run("echo profile=$(sed -n 's/^profile_id *= *//p' /run/anaconda/anaconda.conf); "
+                 "sed -n '/^hidden_webui_pages/,/^[^[:space:]]/p' /run/anaconda/anaconda.conf; "
+                 "echo pages_loaded=$(grep -c 'Loading initial data' /tmp/anaconda-webui.log); "
+                 "echo accounts_hidden_in_log=$(grep -c \"Screen 'anaconda-screen-accounts' will not be displayed\" "
+                 "/tmp/anaconda-webui.log)")
+        report("installer: create account page", st)
+        hidden = st.split("pages_loaded=")[0]
+        result["installer_asks_for_user"] = ("hidden_webui_pages" in hidden and "anaconda-screen-accounts" not in hidden
+                                             and "accounts_hidden_in_log=0" in st and "pages_loaded=0" not in st)
+        say("installer asks for a user account:", result["installer_asks_for_user"])
 
     report("after", run(
         "free -m; loginctl list-sessions; systemctl --failed --no-pager; coredumpctl list --no-pager; "
@@ -216,6 +261,7 @@ try:
     report("oom", run("journalctl -b --no-pager -o short-monotonic -u systemd-oomd | tail -40; "
                       "dmesg | grep -iE 'oom|killed process' | tail -20", 120))
     report("anaconda.log", run("tail -n 30 /tmp/anaconda.log; ls -la /tmp", 120))
+    report("installer window errors", run("grep -ihE -B2 -A6 'qt[.]qpa|platform plugin|slitherer|webui-desktop|cannot open display' /tmp/*.log 2>/dev/null | tail -60", 120))
     report("dbus.log + webui log", run("cat /tmp/dbus.log; tail -n 80 /tmp/anaconda-webui.log", 120))
     report("journal: first events after the installer started", run(
         "journalctl -b --no-pager -o short-monotonic --since=@$(cat /tmp/faraday-t0) | grep -v audit | "

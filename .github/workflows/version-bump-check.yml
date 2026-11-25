@@ -1,0 +1,35 @@
+name: Version bump check
+
+# Every pull request must raise fedora/VERSION, so each merge builds a
+# new, correctly named ISO (FaradayOSv<VERSION>.iso). Format: X.YY, e.g. 0.81,
+# or X.YYe for an experimental release, e.g. 0.89e.
+on:
+  pull_request:
+    branches: [main, experimental/quickshell]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: fedora/VERSION must be higher than on the target branch
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          NEW=$(tr -d '[:space:]' < fedora/VERSION)
+          OLD=$(git show "origin/$BASE_REF:fedora/VERSION" 2>/dev/null | tr -d '[:space:]' || true)
+          echo "Target branch ($BASE_REF): v$OLD   This PR: v$NEW"
+          if ! [[ "$NEW" =~ ^[0-9]+\.[0-9]{2}e?$ ]]; then
+            echo "::error file=fedora/VERSION::Version must use the format X.YY or X.YYe (e.g. 0.81 or 0.89e), not '$NEW'."
+            exit 1
+          fi
+          if [ -n "$OLD" ] && [ "$(printf '%s\n%s\n' "$OLD" "$NEW" | sort -V | tail -1)" != "$NEW" -o "$OLD" = "$NEW" ]; then
+            echo "::error file=fedora/VERSION::Bump fedora/VERSION above v$OLD (for example to v$(awk -v v="$OLD" 'BEGIN{printf "%.2f", v+0.01}'))."
+            exit 1
+          fi
+          echo "OK: v$OLD -> v$NEW"
