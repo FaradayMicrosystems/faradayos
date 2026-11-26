@@ -27,6 +27,7 @@ check() { # description, command
 W=$R/usr/share/wallpapers/FaradayOS/contents/images/3260x1838.png
 check "OS name is FaradayOS"                 "grep -q ^NAME=\\\"FaradayOS\\\" $R/usr/lib/os-release"
 check "Version is FaradayOS v$VERSION"       "grep -qx \"PRETTY_NAME=.FaradayOS v$VERSION.\" $R/usr/lib/os-release && grep -qx IMAGE_VERSION=$VERSION $R/usr/lib/os-release && grep -qx VERSION_ID=44 $R/usr/lib/os-release"
+check "Default machine name is faradayos"     "grep -qx DEFAULT_HOSTNAME=faradayos $R/usr/lib/os-release"
 check "ISO volume label FaradayOSv${VERSION//./-}" "xorriso -indev /iso.iso -pvd_info 2>&1 | grep -q \"Volume Id *: FaradayOSv${VERSION//./-}\""
 check "Boot splash theme installed"          "test -f $R/usr/share/plymouth/themes/faraday/faraday.script -a -f $R/usr/share/plymouth/themes/faraday/logo.png -a -f $R/usr/share/plymouth/themes/faraday/frame-536.png"
 check "Boot splash set as default"           "grep -q ^Theme=faraday $R/etc/plymouth/plymouthd.conf"
