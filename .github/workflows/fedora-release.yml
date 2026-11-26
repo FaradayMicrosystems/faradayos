@@ -32,45 +32,61 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_sha || github.sha }}
 
-      - name: Download ISO from the build
+      - name: Download both editions' ISOs from the build
         run: |
           RUN=${{ github.event.workflow_run.id || inputs.run_id }}
           [ -n "$RUN" ] || RUN=$(gh run list -R "$GITHUB_REPOSITORY" -w fedora-iso.yml -b main -s success -L 1 --json databaseId -q '.[0].databaseId')
-          echo "Publishing ISO from build run $RUN"
+          echo "Publishing ISOs from build run $RUN"
           echo "RUN=$RUN" >> "$GITHUB_ENV"
           gh run download "$RUN" -R "$GITHUB_REPOSITORY" -n FaradayOS-Fedora-ISO -D iso
+          gh run download "$RUN" -R "$GITHUB_REPOSITORY" -n FaradayOS-Workplace-ISO -D iso
           ls -l iso
 
-      - name: Split ISO into parts
+      - name: Split ISOs into parts
         run: |
-          V=$(cat fedora/VERSION); ISO=FaradayOSv$V.iso
+          V=$(cat fedora/VERSION)
           cd iso
-          sha256sum -c "$ISO.sha256"
-          split -b 1900M -d -a 1 "$ISO" "$ISO.part"
-          rm "$ISO"
-          sha256sum "$ISO".part[0-9] > SHA256SUMS-parts.txt
+          for ED in performance workplace; do
+            ISO=FaradayOSv$V-$ED.iso
+            sha256sum -c "$ISO.sha256"
+            split -b 1900M -d -a 1 "$ISO" "$ISO.part"
+            rm "$ISO"
+          done
+          sha256sum *.iso.part[0-9] > SHA256SUMS-parts.txt
           ls -l
 
       - name: Publish release
         run: |
-          V=$(cat fedora/VERSION); ISO=FaradayOSv$V.iso; TAG=v$V
-          PARTS=$(ls iso/"$ISO".part[0-9] | xargs -n1 basename | tr '\n' ' ')
-          cat > notes.md <<EOF
-          FaradayOS v$V (Fedora 44 KDE edition). Built by [run $RUN]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$RUN).
-
-          **Version numbering changed:** versions are now \`v0.<number>\` (this is v$V). Earlier releases named \`v0.0.<number>\` (such as v0.0.70) used the wrong format; that was Claude's error. All new releases use the new format.
-
-          **Download all \`$ISO.part*\` files below**, then join them into one ISO:
-
-          Fastest download (many connections at once; Linux \`sudo dnf install aria2\` or \`sudo pacman -S aria2\`):
-          \`aria2c -Z -x16 -s16 $(for p in $PARTS; do printf '%s ' "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases/download/$TAG/$p"; done)\`
-
-          - Linux: \`cat $ISO.part* > $ISO\`
-          - Windows (Command Prompt, in the download folder): \`copy /b $(echo $PARTS | sed 's/ / + /g') $ISO\`
-
-          Check it (optional): \`sha256sum -c $ISO.sha256\` should print \`OK\`.
-          Then write \`$ISO\` to a USB stick (Fedora Media Writer or balenaEtcher). See fedora/README.md.
-          EOF
+          V=$(cat fedora/VERSION); TAG=v$V; DL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases/download/$TAG
+          howto() { # edition
+            ISO=FaradayOSv$V-$1.iso
+            PARTS=$(ls iso/"$ISO".part[0-9] | xargs -n1 basename | tr '\n' ' ')
+            echo "Fastest download (many connections at once; \`sudo dnf install aria2\` or \`sudo pacman -S aria2\`):"
+            echo
+            echo "\`aria2c -Z -x16 -s16 $(for p in $PARTS; do printf '%s ' "$DL/$p"; done)\`"
+            echo
+            echo "- Linux: \`cat $ISO.part* > $ISO\`"
+            echo "- Windows (Command Prompt, in the download folder): \`copy /b $(echo $PARTS | sed 's/ *$//; s/ / + /g') $ISO\`"
+            echo "- Check it (optional): \`sha256sum -c $ISO.sha256\` should print \`OK\`."
+          }
+          {
+            echo "FaradayOS v$V (Fedora 44, Quickshell desktop). Built by [run $RUN]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$RUN)."
+            echo
+            echo "Two editions. Download all \`.part\` files of ONE edition, then join them into one ISO."
+            echo
+            echo "## Performance edition: gaming, VR, engineering"
+            echo "\`FaradayOSv$V-performance.iso\`: Steam, VR tools, KDE Plasma on TTY4."
+            echo
+            howto performance
+            echo
+            echo "## Workplace edition: office, CAD, design"
+            echo "\`FaradayOSv$V-workplace.iso\`: lighter, no gaming or VR, with a software catalog by category (office, CAD, design, communication, PDF, development, remote access)."
+            echo
+            howto workplace
+            echo
+            echo "Then write the ISO to a USB stick (Fedora Media Writer or balenaEtcher). See fedora/README.md."
+          } > notes.md
+          cat notes.md
           gh release delete "$TAG" -R "$GITHUB_REPOSITORY" -y --cleanup-tag 2>/dev/null || true
           gh release create "$TAG" -R "$GITHUB_REPOSITORY" --target "$(git rev-parse HEAD)" \
             -t "FaradayOS v$V" -F notes.md --latest iso/*

@@ -1,0 +1,74 @@
+name: Edition package probe
+
+# Quick check (2-5 min, no ISO build): resolves each edition's whole package list with its repos, like the ISO
+# build does, and checks that every app in the software catalog (addons.list) exists.
+on:
+  workflow_dispatch:
+  push:
+    branches: ['claude/**', 'experimental/**']
+    paths: ['.github/workflows/edition-probe.yml', 'fedora/faradayos.ks', 'fedora/editions.list', 'fedora/edition-ks.sh', 'fedora/overlay/usr/share/faraday/addons.list']
+
+jobs:
+  probe:
+    name: Packages (${{ matrix.edition }})
+    runs-on: ubuntu-latest
+    container: fedora:44
+    strategy:
+      fail-fast: false
+      matrix:
+        edition: [performance, workplace]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Resolve the kickstart package list
+        run: |
+          KS=/tmp/faradayos-${{ matrix.edition }}.ks
+          bash fedora/edition-ks.sh ${{ matrix.edition }} > $KS
+          mkdir -p /tmp/repos
+          # repos from the kickstart (url + repo lines)
+          sed -n 's/^url --metalink=\(.*\)/fedora \1 metalink/p; s/^repo --name=\([^ ]*\) --\(metalink\|mirrorlist\|baseurl\)=\([^ ]*\)\(.*\)/\1 \3 \2\4/p' $KS |
+          while read -r name url kind rest; do
+            inc=$(echo "$rest" | sed -n 's/.*--includepkgs=\([^ ]*\).*/\1/p' | tr , ' ')
+            printf '[%s]\nname=%s\n%s=%s\ngpgcheck=0\n%s\n' "$name" "$name" "$kind" "$url" "${inc:+includepkgs=$inc}" > /tmp/repos/$name.repo
+          done
+          cat /tmp/repos/*.repo
+          PKGS=$(sed -n '/^%packages/,/^%end/p' $KS | grep -v '^%\|^#\|^-\|^$' | xargs)
+          EXCL=$(sed -n '/^%packages/,/^%end/p' $KS | sed -n 's/^-//p' | xargs -I{} echo --exclude={} | xargs)
+          dnf -y --releasever=44 --installroot=/tmp/root --use-host-config --setopt=reposdir=/tmp/repos --setopt=install_weak_deps=True \
+            $EXCL install --assumeno $PKGS > /tmp/out.txt 2>&1
+          grep -iE 'problem|nothing provides|conflict|requires|No match' /tmp/out.txt | head -40
+          grep -E 'Transaction Summary|Total size|After this' /tmp/out.txt
+          grep -E '^ *(steam|plasma-workspace|niri|hyprland|ryoku-desktop|evince) ' /tmp/out.txt | head
+          # Fail on unresolvable packages (the ISO build would fail the same way)
+          grep -q 'Transaction Summary' /tmp/out.txt && ! grep -qiE '^ *problem|nothing provides|No match for argument' /tmp/out.txt
+      - name: Hyprland status (Ryoku stable + testing, COPR versions)
+        if: matrix.edition == 'performance'
+        continue-on-error: true
+        run: |
+          set +e
+          printf '[ryoku-testing]\nname=ryoku-testing\nbaseurl=https://repo.ryoku.dev/testing/fedora/44/x86_64\ngpgcheck=0\n' > /tmp/repos/ryoku-testing.repo
+          Q="dnf -q --releasever=44 --setopt=reposdir=/tmp/repos repoquery"
+          $Q --showduplicates --qf '%{name}-%{evr} %{repoid}\n' ryoku-desktop-hyprland hyprglass aquamarine hyprgraphics hyprland
+          echo "== hyprglass needs"; $Q --showduplicates --requires hyprglass | grep -i 'aquamarine\|hyprgraphics\|hyprland'
+          echo "== who provides libaquamarine.so.14"; $Q --whatprovides 'libaquamarine.so.14()(64bit)'
+          echo "== ryoku-desktop-hyprland needs"; $Q --requires ryoku-desktop-hyprland
+
+  catalog:
+    name: Software catalog apps exist
+    runs-on: ubuntu-latest
+    container: fedora:44
+    steps:
+      - uses: actions/checkout@v4
+      - name: Every dnf app is in Fedora or RPM Fusion, every Flathub app is on Flathub
+        run: |
+          L=fedora/overlay/usr/share/faraday/addons.list
+          field() { grep -v '^[[:space:]]*#' $L | grep -E "^[^|[]*[|][[:space:]]*$1[[:space:]]*[|]" | cut -d'|' -f3 | xargs -n1 | sort -u; }
+          dnf -y -q install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-44.noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-44.noarch.rpm >/dev/null
+          bad=0
+          for p in $(field dnf); do
+            dnf -q repoquery --available --qf '%{name}\n' "$p" 2>/dev/null | grep -qx "$p" && echo "OK    dnf $p" || { echo "MISSING dnf $p"; bad=1; }
+          done
+          for a in $(field flatpak); do
+            curl -fsS --retry 3 -o /dev/null "https://flathub.org/api/v2/appstream/$a" && echo "OK    flathub $a" || { echo "MISSING flathub $a"; bad=1; }
+          done
+          echo "Categories:"; grep '^\[' $L
+          exit $bad

@@ -1,11 +1,12 @@
 #!/bin/bash
 # Checks a built FaradayOS Fedora ISO: branding, boot splash, NVIDIA driver, gaming, VR installers, touchpad, fingerprint.
-# Usage: fedora/verify-iso.sh [path/to/FaradayOSv<version>.iso]
+# Works for every edition (fedora/editions.list): it reads the edition from the image and runs that edition's checks.
+# Usage: fedora/verify-iso.sh [path/to/FaradayOSv<version>-<edition>.iso]   (default: the performance ISO in out-fedora)
 # Runs inside a Fedora container (podman or docker). Prints PASS/FAIL per check.
 set -euo pipefail
 
 VERSION=$(cat "$(dirname "$0")/VERSION")
-ISO=$(realpath "${1:-$(dirname "$0")/../out-fedora/FaradayOSv$VERSION.iso}")
+ISO=$(realpath "${1:-$(dirname "$0")/../out-fedora/FaradayOSv$VERSION-performance.iso}")
 [ -f "$ISO" ] || { echo "ISO not found: $ISO"; exit 1; }
 if command -v podman >/dev/null; then ENGINE=podman; else ENGINE=docker; fi
 SUDO=""; [ "$(id -u)" -eq 0 ] || SUDO=sudo
@@ -20,14 +21,20 @@ mount -o loop,ro /m/iso/LiveOS/squashfs.img /m/sq
 if [ -f /m/sq/LiveOS/rootfs.img ]; then mount -o loop,ro /m/sq/LiveOS/rootfs.img /m/root; R=/m/root; else R=/m/sq; fi
 
 fails=0
+ED=$(cat $R/usr/share/faraday/edition 2>/dev/null || echo unknown)
+echo "Edition: $ED"
 echo "Package versions: $(chroot $R rpm -q kernel akmod-nvidia libreoffice-core | xargs)"
 check() { # description, command
   if eval "$2" >/dev/null 2>&1; then echo "PASS  $1"; else echo "FAIL  $1"; fails=$((fails+1)); fi
 }
+# Checks for one edition only: perf = performance (gaming, VR, Plasma), work = workplace
+perf() { if [ "$ED" = performance ]; then check "$@"; fi; }
+work() { if [ "$ED" = workplace ]; then check "$@"; fi; }
+check "Edition recorded in the image (performance or workplace)" "test $ED = performance -o $ED = workplace"
 W=$R/usr/share/wallpapers/FaradayOS/contents/images/3260x1838.png
 check "OS name is FaradayOS"                 "grep -q ^NAME=\\\"FaradayOS\\\" $R/usr/lib/os-release"
 check "Version is FaradayOS v$VERSION"       "grep -qx \"PRETTY_NAME=.FaradayOS v$VERSION.\" $R/usr/lib/os-release && grep -qx IMAGE_VERSION=$VERSION $R/usr/lib/os-release && grep -qx VERSION_ID=44 $R/usr/lib/os-release"
-check "ISO volume label FaradayOSv${VERSION//./-}" "xorriso -indev /iso.iso -pvd_info 2>&1 | grep -q \"Volume Id *: FaradayOSv${VERSION//./-}\""
+check "ISO volume label FaradayOSv${VERSION//./-}-$ED" "xorriso -indev /iso.iso -pvd_info 2>&1 | grep -qE \"Volume Id *: FaradayOSv${VERSION//./-}-$ED *$\""
 check "Boot splash theme installed"          "test -f $R/usr/share/plymouth/themes/faraday/faraday.script -a -f $R/usr/share/plymouth/themes/faraday/logo.png -a -f $R/usr/share/plymouth/themes/faraday/frame-536.png"
 check "Boot splash set as default"           "grep -q ^Theme=faraday $R/etc/plymouth/plymouthd.conf"
 check "Boot splash inside live initramfs"    "lsinitrd \$(find /m/iso -name initrd.img | head -1) | grep -q plymouth/themes/faraday/faraday.script"
@@ -57,8 +64,8 @@ check "Live ISO boot menu says FaradayOS"     "echo \"\$MENU\" | grep -q Faraday
 check "NVIDIA kernel module built"           "find $R/usr/lib/modules -name \"nvidia.ko*\" | grep -q ."
 check "NVIDIA: nouveau kept off (modprobe + boot image)" "grep -qx \"blacklist nouveau\" $R/usr/lib/modprobe.d/faraday-nvidia.conf && grep -q nouveau $R/usr/lib/dracut/dracut.conf.d/90-faraday-nvidia.conf"
 check "NVIDIA: installed system boots without nouveau" "test -x $R/usr/share/faraday/nvidia-boot-setup.sh && grep -q nvidia-boot-setup.sh $R/usr/share/anaconda/post-scripts/91-faraday-nvidia.ks && grep -q modprobe.blacklist=nouveau $R/usr/share/faraday/nvidia-boot-setup.sh"
-check "Steam, gamescope, MangoHud, GameMode" "chroot $R rpm -q steam gamescope mangohud gamemode"
-check "Steam 32-bit graphics: NVIDIA + Mesa"  "chroot $R rpm -q xorg-x11-drv-nvidia-libs.i686 mesa-dri-drivers.i686 mesa-vulkan-drivers.i686 && test \$(chroot $R rpm -q --qf %{VERSION} xorg-x11-drv-nvidia-libs.i686) = \$(chroot $R rpm -q --qf %{VERSION} xorg-x11-drv-nvidia-libs.x86_64)"
+perf  "Steam, gamescope, MangoHud, GameMode" "chroot $R rpm -q steam gamescope mangohud gamemode"
+perf  "Steam 32-bit graphics: NVIDIA + Mesa"  "chroot $R rpm -q xorg-x11-drv-nvidia-libs.i686 mesa-dri-drivers.i686 mesa-vulkan-drivers.i686 && test \$(chroot $R rpm -q --qf %{VERSION} xorg-x11-drv-nvidia-libs.i686) = \$(chroot $R rpm -q --qf %{VERSION} xorg-x11-drv-nvidia-libs.x86_64)"
 check "Full ffmpeg codecs (RPM Fusion)"      "ls $R/usr/lib64/libavcodec.so.* && ! chroot $R rpm -q libavcodec-free"
 Z=$R/etc/firewalld/zones
 # Big optional software ships as one-click installers, not in the ISO
@@ -82,7 +89,9 @@ installer_pkgs() {
   [ "$n" -eq $(echo $VRPKGS | wc -w) ]
 }
 check "Lean ISO: VR apps, Wine, Lutris, CUDA not preinstalled" lean
-check "Installers: VR tools + Wine/Lutris in app menu" installers
+perf  "Installers: VR tools + Wine/Lutris in app menu" installers
+wine_installer() { test -x $R/usr/bin/faraday-install-wine -a -f $R/usr/share/applications/faraday-install-wine.desktop -a -x $R/usr/libexec/faraday/install-addons-system -a -x $R/usr/bin/faraday-addons; }
+work  "Installers: Wine/Lutris in app menu" wine_installer
 check "Installers: all their packages are downloadable" installer_pkgs
 ADDONFLATPAKS=$(addons_of flatpak)
 flathub_ids() { for a in $ADDONFLATPAKS; do curl -fsS --retry 3 -o /dev/null https://flathub.org/api/v2/appstream/$a || { echo "not on Flathub: $a"; return 1; }; done; }
@@ -111,12 +120,12 @@ check "Add-ons: Claude Code repository has claude-code" "curl -fsSL --retry 3 ht
 claude_desktop() { dnf -y -q install dpkg gnupg2 >/dev/null 2>&1; bash $R/usr/libexec/faraday/addon-claude-desktop --check >/tmp/claude-desktop.log 2>&1; }
 check "Add-ons: Claude Desktop official package verifies and unpacks" claude_desktop
 tail -3 /tmp/claude-desktop.log 2>/dev/null || true
-check "Installers: ALVR download link works" "curl -fsIL -o /dev/null https://github.com/alvr-org/ALVR/releases/latest/download/alvr_streamer_linux.tar.gz"
-check "VR: SteamVR setup launcher"           "test -x $R/usr/bin/faraday-steamvr-setup -a -f $R/usr/share/applications/faraday-steamvr-setup.desktop"
-check "VR: readiness check + login notice"   "test -x $R/usr/bin/faraday-vr-check -a -f $R/etc/xdg/autostart/faraday-vr-check.desktop"
-check "VR: firewall ports open (9757, 9943-9944)" "grep -q 9943-9944 $R/usr/lib/firewalld/services/faradayos-vr.xml && grep -qs faradayos-vr $Z/*.xml"
-check "VR: boot setup + Avahi enabled"       "ls $R/etc/systemd/system/multi-user.target.wants/faraday-vr-setup.service && ls $R/etc/systemd/system/multi-user.target.wants/avahi-daemon.service"
-check "VR: headset USB rules + steam-devices" "test -f $R/usr/lib/udev/rules.d/70-faradayos-vr.rules && chroot $R rpm -q steam-devices"
+perf  "Installers: ALVR download link works" "curl -fsIL -o /dev/null https://github.com/alvr-org/ALVR/releases/latest/download/alvr_streamer_linux.tar.gz"
+perf  "VR: SteamVR setup launcher"           "test -x $R/usr/bin/faraday-steamvr-setup -a -f $R/usr/share/applications/faraday-steamvr-setup.desktop"
+perf  "VR: readiness check + login notice"   "test -x $R/usr/bin/faraday-vr-check -a -f $R/etc/xdg/autostart/faraday-vr-check.desktop"
+perf  "VR: firewall ports open (9757, 9943-9944)" "grep -q 9943-9944 $R/usr/lib/firewalld/services/faradayos-vr.xml && grep -qs faradayos-vr $Z/*.xml"
+perf  "VR: boot setup + Avahi enabled"       "ls $R/etc/systemd/system/multi-user.target.wants/faraday-vr-setup.service && ls $R/etc/systemd/system/multi-user.target.wants/avahi-daemon.service"
+perf  "VR: headset USB rules + steam-devices" "test -f $R/usr/lib/udev/rules.d/70-faradayos-vr.rules && chroot $R rpm -q steam-devices"
 check "AMD/Intel VA-API video encode"       "chroot $R rpm -q mesa-va-drivers-freeworld"
 K=$(ls $R/usr/lib/modules | sort -V | tail -1)
 check "Touchpad: libinput + kernel drivers"  "chroot $R rpm -q libinput xorg-x11-drv-libinput && ! for m in i2c-hid-acpi hid-multitouch psmouse; do find $R/usr/lib/modules/$K -name \"\$m.ko*\" | grep -q . || grep -q \"/\$m.ko\" $R/usr/lib/modules/$K/modules.builtin || echo missing; done | grep -q missing"
@@ -124,7 +133,9 @@ check "Touchpad: tap to click default"       "grep -q TapToClick=true $R/etc/xdg
 check "Fingerprint: fprintd + PAM installed" "chroot $R rpm -q fprintd fprintd-pam libfprint"
 # /etc/pam.d/system-auth is an absolute symlink into /etc/authselect, so read the target inside the image
 check "Fingerprint: login uses fingerprint"  "grep -qx with-fingerprint $R/etc/authselect/authselect.conf && grep -q pam_fprintd $R/etc/authselect/system-auth"
-check "Add-ons list readable (every entry listed)" "S=\$(chroot $R env HOME=/root /usr/bin/faraday-addons --status) && grep -qw wine <<<\"\$S\" && grep -qw vr <<<\"\$S\""
+perf  "Add-ons list readable (every entry listed)" "S=\$(chroot $R env HOME=/root /usr/bin/faraday-addons --status) && grep -qw wine <<<\"\$S\" && grep -qw vr <<<\"\$S\""
+work  "Software catalog readable, with its categories" "S=\$(chroot $R env HOME=/root /usr/bin/faraday-addons --status) && grep -qw freecad <<<\"\$S\" && grep -qw gimp <<<\"\$S\" && grep -qw zoom <<<\"\$S\" && test \$(grep -c \"^\\[\" $R/usr/share/faraday/addons.list) -ge 6"
+work  "Software catalog: no gaming or VR section" "! grep -qiE \"^\\[.*(gaming|performance)|^(vr|heroic|ckan|protonupqt) \" $R/usr/share/faraday/addons.list"
 check "Add-ons installer icon on the desktop for new users" "test -x $R/etc/skel/Desktop/faraday-addons.desktop -a -x $R/usr/bin/faraday-addons && grep -q Exec=/usr/bin/faraday-addons $R/etc/skel/Desktop/faraday-addons.desktop && chroot $R rpm -q kdialog kitty"
 check "Install removes live user + autologin" "test -x $R/usr/share/faraday/remove-liveuser.sh && grep -q remove-liveuser.sh $R/usr/share/anaconda/post-scripts/90-faraday-remove-liveuser.ks && ls $R/etc/systemd/system/multi-user.target.wants/faraday-remove-liveuser.service"
 check "No live user baked into the image"   "! grep -q ^liveuser: $R/etc/passwd && ! grep -rqs ^User=liveuser $R/etc/plasmalogin.conf $R/etc/plasmalogin.conf.d $R/etc/sddm.conf $R/etc/sddm.conf.d"
@@ -134,7 +145,7 @@ check "Installer keyboard: live layout readable" "chroot $R env GSETTINGS_BACKEN
 check "Live session configured (Ryoku)"      "grep -q ryoku $R/etc/sysconfig/livesys && test -x $R/usr/libexec/livesys/sessions.d/livesys-ryoku"
 # Quickshell edition (experimental branch): FaradayOS desktop (Ryoku on Hyprland) on TTY2, KDE Plasma on TTY4
 check "FaradayOS desktop: Quickshell + compositor installed" "chroot $R rpm -q ryoku-desktop ryoku-shell quickshell && { chroot $R rpm -q ryoku-desktop-hyprland hyprland || chroot $R rpm -q ryoku-desktop-niri niri; }"
-check "KDE Plasma installed (TTY4)"          "chroot $R rpm -q plasma-workspace plasma-desktop && test -x $R/usr/bin/startplasma-wayland"
+perf  "KDE Plasma installed (TTY4)"          "chroot $R rpm -q plasma-workspace plasma-desktop && test -x $R/usr/bin/startplasma-wayland"
 check "TTY2 starts Hyprland, TTY4 starts Plasma" "test -x $R/usr/libexec/faraday/tty-session && grep -q tty2 $R/etc/profile.d/faraday-tty-session.sh && grep -q tty4 $R/etc/fish/conf.d/faraday-tty-session.fish && test -x $R/usr/share/ryoku/lockscreen/ryoku-wayland-session && grep -q Hyprland $R/usr/libexec/faraday/tty-session && grep -q startplasma-wayland $R/usr/libexec/faraday/tty-session"
 check "niri starts without the import-environment warning" "test -x $R/usr/libexec/faraday/niri-session && grep -q /usr/libexec/faraday/niri-session $R/usr/libexec/faraday/tty-session && grep -q \"dbus-update-activation-environment --systemd --all\" $R/usr/libexec/faraday/niri-session"
 check "Ryoku config copied once at first sign-in (bootstrap not run by every login)" "! test -e $R/etc/systemd/user/default.target.wants/ryoku-bootstrap.service"
@@ -148,6 +159,14 @@ check "FaradayOS branding: Hub name, wallpaper, bar mark" "grep -qx \"Name=Farad
 check "FaradayOS branding re-applied after updates" "grep -q rebrand-ryoku.py $R/etc/dnf/libdnf5-plugins/actions.d/zz-faraday-rebrand-ryoku.actions"
 check "Installer (web UI) installed"         "chroot $R rpm -q anaconda-webui firefox"
 check "Installer window: session env has no shell-quoted values" "grep -qx QT_QPA_PLATFORM=wayland $R/etc/environment.d/99-zz-faradayos.conf"
+
+# Workplace edition: same desktop and drivers, no gaming, no VR, no KDE Plasma
+work  "Workplace: no Steam, gamescope, MangoHud, GameMode" "! chroot $R rpm -q steam gamescope mangohud gamemode | grep -qv \"not installed\""
+work  "Workplace: no KDE Plasma" "! chroot $R rpm -q plasma-workspace"
+work  "Workplace: no 32-bit NVIDIA libraries" "! chroot $R rpm -q xorg-x11-drv-nvidia-libs.i686"
+work  "Workplace: VR tools and gaming settings removed" "! test -e $R/usr/bin/faraday-install-vr -o -e $R/etc/xdg/autostart/faraday-vr-check.desktop -o -e $R/usr/lib/systemd/system/faraday-vr-setup.service -o -e $R/etc/sysctl.d/99-faraday-gaming.conf"
+work  "Workplace: everyday apps (PDF, images, text, calculator, archives)" "chroot $R rpm -q evince loupe gnome-text-editor gnome-calculator file-roller"
+work  "Workplace: TTY4 is a plain console (no Plasma to start)" "grep -q startplasma-wayland $R/etc/profile.d/faraday-tty-session.sh"
 
 umount -R /m/root 2>/dev/null || true; umount /m/sq /m/iso
 echo; [ $fails -eq 0 ] && echo "All checks passed." || { echo "$fails check(s) failed."; exit 1; }

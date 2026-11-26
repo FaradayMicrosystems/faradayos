@@ -1,0 +1,8 @@
+# FaradayOS editions. One line each; the FaradayOS Builder app shows one button per line.
+#   id | button text | what it is
+# Build one:  ./fedora/build-iso.sh <id>     (no id = performance)
+# The ISO is out-fedora/FaradayOSv<version>-<id>.iso
+# Lines in fedora/faradayos.ks between "#@if <id> ..." and "#@end" are only in those editions
+# (see fedora/edition-ks.sh). To add an edition: add a line here, then tag its packages in faradayos.ks.
+performance | Performance | Gaming, VR and engineering: the full FaradayOS with Steam, KDE Plasma and the VR tools
+workplace   | Workplace   | Office, CAD and design: lighter, no gaming or VR, with a software catalog by category
