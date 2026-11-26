@@ -22,6 +22,7 @@ jobs:
           RUN=$(gh run list -R "$GITHUB_REPOSITORY" -w fedora-iso.yml -b "$GITHUB_REF_NAME" -s success -L 1 --json databaseId -q '.[0].databaseId')
           echo "Checking ISO from build run $RUN"
           gh run download "$RUN" -R "$GITHUB_REPOSITORY" -n FaradayOS-Fedora-ISO -D out-fedora
+          gh run download "$RUN" -R "$GITHUB_REPOSITORY" -n FaradayOS-Workplace-ISO -D out-fedora || echo "No workplace ISO in that run"
 
-      - name: Verify ISO (branding, boot splash, NVIDIA, gaming)
-        run: ./fedora/verify-iso.sh
+      - name: Verify ISOs (every edition in the run)
+        run: for iso in out-fedora/FaradayOS*.iso; do echo "== $iso"; ./fedora/verify-iso.sh "$iso" || exit 1; done

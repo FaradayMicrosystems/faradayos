@@ -7,6 +7,10 @@ on:
       run_id:
         description: Build run to inspect (empty = newest green build on main)
         required: false
+      edition:
+        description: Edition to inspect (performance or workplace)
+        required: false
+        default: performance
   push:
     branches: ['claude/**']
     paths: ['.github/workflows/fedora-size-report.yml']
@@ -26,7 +30,7 @@ jobs:
           RUN=${{ inputs.run_id }}
           [ -n "$RUN" ] || RUN=$(gh run list -R "$GITHUB_REPOSITORY" -w fedora-iso.yml -b main -s success -L 1 --json databaseId -q '.[0].databaseId')
           echo "Inspecting ISO from build run $RUN"
-          gh run download "$RUN" -R "$GITHUB_REPOSITORY" -n FaradayOS-Fedora-ISO -D iso
+          gh run download "$RUN" -R "$GITHUB_REPOSITORY" -n ${{ (inputs.edition || 'performance') == 'workplace' && 'FaradayOS-Workplace-ISO' || 'FaradayOS-Fedora-ISO' }} -D iso
 
       - name: Report
         run: |
