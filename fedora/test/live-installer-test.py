@@ -197,6 +197,18 @@ try:
         "systemd-analyze --user -M liveuser@.host critical-chain niri.service --no-pager 2>&1 | head -30; "
         "systemd-analyze --user -M liveuser@.host blame --no-pager 2>&1 | head -20; "
         "journalctl -b --no-pager -o short-monotonic _UID=1000 | cut -c1-220 | head -60", 300))
+    # What is on screen at first sign-in: every layer surface (bar, toasts, popups) and window, the autostart
+    # apps that ran, and what the shell logged about notifications. Finds stray boxes like the empty card that
+    # showed at the top right of v0.89e.
+    report("on screen at first sign-in", run(
+        "S=$(ls /run/user/1000/niri.*.sock 2>/dev/null | head -1); "
+        "for q in layers windows; do echo \"== niri msg $q\"; "
+        "runuser -u liveuser -- env NIRI_SOCKET=$S XDG_RUNTIME_DIR=/run/user/1000 niri msg $q 2>&1 | head -80; done; "
+        "echo '== autostart services'; "
+        "systemctl --user -M liveuser@.host list-units --all --no-pager --plain 'app-*@autostart.service' 2>&1 | head -40; "
+        "echo '== notifications and shell warnings'; "
+        "journalctl -b --no-pager -o short-monotonic _UID=1000 | grep -iE 'notif|kdialog|qs\\[|quickshell|ryogami' | "
+        "cut -c1-220 | tail -60", 300))
     if a.launcher_entry:
         # The launcher uses the first liveinst.desktop in liveuser's XDG data dirs; it skips NoDisplay/Hidden entries
         st = run("for d in ~liveuser/.local/share /usr/local/share /usr/share; do f=$d/applications/liveinst.desktop; "
