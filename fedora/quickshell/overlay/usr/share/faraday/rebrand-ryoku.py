@@ -272,6 +272,59 @@ def kde_only():
         write_if_changed(path, new, old)
 
 
+# 7a. Quiet first sign-in. Ryoku's wallpaper daemon (Ryogami) sends a "Wallpaper changed" notification
+#     whenever it applies a wallpaper, also when the first sign-in sets the default one, so a fresh
+#     desktop opened with a toast at the top right. Default it off (the seed every new user gets, and
+#     users who still have Ryogami's default); a user can turn it on in the wallpaper picker.
+RYOGAMI_KEY = ("general", "notifyOnWallpaperChange")
+
+
+def ryogami_files():
+    return [SHARE + "/config/ryoku/ryogami.json"] + glob.glob("/home/*/.config/ryoku/ryogami.json")
+
+
+def quiet_wallpaper():
+    for path in ryogami_files():
+        if not os.path.isdir(os.path.dirname(path)):
+            continue
+        old = read(path)
+        try:
+            data = json.loads(old) if old else {}
+        except ValueError:
+            continue
+        if not isinstance(data, dict):
+            continue
+        section = data.setdefault(RYOGAMI_KEY[0], {})
+        if not isinstance(section, dict) or RYOGAMI_KEY[1] in section:
+            continue                # the user's own choice stays
+        section[RYOGAMI_KEY[1]] = False
+        write_if_changed(path, json.dumps(data, indent=2) + "\n", old or "")
+        if path.startswith("/home/"):
+            st = os.stat(os.path.dirname(path))
+            os.chown(path, st.st_uid, st.st_gid)
+
+
+# 7b. Login screen: offer only "FaradayOS" and "KDE Plasma" (faradayos*.desktop, both through
+#     /usr/libexec/faraday/desktop-session). The packages' own entries (niri, Hyprland, Plasma,
+#     Plasma X11) start the same desktops without FaradayOS's setup, so the login screen hides them.
+SESSION_GLOBS = ["/usr/share/wayland-sessions/*.desktop", "/usr/share/xsessions/*.desktop"]
+
+
+def other_sessions():
+    return [p for g in SESSION_GLOBS for p in sorted(glob.glob(g))
+            if not os.path.basename(p).startswith("faradayos")]
+
+
+def login_sessions():
+    for path in other_sessions():
+        old = read(path)
+        if old is None or re.search(r"^NoDisplay=true", old, flags=re.M):
+            continue
+        new = re.sub(r"^NoDisplay=.*\n", "", old, flags=re.M)
+        new = re.sub(r"^\[Desktop Entry\]\n", "[Desktop Entry]\nNoDisplay=true\n", new, count=1, flags=re.M)
+        write_if_changed(path, new, old)
+
+
 # 8. Boot: keep the FaradayOS splash and a GRUB menu with only FaradayOS entries.
 #    ryoku-desktop's update script re-themes both; undo that.
 def boot():
@@ -337,6 +390,17 @@ def check():
     for path in kde_only_files():
         if not re.search(r"^OnlyShowIn=", read(path) or "", flags=re.M):
             left.append("%s: autostarts outside KDE (black window in niri)" % path)
+    seed = SHARE + "/config/ryoku/ryogami.json"
+    if os.path.isdir(os.path.dirname(seed)):
+        try:
+            on = json.loads(read(seed) or "{}").get(RYOGAMI_KEY[0], {}).get(RYOGAMI_KEY[1], True)
+        except (ValueError, AttributeError):
+            on = True
+        if on is not False:
+            left.append("%s: wallpaper-change notification on (toast at first sign-in)" % seed)
+    for path in other_sessions():
+        if not re.search(r"^NoDisplay=true", read(path) or "", flags=re.M):
+            left.append("%s: shown on the login screen" % path)
     for line in left:
         print("still Ryoku:", line)
     return 1 if left else 0
@@ -347,7 +411,7 @@ def main():
         sys.exit(check())
     if not os.path.isdir(SHARE):
         return                      # Ryoku is not installed: nothing to do
-    for step in (catalogs, qml, desktop_files, logos, rices, niri, kde_only, boot):
+    for step in (catalogs, qml, desktop_files, logos, rices, niri, kde_only, quiet_wallpaper, login_sessions, boot):
         try:
             step()
         except Exception as e:      # one failed step must not stop the others or dnf

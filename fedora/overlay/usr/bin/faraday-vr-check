@@ -116,6 +116,9 @@ else pass "No active firewall blocking VR ports"; fi
 # --- Report ----------------------------------------------------------------
 SUMMARY="VR readiness: $OK ok, $WARN warnings, $FAIL problems"
 if [[ $MODE == --login ]]; then
+  # VR tools are an optional add-on: say nothing at sign-in on a PC that never installed them
+  # (it popped up on every first sign-in, also on office PCs).
+  pkg wivrn || [[ -x /opt/alvr/bin/alvr_dashboard ]] || exit 0
   STAMP="${XDG_STATE_HOME:-$HOME/.local/state}/faradayos/vr-ready"
   (( FAIL == 0 && WARN == 0 )) && { mkdir -p "$(dirname "$STAMP")"; touch "$STAMP"; exit 0; }
   [[ -f $STAMP ]] && (( FAIL == 0 )) && exit 0

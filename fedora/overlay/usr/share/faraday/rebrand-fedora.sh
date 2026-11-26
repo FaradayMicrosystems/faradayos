@@ -7,6 +7,8 @@ FV=$(cat /usr/share/faraday/version 2>/dev/null)
 if [ -f $O ]; then
   sed -i 's/^NAME=.*/NAME="FaradayOS"/; s/^LOGO=.*/LOGO=faradayos/; s/^ANSI_COLOR=.*/ANSI_COLOR="38;5;208"/' $O
   grep -q '^LOGO=' $O || echo 'LOGO=faradayos' >> $O
+  # Machine name when none was chosen (login prompt, terminal): "faradayos", not systemd's fallback "fedora"
+  sed -i '/^DEFAULT_HOSTNAME=/d' $O; echo 'DEFAULT_HOSTNAME=faradayos' >> $O
   if [ -n "$FV" ]; then
     FEDV=$(sed -n 's/^VERSION_ID=//p' $O)
     sed -i "s/^PRETTY_NAME=.*/PRETTY_NAME=\"FaradayOS v$FV\"/; s/^VERSION=.*/VERSION=\"$FV (Fedora $FEDV)\"/; /^IMAGE_ID=/d; /^IMAGE_VERSION=/d" $O

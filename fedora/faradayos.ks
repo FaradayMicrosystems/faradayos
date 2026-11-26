@@ -186,7 +186,7 @@ cp -L /etc/resolv.conf "$R"
 bash /src/fedora/apply-branding.sh "${ANA_INSTALL_PATH:-/mnt/sysimage}" /src
 # Quickshell edition files: Ryoku/Hyprland repos for updates, TTY2/TTY4 desktops, live session
 cp -a --no-preserve=ownership /src/fedora/quickshell/overlay/. "${ANA_INSTALL_PATH:-/mnt/sysimage}/"
-chmod 755 "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/livesys/sessions.d/livesys-ryoku" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/share/faraday/rebrand-ryoku.py" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/faraday/tty-session" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/faraday/niri-session"
+chmod 755 "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/livesys/sessions.d/livesys-ryoku" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/share/faraday/rebrand-ryoku.py" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/faraday/tty-session" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/faraday/desktop-session" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/faraday/niri-session"
 %end
 
 %post --erroronfail
@@ -282,12 +282,24 @@ rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-ryoku
 systemctl --global disable ryoku-bootstrap.service 2>/dev/null || true
 mkdir -p /usr/share/icons/default
 [ -e /usr/share/icons/default/index.theme ] || printf '[Icon Theme]\nName=Default\nInherits=Bibata-Modern-Ice\n' > /usr/share/icons/default/index.theme
-# No graphical login screen: each desktop has its own TTY with a text login
-#   TTY2 (Ctrl+Alt+F2) -> FaradayOS desktop, TTY4 (Ctrl+Alt+F4) -> KDE Plasma; the PC starts on TTY2.
-#   See fedora/quickshell/overlay/usr/libexec/faraday/tty-session
-systemctl disable plasmalogin.service sddm.service ryoku-greeter-guard.service 2>/dev/null || true
+# Graphical login screen: Ryoku's SDDM greeter (weston kiosk + its "orbital" skin, laid by ryoku-desktop),
+# with sessions "FaradayOS" (default) and "KDE Plasma" (usr/share/wayland-sessions/faradayos*.desktop;
+# rebrand-ryoku.py hides the packages' own entries). Lists every user, no autologin. Config in
+# etc/sddm.conf.d. Fedora KDE's own login screen (plasmalogin) stays off. TTY2/TTY4 keep a text sign-in
+# as a fallback (usr/libexec/faraday/tty-session); the live USB signs liveuser in on TTY2 (livesys-ryoku).
+[ -f /usr/share/sddm/themes/ryoku/Main.qml ] || /usr/share/ryoku/lockscreen/qylock/sddm-host/install-greeter-theme \
+  /usr/share/ryoku/lockscreen/qylock/themes/clockwork/orbital /usr/share/sddm/themes/ryoku false
+test -f /usr/share/sddm/themes/ryoku/Main.qml || exit 1
+test -x /usr/share/ryoku/lockscreen/ryoku-greeter || exit 1
+systemctl disable plasmalogin.service 2>/dev/null || true
 rm -f /etc/systemd/system/display-manager.service
-systemctl enable getty@tty2.service getty@tty4.service faraday-tty2.service
+systemctl enable sddm.service ryoku-greeter-guard.service
+test "$(readlink /etc/systemd/system/display-manager.service)" = /usr/lib/systemd/system/sddm.service || exit 1
+systemctl enable getty@tty2.service getty@tty4.service
+# First sign-in on this PC starts the FaradayOS desktop (SDDM remembers each later choice)
+mkdir -p /var/lib/sddm
+printf '[Last]\nSession=/usr/share/wayland-sessions/faradayos.desktop\n' > /var/lib/sddm/state.conf
+chown -R sddm:sddm /var/lib/sddm || true
 # No graphical login screen means Fedora KDE's first-boot account setup (plasma-setup) never runs, so the
 # installer itself asks for the user account (etc/anaconda/conf.d/90-faradayos-accounts.conf)
 systemctl disable plasma-setup.service 2>/dev/null || true

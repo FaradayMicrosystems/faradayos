@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=KDE Plasma
+Comment=KDE Plasma desktop
+Exec=/usr/libexec/faraday/desktop-session plasma
+TryExec=/usr/bin/startplasma-wayland
+Type=Application
+DesktopNames=KDE
