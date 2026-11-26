@@ -1,6 +1,6 @@
 # FaradayOS handover
 
-Last updated: 25 Nov 2026 (AEST). For someone taking over FaradayOS. Full technical details: [FARADAYOS.md](FARADAYOS.md).
+Last updated: 26 Nov 2026 (AEST). For someone taking over FaradayOS. Full technical details: [FARADAYOS.md](FARADAYOS.md).
 
 ## 1. Who does what
 
@@ -9,12 +9,12 @@ Last updated: 25 Nov 2026 (AEST). For someone taking over FaradayOS. Full techni
 - Aurora's time zone: AEST Queensland (UTC+10, no daylight saving). Give times in AEST.
 - Communication: explicit, brief replies. Give a completion ETA before starting any work. Give the reason for each decision.
 
-## 2. Current state (25 Nov 2026)
+## 2. Current state (26 Nov 2026)
 
 | | `main` |
 |---|---|
-| Version | v0.89e (experimental Quickshell edition merged into `main`) |
-| Desktop | Ryoku (Quickshell) on niri, KDE Plasma as second session; SDDM login screen (Ryoku greeter) |
+| Version | v0.90e: two editions, **Performance** and **Workplace**, plus the **FaradayOS Builder** AppImage in every release |
+| Desktop | Ryoku (Quickshell) on niri; KDE Plasma as a second session in Performance only; graphical login screen (SDDM, Ryoku greeter) since v0.91e |
 | Status | Alpha. Aurora's main focus; being tested on hardware |
 | Built how | CI on every push, published as a Release; or Aurora's local build (one command, section 6) |
 
@@ -26,7 +26,7 @@ No open PRs at handover.
 
 1. **Experimental: slow first boot / about one-minute pause after sign-in (v0.87).** CI shows about 7 s from sign-in to niri, so it is not reproduced. **Waiting on Aurora's fresh-install test** of v0.87. If it still happens, ask her for `journalctl -b --user` and `systemd-analyze blame` from the affected PC.
 2. **Done 25 Nov 2026:** experimental merged into `main` as v0.89e (Aurora's go).
-3. **niri vs Hyprland undecided.** Aurora prefers Hyprland, but Ryoku's Fedora 44 Hyprland packages are broken upstream (`hyprglass` needs `libaquamarine.so.14`; COPR ships `.so.15`). Running niri meanwhile. Run `quickshell-probe.yml` to see whether Hyprland installs again; switch-back steps are in `fedora/quickshell/README.md`.
+3. **niri vs Hyprland undecided.** Aurora prefers Hyprland, but Ryoku's Fedora 44 Hyprland packages are broken upstream (`hyprglass` needs `libaquamarine.so.14`; COPR ships `.so.15`). Running niri meanwhile. Run `edition-probe.yml` to see whether Hyprland installs again; switch-back steps are in `fedora/quickshell/README.md`.
 4. **Red `test (as-is)` / `test (with-display-env)` jobs are a known false alarm** until the first Quickshell Release (v0.89e) exists: `fedora-installer-test.yml` tests the latest Release ISO with the niri flags. Ignore them; the VM test inside `fedora-iso.yml` is the real one.
 5. **Done in v0.89e:** main's `build-iso.sh` now has unattended mode, `--network host` and auto-retry; `version-bump-check.yml` checks PRs to `main`.
 6. **Fonts zip** from Aurora (to become default system fonts) not received yet.
@@ -38,7 +38,8 @@ No open PRs at handover.
 - **Base distro: Fedora 44, mutable.** Aurora dislikes locked-down atomic/immutable systems. Do not suggest switching.
 - **CachyOS build is deprecated.** Do not fix or develop it. Keep `profile/airootfs/` (shared branding).
 - **Version:** format `vX.YY`, in `fedora/VERSION` as `0.88`. Experimental releases add `e`: `vX.YYe` (e.g. `0.89e`). **Bump it in every PR.** Never three-part (`v0.0.x`). Update README version mentions too.
-  - Next free number: **0.90** (or **0.90e** if experimental).
+  - Next free number: **0.92** (or **0.92e** if experimental).
+- **Editions.** One kickstart for all editions (`#@if <edition>` blocks); see FARADAYOS.md section 1. New editions: a line in `fedora/editions.list` plus tagged blocks; the Builder app shows it without changes.
 - **Lean ISO.** Large optional software goes in the add-ons list (`fedora/overlay/usr/share/faraday/addons.list`), never in `%packages`. Ask Aurora before adding anything large to the ISO.
 - **Auto-merge.** Claude merges its own PRs once CI passes; do not ask Aurora to merge. If CI fails, fix it. Re-run once for RPM Fusion outages.
 - **PR body:** start with the project attribution lines, credit Aurora, assign `FaradayMicrosystems` and request her review.
@@ -61,8 +62,11 @@ Always the same command, for every release (experimental or not):
 
 ```
 git clone https://github.com/FaradayMicrosystems/faradayos.git ~/faradayos   # first time only
-cd ~/faradayos && git pull && ./fedora/build-iso.sh                           # no sudo; asks once; ~40 GB, 30-90 min; ISO in out-fedora/
+cd ~/faradayos && git pull && ./fedora/build-iso.sh                           # Performance; no sudo; asks once; ~40 GB, 30-90 min; ISO in out-fedora/
+cd ~/faradayos && git pull && ./fedora/build-iso.sh workplace                 # Workplace
 ```
+
+Or the FaradayOS Builder app from the release (two buttons, same result, ISOs in `~/FaradayOS-ISOs`).
 
 Never tell Aurora to clone a different branch or folder.
 

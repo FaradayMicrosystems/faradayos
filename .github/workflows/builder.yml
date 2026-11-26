@@ -1,0 +1,47 @@
+name: FaradayOS Builder app
+
+# Builds the FaradayOS Builder AppImage (builder/) and starts it once on a virtual screen.
+# Releases attach it through fedora-release.yml; this workflow checks every change before that.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, 'claude/**']
+    paths: ['builder/**', 'fedora/builder-helper.sh', 'fedora/editions.list', '.github/workflows/builder.yml']
+  pull_request:
+    paths: ['builder/**', 'fedora/builder-helper.sh', 'fedora/editions.list', '.github/workflows/builder.yml']
+
+jobs:
+  appimage:
+    # Older Ubuntu = older glibc, so the AppImage runs on older distributions too
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: builder/go.mod
+          cache-dependency-path: builder/go.sum
+      - name: Install build libraries
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q libgl1-mesa-dev xorg-dev libwayland-dev libxkbcommon-dev wayland-protocols xvfb desktop-file-utils
+      - name: Check the helper script and editions list
+        run: |
+          bash -n fedora/builder-helper.sh
+          bash -n fedora/build-iso.sh
+          for e in $(grep -v '^#' fedora/editions.list | cut -d'|' -f1); do bash fedora/edition-ks.sh "$e" > /dev/null; echo "edition ok: $e"; done
+      - name: Go vet
+        working-directory: builder
+        run: go vet ./...
+      - name: Build AppImage
+        run: builder/build-appimage.sh "$(cat fedora/VERSION)"
+      - name: Smoke test (starts, reads the editions, quits)
+        run: |
+          APP=$(ls builder/dist/*.AppImage)
+          "$APP" --appimage-extract-and-run --version
+          FARADAY_BUILDER_SRC=$PWD LIBGL_ALWAYS_SOFTWARE=1 timeout 60 xvfb-run -a "$APP" --appimage-extract-and-run --smoke-test 2>&1 | tee smoke.log
+          grep -q "FaradayOS source v$(cat fedora/VERSION) ready" smoke.log
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FaradayOS-Builder-AppImage
+          path: builder/dist/*
+          retention-days: 14

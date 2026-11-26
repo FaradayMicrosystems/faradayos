@@ -34,8 +34,14 @@ Contents:
 
 | Branch | Edition | Desktop | Version | Status |
 |---|---|---|---|---|
-| `main` | FaradayOS (Quickshell edition) | Ryoku (Quickshell shell) on niri, KDE Plasma as a second session; graphical login screen (SDDM) | v0.89e | The only branch to build and release from. Every push builds, checks and publishes an ISO. |
+| `main` | FaradayOS: **Performance** and **Workplace** editions | Ryoku (Quickshell shell) on niri; KDE Plasma as a second session in Performance only; graphical login screen (SDDM) | v0.91e | The only branch to build and release from. Every push builds, checks and publishes both ISOs and the Builder app. |
 | `experimental/quickshell` | (retired) | | v0.87 | Merged into `main` as v0.89e (25 Nov 2026, on Aurora's go). Do not develop on it any more. |
+
+Editions (since v0.90e, Aurora 26 Nov 2026), listed in `fedora/editions.list`:
+- **performance**: gaming, VR, engineering. Steam, gamescope, MangoHud, GameMode, 32-bit NVIDIA libs, VR groundwork, KDE Plasma on TTY4, Gaming and VR add-ons.
+- **workplace**: same base, desktop, drivers, branding, LibreOffice; none of the above. Small GNOME apps (Evince, Loupe, Text Editor, Calculator, File Roller, Simple Scan). The add-ons list is the software catalog (about 80 apps in 7 categories).
+- One kickstart: `#@if <edition>` ... `#@end` blocks in `fedora/faradayos.ks` hold what differs; `fedora/edition-ks.sh <edition>` writes the edition's kickstart. Keep shared things outside the blocks.
+- ISO names: `FaradayOSv<VERSION>-<edition>.iso`; volume label `FaradayOSv0-90e-<edition>`; `/usr/share/faraday/edition` in the image says which one.
 
 Rules:
 - **All work, experimental or not, goes to `main`** (Aurora, 25 Nov 2026), so the build command never changes. Experimental releases get an `e` suffix on the version (see section 6).
@@ -105,17 +111,20 @@ sudo pacman -S podman        # CachyOS/Arch, once
 sudo dnf install podman      # Fedora, once
 ```
 
+**Easiest: the FaradayOS Builder app** (since v0.90e, Aurora 26 Nov 2026): download `FaradayOS-Builder-v<VERSION>-x86_64.AppImage` from the release, `chmod +x`, open it, press **Build Performance** or **Build Workplace**. ISOs go to `~/FaradayOS-ISOs`. See section 7a.
+
 **The build command (always the same, every release):**
 ```
 git clone https://github.com/FaradayMicrosystems/faradayos.git ~/faradayos   # first time only
-cd ~/faradayos && git pull && ./fedora/build-iso.sh                           # every build; run WITHOUT sudo
-./fedora/verify-iso.sh       # optional, every line should say PASS
+cd ~/faradayos && git pull && ./fedora/build-iso.sh                           # Performance; run WITHOUT sudo
+cd ~/faradayos && git pull && ./fedora/build-iso.sh workplace                 # Workplace
+./fedora/verify-iso.sh out-fedora/FaradayOSv<VERSION>-<edition>.iso           # optional, every line should say PASS
 ```
 
 Notes:
-- `build-iso.sh` is unattended: asks for sudo once and re-runs itself as root, blocks sleep, uses `--network host` (fixes container DNS failures), retries once on failure (mirror outages), logs to `out-fedora/build.log`, and shows a desktop notification when done.
+- `build-iso.sh` is unattended: asks for sudo once and re-runs itself as root, blocks sleep, uses `--network host` (fixes container DNS failures), retries once on failure (mirror outages), logs to `out-fedora/build-<edition>.log`, and shows a desktop notification when done. `FARADAY_OUT=<folder>` changes the output folder. The build container is named `faradayos-build-<edition>` (the Builder stops it by name).
 - Old clone folders (`~/faradayos-quickshell`, `faradayos-fedora`) can be deleted; use `~/faradayos` only.
-- Logs: `out-fedora/lmc.log` (livemedia-creator), `out-fedora/build.log`.
+- Logs: `out-fedora/lmc-<edition>.log` (livemedia-creator), `out-fedora/build-<edition>.log`, and the edition's kickstart `out-fedora/faradayos-<edition>.ks`.
 - Aurora prefers local builds: GitHub artifact downloads are too slow for her.
 
 ## 5. CI workflows
@@ -124,13 +133,14 @@ All in `.github/workflows/`. Builds need Fedora mirrors, so they only run on Git
 
 | Workflow | Trigger | What it does |
 |---|---|---|
-| `fedora-iso.yml` (Build Fedora edition ISO) | Push to `main`, `fedora-mutable`, `claude/**` (and `experimental/**` on the experimental branch) touching `fedora/**` (not `fedora/README.md`, `fedora/test/**`), `profile/airootfs/**` or the workflow; manual | Builds the ISO, prints loaded repos, runs `verify-iso.sh`, uploads ISO artifact (`FaradayOS-Fedora-ISO`, or `FaradayOS-Quickshell-ISO` on experimental, kept 7 days) and logs, then boots it in QEMU and starts the installer. A failed VM test fails the build, so no broken ISO is released. Takes roughly 1 to 2 hours. |
-| `fedora-release.yml` | A green `fedora-iso.yml` run on `main`; manual with `run_id` | Splits the ISO into 1900 MB parts, writes checksums and publishes GitHub Release `v<VERSION>` (replaces a release with the same tag). |
+| `fedora-iso.yml` (Build Fedora edition ISO) | Push to `main`, `fedora-mutable`, `claude/**` (and `experimental/**` on the experimental branch) touching `fedora/**` (not `fedora/README.md`, `fedora/test/**`), `profile/airootfs/**` or the workflow; manual | Builds both editions side by side (matrix), prints loaded repos, runs `verify-iso.sh` (edition-aware), uploads ISO artifacts (`FaradayOS-Fedora-ISO` = performance, `FaradayOS-Workplace-ISO`, kept 7 days) and logs, then boots each in QEMU and starts the installer. A failed VM test fails the build, so no broken ISO is released. Takes roughly 1 to 2 hours. |
+| `fedora-release.yml` | A green `fedora-iso.yml` run on `main`; manual with `run_id` | Splits both ISOs into 1900 MB parts, writes checksums, builds the Builder AppImage (Ubuntu 22.04 for an older glibc) and publishes GitHub Release `v<VERSION>` with all of them (replaces a release with the same tag). |
 | `fedora-verify.yml` | Push to `main`/`fedora-mutable` touching `verify-iso.sh` | Re-checks the newest successful ISO without rebuilding. |
 | `fedora-size-report.yml` | Manual (`run_id`), or push to `claude/**` touching it | Lists largest packages and folders in an ISO. |
 | `fedora-installer-test.yml` | Manual; push touching `fedora/test/**` | Boots the latest release (or a run's ISO) in QEMU, starts the installer, uploads screenshots/logs. Runs 3 variants. |
 | `version-bump-check.yml` | Every PR to `main` | Fails unless `fedora/VERSION` is format `X.YY` or `X.YYe` and higher than the target branch. |
-| `quickshell-probe.yml` | Experimental only; push touching the kickstart; manual | Resolves the whole package list in 2 to 5 minutes; reports whether Ryoku's Hyprland packages install yet. |
+| `edition-probe.yml` | Push to `claude/**` touching the kickstart, editions or `addons.list`; manual | In 2 to 5 minutes: resolves each edition's whole package list, checks every catalog app exists (dnf repoquery, Flathub API), reports whether Ryoku's Hyprland packages install yet. |
+| `builder.yml` | Push/PR touching `builder/**`, `builder-helper.sh`, `editions.list` | Builds the Builder AppImage, checks the helper and editions, starts the app on a virtual screen (`--smoke-test`), uploads artifact `FaradayOS-Builder-AppImage`. |
 
 Important CI behaviour:
 - Changes only to Markdown/README files do **not** trigger the ISO build (paths filter). A PR then shows no checks.
@@ -143,14 +153,23 @@ Important CI behaviour:
 - **Experimental releases add `e`**: `vX.YYe`, e.g. v0.89e (`0.89e` in `fedora/VERSION`). Same number line: after v0.89e comes v0.90 or v0.90e. Use `e` whenever the release carries untested/experimental work.
 - **Never** use three-part versions (`v0.0.70` was an error; after it came v0.72).
 - **Bump the version in every PR.** `version-bump-check.yml` enforces it.
-- `VERSION` sets: ISO name `FaradayOSv0.88.iso`, volume label `FaradayOSv0-88`, os-release `PRETTY_NAME="FaradayOS v0.88"`, `IMAGE_VERSION=0.88`, release tag `v0.88`. `VERSION_ID` stays Fedora's `44`, because dnf needs it.
+- `VERSION` sets: ISO names `FaradayOSv0.90e-<edition>.iso`, volume label `FaradayOSv0-90e-<edition>`, Builder name `FaradayOS-Builder-v0.90e-x86_64.AppImage`, os-release `PRETTY_NAME="FaradayOS v0.88"`, `IMAGE_VERSION=0.88`, release tag `v0.88`. `VERSION_ID` stays Fedora's `44`, because dnf needs it.
 - Also update version mentions in `README.md` and `fedora/README.md`.
 
 ## 7. Releases and downloads
 
 1. A PR is merged into `main`.
 2. `fedora-iso.yml` builds and checks the ISO on `main`.
-3. When green, `fedora-release.yml` publishes Release `v<VERSION>` with `FaradayOSv<VERSION>.iso.part0..N`, `.sha256` and `SHA256SUMS-parts.txt`.
+3. When green, `fedora-release.yml` publishes Release `v<VERSION>` with `FaradayOSv<VERSION>-<edition>.iso.part0..N` for both editions, their `.sha256`, `SHA256SUMS-parts.txt`, and `FaradayOS-Builder-v<VERSION>-x86_64.AppImage` (+ `.sha256`).
+
+### 7a. FaradayOS Builder app
+Aurora (26 Nov 2026): main releases a simple GUI that people download to build FaradayOS. Source `builder/main.go` (Go + Fyne 2.8), packaged by `builder/build-appimage.sh` (appimagetool 1.9.0).
+- Holds no build logic: downloads the source tarball of its own version (`refs/tags/v<VERSION>`; dev builds use `main`) to `~/.local/share/faradayos-builder/src/`, reads `fedora/editions.list` (one button per line; a new edition needs no app change), runs `fedora/build-iso.sh <edition>`.
+- Checks: x86_64 Linux, source downloaded, podman/docker (offers to install via the helper: pacman/dnf/apt/zypper), pkexec, about 45 GB free in the output folder.
+- Sign-in: once per session through pkexec, which starts `fedora/builder-helper.sh` as root. The helper only accepts `build <edition> <folder>`, `install-podman`, `fingerprint`, `stop`, `quit`; output folder must belong to the signed-in user. Closing the app stops a running build. It runs from the downloaded source because root cannot read a user's FUSE-mounted AppImage.
+- Fingerprint: optional button (shown when a finger is enrolled) adds `auth sufficient pam_fprintd.so` to `/etc/pam.d/polkit-1` (backup kept), only after the user confirms. No NOPASSWD sudo rules or setuid helpers, by design.
+- Checks for a newer release on start and offers a link; never updates itself.
+- Local test: `FARADAY_BUILDER_SRC=~/faradayos ./FaradayOS-Builder-*.AppImage` (uses that checkout).
 
 To install:
 1. Download every `.part*` file from the [latest release](https://github.com/FaradayMicrosystems/faradayos/releases/latest). Fastest: the `aria2c` command in the release notes.
@@ -198,9 +217,11 @@ Tip: Steam's first launch downloads its runtime and can look like it is not star
 
 Large optional software is **not** in the ISO (keeps the download small). After install, open **Install FaradayOS add-ons** (desktop icon or app menu), tick items, click OK.
 
-- List: `fedora/overlay/usr/share/faraday/addons.list`, one line per add-on: `id | type | what | label | check`. Types: `dnf`, `flatpak`, `root` (script in `/usr/libexec/faraday/addon-*`), `script` (runs as the user).
+- It is the software catalog (v0.90e): the installer first asks which categories to look at, then shows one checklist per category.
+- List: `fedora/overlay/usr/share/faraday/addons.list`, one line per add-on: `id | type | what | label | check`, grouped under `[Category]` lines. `[Category | performance]` = only in those editions; the ISO build's `%post` removes other editions' categories. Types: `dnf`, `flatpak`, `root` (script in `/usr/libexec/faraday/addon-*`), `script` (runs as the user).
 - One password prompt for all dnf/flatpak/root add-ons; already-installed ones are skipped; failures are named; a summary lists OK / SKIPPED / FAILED. Safe to re-run.
-- Current add-ons: Remmina, qBittorrent, KDE Connect, GNOME Disks, Timeshift, fingerprint drivers, Wine + Lutris, WinBoat, CKAN, LM Studio, Claude Code, Claude Desktop, Popsicle, OnlyOffice, Heroic, ProtonUp-Qt, Flatseal, Discord, Telegram, Obsidian, TIDAL (tidal-hifi), VR tools (last).
+- Categories (about 80 apps): Office and productivity; CAD and engineering (FreeCAD and SolveSpace from Flathub: not in Fedora 44); Design, photo and video; Communication; PDF and documents; Development and AI; Remote access, security and system; Gaming and VR (performance only: Heroic, ProtonUp-Qt, CKAN, VR tools). Aurora asked for "top 50 per category"; Claude proposed 10 to 20 vetted apps per category instead (fewer good Linux apps exist, e.g. CAD).
+- `edition-probe.yml` checks every catalog app exists in minutes; not on Flathub (Nov 2026): ProjectLibre, OrcaSlicer (`io.github.softfever.OrcaSlicer`), Master PDF Editor, QCAD.
 - Every ISO build checks every add-on is downloadable and trial-installs the dnf ones (`dnf --assumeno`).
 - **To add an add-on:** add one line to `addons.list`. Never add large software to `%packages`; ask Aurora before adding anything large to the ISO.
 - WinBoat's `.rpm` is found from the GitHub release page, not `api.github.com` (rate-limited on CI).
@@ -270,8 +291,9 @@ Experimental fixes since branching: v0.81 version-bump CI check; v0.82 unattende
 | v0.80 | #19 | ISO includes Fedora updates (repo rename fix); Java kept for LibreOffice |
 | v0.81-v0.87 | #20-#29 | Experimental Quickshell edition (see section 14) |
 | v0.88 | #30 | Project documentation and handover file |
-| v0.89e | this PR | Experimental Quickshell edition merged into `main`; one build command; `e` suffix for experimental versions |
+| v0.89e | #31 | Experimental Quickshell edition merged into `main`; one build command; `e` suffix for experimental versions |
+| v0.90e | this PR | Workplace edition next to Performance; software catalog by category; FaradayOS Builder AppImage in every release |
 
 ## 18. Legacy CachyOS build (deprecated)
 
-FaradayOS started on CachyOS (Arch, archiso + Calamares). **It is deprecated: do not build, fix or develop it.** Its files (`build.sh`, `profile/` except `profile/airootfs/` branding, `aur-packages.txt`, `Build-FaradayOS*.desktop`) remain only because the Fedora build reuses the branding in `profile/airootfs/`.
+FaradayOS started on CachyOS (Arch, archiso + Calamares). **It is deprecated: do not build, fix or develop it.** Its files (`build.sh`, `profile/` except `profile/airootfs/` branding, `aur-packages.txt`) remain (its `Build-FaradayOS*.desktop` launchers were removed in v0.90e) only because the Fedora build reuses the branding in `profile/airootfs/`.

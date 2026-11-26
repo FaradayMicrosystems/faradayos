@@ -13,7 +13,7 @@ On `main` since v0.89e (developed on the former branch `experimental/quickshell`
   supported compositor (packaged by Fedora itself). To switch back: `ryoku-desktop-niri` ->
   `ryoku-desktop-hyprland` in the kickstart, `Session=hyprland.desktop` in `livesys-ryoku`,
   `--compositor Hyprland` in `fedora/test/desktop-args`, and the niri checks in `verify-iso.sh`.
-  The probe workflow (`quickshell-probe.yml`) shows in 2 minutes whether Hyprland resolves again.
+  The probe workflow (`edition-probe.yml`) shows in 2 minutes whether Hyprland resolves again.
 - **Packages:** Ryoku's signed Fedora repo (`repo.ryoku.dev`) plus the `sdegler/hyprland` COPR
   (Ryoku still needs hypridle and hyprpicker from it), limited to the Hyprland packages, as Ryoku's own installer does. Both stay enabled so updates work.
 - **Graphical login screen (v0.91e, Aurora 2026-11-26):** the PC starts at Ryoku's SDDM login screen

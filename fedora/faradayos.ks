@@ -1,6 +1,9 @@
-# FaradayOS (Fedora edition), EXPERIMENTAL Quickshell branch: normal, writable Fedora system with the
-# Ryoku desktop (Quickshell shell on the Hyprland compositor) instead of KDE Plasma. See fedora/quickshell/README.md.
+# FaradayOS (Fedora edition): normal, writable Fedora system with the Ryoku desktop (Quickshell shell on the
+# niri/Hyprland compositor). See fedora/quickshell/README.md.
 # Built into a live ISO by fedora/build-iso.sh (livemedia-creator --no-virt).
+# EDITIONS (fedora/editions.list): lines between "#@if <edition>..." and "#@end" are only in those editions;
+# fedora/edition-ks.sh writes the kickstart for one edition. Everything else is shared, so fixes reach every edition.
+#   performance = gaming, VR, KDE Plasma on TTY4      workplace = no gaming/VR/Plasma, office tools, software catalog
 # The repo is mounted at /src inside the build container; branding is copied from there.
 
 lang en_US.UTF-8
@@ -25,7 +28,9 @@ repo --name=rpmfusion-free --mirrorlist=https://mirrors.rpmfusion.org/mirrorlist
 repo --name=rpmfusion-free-updates --mirrorlist=https://mirrors.rpmfusion.org/mirrorlist?repo=free-fedora-updates-released-$releasever&arch=$basearch
 repo --name=rpmfusion-nonfree --mirrorlist=https://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-$releasever&arch=$basearch
 repo --name=rpmfusion-nonfree-updates --mirrorlist=https://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-updates-released-$releasever&arch=$basearch
+#@if performance
 repo --name=rpmfusion-nonfree-steam --mirrorlist=https://mirrors.rpmfusion.org/mirrorlist?repo=nonfree-fedora-steam-$releasever&arch=$basearch
+#@end
 # Ryoku desktop: its signed Fedora repo, and the Hyprland COPR limited to the packages Ryoku's installer takes from it
 repo --name=ryoku --baseurl=https://repo.ryoku.dev/stable/fedora/$releasever/x86_64
 repo --name=ryoku-copr-sdegler-hyprland --baseurl=https://download.copr.fedorainfracloud.org/results/sdegler/hyprland/fedora-$releasever-$basearch/ --includepkgs=aquamarine,hyprcursor,hyprgraphics,hypridle,hyprland,hyprland-guiutils,hyprland-qt-support,hyprland-uwsm,hyprlang,hyprpicker,hyprpolkitagent,hyprsunset,hyprtoolkit,hyprutils,hyprwire,uwsm,xdg-desktop-portal-hyprland
@@ -68,7 +73,19 @@ ryoku-desktop
 # libaquamarine.so.14, the COPR ships .so.15). When the probe workflow shows they install, change this line
 # to ryoku-desktop-hyprland; tty-session then starts Hyprland on TTY2 by itself.
 ryoku-desktop-niri
+#@if performance
 @kde-desktop
+#@end
+#@if workplace
+# Workplace: no KDE Plasma. Small GNOME apps for everyday files (Plasma's apps come with @kde-desktop in performance)
+evince
+loupe
+gnome-text-editor
+gnome-calculator
+file-roller
+simple-scan
+xdg-desktop-portal-gtk
+#@end
 kitty
 nautilus
 nautilus-python
@@ -102,8 +119,10 @@ mesa-vulkan-drivers
 vulkan-tools
 akmods
 akmod-nvidia
+#@if performance
 # Steam is 32-bit: it needs the 32-bit NVIDIA libraries (already pulled in today; listed so it stays that way)
 xorg-x11-drv-nvidia-libs.i686
+#@end
 switcheroo-control
 
 # Laptops: touchpad, touchscreen, pen, screen rotation, fingerprint reader
@@ -116,6 +135,7 @@ fprintd
 fprintd-pam
 libfprint
 
+#@if performance
 # Gaming
 steam
 gamemode
@@ -127,6 +147,8 @@ mangohud
 
 # VR groundwork only (small): headset USB rules, mDNS discovery, firewall service, realtime permission tool
 steam-devices
+#@end
+# mDNS: finds network printers, and VR headsets in performance
 avahi
 nss-mdns
 libcap
@@ -170,9 +192,22 @@ chmod 755 "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/livesys/sessions.d/liv
 %post --erroronfail
 set -x
 
+#@if performance
+echo performance > /usr/share/faraday/edition
 # Keep the Steam repo on for updates
 dnf config-manager setopt rpmfusion-nonfree-steam.enabled=1 || \
   sed -i '0,/^enabled=0/s//enabled=1/' /etc/yum.repos.d/rpmfusion-nonfree-steam.repo
+#@end
+#@if workplace
+echo workplace > /usr/share/faraday/edition
+#@end
+# Add-ons catalog: keep only the categories meant for this edition ("[Name | edition ...]" headers in addons.list)
+ED=$(cat /usr/share/faraday/edition)
+awk -v ed="$ED" 'BEGIN { keep=1 }
+  /^\[/ { keep=1; p=index($0, "|"); if (p) { e=substr($0, p+1); sub(/\].*/, "", e); keep=0; n=split(e, w, " "); for (i=1; i<=n; i++) if (w[i] == ed) keep=1 } }
+  keep' /usr/share/faraday/addons.list > /tmp/addons.list
+install -m644 /tmp/addons.list /usr/share/faraday/addons.list
+grep -q '^\[' /usr/share/faraday/addons.list || exit 1
 
 # Build the NVIDIA kernel module now, so it works on first boot of the live USB.
 # Installing akmod-nvidia already starts a build in the background: wait for it, then build if it did not finish.
@@ -194,19 +229,41 @@ authselect current >/dev/null 2>&1 || authselect select local --force
 authselect enable-feature with-fingerprint
 authselect apply-changes
 
+#@if performance
 # VR: open WiVRn/ALVR/mDNS ports, run the boot-time VR setup, let headsets find this PC
 firewall-offline-cmd --add-service=faradayos-vr
 Z=$(firewall-offline-cmd --get-default-zone)
 [ "$Z" = FedoraWorkstation ] || firewall-offline-cmd --zone=FedoraWorkstation --add-service=faradayos-vr || true
 systemctl enable avahi-daemon.service faraday-vr-setup.service
+#@end
+#@if workplace
+# Workplace: no VR or gaming. Remove the VR tools that the shared overlay brings, and the gaming kernel settings.
+rm -f /usr/bin/faraday-install-vr /usr/bin/faraday-steamvr-setup /usr/bin/faraday-vr-check /usr/libexec/faraday/install-vr-system \
+  /usr/share/applications/faraday-install-vr.desktop /usr/share/applications/faraday-steamvr-setup.desktop \
+  /usr/share/applications/faraday-vr-check.desktop /etc/xdg/autostart/faraday-vr-check.desktop \
+  /usr/lib/systemd/system/faraday-vr-setup.service /usr/lib/firewalld/services/faradayos-vr.xml \
+  /usr/lib/udev/rules.d/70-faradayos-vr.rules /etc/yum.repos.d/_copr-xr-sig-xrizer.repo \
+  /usr/libexec/faraday/addon-ckan /etc/sysctl.d/99-faraday-gaming.conf
+rm -rf /usr/share/faraday/vr
+# Printers on the network are found through mDNS
+systemctl enable avahi-daemon.service
+#@end
 
 # Keep the ISO small: remove large extras that office/desktop work does not need (dnf install them if wanted).
 # Done here, not in %packages, because they are members of the KDE/LibreOffice groups.
 # (Java stays: with Fedora updates, LibreOffice 26.2 needs it, and removing it takes LibreOffice too)
 dnf -y remove 'digikam*' 'proj-data-*' libreoffice-base || true
 rpm -q libreoffice-writer libreoffice-calc libreoffice-impress nautilus kitty || exit 1
+#@if performance
 # Both desktops must be in the image: FaradayOS (Ryoku on Hyprland or niri) on TTY2, KDE Plasma on TTY4
 rpm -q ryoku-desktop plasma-workspace || exit 1
+#@end
+#@if workplace
+# Workplace: FaradayOS desktop only, no Plasma, no Steam
+rpm -q ryoku-desktop evince || exit 1
+rpm -q plasma-workspace && exit 1
+rpm -q steam && exit 1
+#@end
 rpm -q hyprland || rpm -q niri || exit 1
 
 # Live session: liveuser is signed in on TTY2, which starts the FaradayOS (Hyprland) desktop (fedora/quickshell/overlay/usr/libexec/livesys/sessions.d)
