@@ -2,20 +2,26 @@
 
 FaradayOS is a gaming- and VR-ready Linux system for work and play, built on **Fedora 44**. Desktop: the FaradayOS (Quickshell) desktop on TTY2, KDE Plasma on TTY4. It is a normal, writable Fedora: install software with `dnf` as usual, nothing is locked down.
 
-Current version: **v0.89e** (set in `fedora/VERSION`). Versions use the format `vX.YY`, with an `e` suffix for experimental releases (v0.88, v0.89e, ...). Earlier releases named `v0.0.<number>` used the wrong format.
+Two editions, same base and look:
+- **Performance:** gaming, VR and engineering (Steam, VR tools, KDE Plasma on TTY4).
+- **Workplace:** lighter, for office, CAD and design work. No gaming, VR or Plasma; a software catalog of about 80 apps by category (office, CAD, design, communication, PDF, development, remote access) installs what you tick.
+
+Current version: **v0.90e** (set in `fedora/VERSION`). Versions use the format `vX.YY`, with an `e` suffix for experimental releases (v0.88, v0.89e, ...). Earlier releases named `v0.0.<number>` used the wrong format.
 
 **Status: alpha.** v0.76 was the first release that works fully out of the box: it installs, boots and runs on real hardware, including NVIDIA graphics (confirmed on a real NVIDIA PC). Some rough edges remain.
 
-## Download
-1. Open the [latest release](https://github.com/FaradayMicrosystems/faradayos/releases/latest) and download every `FaradayOSv0.89e.iso.part*` file (about 3.9 GB in total, each part under 2 GB).
-   Fastest: `aria2c -Z -x16 -s16 <part URLs>` (the release notes have the full command).
+## Get FaradayOS
+**Easiest: the FaradayOS Builder app.** Download `FaradayOS-Builder-v<version>-x86_64.AppImage` from the [latest release](https://github.com/FaradayMicrosystems/faradayos/releases/latest), make it executable (`chmod +x FaradayOS-Builder-*.AppImage`), open it, and press **Build Performance** or **Build Workplace**. You sign in once (password, or fingerprint if set up); the ISO lands in `~/FaradayOS-ISOs`. Works on any 64-bit Linux PC with podman (the app offers to install it), about 45 GB free and about 1 hour per edition. Source: [`builder/`](builder/).
+
+**Or download a ready ISO** from the [latest release](https://github.com/FaradayMicrosystems/faradayos/releases/latest):
+1. Download every `.part` file of ONE edition, e.g. `FaradayOSv0.90e-workplace.iso.part*` (each part under 2 GB). Fastest: `aria2c -Z -x16 -s16 <part URLs>` (the release notes have the full command).
 2. Join the parts in the download folder:
-   - Linux: `cat FaradayOSv0.89e.iso.part* > FaradayOSv0.89e.iso`
-   - Windows (Command Prompt): `copy /b FaradayOSv0.89e.iso.part0 + FaradayOSv0.89e.iso.part1 FaradayOSv0.89e.iso`
-3. Write `FaradayOSv0.89e.iso` to a USB stick (8 GB+) with Fedora Media Writer or balenaEtcher.
+   - Linux: `cat FaradayOSv0.90e-workplace.iso.part* > FaradayOSv0.90e-workplace.iso`
+   - Windows (Command Prompt): `copy /b FaradayOSv0.90e-workplace.iso.part0 + FaradayOSv0.90e-workplace.iso.part1 FaradayOSv0.90e-workplace.iso`
+3. Write the ISO to a USB stick (8 GB+) with Fedora Media Writer or balenaEtcher.
 4. Turn off Secure Boot (the NVIDIA driver is not signed), boot the USB, and open **Install to Hard Drive**.
 
-Every push to `main` builds the ISO on GitHub Actions, checks it, and publishes it as a release.
+Every push to `main` builds both editions on GitHub Actions, checks them, and publishes them with the Builder app as a release.
 
 ## What you get
 - **Desktop:** KDE Plasma, Firefox, LibreOffice, KDE apps, Papirus icons, floating left panel
@@ -27,8 +33,8 @@ Every push to `main` builds the ISO on GitHub Actions, checks it, and publishes 
 - **FaradayOS look:** animated boot screen, KDE splash, wallpaper, colour scheme (black `#0B0B0B`, orange `#FF7A1A`, yellow `#FFC53D`, jade `#00A86B`), lock and login screens, logo icons. Branding is re-applied after updates.
 - After install, the computer starts at the login screen; the live user is removed.
 
-## Add-ons
-Big optional software is not in the ISO, so the download stays small. After installing FaradayOS, open **Install FaradayOS add-ons** (desktop icon or app menu), tick what you want, and click OK. The ticked add-ons then install one after another in a terminal window:
+## Add-ons (software catalog)
+Big optional software is not in the ISO, so the download stays small. After installing FaradayOS, open **Install FaradayOS add-ons** (desktop icon or app menu). Pick the categories you want to look at (Office and productivity, CAD and engineering, Design photo and video, Communication, PDF and documents, Development and AI, Remote access security and system, and Gaming and VR in the Performance edition), tick apps in each, and click OK. The ticked add-ons then install one after another in a terminal window:
 - Add-ons you already have are marked "already installed" and skipped.
 - Everything except VR installs after **one** password prompt.
 - If an add-on fails, its name is shown, the others still install, and a summary at the end lists each one as OK, SKIPPED or FAILED. Running it again is safe.
@@ -60,17 +66,21 @@ Big optional software is not in the ISO, so the download stays small. After inst
 
 VR tools and Wine and Lutris also have their own entries in the app menu (**Install VR tools**, **Install Wine and Lutris**, **Set up SteamVR**).
 
-**Adding an add-on:** add one line to [`fedora/overlay/usr/share/faraday/addons.list`](fedora/overlay/usr/share/faraday/addons.list). The format is explained at the top of that file. Each ISO build checks that every add-on in the list can still be downloaded, and does a trial install of all of them to prove their dependencies resolve.
+**Adding an add-on:** add one line under its `[Category]` in [`fedora/overlay/usr/share/faraday/addons.list`](fedora/overlay/usr/share/faraday/addons.list). `[Category | performance]` limits a category to some editions. The format is explained at the top of that file. The edition probe workflow checks in minutes that every app exists. Each ISO build checks that every add-on in the list can still be downloaded, and does a trial install of all of them to prove their dependencies resolve.
 
 ## Build it yourself
-See [fedora/README.md](fedora/README.md): `./fedora/build-iso.sh` builds the ISO in a Fedora container (podman or docker, about 40 GB free disk, 30 to 90 minutes), and `./fedora/verify-iso.sh` checks it.
+Use the Builder app (above), or the command line, see [fedora/README.md](fedora/README.md):
+- `./fedora/build-iso.sh` builds the Performance ISO, `./fedora/build-iso.sh workplace` the Workplace ISO, in a Fedora container (podman or docker, about 40 GB free disk, 30 to 90 minutes). Result: `out-fedora/FaradayOSv<version>-<edition>.iso`.
+- `./fedora/verify-iso.sh out-fedora/FaradayOSv<version>-<edition>.iso` checks it.
+- Editions are listed in [`fedora/editions.list`](fedora/editions.list); `#@if <edition>` blocks in `fedora/faradayos.ks` hold what differs.
 
 ## Repository layout
-- `fedora/`: the FaradayOS build (kickstart `faradayos.ks`, `VERSION`, build and check scripts, Fedora-only files in `overlay/`)
+- `fedora/`: the FaradayOS build (kickstart `faradayos.ks`, `editions.list`, `VERSION`, build and check scripts, Fedora-only files in `overlay/`)
+- `builder/`: the FaradayOS Builder app (Go + Fyne, packaged as an AppImage by `build-appimage.sh`)
 - `profile/airootfs/`: branding shared with the Fedora build (Plymouth boot animation, KDE global theme `org.faraday.desktop`, colour scheme, wallpaper, icons)
 - `assets/`: logo and splash source images
 - `.github/workflows/`: ISO build, release publishing, ISO check and size report
 - `docs/`: full project documentation ([FARADAYOS.md](docs/FARADAYOS.md)) and the handover file ([HANDOVER.md](docs/HANDOVER.md))
 
 ## Legacy CachyOS build
-FaradayOS started on CachyOS (Arch). **Do not use it**: that build (`build.sh`, `profile/`, `aur-packages.txt`, `Build-FaradayOS*.desktop`) is no longer developed; FaradayOS moved to Fedora for stability. Its files stay because the Fedora build reuses the branding in `profile/airootfs/`.
+FaradayOS started on CachyOS (Arch). **Do not use it**: that build (`build.sh`, `profile/`, `aur-packages.txt`) is no longer developed (its desktop launchers were removed in v0.90e; use the Builder app); FaradayOS moved to Fedora for stability. Its files stay because the Fedora build reuses the branding in `profile/airootfs/`.
