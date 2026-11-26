@@ -1,6 +1,6 @@
 # FaradayOS documentation
 
-Last updated: 24 Nov 2026 (AEST). Covers `main` at v0.88 and `experimental/quickshell` at v0.87.
+Last updated: 25 Nov 2026 (AEST). Covers `main` at v0.89e. Since v0.89e the experimental Quickshell edition lives on `main`.
 
 FaradayOS is a Linux operating system for the workplace that also does gaming and VR, with NVIDIA and AMD graphics support. It is built on **Fedora 44** and is a normal, writable system: software installs with `dnf` as usual. Nothing is locked down (no atomic/immutable image).
 
@@ -34,12 +34,12 @@ Contents:
 
 | Branch | Edition | Desktop | Version | Status |
 |---|---|---|---|---|
-| `main` | FaradayOS (release) | KDE Plasma | v0.88 | Release branch. Every push builds, checks and publishes an ISO. |
-| `experimental/quickshell` | FaradayOS Quickshell edition | Ryoku (Quickshell shell) on niri, plus KDE Plasma on TTY4 | v0.87 | Public experimental branch. Aurora's main focus since 2026-11-11. |
+| `main` | FaradayOS (Quickshell edition) | Ryoku (Quickshell shell) on niri on TTY2, KDE Plasma on TTY4 | v0.89e | The only branch to build and release from. Every push builds, checks and publishes an ISO. |
+| `experimental/quickshell` | (retired) | | v0.87 | Merged into `main` as v0.89e (25 Nov 2026, on Aurora's go). Do not develop on it any more. |
 
 Rules:
-- **Never merge `experimental/quickshell` into `main`** without Aurora's explicit go. She plans to do it herself once the edition is tested.
-- Work branches are `claude/project-thread-*`. Each PR targets `main` or `experimental/quickshell`.
+- **All work, experimental or not, goes to `main`** (Aurora, 25 Nov 2026), so the build command never changes. Experimental releases get an `e` suffix on the version (see section 6).
+- Work branches are `claude/project-thread-*`. Each PR targets `main`.
 - Other branches on GitHub (`FaradayOS-Lite`, `fedora-mutable`, `iso-test`, `v0.0.57` to `v0.0.68`, merged `claude/*`) are stale. Do not build from them.
 
 ## 2. Repository layout
@@ -105,25 +105,17 @@ sudo pacman -S podman        # CachyOS/Arch, once
 sudo dnf install podman      # Fedora, once
 ```
 
-**Main (KDE) edition:**
+**The build command (always the same, every release):**
 ```
-git clone https://github.com/FaradayMicrosystems/faradayos.git faradayos-fedora
-cd faradayos-fedora
-./fedora/build-iso.sh
+git clone https://github.com/FaradayMicrosystems/faradayos.git ~/faradayos   # first time only
+cd ~/faradayos && git pull && ./fedora/build-iso.sh                           # every build; run WITHOUT sudo
 ./fedora/verify-iso.sh       # optional, every line should say PASS
 ```
 
-**Experimental Quickshell edition (Aurora's usual build, on her CachyOS PC):**
-```
-git clone -b experimental/quickshell https://github.com/FaradayMicrosystems/faradayos.git ~/faradayos-quickshell
-cd ~/faradayos-quickshell
-./fedora/build-iso.sh        # run WITHOUT sudo; it asks for the password once itself
-```
-
 Notes:
-- Both editions write the same file name (`out-fedora/FaradayOSv<VERSION>.iso`). Keep each edition in its own clone folder.
-- The experimental branch's `build-iso.sh` is unattended: asks for sudo once and re-runs itself as root, blocks sleep, uses `--network host` (fixes container DNS failures), retries once on failure (mirror outages), logs to `out-fedora/build.log`, and shows a desktop notification when done. **Main's `build-iso.sh` does not have these yet**; it asks for sudo via `sudo` directly and has no retry.
-- Logs: `out-fedora/lmc.log` (livemedia-creator), `out-fedora/build.log` (experimental only).
+- `build-iso.sh` is unattended: asks for sudo once and re-runs itself as root, blocks sleep, uses `--network host` (fixes container DNS failures), retries once on failure (mirror outages), logs to `out-fedora/build.log`, and shows a desktop notification when done.
+- Old clone folders (`~/faradayos-quickshell`, `faradayos-fedora`) can be deleted; use `~/faradayos` only.
+- Logs: `out-fedora/lmc.log` (livemedia-creator), `out-fedora/build.log`.
 - Aurora prefers local builds: GitHub artifact downloads are too slow for her.
 
 ## 5. CI workflows
@@ -137,7 +129,7 @@ All in `.github/workflows/`. Builds need Fedora mirrors, so they only run on Git
 | `fedora-verify.yml` | Push to `main`/`fedora-mutable` touching `verify-iso.sh` | Re-checks the newest successful ISO without rebuilding. |
 | `fedora-size-report.yml` | Manual (`run_id`), or push to `claude/**` touching it | Lists largest packages and folders in an ISO. |
 | `fedora-installer-test.yml` | Manual; push touching `fedora/test/**` | Boots the latest release (or a run's ISO) in QEMU, starts the installer, uploads screenshots/logs. Runs 3 variants. |
-| `version-bump-check.yml` | Every PR to `main` or `experimental/quickshell` (**on the experimental branch only so far**) | Fails unless `fedora/VERSION` is format `X.YY` and higher than the target branch. |
+| `version-bump-check.yml` | Every PR to `main` | Fails unless `fedora/VERSION` is format `X.YY` or `X.YYe` and higher than the target branch. |
 | `quickshell-probe.yml` | Experimental only; push touching the kickstart; manual | Resolves the whole package list in 2 to 5 minutes; reports whether Ryoku's Hyprland packages install yet. |
 
 Important CI behaviour:
@@ -148,8 +140,9 @@ Important CI behaviour:
 ## 6. Versioning
 
 - Format **`vX.YY`**, e.g. v0.88. Stored in `fedora/VERSION` without the `v` (`0.88`).
+- **Experimental releases add `e`**: `vX.YYe`, e.g. v0.89e (`0.89e` in `fedora/VERSION`). Same number line: after v0.89e comes v0.90 or v0.90e. Use `e` whenever the release carries untested/experimental work.
 - **Never** use three-part versions (`v0.0.70` was an error; after it came v0.72).
-- **Bump the version in every PR, on every branch.** `main` and `experimental/quickshell` share one number line: always pick a number higher than **both** branches.
+- **Bump the version in every PR.** `version-bump-check.yml` enforces it.
 - `VERSION` sets: ISO name `FaradayOSv0.88.iso`, volume label `FaradayOSv0-88`, os-release `PRETTY_NAME="FaradayOS v0.88"`, `IMAGE_VERSION=0.88`, release tag `v0.88`. `VERSION_ID` stays Fedora's `44`, because dnf needs it.
 - Also update version mentions in `README.md` and `fedora/README.md`.
 
@@ -166,7 +159,7 @@ To install:
 4. Write to a USB stick (8 GB+) with Fedora Media Writer or balenaEtcher.
 5. **Turn off Secure Boot** (the NVIDIA driver is not signed), boot the USB, open **Install to Hard Drive**.
 
-The experimental branch is not released. Its ISO is the `FaradayOS-Quickshell-ISO` artifact (7 days) or a local build.
+Experimental (`e`) versions are released from `main` the same way, e.g. Release `v0.89e`.
 
 ## 8. Branding: boot splash, GRUB, desktop, installer
 
@@ -228,7 +221,7 @@ Installed on demand by **Install VR tools** (`faraday-install-vr`, also an add-o
 
 ## 14. Experimental Quickshell edition
 
-Branch `experimental/quickshell`, full details in `fedora/quickshell/README.md` on that branch.
+On `main` since v0.89e (formerly branch `experimental/quickshell`). Full details in `fedora/quickshell/README.md`.
 
 - **Desktop:** [Ryoku](https://ryoku.dev) (GPL-3.0, by the Ryoku contributors): a hand-written Quickshell shell. Installed from Ryoku's signed Fedora repo (`repo.ryoku.dev`, key fingerprint `EB6D3C0F55A7B3CABA6B2838847B274F025DD6E3`) plus the `sdegler/hyprland` COPR (limited package list).
 - **Compositor: niri for now.** Aurora wants Hyprland ("stick to hyprland", 2026-11-10), but Ryoku's Fedora 44 Hyprland packages are uninstallable upstream (`hyprglass` needs `libaquamarine.so.14`, the COPR ships `.so.15`). Switch back: `ryoku-desktop-niri` -> `ryoku-desktop-hyprland` in the kickstart, `Session=hyprland.desktop` in `livesys-ryoku`, `--compositor Hyprland` in `fedora/test/desktop-args`, and the niri checks in `verify-iso.sh`. `quickshell-probe.yml` shows in minutes whether Hyprland installs again. `tty-session` starts Hyprland by itself once it is installed.
@@ -250,10 +243,8 @@ Experimental fixes since branching: v0.81 version-bump CI check; v0.82 unattende
 ## 16. Known issues
 
 - **Experimental: slow first boot / about one-minute pause after sign-in** (v0.87). Not reproduced in CI (about 7 s from sign-in to niri). Waiting on Aurora's fresh-install test.
-- **Experimental: red `test (as-is)` / `test (with-display-env)` jobs** are a known false alarm. `fedora-installer-test.yml` tests the latest *release* (main's KDE ISO) with the experimental niri test flags, so it always fails there. The VM test inside `fedora-iso.yml` is the one that counts.
+- **Red `test (as-is)` / `test (with-display-env)` jobs** are a known false alarm while the latest Release is still the KDE-only v0.88: `fedora-installer-test.yml` tests the latest *release* with the niri test flags. Should clear once v0.89e is released. The VM test inside `fedora-iso.yml` is the one that counts.
 - **Hyprland unavailable** on Fedora 44 Ryoku packages (upstream soname mismatch); experimental runs niri.
-- **Main's `build-iso.sh`** lacks the unattended / `--network host` / retry improvements from experimental.
-- **`version-bump-check.yml`** exists only on experimental; PRs to `main` are not checked automatically yet.
 - **UEFI boot label** still says "Fedora".
 - **RPM Fusion outages** occasionally fail CI; re-run once.
 - **`fedora-verify.yml`** can race a fresh ISO build on `main` and fail with "ISO not found" (it downloads the previous run's ISO). Not a real failure.
@@ -278,7 +269,8 @@ Experimental fixes since branching: v0.81 version-bump CI check; v0.82 unattende
 | v0.79 | #18 | Claude Code and Claude Desktop add-ons |
 | v0.80 | #19 | ISO includes Fedora updates (repo rename fix); Java kept for LibreOffice |
 | v0.81-v0.87 | #20-#29 | Experimental Quickshell edition (see section 14) |
-| v0.88 | this PR | Project documentation and handover file |
+| v0.88 | #30 | Project documentation and handover file |
+| v0.89e | this PR | Experimental Quickshell edition merged into `main`; one build command; `e` suffix for experimental versions |
 
 ## 18. Legacy CachyOS build (deprecated)
 
