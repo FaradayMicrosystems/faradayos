@@ -16,13 +16,16 @@ On `main` since v0.89e (developed on the former branch `experimental/quickshell`
   The probe workflow (`quickshell-probe.yml`) shows in 2 minutes whether Hyprland resolves again.
 - **Packages:** Ryoku's signed Fedora repo (`repo.ryoku.dev`) plus the `sdegler/hyprland` COPR
   (Ryoku still needs hypridle and hyprpicker from it), limited to the Hyprland packages, as Ryoku's own installer does. Both stay enabled so updates work.
-- **One desktop per TTY (Aurora, 2026-11-10):** no graphical login screen. Sign in on **TTY2**
-  (Ctrl+Alt+F2) for the FaradayOS desktop (Ryoku's Quickshell shell; Hyprland when installed, niri
-  until Ryoku's Hyprland packages for Fedora 44 install again), or on **TTY4** (Ctrl+Alt+F4) for
-  **KDE Plasma**. The PC starts on TTY2; TTY1 and the rest stay text consoles. The live USB signs
-  liveuser in on TTY2 by itself. Files: `overlay/usr/libexec/faraday/tty-session`,
-  `overlay/etc/profile.d/faraday-tty-session.sh`, `overlay/etc/fish/conf.d/faraday-tty-session.fish`,
-  `overlay/usr/lib/systemd/system/faraday-tty2.service`, `overlay/usr/libexec/livesys/sessions.d/livesys-ryoku`.
+- **Graphical login screen (v0.91e, Aurora 2026-11-26):** the PC starts at Ryoku's SDDM login screen
+  (weston kiosk greeter, "orbital" skin), which lists every user (no autologin). Sessions: **FaradayOS**
+  (default on first sign-in) and **KDE Plasma**, both through `overlay/usr/libexec/faraday/desktop-session`
+  (`overlay/usr/share/wayland-sessions/faradayos*.desktop`); `rebrand-ryoku.py` hides the packages' own
+  session entries. Config: `overlay/etc/sddm.conf.d/`. `ryoku-greeter-guard` restarts SDDM if its greeter dies.
+  Text sign-in still works as a fallback: **TTY2** (Ctrl+Alt+F2) FaradayOS, **TTY4** KDE Plasma
+  (`overlay/usr/libexec/faraday/tty-session`, `overlay/etc/profile.d/faraday-tty-session.sh`,
+  `overlay/etc/fish/conf.d/faraday-tty-session.fish`). The live USB turns the login screen off for itself and
+  signs liveuser in on TTY2 (`overlay/usr/libexec/livesys/sessions.d/livesys-ryoku`). The VM test starts the
+  login screen and checks its greeter runs (`--login-screen`). (2026-11-10 to v0.90e: no login screen, TTY only.)
 - **Installer on the live USB:** open the app launcher and pick **Install FaradayOS**. Fedora's
   `liveinst.desktop` is marked `NoDisplay=true` and Ryoku's launcher hides such entries, so
   `livesys-ryoku` puts a visible copy in liveuser's `~/.local/share/applications` (live USB only).

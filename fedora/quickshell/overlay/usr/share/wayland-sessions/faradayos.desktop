@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=FaradayOS
+Comment=The FaradayOS desktop
+Exec=/usr/libexec/faraday/desktop-session faradayos
+Type=Application
+DesktopNames=niri

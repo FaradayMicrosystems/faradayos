@@ -1,5 +1,5 @@
 #!/bin/sh
-# FaradayOS Quickshell edition, live USB: liveuser is signed in on TTY2 automatically, which starts the
+# FaradayOS Quickshell edition, live USB: liveuser is signed in on TTY2 automatically (no login screen), which starts the
 # FaradayOS (Hyprland) desktop. TTY4 offers KDE Plasma (sign in as liveuser, no password).
 # Run by livesys.service after it creates liveuser. The autologin lives in /run, so it only exists while
 # the live USB runs and is never copied to an installed system.
@@ -17,6 +17,10 @@ if [ -f /usr/share/applications/liveinst.desktop ]; then
   chmod +x ~liveuser/Desktop/liveinst.desktop
   chown -R liveuser:liveuser ~liveuser/.local ~liveuser/Desktop
 fi
+# The live USB has no login screen: liveuser is already signed in. Turn the installed system's login
+# screen off for this boot only (/run), before it starts (livesys runs before the display manager).
+systemctl mask --runtime sddm.service ryoku-greeter-guard.service
+systemctl --no-block stop sddm.service ryoku-greeter-guard.service
 # Sign liveuser in on TTY2 (after the launcher entry exists, so the desktop sees it at start)
 D=/run/systemd/system/getty@tty2.service.d
 mkdir -p $D
@@ -27,3 +31,4 @@ ExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin liveuser %I $TER
 CONF
 systemctl daemon-reload
 systemctl --no-block restart getty@tty2.service
+chvt 2 2>/dev/null || true

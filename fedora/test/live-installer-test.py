@@ -22,6 +22,8 @@ ap.add_argument("--launcher-entry", action="store_true",
 ap.add_argument("--account-page", action="store_true",
                 help="the installer itself must ask for the user account: its 'Create account' page must not be "
                      "hidden (nothing else on the installed system creates a user)")
+ap.add_argument("--login-screen", action="store_true",
+                help="after the installer test, start the installed system's login screen (SDDM) and check its greeter runs")
 ap.add_argument("--prep", default="", help="shell command to run as root in the live system before the installer starts")
 a = ap.parse_args()
 COMP, SHELL = a.compositor, a.shell
@@ -161,6 +163,8 @@ if a.launcher_entry:
     result["installer_in_launcher"] = False
 if a.account_page:
     result["installer_asks_for_user"] = False
+if a.login_screen:
+    result["login_screen"] = False
 # The v0.72 crash: the installer's keyboard page looped, starting thousands of keyboard tasks. A normal start needs a few.
 MAX_TASKS = 300
 try:
@@ -263,6 +267,22 @@ try:
         "free -m; loginctl list-sessions; systemctl --failed --no-pager; coredumpctl list --no-pager; "
         "ps -eo pid,user,rss,cmd --sort=-rss | head -30; systemctl --user -M liveuser@.host status faraday-test-liveinst --no-pager -l; "
         "coredumpctl info --no-pager 2>/dev/null | grep -E 'Executable:|Signal:|Timestamp:|Stack trace|^ +#([0-9]|1[0-9]) ' | head -150", 300))
+    if a.login_screen:
+        # The live USB turns the login screen off for itself (livesys-ryoku); an installed PC starts on it.
+        # Start it the way an installed PC does and check its greeter comes up and stays up.
+        st = run("systemctl unmask --runtime sddm.service ryoku-greeter-guard.service; systemctl daemon-reload; "
+                 "systemctl start sddm.service; sleep 40; "
+                 "echo greeter1=$(pgrep -c -f sddm-greeter); sleep 15; echo greeter2=$(pgrep -c -f sddm-greeter); "
+                 "echo vt=$(cat /sys/class/tty/tty0/active); systemctl is-active sddm.service; "
+                 "ps -eo pid,user,cmd | grep -E '[s]ddm|[w]eston' | cut -c1-200; "
+                 "grep -H '' /usr/share/wayland-sessions/*.desktop | grep -E 'Name=|NoDisplay=|Exec='; "
+                 "journalctl -b --no-pager -o short-monotonic -u sddm.service | cut -c1-220 | tail -40", 240)
+        say("login screen:", shot("login-screen"))
+        report("login screen", st)
+        m1, m2 = re.search(r"greeter1=(\d+)", st), re.search(r"greeter2=(\d+)", st)
+        result["login_screen"] = bool(m1 and m2 and int(m1.group(1)) > 0 and int(m2.group(1)) > 0)
+        say("login screen greeter running:", result["login_screen"])
+
     # The job log is the only output some readers can see, so print the important parts there (filtered in the VM:
     # the serial line is too slow for the whole journal)
     pat = ("kwin|plasmashell|KCrash|dumped core|segfault|oom|Out of memory|Killed process|liveinst|pkexec|anaconda|"

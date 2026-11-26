@@ -272,6 +272,27 @@ def kde_only():
         write_if_changed(path, new, old)
 
 
+# 7b. Login screen: offer only "FaradayOS" and "KDE Plasma" (faradayos*.desktop, both through
+#     /usr/libexec/faraday/desktop-session). The packages' own entries (niri, Hyprland, Plasma,
+#     Plasma X11) start the same desktops without FaradayOS's setup, so the login screen hides them.
+SESSION_GLOBS = ["/usr/share/wayland-sessions/*.desktop", "/usr/share/xsessions/*.desktop"]
+
+
+def other_sessions():
+    return [p for g in SESSION_GLOBS for p in sorted(glob.glob(g))
+            if not os.path.basename(p).startswith("faradayos")]
+
+
+def login_sessions():
+    for path in other_sessions():
+        old = read(path)
+        if old is None or re.search(r"^NoDisplay=true", old, flags=re.M):
+            continue
+        new = re.sub(r"^NoDisplay=.*\n", "", old, flags=re.M)
+        new = re.sub(r"^\[Desktop Entry\]\n", "[Desktop Entry]\nNoDisplay=true\n", new, count=1, flags=re.M)
+        write_if_changed(path, new, old)
+
+
 # 8. Boot: keep the FaradayOS splash and a GRUB menu with only FaradayOS entries.
 #    ryoku-desktop's update script re-themes both; undo that.
 def boot():
@@ -337,6 +358,9 @@ def check():
     for path in kde_only_files():
         if not re.search(r"^OnlyShowIn=", read(path) or "", flags=re.M):
             left.append("%s: autostarts outside KDE (black window in niri)" % path)
+    for path in other_sessions():
+        if not re.search(r"^NoDisplay=true", read(path) or "", flags=re.M):
+            left.append("%s: shown on the login screen" % path)
     for line in left:
         print("still Ryoku:", line)
     return 1 if left else 0
@@ -347,7 +371,7 @@ def main():
         sys.exit(check())
     if not os.path.isdir(SHARE):
         return                      # Ryoku is not installed: nothing to do
-    for step in (catalogs, qml, desktop_files, logos, rices, niri, kde_only, boot):
+    for step in (catalogs, qml, desktop_files, logos, rices, niri, kde_only, login_sessions, boot):
         try:
             step()
         except Exception as e:      # one failed step must not stop the others or dnf

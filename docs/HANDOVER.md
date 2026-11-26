@@ -14,7 +14,7 @@ Last updated: 25 Nov 2026 (AEST). For someone taking over FaradayOS. Full techni
 | | `main` |
 |---|---|
 | Version | v0.89e (experimental Quickshell edition merged into `main`) |
-| Desktop | Ryoku (Quickshell) on niri on TTY2, KDE Plasma on TTY4 |
+| Desktop | Ryoku (Quickshell) on niri, KDE Plasma as second session; SDDM login screen (Ryoku greeter) |
 | Status | Alpha. Aurora's main focus; being tested on hardware |
 | Built how | CI on every push, published as a Release; or Aurora's local build (one command, section 6) |
 
