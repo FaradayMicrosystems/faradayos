@@ -23,7 +23,7 @@ jobs:
       - name: Install build libraries
         run: |
           sudo apt-get update -q
-          sudo apt-get install -y -q libgl1-mesa-dev xorg-dev libwayland-dev libxkbcommon-dev wayland-protocols xvfb
+          sudo apt-get install -y -q libgl1-mesa-dev xorg-dev libwayland-dev libxkbcommon-dev wayland-protocols xvfb desktop-file-utils
       - name: Check the helper script and editions list
         run: |
           bash -n fedora/builder-helper.sh

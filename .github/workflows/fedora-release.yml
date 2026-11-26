@@ -63,7 +63,7 @@ jobs:
       - name: Build the FaradayOS Builder AppImage
         run: |
           sudo apt-get update -q
-          sudo apt-get install -y -q libgl1-mesa-dev xorg-dev libwayland-dev libxkbcommon-dev wayland-protocols
+          sudo apt-get install -y -q libgl1-mesa-dev xorg-dev libwayland-dev libxkbcommon-dev wayland-protocols desktop-file-utils
           builder/build-appimage.sh "$(cat fedora/VERSION)"
           cp builder/dist/* iso/
 

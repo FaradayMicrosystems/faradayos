@@ -2,7 +2,7 @@
 # Builds the FaradayOS Builder AppImage: builder/dist/FaradayOS-Builder-v<version>-x86_64.AppImage (+ .sha256)
 # Usage: builder/build-appimage.sh [version]   (default: fedora/VERSION)
 # Needs: Go, a C compiler, OpenGL/X11/Wayland headers (Ubuntu: libgl1-mesa-dev xorg-dev libwayland-dev
-# libxkbcommon-dev), curl. Used by .github/workflows/builder.yml and the release workflow.
+# libxkbcommon-dev desktop-file-utils), curl. Used by .github/workflows/builder.yml and the release workflow.
 set -euo pipefail
 cd "$(dirname "$0")"
 VERSION=${1:-$(tr -d '[:space:]' < ../fedora/VERSION)}
@@ -22,7 +22,7 @@ Name=FaradayOS Builder
 Comment=Build FaradayOS ISOs (Performance or Workplace edition)
 Exec=faradayos-builder
 Icon=faradayos-builder
-Categories=System;Utility;
+Categories=Utility;
 Terminal=false
 DESKTOP
 cat > AppDir/AppRun <<'APPRUN'
