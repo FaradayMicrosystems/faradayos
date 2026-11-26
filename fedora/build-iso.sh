@@ -69,7 +69,9 @@ build() {
   # --network host: use the PC's own network and DNS. The default container network
   # (NAT bridge) gets no DNS answers on some PCs (firewall/VPN), which makes dnf fail
   # with "Could not resolve host" or "Resolving timed out".
-  "${INHIBIT[@]}" $ENGINE run --rm --privileged --network host \
+  # Named, so the Builder app can stop it (and a container left over from a crash is removed first)
+  $ENGINE rm -f "faradayos-build-$EDITION" >/dev/null 2>&1 || true
+  "${INHIBIT[@]}" $ENGINE run --rm --name "faradayos-build-$EDITION" --privileged --network host \
     -v /dev:/dev -v "$REPO":/src:ro -v "$OUT":/out \
     "docker.io/library/fedora:$FEDORA" bash -euc "
       dnf -y install lorax-lmc-novirt pykickstart policycoreutils

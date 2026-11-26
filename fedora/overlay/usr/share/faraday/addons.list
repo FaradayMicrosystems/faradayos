@@ -28,19 +28,16 @@ joplin      | flatpak | net.cozic.joplin_desktop    | Joplin: notes and to-dos w
 obsidian    | flatpak | md.obsidian.Obsidian        | Obsidian: notes (Flathub)
 logseq      | flatpak | com.logseq.Logseq           | Logseq: outliner notes and knowledge base (Flathub)
 planify     | flatpak | io.github.alainm23.planify  | Planify: task manager with Todoist and Nextcloud sync (Flathub)
-projectlibre | flatpak | com.projectlibre.ProjectLibre | ProjectLibre: project plans and Gantt charts, opens Microsoft Project files (Flathub)
 [CAD and engineering]
-freecad     | dnf     | freecad                     | FreeCAD: 3D parametric CAD for mechanical design
+freecad     | flatpak | org.freecad.FreeCAD         | FreeCAD: 3D parametric CAD for mechanical design (Flathub)
 librecad    | dnf     | librecad                    | LibreCAD: 2D CAD drafting (DXF/DWG)
-qcad        | flatpak | org.qcad.QCAD               | QCAD: 2D CAD drafting (Flathub)
-solvespace  | dnf     | solvespace                  | SolveSpace: small, fast parametric 3D CAD
+solvespace  | flatpak | com.solvespace.SolveSpace   | SolveSpace: small, fast parametric 3D CAD (Flathub)
 openscad    | dnf     | openscad                    | OpenSCAD: 3D CAD by writing code
 dune3d      | flatpak | org.dune3d.dune3d           | Dune 3D: modern parametric 3D CAD (Flathub)
 kicad       | dnf     | kicad                       | KiCad: electronics, schematics and circuit boards (large, about 1 GB)
 librepcb    | flatpak | org.librepcb.LibrePCB       | LibrePCB: electronics and circuit boards, easy to learn (Flathub)
 sweethome3d | flatpak | com.sweethome3d.Sweethome3d | Sweet Home 3D: floor plans and interior design (Flathub)
 prusaslicer | dnf     | prusa-slicer                | PrusaSlicer: prepare 3D prints
-orcaslicer  | flatpak | io.github.softfever.OrcaSlicer | OrcaSlicer: prepare 3D prints, Bambu Lab and others (Flathub)
 cura        | flatpak | com.ultimaker.cura          | UltiMaker Cura: prepare 3D prints (Flathub)
 [Design, photo and video]
 gimp        | dnf     | gimp                        | GIMP: photo editing and retouching
@@ -72,7 +69,6 @@ mattermost  | flatpak | com.mattermost.Desktop      | Mattermost: team chat (Fla
 okular      | dnf     | okular                      | Okular: PDF viewer with notes, highlights and form filling
 xournalpp   | dnf     | xournalpp                   | Xournal++: write and sign on PDFs, handwritten notes
 pdfarranger | dnf     | pdfarranger                 | PDF Arranger: merge, split, rotate and reorder PDF pages
-masterpdf   | flatpak | net.codeindustry.MasterPDFEditor | Master PDF Editor: edit PDF text and images (proprietary, Flathub)
 ocrmypdf    | dnf     | ocrmypdf tesseract-langpack-eng | OCRmyPDF: make scanned PDFs searchable (command line)
 calibre     | dnf     | calibre                     | Calibre: e-book library and converter
 [Development and AI]

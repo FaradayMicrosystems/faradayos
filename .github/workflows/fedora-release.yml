@@ -16,7 +16,7 @@ on:
 jobs:
   release:
     if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04  # older glibc for the Builder AppImage it builds
     permissions:
       actions: read
       contents: write
@@ -55,6 +55,18 @@ jobs:
           sha256sum *.iso.part[0-9] > SHA256SUMS-parts.txt
           ls -l
 
+      # The FaradayOS Builder app (builder/): people download it to build the ISOs themselves
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: builder/go.mod
+          cache-dependency-path: builder/go.sum
+      - name: Build the FaradayOS Builder AppImage
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q libgl1-mesa-dev xorg-dev libwayland-dev libxkbcommon-dev wayland-protocols
+          builder/build-appimage.sh "$(cat fedora/VERSION)"
+          cp builder/dist/* iso/
+
       - name: Publish release
         run: |
           V=$(cat fedora/VERSION); TAG=v$V; DL=$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/releases/download/$TAG
@@ -72,6 +84,11 @@ jobs:
           {
             echo "FaradayOS v$V (Fedora 44, Quickshell desktop). Built by [run $RUN]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$RUN)."
             echo
+            echo "## Easiest: build it yourself with the FaradayOS Builder"
+            echo "Download \`FaradayOS-Builder-v$V-x86_64.AppImage\` below, make it executable (\`chmod +x FaradayOS-Builder-*.AppImage\`, or right-click > Properties > Allow executing), and open it."
+            echo "Pick **Performance** or **Workplace**; the ISO lands in \`~/FaradayOS-ISOs\`. Needs any 64-bit Linux PC with podman (the app offers to install it), about 45 GB free and about 1 hour per edition."
+            echo
+            echo "## Or download a ready ISO"
             echo "Two editions. Download all \`.part\` files of ONE edition, then join them into one ISO."
             echo
             echo "## Performance edition: gaming, VR, engineering"
