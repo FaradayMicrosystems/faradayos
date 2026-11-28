@@ -1,6 +1,6 @@
 # Hyprland compositor stack (Fedora does not package it). Same COPR and package list Ryoku's own installer uses.
 [ryoku-copr-sdegler-hyprland]
-name=Ryoku dependency: sdegler/hyprland
+name=FaradayOS desktop dependency: sdegler/hyprland
 baseurl=https://download.copr.fedorainfracloud.org/results/sdegler/hyprland/fedora-$releasever-$basearch/
 enabled=1
 gpgcheck=1

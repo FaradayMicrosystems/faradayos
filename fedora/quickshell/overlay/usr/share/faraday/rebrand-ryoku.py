@@ -38,8 +38,13 @@ CATALOG_DIRS = [SHARE + "/i18n"] + glob.glob("/home/*/.local/share/ryoku/i18n")
 # (github.com/Ryoku-dev; ryoku.dev is lower case and never matches).
 WORD = re.compile(r"(?<![A-Za-z0-9_@/.-])Ryoku(?![.][A-Za-z]|[A-Z0-9_]|-dev)")
 # Ryoku's app store, shown as "Ryostore" (the command "ryostore" is lower case).
-STORE = re.compile(r"(?<![A-Za-z0-9_@/.-])Ryostore(?![A-Za-z0-9_])")
+STORE = re.compile(r"(?<![A-Za-z0-9_@/.-])Ryo[sS]tore(?![A-Za-z0-9_])")
 STORE_NAME = NAME + " Store"
+STORE_UP = re.compile(r"(?<![A-Za-z0-9_@/.$-])RYOSTORE(?![A-Za-z0-9_])")
+# Upper-case labels made of more than the bare word ("RYOKU FEDORA", "OPEN IN RYOKU HUB", "BROWSE RYOSTORE").
+# Labels like these were left in the shell settings header and buttons (VM test, v0.91e). The bare "RYOKU" stays
+# (an option value code compares against), except where it is assigned to a text property.
+DISTRO_LABEL = re.compile(r"^RYOKU (FEDORA|ARCH|CACHYOS|VOID)$")
 # Upper-case labels ("RYOKU", "RYOKU DEFAULT"). Catalog values only: in QML an
 # upper-case "RYOKU" is also an option value code compares against.
 WORD_UP = re.compile(r"(?<![A-Za-z0-9_@/.$-])RYOKU(?![A-Za-z0-9_])")
@@ -87,7 +92,12 @@ def brand_text(s):
 
 
 def brand_label(s):
-    return WORD_UP.sub(NAME.upper(), brand_text(s))
+    return STORE_UP.sub(NAME.upper() + " STORE", WORD_UP.sub(NAME.upper(), brand_text(s)))
+
+
+def upper_label(s):
+    """An upper-case QML label with RYOKU/RYOSTORE in it (never the bare option value "RYOKU")."""
+    return s != "RYOKU" and (WORD_UP.search(s) or STORE_UP.search(s)) and s == s.upper()
 
 
 # 1. Translation catalogs: change the shown text (values), keep the lookup keys.
@@ -97,7 +107,8 @@ def catalogs():
             if path.endswith("/langs.json"):
                 continue
             old = read(path)
-            if old is None or ("Ryoku" not in old and "RYOKU" not in old and "Ryostore" not in old):
+            if old is None or ("Ryoku" not in old and "RYOKU" not in old and "Ryostore" not in old
+                                and "RyoStore" not in old and "RYOSTORE" not in old):
                 continue
             try:
                 data = json.loads(old)
@@ -120,7 +131,13 @@ def qml_literal(m, text):
     before = text[max(0, m.start() - 9):m.start()]
     if s == "Ryoku" and before.endswith(("? ", "author: ")):
         return '"%s"' % NAME       # shown values: style ? "Ryoku" : ..., author: "Ryoku"
-    if ("Ryoku" not in s and "Ryostore" not in s) or SKIP_LITERAL.search(s):
+    if s == "RYOKU" and before.endswith("text: "):
+        return '"%s"' % NAME.upper()   # QS Bar settings header: text: "RYOKU"
+    if DISTRO_LABEL.match(s):
+        return '"%s"' % NAME.upper()   # Settings header "RYOKU FEDORA" (also a catalog key: shown as is)
+    if upper_label(s) and not before.endswith(("tr(", ".t(")):
+        return '"' + brand_label(s) + '"'  # upper-case labels outside the catalogs (catalog keys: step 1)
+    if ("Ryoku" not in s and "Ryostore" not in s and "RyoStore" not in s) or SKIP_LITERAL.search(s):
         return m.group(0)
     if before.endswith("tr(") or before.endswith(".t("):
         return m.group(0)          # catalog key: translated through step 1
@@ -135,16 +152,41 @@ def qml():
                     continue
                 path = os.path.join(dirpath, fn)
                 old = read(path)
-                if old is None or ("Ryoku" not in old and "Ryostore" not in old
+                if old is None or ("Ryoku" not in old and "Ryostore" not in old and "RyoStore" not in old
+                                   and "RYOKU" not in old and "RYOSTORE" not in old
                                    and "markImage" not in old and "launcherLogoTextLabel" not in old):
                     continue
                 new = LITERAL.sub(lambda m: qml_literal(m, old), old)
+                # Notification titles: notify-send ... 'Ryoku' (the -a/--app-name ids stay)
+                new = re.sub(r"(notify-send(?: -i [\w-]+)? )'Ryoku'", r"\1'%s'" % NAME, new)
+                # First-run tour: the bar a new account really gets (QS Bar) is the one marked as the default
+                if fn == "PageBars.qml" and '{ id: "qsbar"' in new and "recommended: true" in new:
+                    new = new.replace(", recommended: true }", " }")
+                    new = re.sub(r'(\{ id: "qsbar",[^\n]*?) \}', r'\1, recommended: true }', new, count=1)
                 new = re.sub(r'(property string name:\s*)"Ryoku"', r'\1"%s"' % NAME, new)
                 new = re.sub(r'(property string markImage:\s*)""', r'\1"%s"' % MARK_PNG, new)
                 # QS Bar's launcher button spells the logo id in capitals: "ryoku" -> RYOKU.
                 new = re.sub(r'(function launcherLogoTextLabel\(id\) \{\s*return )String\(id\)\.toUpperCase\(\)',
                              r'\1id === "ryoku" ? "%s" : String(id).toUpperCase()' % NAME.upper(), new)
                 write_if_changed(path, new, old)
+
+
+# 2b. Shell helpers: notification titles, and the shortcut hint that never closed on its own (VM test, v0.93e).
+INTRO = "/usr/bin/ryoku-session-intro"
+HINT_OLD = 'env "${qml_env[@]}" qs -c keys-hint &'
+HINT_NEW = 'timeout 90 env "${qml_env[@]}" qs -c keys-hint &'
+
+
+def scripts():
+    for path in glob.glob("/usr/bin/ryoku*"):
+        old = read(path)
+        if old is None or not old.startswith("#!") or "notify-send" not in old:
+            continue
+        new = re.sub(r'(notify-send(?: -[ai] [\w-]+)* )"Ryoku"', r'\1"%s"' % NAME, old)
+        write_if_changed(path, new, old)
+    old = read(INTRO)
+    if old and HINT_OLD in old and HINT_NEW not in old:
+        write_if_changed(INTRO, old.replace(HINT_OLD, HINT_NEW), old)
 
 
 # 3. Launcher entries.
@@ -393,6 +435,10 @@ def check():
                         left.append("%s: default brand name" % os.path.join(dirpath, fn))
                     if re.search(r'function launcherLogoTextLabel\(id\) \{\s*return String\(id\)', t):
                         left.append("%s: bar launcher label" % os.path.join(dirpath, fn))
+                    if re.search(r'text: "RYOKU"|"RYOKU (?:FEDORA|ARCH|CACHYOS|VOID)"', t):
+                        left.append("%s: upper-case RYOKU label" % os.path.join(dirpath, fn))
+                    if re.search(r"notify-send(?: -i [\w-]+)? 'Ryoku'", t):
+                        left.append("%s: notification title" % os.path.join(dirpath, fn))
     seeds = glob.glob(SHARE + "/config/niri/user.kdl")
     if os.path.isdir(SHARE) and glob.glob(SHARE + "/config/niri/*.kdl") and not seeds:
         left.append(SHARE + "/config/niri/user.kdl: missing, first-run tour would tile")
@@ -415,6 +461,12 @@ def check():
             left.append("%s: shown on the login screen" % path)
     if os.path.exists(GHOST) and subprocess.run([sys.executable, GHOST, "--check"], capture_output=True).returncode:
         left.append("NotificationPopups.qml: ghost-card fix not applied")
+    for path in glob.glob("/usr/bin/ryoku*"):
+        t = read(path) or ""
+        if t.startswith("#!") and re.search(r'notify-send(?: -[ai] [\w-]+)* "Ryoku"', t):
+            left.append("%s: notification title" % path)
+    if HINT_OLD in (read(INTRO) or "") and HINT_NEW not in (read(INTRO) or ""):
+        left.append(INTRO + ": shortcut hint never closes")
     for line in left:
         print("still Ryoku:", line)
     return 1 if left else 0
@@ -425,7 +477,7 @@ def main():
         sys.exit(check())
     if not os.path.isdir(SHARE):
         return                      # Ryoku is not installed: nothing to do
-    for step in (catalogs, qml, desktop_files, logos, rices, niri, kde_only, quiet_wallpaper, login_sessions, ghost_popups, boot):
+    for step in (catalogs, qml, scripts, desktop_files, logos, rices, niri, kde_only, quiet_wallpaper, login_sessions, ghost_popups, boot):
         try:
             step()
         except Exception as e:      # one failed step must not stop the others or dnf

@@ -8,7 +8,7 @@
 
 lang en_US.UTF-8
 keyboard us
-timezone America/New_York
+timezone Australia/Brisbane --utc
 selinux --enforcing
 firewall --enabled --service=mdns
 network --bootproto=dhcp --device=link --activate
@@ -76,12 +76,14 @@ ryoku-desktop-niri
 #@if performance
 @kde-desktop
 #@end
-#@if workplace
-# Workplace: no KDE Plasma. Small GNOME apps for everyday files (Plasma's apps come with @kde-desktop in performance)
+# Both editions: a PDF viewer, an image viewer and a calculator for the FaradayOS desktop (the performance
+# edition had none: PDFs and pictures opened in Firefox or not at all; VM test, v0.93e). Defaults: etc/xdg/mimeapps.list
 evince
 loupe
-gnome-text-editor
 gnome-calculator
+#@if workplace
+# Workplace: no KDE Plasma. More small GNOME apps for everyday files
+gnome-text-editor
 file-roller
 simple-scan
 xdg-desktop-portal-gtk
@@ -254,6 +256,15 @@ systemctl enable avahi-daemon.service
 # (Java stays: with Fedora updates, LibreOffice 26.2 needs it, and removing it takes LibreOffice too)
 dnf -y remove 'digikam*' 'proj-data-*' libreoffice-base || true
 rpm -q libreoffice-writer libreoffice-calc libreoffice-impress nautilus kitty || exit 1
+rpm -q evince loupe gnome-calculator || exit 1
+# App store: Flathub, the catalog the FaradayOS Store installs from (only Fedora's own flatpak remote was set up,
+# so every install from the Store failed; VM test, v0.93e)
+flatpak remote-add --system --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || exit 1
+# The NVIDIA settings loader autostarts in every session; on PCs without the NVIDIA driver it failed at each sign-in
+# (usr/libexec/faraday/nvidia-settings-load runs it only when the driver is loaded)
+for f in /etc/xdg/autostart/nvidia-settings*.desktop; do
+  if [ -f "$f" ]; then sed -i 's|^Exec=nvidia-settings -l$|Exec=/usr/libexec/faraday/nvidia-settings-load|' "$f"; fi
+done
 #@if performance
 # Both desktops must be in the image: FaradayOS (Ryoku on Hyprland or niri) on TTY2, KDE Plasma on TTY4
 rpm -q ryoku-desktop plasma-workspace || exit 1

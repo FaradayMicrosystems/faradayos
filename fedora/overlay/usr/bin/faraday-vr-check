@@ -26,7 +26,7 @@ fix_system(){
   # Open the ports WiVRn (9757 tcp+udp), ALVR (9943-9944 tcp+udp) and mDNS (5353/udp) need, in every active zone.
   if have firewall-cmd && systemctl is-active --quiet firewalld; then
     local z
-    for z in $(firewall-cmd --get-default-zone) $(firewall-cmd --get-active-zones 2>/dev/null | grep -v '^[[:space:]]'); do
+    for z in $(firewall-cmd --get-default-zone) $(firewall-cmd --get-active-zones 2>/dev/null | awk '/^[^[:space:]]/{print $1}'); do
       firewall-cmd -q --permanent --zone="$z" --query-service=faradayos-vr || firewall-cmd -q --permanent --zone="$z" --add-service=faradayos-vr
     done
     firewall-cmd -q --reload

@@ -15,6 +15,16 @@
 set -uo pipefail
 LIST=${FARADAY_ADDONS_LIST:-/usr/share/faraday/addons.list}
 HELPER=/usr/libexec/faraday/install-addons-system
+# The checklists drew no tick boxes in the FaradayOS desktop: its Qt theme (qt6ct, Fusion with a dark palette)
+# paints them the same colour as the list (VM test, v0.93e). Draw the dialogs with KDE's Breeze style when it is
+# installed, otherwise with Qt's plain Fusion colours.
+kdialog(){
+  if compgen -G "/usr/lib*/qt6/plugins/styles/breeze*.so" >/dev/null; then
+    QT_QPA_PLATFORMTHEME=kde QT_STYLE_OVERRIDE=Breeze command kdialog "$@"
+  else
+    env -u QT_QPA_PLATFORMTHEME QT_STYLE_OVERRIDE=Fusion kdialog "$@"
+  fi
+}
 
 trim(){ local s=$1; s=${s#"${s%%[![:space:]]*}"}; printf '%s' "${s%"${s##*[![:space:]]}"}"; }
 # Load the list into arrays (index = order in the file)

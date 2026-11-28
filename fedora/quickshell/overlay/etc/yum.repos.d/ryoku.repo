@@ -1,6 +1,6 @@
 # Ryoku desktop packages (Quickshell shell, Hyprland plugins, themes). Signed; key from the ryoku-keyring package.
 [ryoku]
-name=Ryoku
+name=FaradayOS desktop (Ryoku packages)
 baseurl=https://repo.ryoku.dev/stable/fedora/$releasever/x86_64
 enabled=1
 gpgcheck=1
