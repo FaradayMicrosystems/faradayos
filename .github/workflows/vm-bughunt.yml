@@ -15,7 +15,7 @@ on:
       scenarios:
         description: 'Scenario names, JSON list (fedora/test/vm/scenario_<name>.py), e.g. ["a","b","c"]'
         required: false
-        default: '["a","b","c"]'
+        default: '["smoke"]'
       gpu:
         description: 'VM graphics: virgl (3D, host software rendering), std, virtio'
         required: false
