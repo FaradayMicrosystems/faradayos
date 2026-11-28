@@ -373,7 +373,7 @@ def install_unattended(vm, timeout=2400):
     # A live install always parses interactive-defaults.ks and ignores --kickstart here, so put ours in its place
     vm.run("command cp -f /root/vmtest.ks /usr/share/anaconda/interactive-defaults.ks")
     say("unattended install started")
-    vm.run("nohup sh -c 'PKEXEC_UID=1000 anaconda --liveinst --cmdline --kickstart=/root/vmtest.ks >/root/anaconda-run.txt 2>&1; "
+    vm.run("nohup sh -c 'PKEXEC_UID=1000 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus anaconda --liveinst --cmdline --kickstart=/root/vmtest.ks >/root/anaconda-run.txt 2>&1; "
            "echo rc=$? >/root/anaconda-rc' >/dev/null 2>&1 &")
     end = time.time() + timeout
     last = ""
