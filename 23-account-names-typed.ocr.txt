@@ -1,0 +1,7 @@
+[25,49] | Vy FaradayOS vO.9le installation
+[33,110] l Create account
+[296,141] Use local account
+[295,170] A standard user account with admin access for making system-wide changes.
+[24,323] 5} Create Account
+[275,544] System
+[296,582] Enable root account

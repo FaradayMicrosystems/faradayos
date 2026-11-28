@@ -1,0 +1,5 @@
+{
+ "installer_window_s": 75,
+ "installer_first_page_s": 137,
+ "page_account_reached": 490
+}

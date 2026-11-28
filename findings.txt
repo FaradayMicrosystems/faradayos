@@ -1,0 +1,5 @@
+Installer stuck on the same page (step 7): | Vy FaradayOS vO.9le installation Create account Use local account A standard user account with admin access for making system-wide changes. 5} Create Account System Enable root account
+Installer stuck on the same page (step 8): | Vy FaradayOS vO.9le installation Create account Use local account A standard user account with admin access for making system-wide changes. 5} Create Account System Enable root account
+Installer stuck on the same page (step 9): | Vy FaradayOS vO.9le installation Create account Use local account A standard user account with admin access for making system-wide changes. 5} Create Account System Enable root account
+Installer stuck on the same page (step 10): | Vy FaradayOS vO.9le installation Create account Use local account A standard user account with admin access for making system-wide changes. 5} Create Account System Enable root account
+Installer stuck for 6 steps, giving up

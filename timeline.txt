@@ -1,0 +1,85 @@
+05:27:20 +76s serial root shell
+05:27:36 +92s desktop up=True
+05:28:25 +141s shot 01-live-after-55s.png brightness=51
+05:28:39 +155s shot 02-tour-after-next-1.png brightness=52
+05:28:52 +168s shot 03-tour-after-next-2.png brightness=51
+05:29:06 +182s shot 04-tour-after-next-3.png brightness=49
+05:29:18 +194s shot 05-tour-after-next-4.png brightness=49
+05:29:26 +202s shot 06-tour-last-page.png brightness=49
+05:29:26 +202s click 'Finish' at 1132,685
+05:29:41 +217s shot 07-tour-after-finish.png brightness=95
+05:29:41 +217s tour open after Finish: False (75s)
+05:30:04 +240s shot 08-tour-reopened.png brightness=51
+05:30:18 +254s shot 09-tour-after-skip.png brightness=51
+05:30:18 +254s tour open after Skip: True
+05:30:38 +274s shot 10-launcher-open.png brightness=48
+05:30:55 +291s shot 11-launcher-install-typed.png brightness=57
+05:30:57 +293s click 'Install FaradayOS' at 1113,585
+05:31:15 +311s shot 12-launcher-after-single-click.png brightness=57
+05:31:16 +312s installer launched from launcher (clicked 'Install FaradayOS', then Enter)
+05:32:06 +362s shot 13-installer-wait-5s.png brightness=51
+05:32:12 +368s installer window after 75s: {'id': 4, 'title': 'Anaconda Web UI', 'app_id': 'org.fedoraproject.AnacondaInstaller', 'pid': 8452, 'workspace_id': 1, 'is_focused': True, 'is_floating': False, 'is_urgent': False, 'layout': {'pos_in_scrolling_layout': [1, 1], 'tile_size': [1920.0, 1080.0], 'window_size': [1920, 1080], 'tile_pos_in_workspace_view': None, 'window_offset_in_tile': [0.0, 0.0]}, 'focus_timestamp': {'secs': 338, 'nanos': 51171987}}
+05:32:37 +393s shot 14-installer-loading-0.png brightness=16
+05:32:58 +414s shot 15-installer-loading-1.png brightness=16
+05:33:14 +430s shot 16-installer-loading-2.png brightness=21
+05:33:14 +430s closing the keys hint (it covers the installer) with its X
+05:33:22 +438s shot 17-installer-after-closing-hint.png brightness=21
+05:33:28 +444s shot 18-inst-00.png brightness=21
+05:33:28 +444s page done after 5s, clicking Next
+05:33:40 +456s shot 19-inst-01.png brightness=20
+05:33:40 +456s page done after 11s, clicking Next
+05:33:51 +467s shot 20-inst-02.png brightness=19
+05:33:51 +467s page done after 10s, clicking Next
+05:34:03 +479s shot 21-inst-03.png brightness=19
+05:34:03 +479s page done after 10s, clicking Next
+05:34:14 +490s shot 22-inst-04.png brightness=25
+05:34:14 +490s click 'Full name' at 325,225
+05:34:19 +495s click 'User name' at 329,286
+05:34:28 +504s shot 23-account-names-typed.png brightness=25
+05:34:28 +504s click 'Passphrase' at 331,356
+05:34:33 +509s click 'Confirm passphrase' at 358,438
+05:34:44 +520s shot 24-account-filled.png brightness=25
+05:34:49 +525s shot 25-account-before-next.png brightness=25
+05:34:49 +525s page done after 45s, clicking Next
+05:35:01 +537s shot 26-inst-05.png brightness=25
+05:35:01 +537s page done after 11s, clicking Next
+05:35:13 +549s shot 27-inst-06.png brightness=25
+05:35:13 +549s page done after 11s, clicking Next
+05:35:25 +561s shot 28-inst-07.png brightness=25
+05:35:25 +561s page done after 11s, clicking Next
+05:35:31 +567s NOT FOUND on screen: 'Use entire disk'
+05:35:31 +567s NOT FOUND on screen: 'Erase data'
+05:35:31 +567s NOT FOUND on screen: '64'
+05:35:31 +567s NOT FOUND on screen: 'Virtio'
+05:35:31 +567s NOT FOUND on screen: 'vda'
+05:35:31 +567s NOT FOUND on screen: 'Continue'
+05:35:31 +567s NOT FOUND on screen: 'Accept'
+05:35:36 +572s shot 29-inst-08.png brightness=25
+05:35:36 +572s page done after 11s, clicking Next
+05:35:43 +579s NOT FOUND on screen: 'Use entire disk'
+05:35:43 +579s NOT FOUND on screen: 'Erase data'
+05:35:43 +579s NOT FOUND on screen: '64'
+05:35:43 +579s NOT FOUND on screen: 'Virtio'
+05:35:43 +579s NOT FOUND on screen: 'vda'
+05:35:43 +579s NOT FOUND on screen: 'Continue'
+05:35:43 +579s NOT FOUND on screen: 'Accept'
+05:35:48 +584s shot 30-inst-09.png brightness=25
+05:35:48 +584s page done after 11s, clicking Next
+05:35:55 +591s NOT FOUND on screen: 'Use entire disk'
+05:35:55 +591s NOT FOUND on screen: 'Erase data'
+05:35:55 +591s NOT FOUND on screen: '64'
+05:35:55 +591s NOT FOUND on screen: 'Virtio'
+05:35:55 +591s NOT FOUND on screen: 'vda'
+05:35:55 +591s NOT FOUND on screen: 'Continue'
+05:35:55 +591s NOT FOUND on screen: 'Accept'
+05:36:00 +596s shot 31-inst-10.png brightness=25
+05:36:00 +596s page done after 11s, clicking Next
+05:36:07 +603s NOT FOUND on screen: 'Use entire disk'
+05:36:07 +603s NOT FOUND on screen: 'Erase data'
+05:36:07 +603s NOT FOUND on screen: '64'
+05:36:07 +603s NOT FOUND on screen: 'Virtio'
+05:36:07 +603s NOT FOUND on screen: 'vda'
+05:36:07 +603s NOT FOUND on screen: 'Continue'
+05:36:07 +603s NOT FOUND on screen: 'Accept'
+05:36:12 +608s shot 32-installer-final.png brightness=25
+05:36:12 +608s live VM stopped

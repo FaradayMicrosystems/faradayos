@@ -1,0 +1,9 @@
+[61,26] FaradayOS vO.9le installation
+[275,102] Destination
+[274,143] Virtio Block Device (vda) 68.7 GB disk
+[24,213] 3} Installation method
+[275,258] How would you like to install?
+[30,275] 4 Storage configuration
+[275,298] @ Use entire disk
+[31,330] 5 Create Account
+[30,385] 6 Review and install

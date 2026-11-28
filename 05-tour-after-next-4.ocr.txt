@@ -1,0 +1,17 @@
+[94,0] ==
+[32,18] FARADAYOS — P 40x = 026
+[1674,17] I & Qiox & wus
+[885,17] & 00:29 Sat 28 &
+[1559,38] _ > a
+[776,92] — #) Press (Super + K_ to open Kit x
+[843,154] Super | + Esc| for the sidebar
+[843,184] Super| + , for settings
+[1165,207] io 62 Your bear 63 Make it yours 64 Essentials 65 Done
+[447,207] FARADAYOS
+[447,225] FIRST RUN
+[1471,233] SEE
+[939,443] lr
+[760,529] The desktop is yours
+[680,599] Change anything Later in FaradayOS Hub, or tune QS Bar from its own
+[923,624] settings.
+[762,680] Open FaradayOS Hub QS Bar settings } Finish |

@@ -1,0 +1,9 @@
+[61,26] FaradayOS v0O.9le installation
+[32,110] 1 Storage configuration
+[275,144] Encryption
+[30,165] 2
+[30,220] 3
+[274,226] @ Encrypt my data
+[24,268] 4) Storage configuration
+[31,330] 5 Create Account
+[30,385] 6 Review and install

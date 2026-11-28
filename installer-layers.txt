@@ -1,0 +1,28 @@
+Output "Virtual-1":
+  Background layer:
+    Surface:
+      Namespace: "ryoku-overview-backdrop"
+      Keyboard interactivity: none
+
+  Bottom layer:
+    Surface:
+      Namespace: "ryoku-dock"
+      Keyboard interactivity: none
+
+    Surface:
+      Namespace: "ryoku-widgets"
+      Keyboard interactivity: none
+
+  Top layer:
+    Surface:
+      Namespace: "quickshell"
+      Keyboard interactivity: none
+
+  Overlay layer:
+    Surface:
+      Namespace: "ryoku-keys-hint"
+      Keyboard interactivity: none
+
+    Surface:
+      Namespace: "ryoku-notifications"
+      Keyboard interactivity: none

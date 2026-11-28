@@ -1,0 +1,27 @@
+[94,0] ==
+[32,18] FARADAYOS — P 40x = 026
+[1674,17] I & Qiox & wus
+[1559,38] _ > a
+[776,92] — #) Press (Super + K_ to open Kit x
+[843,154] Super | + Esc| for the sidebar
+[843,184] Super| + , for settings
+[447,207] FARADAYOS io 62 Your ber 63 Make it yours 64 Essentials 985 Done
+[406,222] Mi RUN
+[413,232] aol
+[402,371] The keys that matter
+[402,418] These eight chords cover most days. Click a row when the action can open from here.
+[422,484] Super + Space Launcher Alt + Space
+[1056,474] AI bar
+[505,495] Find apps and files.
+[1057,495] Ask a quick question.
+[1071,556] Quick settings
+[504,556] FaradayOS Hub
+[983,566] Super + Escape
+[505,577] Change system and desktop settings.
+[1071,577] Open controls and session actions.
+[1085,638] Screenshot
+[421,648] Super + K Kit Super + Shift + $
+[485,659] Shortcuts, commands, your phone and quick tools.
+[1086,659] Capture, edit, scan or record.
+[421,730] Super + Return Terminal Super +L Lock
+[509,741] Open the configured terminal. Lock the current session.

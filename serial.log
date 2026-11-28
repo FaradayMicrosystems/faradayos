@@ -1,0 +1,764 @@
+P+q6E616D65\[6n[32766;32766H[6n[!p]104\[0m[?7h[1G[0J]3008;start=d6bd6691847b448895b9c200f8946719;user=root;hostname=faradayos;machineid=4dfaf8d5ff494bac8436a806fe5a8a72;bootid=7137b32909b34e66a4fb006457e3c496;pid=1;pidfdid=1;comm=systemd;type=boot\[[0;32m  OK  [0m] Started [0;1;39mplymouth-start.service[0m - Show Plymouth Boot Screen.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-ask-password-plymo…[0mquests to Plymouth Directory Watch.
+[[0;32m  OK  [0m] Reached target [0;1;39mcryptsetup.target[0m - Local Encrypted Volumes.
+[[0;32m  OK  [0m] Reached target [0;1;39mpaths.target[0m - Path Units.
+[[0;32m  OK  [0m] Reached target [0;1;39msysinit.target[0m - System Initialization.
+[[0;32m  OK  [0m] Reached target [0;1;39mbasic.target[0m - Basic System.
+[[0;32m  OK  [0m] Reached target [0;1;39minitrd-root-device.target[0m - Initrd Root Device.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup.
+         Stopping [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup...
+         Starting [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup...
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup.
+         Starting [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup.
+[[0;32m  OK  [0m] Finished [0;1;39mdracut-initqueue.service[0m - dracut initqueue hook.
+[[0;32m  OK  [0m] Reached target [0;1;39mremote-fs-pre.targe…[0mreparation for Remote File Systems.
+[[0;32m  OK  [0m] Reached target [0;1;39mremote-cryptsetup.target[0m - Remote Encrypted Volumes.
+[[0;32m  OK  [0m] Reached target [0;1;39mremote-fs.target[0m - Remote File Systems.
+         Starting [0;1;39mdracut-pre-mount.service[0m - dracut pre-mount hook...
+[[0;32m  OK  [0m] Finished [0;1;39mdracut-pre-mount.service[0m - dracut pre-mount hook.
+         Mounting [0;1;39msysroot.mount[0m - /sysroot...
+[[0;32m  OK  [0m] Mounted [0;1;39msysroot.mount[0m - /sysroot.
+[[0;32m  OK  [0m] Reached target [0;1;39minitrd-root-fs.target[0m - Initrd Root File System.
+         Starting [0;1;39minitrd-parse-etc.service[0m …ints Configured in the Real Root...
+[[0;32m  OK  [0m] Finished [0;1;39minitrd-parse-etc.service[0m …points Configured in the Real Root.
+[[0;32m  OK  [0m] Reached target [0;1;39minitrd-fs.target[0m - Initrd File Systems.
+[[0;32m  OK  [0m] Reached target [0;1;39minitrd.target[0m - Initrd Default Target.
+         Starting [0;1;39mdracut-mount.service[0m - dracut mount hook...
+[[0;32m  OK  [0m] Finished [0;1;39mdracut-mount.service[0m - dracut mount hook.
+         Starting [0;1;39mdracut-pre-pivot.service[0m …racut pre-pivot and cleanup hook...
+[[0;32m  OK  [0m] Finished [0;1;39mdracut-pre-pivot.service[0m - dracut pre-pivot and cleanup hook.
+         Starting [0;1;39minitrd-cleanup.service[0m - …ing Up and Shutting Down Daemons...
+[[0;32m  OK  [0m] Stopped target [0;1;39mnetwork.target[0m - Network.
+[[0;32m  OK  [0m] Stopped target [0;1;39mremote-cryptsetup.target[0m - Remote Encrypted Volumes.
+[[0;32m  OK  [0m] Stopped target [0;1;39mtimers.target[0m - Timer Units.
+[[0;32m  OK  [0m] Closed [0;1;39mdbus.socket[0m - D-Bus System Message Bus Socket.
+[[0;32m  OK  [0m] Stopped [0;1;39mdracut-pre-pivot.service[0m - dracut pre-pivot and cleanup hook.
+[[0;32m  OK  [0m] Stopped target [0;1;39minitrd.target[0m - Initrd Default Target.
+[[0;32m  OK  [0m] Stopped target [0;1;39mbasic.target[0m - Basic System.
+[[0;32m  OK  [0m] Stopped target [0;1;39minitrd-root-device.target[0m - Initrd Root Device.
+[[0;32m  OK  [0m] Stopped target [0;1;39minitrd-usr-fs.target[0m - Initrd /usr File System.
+[[0;32m  OK  [0m] Stopped target [0;1;39mpaths.target[0m - Path Units.
+[[0;32m  OK  [0m] Stopped target [0;1;39mremote-fs.target[0m - Remote File Systems.
+[[0;32m  OK  [0m] Stopped target [0;1;39mremote-fs-pre.targe…[0mreparation for Remote File Systems.
+[[0;32m  OK  [0m] Stopped target [0;1;39mslices.target[0m - Slice Units.
+[[0;32m  OK  [0m] Stopped target [0;1;39msockets.target[0m - Socket Units.
+[[0;32m  OK  [0m] Stopped target [0;1;39msysinit.target[0m - System Initialization.
+[[0;32m  OK  [0m] Stopped target [0;1;39mlocal-fs.target[0m - Local File Systems.
+[[0;32m  OK  [0m] Stopped target [0;1;39mlocal-fs-pre.target[0m…Preparation for Local File Systems.
+[[0;32m  OK  [0m] Stopped target [0;1;39mswap.target[0m - Swaps.
+[[0;32m  OK  [0m] Closed [0;1;39miscsid.socket[0m - Open-iSCSI iscsid Socket.
+[[0;32m  OK  [0m] Closed [0;1;39miscsiuio.socket[0m - Open-iSCSI iscsiuio Socket.
+[[0;32m  OK  [0m] Stopped [0;1;39mdracut-mount.service[0m - dracut mount hook.
+[[0;32m  OK  [0m] Stopped [0;1;39mdracut-pre-mount.service[0m - dracut pre-mount hook.
+[[0;32m  OK  [0m] Stopped target [0;1;39mcryptsetup.target[0m - Local Encrypted Volumes.
+[[0;32m  OK  [0m] Stopped [0;1;39mdracut-initqueue.service[0m - dracut initqueue hook.
+         Starting [0;1;39mplymouth-switch-root.serv…e[0m - Plymouth switch root service...
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-sysctl.service[0m - Apply Kernel Variables.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-modules-load.service[0m - Load Kernel Modules.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-tmpfiles-setup.ser…[0mreate System Files and Directories.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-udev-trigger.service[0m - Coldplug All udev Devices.
+[[0;32m  OK  [0m] Stopped [0;1;39mdracut-pre-trigger.service[0m - dracut pre-trigger hook.
+         Stopping [0;1;39msystemd-udevd.service[0m - R…ager for Device Events and Files...
+[[0;32m  OK  [0m] Finished [0;1;39minitrd-cleanup.service[0m - …aning Up and Shutting Down Daemons.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-udevd.service[0m - Ru…anager for Device Events and Files.
+[[0;32m  OK  [0m] Closed [0;1;39msystemd-udevd-control.socket[0m - udev Control Socket.
+[[0;32m  OK  [0m] Stopped [0;1;39mdracut-pre-udev.service[0m - dracut pre-udev hook.
+[[0;32m  OK  [0m] Stopped [0;1;39mdracut-cmdline.service[0m - dracut cmdline hook.
+[[0;32m  OK  [0m] Stopped [0;1;39mdracut-cmdline-ask.service[0m… for additional cmdline parameters.
+         Starting [0;1;39minitrd-udevadm-cleanup-db.service[0m - Cleanup udev Database...
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-tmpfiles-setup-dev…[0mCreate Static Device Nodes in /dev.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-tmpfiles-setup-dev…[0mic Device Nodes in /dev gracefully.
+[[0;32m  OK  [0m] Stopped [0;1;39mkmod-static-nodes.service[0m …Create List of Static Device Nodes.
+[[0;32m  OK  [0m] Finished [0;1;39minitrd-udevadm-cleanup-db.service[0m - Cleanup udev Database.
+[[0;32m  OK  [0m] Reached target [0;1;39minitrd-switch-root.target[0m - Switch Root.
+[[0;32m  OK  [0m] Finished [0;1;39mplymouth-switch-root.service[0m - Plymouth switch root service.
+         Starting [0;1;39minitrd-switch-root.service[0m - Switch Root...
+P+q6E616D65\[6n[32766;32766H[6n[!p]104\[0m[?7h[1G[0J]3008;start=a386915d5c5f426da28da2d07c1c17be;user=root;hostname=faradayos;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;bootid=7137b32909b34e66a4fb006457e3c496;pid=1;pidfdid=1;comm=systemd;type=boot\[[0;32m  OK  [0m] Stopped [0;1;39minitrd-switch-root.service[0m - Switch Root.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-akmods\x2dkey…lice[0m - Slice /system/akmods-keygen.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-getty.slice[0m - Slice /system/getty.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-serial\x2dget…slice[0m - Slice /system/serial-getty.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-systemd\x2dzr…[0m- Slice /system/systemd-zram-setup.
+[[0;32m  OK  [0m] Created slice [0;1;39muser.slice[0m - User and Session Slice.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-ask-password-wall.…[0md Requests to Wall Directory Watch.
+[[0;32m  OK  [0m] Set up automount [0;1;39mproc-sys-fs-binfm…[0mormats File System Automount Point.
+         Expecting device [0;1;39mdev-ttyS0.device[0m - /dev/ttyS0...
+         Expecting device [0;1;39mdev-zram0.device[0m - /dev/zram0...
+[[0;32m  OK  [0m] Reached target [0;1;39mimports.target[0m - Image Downloads.
+[[0;32m  OK  [0m] Stopped target [0;1;39minitrd-switch-root.target[0m - Switch Root.
+[[0;32m  OK  [0m] Stopped target [0;1;39minitrd-fs.target[0m - Initrd File Systems.
+[[0;32m  OK  [0m] Stopped target [0;1;39minitrd-root-fs.target[0m - Initrd Root File System.
+[[0;32m  OK  [0m] Reached target [0;1;39mintegritysetup.targ…[0m Local Integrity Protected Volumes.
+[[0;32m  OK  [0m] Reached target [0;1;39mrpc_pipefs.target[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mslices.target[0m - Slice Units.
+[[0;32m  OK  [0m] Reached target [0;1;39mveritysetup.target[0m - Local Verity Protected Volumes.
+[[0;32m  OK  [0m] Listening on [0;1;39mdm-event.socket[0m - Device-mapper event daemon FIFOs.
+[[0;32m  OK  [0m] Listening on [0;1;39mlvm2-lvmpolld.socket[0m - LVM2 poll daemon socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-ask-password.…[0m User Interactively for a Password.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-coredump.socket[0m - Process Core Dump Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-creds.socket[0m - Credential Encryption/Decryption.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-factory-reset.socket[0m - Factory Reset Management.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-journald-audit.socket[0m - Journal Audit Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-mute-console.…[0mnsole Output Muting Service Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-oomd.socket[0m -… Out-Of-Memory (OOM) Killer Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-repart.socket[0m…Disk Repartitioning Service Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-resolved-moni…t[0m - Resolve Monitor Varlink Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-resolved-varl…t[0m - Resolve Service Varlink Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-udevd-control.socket[0m - udev Control Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-udevd-varlink.socket[0m - udev Varlink Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-userdbd.socket[0m - User Database Manager Socket.
+         Mounting [0;1;39mdev-hugepages.mount[0m - Huge Pages File System...
+         Mounting [0;1;39mdev-mqueue.mount[0m - POSIX Message Queue File System...
+         Mounting [0;1;39msys-kernel-debug.mount[0m - Kernel Debug File System...
+         Mounting [0;1;39msys-kernel-tracing.mount[0m - Kernel Trace File System...
+         Starting [0;1;39mkmod-static-nodes.service[0m…eate List of Static Device Nodes...
+         Starting [0;1;39mlvm2-monitor.service[0m - Mo…ing dmeventd or progress polling...
+         Mounting [0;1;39msys-fs-fuse-connections.mount[0m - FUSE Control File System...
+[[0;32m  OK  [0m] Stopped [0;1;39mplymouth-switch-root.service[0m - Plymouth switch root service.
+         Starting [0;1;39msystemd-journald.service[0m - Journal Service...
+         Starting [0;1;39msystemd-modules-load.service[0m - Load Kernel Modules...
+         Starting [0;1;39msystemd-network-generator…[0mk Units from Kernel Command Line...
+         Starting [0;1;39msystemd-remount-fs.servic…[0munt Root and Kernel File Systems...
+[[0;32m  OK  [0m] Reached target [0;1;39mcryptsetup.target[0m - Local Encrypted Volumes.
+         Starting [0;1;39msystemd-udev-load-credent…[0mLoad udev Rules from Credentials...
+         Starting [0;1;39msystemd-udev-trigger.service[0m - Coldplug All udev Devices...
+[[0;32m  OK  [0m] Finished [0;1;39mkmod-static-nodes.service[0m…Create List of Static Device Nodes.
+         Starting [0;1;39msystemd-tmpfiles-setup-de…[0m Device Nodes in /dev gracefully...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-network-generator…[0mork Units from Kernel Command Line.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-remount-fs.servic…[0mmount Root and Kernel File Systems.
+         Starting [0;1;39msystemd-hwdb-update.service[0m - Rebuild Hardware Database...
+         Starting [0;1;39msystemd-random-seed.service[0m - Load/Save OS Random Seed...
+[[0;32m  OK  [0m] Started [0;1;39msystemd-journald.service[0m - Journal Service.
+[[0;32m  OK  [0m] Mounted [0;1;39mdev-hugepages.mount[0m - Huge Pages File System.
+[[0;32m  OK  [0m] Mounted [0;1;39mdev-mqueue.mount[0m - POSIX Message Queue File System.
+[[0;32m  OK  [0m] Mounted [0;1;39msys-kernel-debug.mount[0m - Kernel Debug File System.
+[[0;32m  OK  [0m] Mounted [0;1;39msys-kernel-tracing.mount[0m - Kernel Trace File System.
+[[0;32m  OK  [0m] Mounted [0;1;39msys-fs-fuse-connections.mount[0m - FUSE Control File System.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-udev-load-credent…[0m- Load udev Rules from Credentials.
+         Starting [0;1;39msystemd-journal-flush.ser…[0msh Journal to Persistent Storage...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-modules-load.service[0m - Load Kernel Modules.
+         Starting [0;1;39msystemd-sysctl.service[0m - Apply Kernel Variables...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-random-seed.service[0m - Load/Save OS Random Seed.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-udev-trigger.service[0m - Coldplug All udev Devices.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-journal-flush.ser…[0mlush Journal to Persistent Storage.
+         Starting [0;1;39msystemd-userdbd.service[0m - User Database Manager...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-sysctl.service[0m - Apply Kernel Variables.
+[[0;32m  OK  [0m] Finished [0;1;39mlvm2-monitor.service[0m - Mo…using dmeventd or progress polling.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-userdbd.service[0m - User Database Manager.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-tmpfiles-setup-de…[0mic Device Nodes in /dev gracefully.
+         Starting [0;1;39msystemd-sysusers.service[0m - Create System Users...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-sysusers.service[0m - Create System Users.
+         Starting [0;1;39msystemd-resolved.service[0m - Network Name Resolution...
+         Starting [0;1;39msystemd-tmpfiles-setup-de…[0meate Static Device Nodes in /dev...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-tmpfiles-setup-de…[0mCreate Static Device Nodes in /dev.
+[[0;32m  OK  [0m] Reached target [0;1;39mlocal-fs-pre.target[0m…Preparation for Local File Systems.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-resolved.service[0m - Network Name Resolution.
+[[0;32m  OK  [0m] Reached target [0;1;39mnss-lookup.target[0m - Host and Network Name Lookups.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-hwdb-update.service[0m - Rebuild Hardware Database.
+         Starting [0;1;39msystemd-udevd.service[0m - R…ager for Device Events and Files...
+[[0;32m  OK  [0m] Started [0;1;39msystemd-udevd.service[0m - Ru…anager for Device Events and Files.
+[[0;32m  OK  [0m] Found device [0;1;39mdev-zram0.device[0m - /dev/zram0.
+         Starting [0;1;39msystemd-zram-setup@zram0.…vice[0m - Create swap on /dev/zram0...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-zram-setup@zram0.service[0m - Create swap on /dev/zram0.
+         Activating swap [0;1;39mdev-zram0.swap[0m - Compressed Swap on /dev/zram0...
+[[0;32m  OK  [0m] Activated swap [0;1;39mdev-zram0.swap[0m - Compressed Swap on /dev/zram0.
+[[0;32m  OK  [0m] Reached target [0;1;39mswap.target[0m - Swaps.
+         Mounting [0;1;39mtmp.mount[0m - Temporary Directory /tmp...
+         Starting [0;1;39msystemd-oomd.service[0m - Us…space Out-Of-Memory (OOM) Killer...
+[[0;32m  OK  [0m] Mounted [0;1;39mtmp.mount[0m - Temporary Directory /tmp.
+[[0;32m  OK  [0m] Reached target [0;1;39mlocal-fs.target[0m - Local File Systems.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-bootctl.socket[0m - Boot Entries Service Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-sysext.socket[0m… System Extension Image Management.
+         Starting [0;1;39mplymouth-read-write.servi…[0mymouth To Write Out Runtime Data...
+         Starting [0;1;39msystemd-binfmt.service[0m - Set Up Additional Binary Formats...
+         Starting [0;1;39msystemd-tmpfiles-setup.se…[0mate System Files and Directories...
+         Starting [0;1;39msystemd-userdb-load-crede…[0mr/group Records from Credentials...
+[[0;32m  OK  [0m] Started [0;1;39msystemd-oomd.service[0m - Userspace Out-Of-Memory (OOM) Killer.
+[[0;32m  OK  [0m] Finished [0;1;39mplymouth-read-write.servi…[0mPlymouth To Write Out Runtime Data.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-userdb-load-crede…[0mser/group Records from Credentials.
+         Mounting [0;1;39mproc-sys-fs-binfmt_misc.m…[0mcutable File Formats File System...
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup.
+         Stopping [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup...
+         Starting [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup...
+[[0;32m  OK  [0m] Mounted [0;1;39mproc-sys-fs-binfmt_misc.mo…[0mxecutable File Formats File System.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-binfmt.service[0m - Set Up Additional Binary Formats.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-tmpfiles-setup.se…[0mreate System Files and Directories.
+         Starting [0;1;39mauditd.service[0m - Security Audit Logging Service...
+         Starting [0;1;39mldconfig.service[0m - Rebuild Dynamic Linker Cache...
+         Starting [0;1;39msystemd-journal-catalog-u…ervice[0m - Rebuild Journal Catalog...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-journal-catalog-u….service[0m - Rebuild Journal Catalog.
+[[0;32m  OK  [0m] Started [0;1;39mauditd.service[0m - Security Audit Logging Service.
+         Starting [0;1;39maudit-rules.service[0m - Load Audit Rules...
+         Starting [0;1;39msystemd-update-utmp.servi…[0mord System Boot/Shutdown in UTMP...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-update-utmp.servi…[0mecord System Boot/Shutdown in UTMP.
+[[0;32m  OK  [0m] Finished [0;1;39maudit-rules.service[0m - Load Audit Rules.
+[[0m[0;31m*     [0m] Job ldconfig.service/start running (2s / no limit)
+M[K[[0;1;31m*[0m[0;31m*    [0m] Job ldconfig.service/start running (3s / no limit)
+M[K[[0;31m*[0;1;31m*[0m[0;31m*   [0m] Job ldconfig.service/start running (3s / no limit)
+M[K[ [0;31m*[0;1;31m*[0m[0;31m*  [0m] Job ldconfig.service/start running (4s / no limit)
+M[K[  [0;31m*[0;1;31m*[0m[0;31m* [0m] Job ldconfig.service/start running (4s / no limit)
+M[K[   [0;31m*[0;1;31m*[0m[0;31m*[0m] Job ldconfig.service/start running (5s / no limit)
+M[K[    [0;31m*[0;1;31m*[0m] Job ldconfig.service/start running (5s / no limit)
+M[K[     [0;31m*[0m] Job ldconfig.service/start running (6s / no limit)
+M[K[    [0;31m*[0;1;31m*[0m] Job ldconfig.service/start running (6s / no limit)
+M[K[   [0;31m*[0;1;31m*[0m[0;31m*[0m] Job ldconfig.service/start running (7s / no limit)
+M[K[  [0;31m*[0;1;31m*[0m[0;31m* [0m] Job ldconfig.service/start running (7s / no limit)
+M[K[ [0;31m*[0;1;31m*[0m[0;31m*  [0m] Job ldconfig.service/start running (8s / no limit)
+M[K[[0;31m*[0;1;31m*[0m[0;31m*   [0m] Job ldconfig.service/start running (8s / no limit)
+M[K[[0;1;31m*[0m[0;31m*    [0m] Job ldconfig.service/start running (9s / no limit)
+M[K[[0m[0;31m*     [0m] Job ldconfig.service/start running (9s / no limit)
+M[K[[0;1;31m*[0m[0;31m*    [0m] Job ldconfig.service/start running (10s / no limit)
+M[K[[0;31m*[0;1;31m*[0m[0;31m*   [0m] Job ldconfig.service/start running (10s / no limit)
+M[K[ [0;31m*[0;1;31m*[0m[0;31m*  [0m] Job ldconfig.service/start running (11s / no limit)
+M[K[  [0;31m*[0;1;31m*[0m[0;31m* [0m] Job ldconfig.service/start running (11s / no limit)
+M[K[   [0;31m*[0;1;31m*[0m[0;31m*[0m] Job ldconfig.service/start running (12s / no limit)
+M[K[    [0;31m*[0;1;31m*[0m] Job ldconfig.service/start running (12s / no limit)
+M[K[     [0;31m*[0m] Job ldconfig.service/start running (13s / no limit)
+M[K[    [0;31m*[0;1;31m*[0m] Job ldconfig.service/start running (13s / no limit)
+M[K[   [0;31m*[0;1;31m*[0m[0;31m*[0m] Job ldconfig.service/start running (14s / no limit)
+M[K[  [0;31m*[0;1;31m*[0m[0;31m* [0m] Job ldconfig.service/start running (14s / no limit)
+M[K[ [0;31m*[0;1;31m*[0m[0;31m*  [0m] Job ldconfig.service/start running (15s / no limit)
+M[K[[0;31m*[0;1;31m*[0m[0;31m*   [0m] Job ldconfig.service/start running (15s / no limit)
+M[K[[0;1;31m*[0m[0;31m*    [0m] Job ldconfig.service/start running (16s / no limit)
+M[K[[0m[0;31m*     [0m] Job ldconfig.service/start running (16s / no limit)
+M[K[[0;1;31m*[0m[0;31m*    [0m] Job ldconfig.service/start running (17s / no limit)
+M[K[[0;31m*[0;1;31m*[0m[0;31m*   [0m] Job ldconfig.service/start running (17s / no limit)
+M[K[ [0;31m*[0;1;31m*[0m[0;31m*  [0m] Job ldconfig.service/start running (18s / no limit)
+M[K[  [0;31m*[0;1;31m*[0m[0;31m* [0m] Job ldconfig.service/start running (18s / no limit)
+M[K[   [0;31m*[0;1;31m*[0m[0;31m*[0m] Job ldconfig.service/start running (19s / no limit)
+M[K[    [0;31m*[0;1;31m*[0m] Job ldconfig.service/start running (19s / no limit)
+M[K[     [0;31m*[0m] Job ldconfig.service/start running (20s / no limit)
+M[K[    [0;31m*[0;1;31m*[0m] Job ldconfig.service/start running (20s / no limit)
+M[K[   [0;31m*[0;1;31m*[0m[0;31m*[0m] Job ldconfig.service/start running (21s / no limit)
+M[K[  [0;31m*[0;1;31m*[0m[0;31m* [0m] Job ldconfig.service/start running (21s / no limit)
+M[K[ [0;31m*[0;1;31m*[0m[0;31m*  [0m] Job ldconfig.service/start running (22s / no limit)
+M[K[[0;31m*[0;1;31m*[0m[0;31m*   [0m] Job ldconfig.service/start running (22s / no limit)
+M[K[[0;1;31m*[0m[0;31m*    [0m] Job ldconfig.service/start running (23s / no limit)
+M[K[[0m[0;31m*     [0m] Job ldconfig.service/start running (23s / no limit)
+M[K[[0;1;31m*[0m[0;31m*    [0m] Job ldconfig.service/start running (24s / no limit)
+M[K[[0;31m*[0;1;31m*[0m[0;31m*   [0m] Job ldconfig.service/start running (24s / no limit)
+M[K[ [0;31m*[0;1;31m*[0m[0;31m*  [0m] Job ldconfig.service/start running (25s / no limit)
+M[K[  [0;31m*[0;1;31m*[0m[0;31m* [0m] Job ldconfig.service/start running (25s / no limit)
+M[K[   [0;31m*[0;1;31m*[0m[0;31m*[0m] Job ldconfig.service/start running (26s / no limit)
+M[K[    [0;31m*[0;1;31m*[0m] Job ldconfig.service/start running (26s / no limit)
+M[K[     [0;31m*[0m] Job ldconfig.service/start running (27s / no limit)
+M[K[    [0;31m*[0;1;31m*[0m] Job ldconfig.service/start running (27s / no limit)
+M[K[   [0;31m*[0;1;31m*[0m[0;31m*[0m] Job ldconfig.service/start running (28s / no limit)
+M[K[  [0;31m*[0;1;31m*[0m[0;31m* [0m] Job ldconfig.service/start running (28s / no limit)
+M[K[ [0;31m*[0;1;31m*[0m[0;31m*  [0m] Job ldconfig.service/start running (29s / no limit)
+M[K[[0;31m*[0;1;31m*[0m[0;31m*   [0m] Job ldconfig.service/start running (29s / no limit)
+M[K[[0;1;31m*[0m[0;31m*    [0m] Job ldconfig.service/start running (30s / no limit)
+M[K[[0m[0;31m*     [0m] Job ldconfig.service/start running (30s / no limit)
+M[K[[0;1;31m*[0m[0;31m*    [0m] Job ldconfig.service/start running (31s / no limit)
+M[K[[0;31m*[0;1;31m*[0m[0;31m*   [0m] Job ldconfig.service/start running (31s / no limit)
+M[K[ [0;31m*[0;1;31m*[0m[0;31m*  [0m] Job ldconfig.service/start running (32s / no limit)
+M[K[  [0;31m*[0;1;31m*[0m[0;31m* [0m] Job ldconfig.service/start running (32s / no limit)
+M[K[   [0;31m*[0;1;31m*[0m[0;31m*[0m] Job ldconfig.service/start running (33s / no limit)
+M[K[    [0;31m*[0;1;31m*[0m] Job ldconfig.service/start running (33s / no limit)
+M[K[     [0;31m*[0m] Job ldconfig.service/start running (34s / no limit)
+M[K[    [0;31m*[0;1;31m*[0m] Job ldconfig.service/start running (34s / no limit)
+M[K[   [0;31m*[0;1;31m*[0m[0;31m*[0m] Job ldconfig.service/start running (35s / no limit)
+M[K[  [0;31m*[0;1;31m*[0m[0;31m* [0m] Job ldconfig.service/start running (35s / no limit)
+M[K[ [0;31m*[0;1;31m*[0m[0;31m*  [0m] Job ldconfig.service/start running (36s / no limit)
+M[K[[0;31m*[0;1;31m*[0m[0;31m*   [0m] Job ldconfig.service/start running (36s / no limit)
+M[K[[0;1;31m*[0m[0;31m*    [0m] Job ldconfig.service/start running (37s / no limit)
+M[K[[0;32m  OK  [0m] Finished [0;1;39mldconfig.service[0m - Rebuild Dynamic Linker Cache.
+[K         Starting [0;1;39msystemd-update-done.service[0m - Update is Completed...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-update-done.service[0m - Update is Completed.
+[[0;32m  OK  [0m] Reached target [0;1;39msysinit.target[0m - System Initialization.
+[[0;32m  OK  [0m] Started [0;1;39mcups.path[0m - CUPS Scheduler.
+[[0;32m  OK  [0m] Started [0;1;39mryoku-snapshot-menu.path[0m - Ryoku snapshot boot menu trigger.
+[[0;32m  OK  [0m] Started [0;1;39mfstrim.timer[0m - Discard unused filesystem blocks once a week.
+[[0;32m  OK  [0m] Started [0;1;39mlogrotate.timer[0m - Daily rotation of log files.
+[[0;32m  OK  [0m] Started [0;1;39mplocate-updatedb.timer[0m - Update the plocate database daily.
+[[0;32m  OK  [0m] Started [0;1;39mraid-check.timer[0m - Weekly RAID setup health check.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-tmpfiles-clean.tim…[0my Cleanup of Temporary Directories.
+[[0;32m  OK  [0m] Started [0;1;39munbound-anchor.timer[0m - dai…f the root trust anchor for DNSSEC.
+[[0;32m  OK  [0m] Reached target [0;1;39mpaths.target[0m - Path Units.
+[[0;32m  OK  [0m] Reached target [0;1;39mtimers.target[0m - Timer Units.
+[[0;32m  OK  [0m] Listening on [0;1;39mavahi-daemon.socket[0m -…DNS/DNS-SD Stack Activation Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mcups.socket[0m - CUPS Scheduler.
+[[0;32m  OK  [0m] Listening on [0;1;39mdbus.socket[0m - D-Bus System Message Bus Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39miscsid.socket[0m - Open-iSCSI iscsid Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39miscsiuio.socket[0m - Open-iSCSI iscsiuio Socket.
+         Starting [0;1;39mpcscd.socket[0m - PC/SC Smart Card Daemon Activation Socket...
+[[0;32m  OK  [0m] Listening on [0;1;39msshd-unix-local.socke…[0mtemd-ssh-generator, AF_UNIX Local).
+         Starting [0;1;39msshd-vsock.socket[0m - OpenS…systemd-ssh-generator, AF_VSOCK)...
+[[0;32m  OK  [0m] Listening on [0;1;39msssd-kcm.socket[0m - SSS…ros Cache Manager responder socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-hostnamed.socket[0m - Hostname Service Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-logind-varlin…[0mer Login Management Varlink Socket.
+         Starting [0;1;39mdbus-broker.service[0m - D-Bus System Message Bus...
+[[0;32m  OK  [0m] Listening on [0;1;39msshd-vsock.socket[0m - O… (systemd-ssh-generator, AF_VSOCK).
+[[0;32m  OK  [0m] Reached target [0;1;39mssh-access.target[0m - SSH Access Available.
+[[0;32m  OK  [0m] Listening on [0;1;39mpcscd.socket[0m - PC/SC Smart Card Daemon Activation Socket.
+[[0;32m  OK  [0m] Reached target [0;1;39msockets.target[0m - Socket Units.
+[[0;32m  OK  [0m] Started [0;1;39mdbus-broker.service[0m - D-Bus System Message Bus.
+[[0;32m  OK  [0m] Reached target [0;1;39mbasic.target[0m - Basic System.
+         Starting [0;1;39mabrtd.service[0m - ABRT Daemon...
+         Starting [0;1;39makmods-keygen@akmods-keyg…[0ms Secure boot MOK Key Generation...
+         Starting [0;1;39mauthselect-apply-changes.…rvice[0m - Apply authselect changes...
+         Starting [0;1;39mavahi-daemon.service[0m - Avahi mDNS/DNS-SD Stack...
+         Starting [0;1;39mdkms.service[0m - Builds and… new kernel modules through DKMS...
+         Starting [0;1;39mdracut-shutdown.service[0m -…store /run/initramfs on shutdown...
+         Starting [0;1;39mfaraday-rebrand.service[0m - FaradayOS branding...
+[[0;32m  OK  [0m] Started [0;1;39mfirewalld.service[0m - firewalld - dynamic firewall daemon.
+         Starting [0;1;39mflatpak-add-fedora-repos.…[0m Add Fedora flatpak repositories...
+[[0;32m  OK  [0m] Started [0;1;39mirqbalance.service[0m - irqbalance daemon.
+         Starting [0;1;39mlivesys.service[0m - Initialization for live environments...
+         Starting [0;1;39mlm_sensors.service[0m - Hardware Monitoring Sensors...
+[[0;32m  OK  [0m] Started [0;1;39mmcelog.service[0m - Machine Check Exception Logging Daemon.
+[[0;32m  OK  [0m] Started [0;1;39mnvidia-powerd.service[0m - nvidia-powerd service.
+         Starting [0;1;39mpolkit.service[0m - Authorization Manager...
+         Starting [0;1;39mrtkit-daemon.service[0m - Re…imeKit Scheduling Policy Service...
+         Starting [0;1;39mswitcheroo-control.servic…[0mSwitcheroo Control Proxy service...
+         Starting [0;1;39msystemd-homed.service[0m - Home Area Manager...
+         Starting [0;1;39mudisks2.service[0m - Disk Manager...
+         Starting [0;1;39mupower.service[0m - Daemon for power management...
+[[0;32m  OK  [0m] Finished [0;1;39mauthselect-apply-changes.service[0m - Apply authselect changes.
+[[0;32m  OK  [0m] Finished [0;1;39mdracut-shutdown.service[0m - Restore /run/initramfs on shutdown.
+[[0;32m  OK  [0m] Reached target [0;1;39mnss-user-lookup.target[0m - User and Group Name Lookups.
+         Starting [0;1;39maccounts-daemon.service[0m - Accounts Service...
+         Starting [0;1;39msystemd-logind.service[0m - User Login Management...
+[[0;32m  OK  [0m] Started [0;1;39mswitcheroo-control.service[0m - Switcheroo Control Proxy service.
+[[0;32m  OK  [0m] Started [0;1;39mrtkit-daemon.service[0m - RealtimeKit Scheduling Policy Service.
+[[0;32m  OK  [0m] Started [0;1;39mavahi-daemon.service[0m - Avahi mDNS/DNS-SD Stack.
+[[0;32m  OK  [0m] Started [0;1;39malsa-state.service[0m - Manag…und Card State (restore and store).
+[[0;32m  OK  [0m] Reached target [0;1;39msound.target[0m - Sound Card.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-homed.service[0m - Home Area Manager.
+[[0;32m  OK  [0m] Finished [0;1;39mlm_sensors.service[0m - Hardware Monitoring Sensors.
+[[0;32m  OK  [0m] Finished [0;1;39mflatpak-add-fedora-repos.…[0m - Add Fedora flatpak repositories.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-homed-activate.service[0m - Home Area Activation.
+[[0;32m  OK  [0m] Finished [0;1;39mfaraday-rebrand.service[0m - FaradayOS branding.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-logind.service[0m - User Login Management.
+[[0;32m  OK  [0m] Started [0;1;39mabrtd.service[0m - ABRT Daemon.
+[[0;32m  OK  [0m] Started [0;1;39mabrt-journal-core.service[0m - ABRT coredumpctl message creator.
+[[0;32m  OK  [0m] Started [0;1;39mabrt-oops.service[0m - ABRT kernel log watcher.
+[[0;32m  OK  [0m] Started [0;1;39mabrt-xorg.service[0m - ABRT Xorg log watcher.
+[[0;32m  OK  [0m] Started [0;1;39mpolkit.service[0m - Authorization Manager.
+[[0;32m  OK  [0m] Started [0;1;39maccounts-daemon.service[0m - Accounts Service.
+         Starting [0;1;39mModemManager.service[0m - Modem Manager...
+[[0;32m  OK  [0m] Finished [0;1;39makmods-keygen@akmods-keyg…[0mods Secure boot MOK Key Generation.
+[[0;32m  OK  [0m] Reached target [0;1;39makmods-keygen.target[0m.
+         Starting [0;1;39makmods.service[0m - Builds a…ll new kmods from akmod packages...
+[[0;32m  OK  [0m] Started [0;1;39mudisks2.service[0m - Disk Manager.
+[[0;32m  OK  [0m] Started [0;1;39mupower.service[0m - Daemon for power management.
+         Stopping [0;1;39mabrt-journal-core.service[0m…ABRT coredumpctl message creator...
+         Stopping [0;1;39mabrt-oops.service[0m - ABRT kernel log watcher...
+         Stopping [0;1;39mabrt-xorg.service[0m - ABRT Xorg log watcher...
+[[0;32m  OK  [0m] Stopped [0;1;39mabrt-journal-core.service[0m - ABRT coredumpctl message creator.
+[[0;32m  OK  [0m] Stopped [0;1;39mabrt-oops.service[0m - ABRT kernel log watcher.
+[[0;32m  OK  [0m] Stopped [0;1;39mabrt-xorg.service[0m - ABRT Xorg log watcher.
+         Stopping [0;1;39mabrtd.service[0m - ABRT Daemon...
+[[0;32m  OK  [0m] Stopped [0;1;39mabrtd.service[0m - ABRT Daemon.
+         Starting [0;1;39msystemd-hostnamed.service[0m - Hostname Service...
+[[0;32m  OK  [0m] Started [0;1;39mModemManager.service[0m - Modem Manager.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-hostnamed.service[0m - Hostname Service.
+[[0;32m  OK  [0m] Finished [0;1;39mdkms.service[0m - Builds and…ll new kernel modules through DKMS.
+[[0;32m  OK  [0m] Finished [0;1;39makmods.service[0m - Builds a…tall new kmods from akmod packages.
+[[0;32m  OK  [0m] Reached target [0;1;39mnetwork-pre.target[0m - Preparation for Network.
+         Starting [0;1;39mNetworkManager.service[0m - Network Manager...
+[[0;1;31mFAILED[0m] Failed to start [0;1;39mryoku-greeter-guard.service[0m.
+See 'systemctl status ryoku-greeter-guard.service' for details.
+[[0;32m  OK  [0m] Started [0;1;39mNetworkManager.service[0m - Network Manager.
+[[0;32m  OK  [0m] Reached target [0;1;39mnetwork.target[0m - Network.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-rfkill.socket[0m…ll Switch Status /dev/rfkill Watch.
+         Starting [0;1;39mNetworkManager-dispatcher…[0manager Script Dispatcher Service...
+         Starting [0;1;39mNetworkManager-wait-onlin…ce[0m - Network Manager Wait Online...
+         Starting [0;1;39mgssproxy.service[0m - GSSAPI Proxy Daemon...
+         Starting [0;1;39mtuned.service[0m - Dynamic System Tuning Daemon...
+[[0;32m  OK  [0m] Started [0;1;39mNetworkManager-dispatcher.…[0m Manager Script Dispatcher Service.
+[[0;32m  OK  [0m] Finished [0;1;39mlivesys.service[0m - Initialization for live environments.
+         Starting [0;1;39mlivesys-late.service[0m - La…ialization for live environments...
+[[0;32m  OK  [0m] Finished [0;1;39mNetworkManager-wait-onlin…vice[0m - Network Manager Wait Online.
+[[0;32m  OK  [0m] Reached target [0;1;39mnetwork-online.target[0m - Network is Online.
+         Starting [0;1;39mfaraday-vr-setup.service[0m …WiVRn/ALVR, SteamVR permissions)...
+         Starting [0;1;39mrpc-statd-notify.service[0m - Notify NFS peers of a restart...
+         Starting [0;1;39mrsyslog.service[0m - System Logging Service...
+[[0;32m  OK  [0m] Finished [0;1;39mlivesys-late.service[0m - La…itialization for live environments.
+         Starting [0;1;39mchronyd.service[0m - NTP client/server...
+[[0;32m  OK  [0m] Started [0;1;39mrpc-statd-notify.service[0m - Notify NFS peers of a restart.
+[[0;32m  OK  [0m] Started [0;1;39mchronyd.service[0m - NTP client/server.
+[[0;32m  OK  [0m] Started [0;1;39mgssproxy.service[0m - GSSAPI Proxy Daemon.
+[[0;32m  OK  [0m] Reached target [0;1;39mnfs-client.target[0m - NFS client services.
+[[0;32m  OK  [0m] Reached target [0;1;39mremote-fs-pre.targe…[0mreparation for Remote File Systems.
+[[0;32m  OK  [0m] Reached target [0;1;39mremote-cryptsetup.target[0m - Remote Encrypted Volumes.
+[[0;32m  OK  [0m] Reached target [0;1;39mremote-fs.target[0m - Remote File Systems.
+[[0;32m  OK  [0m] Reached target [0;1;39mremote-veritysetup.…[0m - Remote Verity Protected Volumes.
+         Starting [0;1;39msystemd-user-sessions.service[0m - Permit User Sessions...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-user-sessions.service[0m - Permit User Sessions.
+         Starting [0;1;39mplymouth-quit-wait.servic…[0md until boot process finishes up...
+         Starting [0;1;39mplymouth-quit.service[0m - Terminate Plymouth Boot Screen...
+[[0;32m  OK  [0m] Started [0;1;39mrsyslog.service[0m - System Logging Service.
+[!p]104\[0m[?7h[1G[0J[6n[32766;32766H[6n[!p]104\[0m[?7h[1G[0J[6n[32766;32766H[6n]3008;start=daa821e646fa482b8271142283b11c3e;user=root;hostname=localhost-live;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;bootid=7137b32909b34e66a4fb006457e3c496;pid=1734;pidfdid=360;comm=(agetty);servicename=serial-getty@ttyS0.service;invocationid=2fb633cb9fdd470e9f42c4232f2e3ffb;type=service\P+q6E616D65\
+FaradayOS v0.91e
+Kernel 7.3.5-200.fc44.x86_64 on x86_64 (ttyS0)
+
+Activate the web console with: systemctl enable --now cockpit.socket
+
+Try contacting this VM's SSH server via 'ssh vsock%4294967295' from host.
+
+localhost-live login: root
+]3008;start=a515e1524d9c4728af4bfe92120bae39;user=root;hostname=localhost-live;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;bootid=7137b32909b34e66a4fb006457e3c496;pid=1734;pidfdid=360;comm=login;targetuser=root;sessionid=3;type=session\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\[?2004h[root@localhost-live ~]# unset command_not_found_handle; export PS1='$ ' TERM=dumb SYSTEMD_PAGER= PAGER=cat; bind 'set enable-bracketed-paste off'; stty -echo cols 250; dmesg -n 1
+[?2004l]3008;start=af8285db-acee-4b76-b2d7-7986d510a470;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\pgrep -u liveuser -f '^qs.-c.shell$' >/dev/null && pgrep -x niri >/dev/null && echo UP || echo D]3008;end=af8285db-acee-4b76-b2d7-7986d510a470;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=1aac0087-a47e-491e-acb4-40e350f604ab;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\DOWN
+]3008;end=1aac0087-a47e-491e-acb4-40e350f604ab;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=e4b1d1b6-bd11-48cd-9df7-18a5ef049f5d;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END1__
+]3008;end=e4b1d1b6-bd11-48cd-9df7-18a5ef049f5d;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=53376c06-0959-483f-8a21-927467d469b2;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\/usr/sbin/grim
+/usr/sbin/grim
+]3008;end=53376c06-0959-483f-8a21-927467d469b2;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=22f6c503-baa5-46f1-adc8-e9eb95ff7633;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END2__
+]3008;end=22f6c503-baa5-46f1-adc8-e9eb95ff7633;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=5fa8fb03-9de9-4c50-bd9a-12d0010c112c;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=5fa8fb03-9de9-4c50-bd9a-12d0010c112c;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=26bbd064-0a6b-4a93-acaa-dcc753e199c3;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END3__
+]3008;end=26bbd064-0a6b-4a93-acaa-dcc753e199c3;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=39873be9-d582-4947-87f4-f059141de42b;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=39873be9-d582-4947-87f4-f059141de42b;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=ad611228-c249-49e5-a8be-9efbda6a90d6;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END4__
+]3008;end=ad611228-c249-49e5-a8be-9efbda6a90d6;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=24cf7a33-0ed8-4004-b7ec-98da88906f2e;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\liveuser    2776 Sat Nov 28 00:27:31 2026 /usr/bin/bash /usr/bin/ryoku-session-intro welcome
+liveuser    3316 Sat Nov 28 00:27:33 2026 flock -n /run/user/1000/ryoku-keys-hint.lock env QML_IMPORT_PATH=/home/liveuser/.local/lib/qt6/qml QML2_IMPORT_PATH=/home/liveuser/.local/lib/qt6/qml qs -c keys-hint
+liveuser    3318 Sat Nov 28 00:27:33 2026 qs -c keys-hint
+[Desktop Entry]
+Type=Application
+Name=Install FaradayOS add-ons
+Comment=Pick optional software (VR tools, Wine and Lutris, and more) and install it in one go
+Exec=/usr/bin/faraday-addons
+Icon=faradayos
+Terminal=false
+Categories=System;Game;
+Name=Install FaradayOS
+Exec=liveinst
+Icon=org.fedoraproject.AnacondaInstaller
+/usr/share/applications/install-app.desktop
+               Local time: Sat 2026-11-28 00:28:26 EST
+           Universal time: Sat 2026-11-28 05:28:26 UTC
+                 RTC time: Sat 2026-11-28 05:28:24
+                Time zone: America/New_York (EST, -0500)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: yes
+ 
+Warning: The system is configured to read the RTC time in the local time zone.
+         This mode cannot be fully supported. It will create various problems
+         with time zone changes and daylight saving time adjustments. The RTC
+         time is never updated, it relies on external facilities to maintain it.
+         If at all possible, use RTC in UTC by calling
+         'timedatectl set-local-rtc 0'.
+]3008;end=24cf7a33-0ed8-4004-b7ec-98da88906f2e;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=af091c96-2bc1-45dd-b38d-2b0cedf642f2;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END5__
+]3008;end=af091c96-2bc1-45dd-b38d-2b0cedf642f2;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=51ba650f-5419-49ed-a62c-6cb0fca6f92d;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\[{"id":2,"title":"Welcome to FaradayOS","app_id":"org.quickshell","pid":5361,"workspace_id":1,"is_focused":true,"is_floating":true,"is_urgent":false,"layout":{"pos_in_scrolling_layout":null,"tile_size":[1188.0,768.0],"window_size":[1180,760],"tile_pos_in_workspace_view":[366.0,184.0],"window_offset_in_tile":[4.0,4.0]},"focus_timestamp":{"secs":100,"nanos":455299852}}]
+]3008;end=51ba650f-5419-49ed-a62c-6cb0fca6f92d;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=91e18486-df91-42b4-9d5c-3e701cf4777a;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END6__
+]3008;end=91e18486-df91-42b4-9d5c-3e701cf4777a;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=32f3683e-3cc4-428d-b1bd-4715cd158be0;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=32f3683e-3cc4-428d-b1bd-4715cd158be0;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=4323aab5-bdf6-4ba5-b541-85fc3bb64867;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END7__
+]3008;end=4323aab5-bdf6-4ba5-b541-85fc3bb64867;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=52e3c787-f3cd-46da-8684-3007d02bd201;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=52e3c787-f3cd-46da-8684-3007d02bd201;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=0704f715-d932-4e42-b5ed-a32eab6ac11f;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END8__
+]3008;end=0704f715-d932-4e42-b5ed-a32eab6ac11f;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=cab1a4ff-af06-41f2-9d59-5ddfbdb81bca;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=cab1a4ff-af06-41f2-9d59-5ddfbdb81bca;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=b80b8dbd-bfb9-46b3-9a03-d5654b9d95c8;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END9__
+]3008;end=b80b8dbd-bfb9-46b3-9a03-d5654b9d95c8;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=3bf8ef06-3999-4af7-85ed-401244974a0f;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=3bf8ef06-3999-4af7-85ed-401244974a0f;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=954e1e2f-7297-4388-a47e-e873a1d1a0b8;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END10__
+]3008;end=954e1e2f-7297-4388-a47e-e873a1d1a0b8;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=18337155-6f88-409c-afd2-9d8f845834d7;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=18337155-6f88-409c-afd2-9d8f845834d7;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=b5fa8c1f-ff11-4072-a164-2df5bdb454c9;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END11__
+]3008;end=b5fa8c1f-ff11-4072-a164-2df5bdb454c9;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=9b0a8ca5-11a7-48ca-9bdc-87ce0a025ef3;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=9b0a8ca5-11a7-48ca-9bdc-87ce0a025ef3;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=f5069b9c-bfd6-4aa8-b5e5-d9732d138cba;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END12__
+]3008;end=f5069b9c-bfd6-4aa8-b5e5-d9732d138cba;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=89b9050c-ba24-4707-851d-9bb8329945bb;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=89b9050c-ba24-4707-851d-9bb8329945bb;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=12c660a7-e181-4d72-b4f6-bc794ff47f62;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END13__
+]3008;end=12c660a7-e181-4d72-b4f6-bc794ff47f62;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=35315c34-3b12-4365-96ff-881f55c1b54a;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=35315c34-3b12-4365-96ff-881f55c1b54a;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=a373aff8-793d-45b2-b579-3965dd193cc4;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END14__
+]3008;end=a373aff8-793d-45b2-b579-3965dd193cc4;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=6408c992-52de-41a4-b442-c51565cf3108;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=6408c992-52de-41a4-b442-c51565cf3108;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=478f37eb-59ea-4936-87a1-a34e99501cf1;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END15__
+]3008;end=478f37eb-59ea-4936-87a1-a34e99501cf1;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=2c7ba67e-e8f1-4a73-a075-c1cc25351df7;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=2c7ba67e-e8f1-4a73-a075-c1cc25351df7;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=2de5b36b-bdcb-4937-850b-ec756a5b2439;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END16__
+]3008;end=2de5b36b-bdcb-4937-850b-ec756a5b2439;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=27f0bbe6-3b16-42be-b189-41dfe81aecd5;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=27f0bbe6-3b16-42be-b189-41dfe81aecd5;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=63fcc508-5ca1-4301-8900-5a67a98b3e80;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END17__
+]3008;end=63fcc508-5ca1-4301-8900-5a67a98b3e80;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=0841801c-79d1-46e5-8774-f06319c9afa1;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=0841801c-79d1-46e5-8774-f06319c9afa1;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=718af44e-04e9-4aa7-bc05-440154553e36;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END18__
+]3008;end=718af44e-04e9-4aa7-bc05-440154553e36;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=094cbda3-fb65-4923-b686-9606d0393a6e;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\[]
+]3008;end=094cbda3-fb65-4923-b686-9606d0393a6e;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=ae767a0e-ad1b-4624-b20d-30fc4235ab09;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END19__
+]3008;end=ae767a0e-ad1b-4624-b20d-30fc4235ab09;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=de1aa2ad-26a7-434b-bd05-7628b90e1b6a;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\[]
+]3008;end=de1aa2ad-26a7-434b-bd05-7628b90e1b6a;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=53b88d0c-b127-4768-b342-7988d2f93df5;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END20__
+]3008;end=53b88d0c-b127-4768-b342-7988d2f93df5;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=c66913cb-6e59-45d6-82ef-cfdadade0df3;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\started
+]3008;end=c66913cb-6e59-45d6-82ef-cfdadade0df3;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=ec0a9366-5110-43f6-ac2b-693500cfaee3;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END21__
+]3008;end=ec0a9366-5110-43f6-ac2b-693500cfaee3;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=77a67cb9-5d57-4325-a7e3-51e98afad6aa;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\[{"id":3,"title":"Welcome to FaradayOS","app_id":"org.quickshell","pid":7919,"workspace_id":1,"is_focused":true,"is_floating":true,"is_urgent":false,"layout":{"pos_in_scrolling_layout":null,"tile_size":[1188.0,768.0],"window_size":[1180,760],"tile_pos_in_workspace_view":[366.0,150.0],"window_offset_in_tile":[4.0,4.0]},"focus_timestamp":{"secs":215,"nanos":619419222}}]
+]3008;end=77a67cb9-5d57-4325-a7e3-51e98afad6aa;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=1b25842e-c04c-431d-bc1a-ed0ea5241d82;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END22__
+]3008;end=1b25842e-c04c-431d-bc1a-ed0ea5241d82;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=059eb2a8-9ff0-49ce-a222-af20bbc77dc3;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=059eb2a8-9ff0-49ce-a222-af20bbc77dc3;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=da1d63af-3d56-4d54-970e-536beb341af1;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END23__
+]3008;end=da1d63af-3d56-4d54-970e-536beb341af1;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=c9912d33-fbe2-4e78-88c4-8364c3de505f;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=c9912d33-fbe2-4e78-88c4-8364c3de505f;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=7b3c1c87-dbd9-4861-824b-fb5bbd2d77ca;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END24__
+]3008;end=7b3c1c87-dbd9-4861-824b-fb5bbd2d77ca;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=f9de4cb4-68c0-4b0f-a47a-a8efa04a15b8;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=f9de4cb4-68c0-4b0f-a47a-a8efa04a15b8;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=65e4ad7a-d280-464f-932a-364faa7870a6;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END25__
+]3008;end=65e4ad7a-d280-464f-932a-364faa7870a6;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=233c0983-c4f3-4b38-a6b0-7c9273e12806;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=233c0983-c4f3-4b38-a6b0-7c9273e12806;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=6fb68ffe-99b5-4642-ad07-28a35cd2b039;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END26__
+]3008;end=6fb68ffe-99b5-4642-ad07-28a35cd2b039;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=c46647de-8b42-4dfc-991c-c6b887a52483;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\[{"id":3,"title":"Welcome to FaradayOS","app_id":"org.quickshell","pid":7919,"workspace_id":1,"is_focused":true,"is_floating":true,"is_urgent":false,"layout":{"pos_in_scrolling_layout":null,"tile_size":[1188.0,768.0],"window_size":[1180,760],"tile_pos_in_workspace_view":[366.0,150.0],"window_offset_in_tile":[4.0,4.0]},"focus_timestamp":{"secs":215,"nanos":619419222}}]
+]3008;end=c46647de-8b42-4dfc-991c-c6b887a52483;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=101aee67-7178-4f2f-8bb1-3743c060f3b0;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END27__
+]3008;end=101aee67-7178-4f2f-8bb1-3743c060f3b0;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=d1793ab8-1b5c-474b-a30a-b1c8a870d7ca;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\Window ID 3: (focused)
+  Title: "Welcome to FaradayOS"
+  App ID: "org.quickshell"
+  Is floating: yes
+  PID: 7919
+  Workspace ID: 1
+  Layout:
+    Tile size: 1188 x 768
+    Workspace-view position: 366, 150
+    Window size: 1180 x 760
+    Window offset in tile: 4 x 4
+
+]3008;end=d1793ab8-1b5c-474b-a30a-b1c8a870d7ca;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=36561624-84f2-41e2-b566-8c8f6069065a;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END28__
+]3008;end=36561624-84f2-41e2-b566-8c8f6069065a;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=26de73c7-9649-4d94-868a-2f28d42317ee;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=26de73c7-9649-4d94-868a-2f28d42317ee;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=dd45d170-2e4e-4fa5-b484-c8bfde4257a0;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END29__
+]3008;end=dd45d170-2e4e-4fa5-b484-c8bfde4257a0;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=e4514297-2575-4a98-b3b5-f240f09bbe92;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=e4514297-2575-4a98-b3b5-f240f09bbe92;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=f0614b73-d7a7-4ea4-8210-0f79f18c0c57;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END30__
+]3008;end=f0614b73-d7a7-4ea4-8210-0f79f18c0c57;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=5b2930e7-d8dc-42fe-a414-a5b6c3e5a568;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=5b2930e7-d8dc-42fe-a414-a5b6c3e5a568;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=bd079ef4-4397-495d-a9cf-ce106110a97e;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END31__
+]3008;end=bd079ef4-4397-495d-a9cf-ce106110a97e;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=5ae3418c-9ef4-48c6-a462-0812cbe84bf8;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=5ae3418c-9ef4-48c6-a462-0812cbe84bf8;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=6abaf8e1-dc41-4766-9157-ecb9a4b6b10d;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END32__
+]3008;end=6abaf8e1-dc41-4766-9157-ecb9a4b6b10d;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=05713c77-5c4f-43e4-aef5-534742701b11;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\Output "Virtual-1":
+  Background layer:
+    Surface:
+      Namespace: "ryoku-overview-backdrop"
+      Keyboard interactivity: none
+
+  Bottom layer:
+    Surface:
+      Namespace: "ryoku-dock"
+      Keyboard interactivity: none
+
+    Surface:
+      Namespace: "ryoku-widgets"
+      Keyboard interactivity: none
+
+  Top layer:
+    Surface:
+      Namespace: "quickshell"
+      Keyboard interactivity: none
+
+  Overlay layer:
+    Surface:
+      Namespace: "launcher"
+      Keyboard interactivity: exclusive
+
+    Surface:
+      Namespace: "ryoku-keys-hint"
+      Keyboard interactivity: none
+
+    Surface:
+      Namespace: "ryoku-notifications"
+      Keyboard interactivity: none
+
+]3008;end=05713c77-5c4f-43e4-aef5-534742701b11;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=e6e40717-5256-4c33-8746-0b193fd522a5;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END33__
+]3008;end=e6e40717-5256-4c33-8746-0b193fd522a5;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=d34aee36-8705-4684-b53b-81b543c96355;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\/usr/share/applications/install-app.desktop
+[Desktop Entry]
+Type=Application
+Name=Install app
+GenericName=App installer
+Comment=Pick AppImages, packages or archives and install them
+Exec=ryoku-shell install
+Terminal=false
+Icon=system-software-install
+Categories=System;
+Keywords=install;app;appimage;package;deb;rpm;flatpak;pacman;archive;software;
+]3008;end=d34aee36-8705-4684-b53b-81b543c96355;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=0db35c7a-771f-4d84-b73e-aa6e3fd6af40;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END34__
+]3008;end=0db35c7a-771f-4d84-b73e-aa6e3fd6af40;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=e90d758a-8a7c-473d-b4ad-88ce2124d808;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=e90d758a-8a7c-473d-b4ad-88ce2124d808;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=99d4acff-9565-4965-bfc4-ad9f30a36f16;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END35__
+]3008;end=99d4acff-9565-4965-bfc4-ad9f30a36f16;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=5734feb6-5a27-4f6d-aab8-6354dfb908b1;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=5734feb6-5a27-4f6d-aab8-6354dfb908b1;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=7fb962b9-38bd-4c28-b697-da75015d8a88;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END36__
+]3008;end=7fb962b9-38bd-4c28-b697-da75015d8a88;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=ac500ce1-f466-4efc-96b5-43e8d754a7be;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\[{"id":3,"title":"Welcome to FaradayOS","app_id":"org.quickshell","pid":7919,"workspace_id":1,"is_focused":true,"is_floating":true,"is_urgent":false,"layout":{"pos_in_scrolling_layout":null,"tile_size":[1188.0,768.0],"window_size":[1180,760],"tile_pos_in_workspace_view":[366.0,150.0],"window_offset_in_tile":[4.0,4.0]},"focus_timestamp":{"secs":310,"nanos":987175472}}]
+]3008;end=ac500ce1-f466-4efc-96b5-43e8d754a7be;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=21ff9dc9-44c4-47bb-848d-f83210bd0253;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END37__
+]3008;end=21ff9dc9-44c4-47bb-848d-f83210bd0253;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=843da984-5029-47ee-b663-4674f1e981ed;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=843da984-5029-47ee-b663-4674f1e981ed;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=0bb61be5-c0b8-4edc-b5be-922bc300d753;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END38__
+]3008;end=0bb61be5-c0b8-4edc-b5be-922bc300d753;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=ac4322da-ac38-4134-89b6-0c696f658f4c;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=ac4322da-ac38-4134-89b6-0c696f658f4c;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=bc63c989-b74c-4f5d-a4cf-0682c7269048;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END39__
+]3008;end=bc63c989-b74c-4f5d-a4cf-0682c7269048;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=90d40fbd-82c1-4ae1-90f2-d3cce8eb99e3;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\[{"id":4,"title":"Anaconda Web UI","app_id":"org.fedoraproject.AnacondaInstaller","pid":8452,"workspace_id":1,"is_focused":true,"is_floating":false,"is_urgent":false,"layout":{"pos_in_scrolling_layout":[1,1],"tile_size":[1920.0,1080.0],"window_size":[1920,1080],"tile_pos_in_workspace_view":null,"window_offset_in_tile":[0.0,0.0]},"focus_timestamp":{"secs":338,"nanos":51171987}},{"id":3,"title":"Welcome to FaradayOS","app_id":"org.quickshell","pid":7919,"workspace_id":1,"is_focused":false,"is_floating":true,"is_urgent":false,"layout":{"pos_in_scrolling_layout":null,"tile_size":[1188.0,768.0],"window_size":[1180,760],"tile_pos_in_workspace_view":[366.0,150.0],"window_offset_in_tile":[4.0,4.0]},"focus_timestamp":{"secs":310,"nanos":987175472}}]
+]3008;end=90d40fbd-82c1-4ae1-90f2-d3cce8eb99e3;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=27bfc0ed-a4e9-44bc-814c-87f790634439;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END40__
+]3008;end=27bfc0ed-a4e9-44bc-814c-87f790634439;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=47c92fbf-1039-4e32-976e-31150b83a835;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\8365 /usr/bin/bash /usr/libexec/anaconda/webui-desktop -t live
+8366 /usr/bin/python3 /sbin/anaconda --liveinst --graphical
+8382 /usr/bin/bash /usr/libexec/anaconda/cockpit-coproc-wrapper.sh 127.0.0.1
+8447 dbus-daemon --print-address --syslog --config-file=/usr/share/anaconda/dbus/anaconda-bus.conf
+8452 slitherer http://127.0.0.1/cockpit/@localhost/anaconda-webui/index.html
+8458 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.boss
+8461 python3 -m pyanaconda.modules.boss
+8477 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.services
+8480 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.security
+8481 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.runtime
+8482 python3 -m pyanaconda.modules.services
+8487 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.storage
+8490 python3 -m pyanaconda.modules.storage
+8493 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.timezone
+8496 python3 -m pyanaconda.modules.runtime
+8504 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.users
+8505 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.localization
+8506 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.payloads
+8507 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.network
+8508 python3 -m pyanaconda.modules.timezone
+8510 python3 -m pyanaconda.modules.payloads
+8512 python3 -m pyanaconda.modules.network
+8514 python3 -m pyanaconda.modules.users
+8516 python3 -m pyanaconda.modules.localization
+8518 python3 -m pyanaconda.modules.security
+00:31:37,442 INF startup_utils: check_memory(): total:8046, needed:320
+00:31:37,442 INF startup_utils: check_memory(): total:8046, graphical:410
+00:31:37,466 INF network: got 0 NTP servers from DHCP
+00:31:37,496 INF core.threads: Thread Done: AnaWaitForConnectingNMThread (139830160975552)
+00:31:37,635 DBG core.storage: LABEL=OEMDRV matches [] for devicetree=None and disks_only=True
+00:31:37,637 INF core.threads: Running Thread: AnaStorageThread (139830160975552)
+00:31:37,657 INF core.threads: Running Thread: AnaTimeInitThread (139830135662272)
+00:31:37,913 DBG payload.manager: Restarting payload thread
+00:31:37,916 INF core.threads: Running Thread: AnaPayloadRestartThread (139830127269568)
+00:31:37,918 INF startup_utils: Geolocation is enabled.
+00:31:37,921 INF core.threads: Running Thread: AnaPayloadThread (139830118876864)
+00:31:37,921 INF core.threads: Thread Done: AnaPayloadRestartThread (139830127269568)
+00:31:37,965 DBG startup_utils: Skip the time synchronization.
+00:31:39,386 INF core.threads: Thread Done: AnaStorageThread (139830160975552)
+00:31:39,629 INF startup_utils: Geoloc: using timezone determined by geolocation
+00:31:39,650 DBG localization: setting locale to: en_US.UTF-8
+00:31:39,713 DBG ui.webui: Waiting for all threads to finish...
+00:31:39,716 DBG core.threads: Waiting for thread AnaTimeInitThread to exit
+00:31:49,541 INF core.threads: Thread Done: AnaTimeInitThread (139830135662272)
+00:31:49,542 DBG core.threads: Waiting for thread AnaPayloadThread to exit
+]3008;end=47c92fbf-1039-4e32-976e-31150b83a835;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=5f05095a-80dc-4645-92db-787b19077606;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END41__
+]3008;end=5f05095a-80dc-4645-92db-787b19077606;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=2d1681de-7dea-4dbc-b5bc-ef44c5fb69e3;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\Window ID 3:
+  Title: "Welcome to FaradayOS"
+  App ID: "org.quickshell"
+  Is floating: yes
+  PID: 7919
+  Workspace ID: 1
+  Layout:
+    Tile size: 1188 x 768
+    Workspace-view position: 366, 150
+    Window size: 1180 x 760
+    Window offset in tile: 4 x 4
+
+Window ID 4: (focused)
+  Title: "Anaconda Web UI"
+  App ID: "org.fedoraproject.AnacondaInstaller"
+  Is floating: no
+  PID: 8452
+  Workspace ID: 1
+  Layout:
+    Tile size: 1920 x 1080
+    Scrolling position: column 1, tile 1
+    Window size: 1920 x 1080
+    Window offset in tile: 0 x 0
+
+]3008;end=2d1681de-7dea-4dbc-b5bc-ef44c5fb69e3;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=ffb8f474-7645-4b72-84d2-ef18fa195661;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END42__
+]3008;end=ffb8f474-7645-4b72-84d2-ef18fa195661;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=8032f5a0-415f-4693-9bc6-2a144354d8e9;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=8032f5a0-415f-4693-9bc6-2a144354d8e9;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=aae16e95-5ef4-42a9-9338-38bd616b9c24;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END43__
+]3008;end=aae16e95-5ef4-42a9-9338-38bd616b9c24;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=dba8f5a6-a2d4-4fdd-b5c3-7f82de6fe8c8;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=dba8f5a6-a2d4-4fdd-b5c3-7f82de6fe8c8;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=e0c84ff5-30ba-4da8-9f17-01d9b805e319;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END44__
+]3008;end=e0c84ff5-30ba-4da8-9f17-01d9b805e319;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=40f5d4b4-840b-4863-832e-f9a1673008b3;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=40f5d4b4-840b-4863-832e-f9a1673008b3;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=b81ca1db-e487-4e94-aac3-80b3a8d6ac8b;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END45__
+]3008;end=b81ca1db-e487-4e94-aac3-80b3a8d6ac8b;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=0a198536-260c-4382-9077-460082c4c3ce;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=0a198536-260c-4382-9077-460082c4c3ce;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=edd72589-a81c-4aac-b287-2126ed527285;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END46__
+]3008;end=edd72589-a81c-4aac-b287-2126ed527285;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=1a66f1c4-2797-4166-a14f-b3bfb47015a4;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=1a66f1c4-2797-4166-a14f-b3bfb47015a4;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=ddd7de83-d998-4c66-8bee-285c47731756;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END47__
+]3008;end=ddd7de83-d998-4c66-8bee-285c47731756;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=326f9ebb-a6ea-4975-9d16-8ec5de781fc5;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=326f9ebb-a6ea-4975-9d16-8ec5de781fc5;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=4e51cb98-79ce-4bff-bae9-1fd5bab085a7;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END48__
+]3008;end=4e51cb98-79ce-4bff-bae9-1fd5bab085a7;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=00989328-b11f-46f4-807a-beee62ebe3a5;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\Output "Virtual-1":
+  Background layer:
+    Surface:
+      Namespace: "ryoku-overview-backdrop"
+      Keyboard interactivity: none
+
+  Bottom layer:
+    Surface:
+      Namespace: "ryoku-dock"
+      Keyboard interactivity: none
+
+    Surface:
+      Namespace: "ryoku-widgets"
+      Keyboard interactivity: none
+
+  Top layer:
+    Surface:
+      Namespace: "quickshell"
+      Keyboard interactivity: none
+
+  Overlay layer:
+    Surface:
+      Namespace: "ryoku-keys-hint"
+      Keyboard interactivity: none
+
+    Surface:
+      Namespace: "ryoku-notifications"
+      Keyboard interactivity: none
+
+]3008;end=00989328-b11f-46f4-807a-beee62ebe3a5;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=8c1f4031-f108-4a87-933f-87ffbe55bfc1;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END49__
+]3008;end=8c1f4031-f108-4a87-933f-87ffbe55bfc1;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=64d7c215-79ff-49de-b19a-251c99207f4d;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=64d7c215-79ff-49de-b19a-251c99207f4d;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=fe8f7501-ef48-4dcf-b3ce-e0ab8f497566;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END50__
+]3008;end=fe8f7501-ef48-4dcf-b3ce-e0ab8f497566;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=09852663-0968-4e40-89e9-e213b8e66f24;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=09852663-0968-4e40-89e9-e213b8e66f24;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=b8ceb327-b1a8-4321-b75f-75ded592fa63;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END51__
+]3008;end=b8ceb327-b1a8-4321-b75f-75ded592fa63;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=fba1a1e4-622a-4539-bc7a-9f5153b129dc;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\Window ID 3:
+  Title: "Welcome to FaradayOS"
+  App ID: "org.quickshell"
+  Is floating: yes
+  PID: 7919
+  Workspace ID: 1
+  Layout:
+    Tile size: 1188 x 768
+    Workspace-view position: 366, 150
+    Window size: 1180 x 760
+    Window offset in tile: 4 x 4
+
+Window ID 4: (focused)
+  Title: "Anaconda Web UI"
+  App ID: "org.fedoraproject.AnacondaInstaller"
+  Is floating: no
+  PID: 8452
+  Workspace ID: 1
+  Layout:
+    Tile size: 1920 x 1080
+    Scrolling position: column 1, tile 1
+    Window size: 1920 x 1080
+    Window offset in tile: 0 x 0
+
+]3008;end=fba1a1e4-622a-4539-bc7a-9f5153b129dc;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=ea4a11cd-107d-40d7-8d25-4501203cdecc;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END52__
+]3008;end=ea4a11cd-107d-40d7-8d25-4501203cdecc;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=cd247dd6-e367-41fd-8bb2-d464c14e871b;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=cd247dd6-e367-41fd-8bb2-d464c14e871b;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=b7cd0404-3556-4af9-9e5e-1f0cf9c46f16;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END53__
+]3008;end=b7cd0404-3556-4af9-9e5e-1f0cf9c46f16;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=2b38db12-111c-4685-95f9-cfca71cc6fd7;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=2b38db12-111c-4685-95f9-cfca71cc6fd7;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=54acaee7-d36d-45e5-ae3a-a43756776b5a;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END54__
+]3008;end=54acaee7-d36d-45e5-ae3a-a43756776b5a;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=b2c69c9a-2a5e-428f-9c0c-f4ccdb954150;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=b2c69c9a-2a5e-428f-9c0c-f4ccdb954150;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=9e8fa552-1a20-4ccb-af91-7f2c02a6dab1;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END55__
+]3008;end=9e8fa552-1a20-4ccb-af91-7f2c02a6dab1;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=1770c6a7-d3e6-4606-97b8-ae13bdf8c670;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=1770c6a7-d3e6-4606-97b8-ae13bdf8c670;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=ed1afc35-9aa0-47fe-955b-5453ae816ce3;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END56__
+]3008;end=ed1afc35-9aa0-47fe-955b-5453ae816ce3;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=10f8a663-a283-4671-95ef-e748cbd422f8;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=10f8a663-a283-4671-95ef-e748cbd422f8;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=88798486-8e1c-4d9c-93c3-8c30d445d55d;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END57__
+]3008;end=88798486-8e1c-4d9c-93c3-8c30d445d55d;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=d37d0d35-b8b4-43ce-840f-443503008622;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=d37d0d35-b8b4-43ce-840f-443503008622;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=db7a655e-dcc7-4577-9a87-703b0dfcefdb;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END58__
+]3008;end=db7a655e-dcc7-4577-9a87-703b0dfcefdb;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=037e8124-2a68-4015-ba9d-9d7ebd1e6772;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=037e8124-2a68-4015-ba9d-9d7ebd1e6772;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=c189b47c-2db6-414e-b780-b6a7657bf1be;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END59__
+]3008;end=c189b47c-2db6-414e-b780-b6a7657bf1be;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=48f236a5-50d4-4670-82ad-c10224192453;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=48f236a5-50d4-4670-82ad-c10224192453;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=337c02c2-987e-4f68-ac6a-9ba9c9ed85e2;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END60__
+]3008;end=337c02c2-987e-4f68-ac6a-9ba9c9ed85e2;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=eaf8b982-6fa5-44c3-a740-7af65f83536c;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=eaf8b982-6fa5-44c3-a740-7af65f83536c;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=8ed3e8d0-cf1d-4c90-8563-0a0faaaf737f;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END61__
+]3008;end=8ed3e8d0-cf1d-4c90-8563-0a0faaaf737f;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=d509ee73-dd1b-4a0a-962b-1c021772c27d;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=d509ee73-dd1b-4a0a-962b-1c021772c27d;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=6d9301bb-bff9-466c-b1a6-b6ab8f3646c0;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END62__
+]3008;end=6d9301bb-bff9-466c-b1a6-b6ab8f3646c0;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=1dbcbbec-3a7b-445a-bb47-570028ec0bf1;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=1dbcbbec-3a7b-445a-bb47-570028ec0bf1;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=9a6e61a0-9768-4df6-a5e3-0331f256ed46;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END63__
+]3008;end=9a6e61a0-9768-4df6-a5e3-0331f256ed46;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=8101055d-2d4f-4aa1-ba56-026c37342cfc;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=8101055d-2d4f-4aa1-ba56-026c37342cfc;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=c2968703-2301-4b7a-84e3-dfa2dc1c1bf9;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END64__
+]3008;end=c2968703-2301-4b7a-84e3-dfa2dc1c1bf9;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=220c358c-82bb-4851-839a-a314e0216fd8;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=220c358c-82bb-4851-839a-a314e0216fd8;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=4a0bb5d4-ed10-496f-8564-c247c2c7067f;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END65__
+]3008;end=4a0bb5d4-ed10-496f-8564-c247c2c7067f;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=7bef31af-489f-4f90-9994-31120c3132ad;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=7bef31af-489f-4f90-9994-31120c3132ad;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=2e7b0a1a-163b-43cd-b42a-8ff5ea7e7521;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END66__
+]3008;end=2e7b0a1a-163b-43cd-b42a-8ff5ea7e7521;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=31e858da-132b-4fa4-8cf7-c3f015bb195f;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=31e858da-132b-4fa4-8cf7-c3f015bb195f;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=0e190ff4-bcde-4ca5-880e-6f105b92b118;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END67__
+]3008;end=0e190ff4-bcde-4ca5-880e-6f105b92b118;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=e9421702-7e51-4852-8d5b-a301519dd61b;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=e9421702-7e51-4852-8d5b-a301519dd61b;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=0b3cb21d-f84e-44c2-9968-ff743b668870;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END68__
+]3008;end=0b3cb21d-f84e-44c2-9968-ff743b668870;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=1835ea94-be98-472c-aab3-9e68d161a5d2;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=1835ea94-be98-472c-aab3-9e68d161a5d2;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=5d2a423d-d92b-4780-b2f4-4a821c3e2c1b;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END69__
+]3008;end=5d2a423d-d92b-4780-b2f4-4a821c3e2c1b;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=65d4c9f5-40cb-4c9a-be88-8837d58f6105;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=65d4c9f5-40cb-4c9a-be88-8837d58f6105;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=c2b0d2a3-275f-44a5-9903-4aa772a712cf;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END70__
+]3008;end=c2b0d2a3-275f-44a5-9903-4aa772a712cf;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=eaf021fd-78cc-4863-b6d2-1d5f63c89b9a;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=eaf021fd-78cc-4863-b6d2-1d5f63c89b9a;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=2ef46c8b-da58-4afb-ac38-3737058fbd6e;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END71__
+]3008;end=2ef46c8b-da58-4afb-ac38-3737058fbd6e;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=1e98fa64-528a-415d-94ea-7738c99cfd3b;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=1e98fa64-528a-415d-94ea-7738c99cfd3b;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=9d9d776c-2d60-4a2c-94f6-d5e8fd6c51af;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END72__
+]3008;end=9d9d776c-2d60-4a2c-94f6-d5e8fd6c51af;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=bf6dc3c7-2e3b-41f1-9a8b-e2d6f563e957;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=bf6dc3c7-2e3b-41f1-9a8b-e2d6f563e957;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=5435cfbf-68a1-442e-a8f1-59f324d9b95d;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END73__
+]3008;end=5435cfbf-68a1-442e-a8f1-59f324d9b95d;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=3af8efb0-c4f8-4632-a1b0-9acc30fb1c48;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=3af8efb0-c4f8-4632-a1b0-9acc30fb1c48;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=03439103-8221-4b56-b282-e38dff3f1742;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END74__
+]3008;end=03439103-8221-4b56-b282-e38dff3f1742;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=955e7d6e-2617-43a7-a280-8cfb13e7464a;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=955e7d6e-2617-43a7-a280-8cfb13e7464a;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=0fe62e93-031b-41d8-bf3e-3f9eef23cce4;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END75__
+]3008;end=0fe62e93-031b-41d8-bf3e-3f9eef23cce4;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=6dab9868-579c-4a0c-924c-343d73af1595;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=6dab9868-579c-4a0c-924c-343d73af1595;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=b4a9c0fe-ddd9-46ac-86e3-fc58cc0490a8;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END76__
+]3008;end=b4a9c0fe-ddd9-46ac-86e3-fc58cc0490a8;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=77205d73-50a5-4e8f-8a48-254847c56c52;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=77205d73-50a5-4e8f-8a48-254847c56c52;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=b8dae87d-df39-493e-9678-2c7cbb7be8d4;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END77__
+]3008;end=b8dae87d-df39-493e-9678-2c7cbb7be8d4;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=a0613eb7-8095-47dd-aa00-27aeefec337a;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=a0613eb7-8095-47dd-aa00-27aeefec337a;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=840f081e-96bf-44a8-8ecb-1146c63238ba;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END78__
+]3008;end=840f081e-96bf-44a8-8ecb-1146c63238ba;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=e03353ef-4ebe-404b-98dc-1e35bf4e55be;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=e03353ef-4ebe-404b-98dc-1e35bf4e55be;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=aded92b8-f415-4ded-a7b8-c2032f874e49;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END79__
+]3008;end=aded92b8-f415-4ded-a7b8-c2032f874e49;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=e0776217-69fc-4216-af29-5e33922d5cb1;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=e0776217-69fc-4216-af29-5e33922d5cb1;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=72ccc6a0-99c0-4edb-9d40-c006c1e3a955;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END80__
+]3008;end=72ccc6a0-99c0-4edb-9d40-c006c1e3a955;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=5f21fb83-100e-4018-bb9c-56bf947393d6;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\00:31:24,033 INF core.configuration.profile: Found the 'fedora-server' profile at /etc/anaconda/profile.d/fedora-server.conf.
+00:31:24,034 INF core.configuration.profile: Found the 'fedora-silverblue' profile at /etc/anaconda/profile.d/fedora-silverblue.conf.
+00:31:24,035 INF core.configuration.profile: Found the 'fedora-workstation' profile at /etc/anaconda/profile.d/fedora-workstation.conf.
+00:31:24,036 INF core.configuration.profile: Found the 'fedora' profile at /etc/anaconda/profile.d/fedora.conf.
+00:31:24,037 INF core.configuration.profile: Found the 'navix' profile at /etc/anaconda/profile.d/navix.conf.
+00:31:24,038 INF core.configuration.profile: Found the 'ovirt' profile at /etc/anaconda/profile.d/ovirt.conf.
+00:31:24,039 INF core.configuration.profile: Found the 'rhel' profile at /etc/anaconda/profile.d/rhel.conf.
+00:31:24,040 INF core.configuration.profile: Found the 'rhvh' profile at /etc/anaconda/profile.d/rhvh.conf.
+00:31:24,041 INF core.configuration.profile: Found the 'rocky' profile at /etc/anaconda/profile.d/rocky.conf.
+00:31:24,042 INF core.configuration.profile: Found the 'scientific-linux' profile at /etc/anaconda/profile.d/scientific-linux.conf.
+00:31:24,043 INF core.configuration.profile: Found the 'virtuozzo-linux' profile at /etc/anaconda/profile.d/virtuozzo-linux.conf.
+00:31:24,043 DBG core.configuration.profile: Detecting a profile for ID=fedora, VARIANT_ID=kde.
+00:31:24,043 INF core.configuration.profile: The 'fedora-kde' profile is detected.
+00:31:24,043 INF core.configuration.anaconda: Load the 'fedora-kde' profile configuration.
+00:31:24,048 INF main: /sbin/anaconda 44.30-2.fc44
+00:31:24,049 INF core.util: Reporting the IPMI event: 7
+00:31:24,748 INF startup_utils: check_memory(): total:8046, needed:320
+00:31:24,749 DBG startup_utils: Don't set up proxy variables.
+00:31:24,749 INF screensaver: Inhibiting screensaver.
+00:31:24,756 INF main: anaconda called with cmdline = ['/sbin/anaconda', '--liveinst', '--graphical']
+00:31:24,756 INF main: Default encoding = utf-8 
+00:31:24,757 INF misc: Configuration loaded from: ['/etc/anaconda/anaconda.conf', '/etc/anaconda/profile.d/fedora.conf', '/etc/anaconda/profile.d/fedora-kde.conf', '/etc/anaconda/conf.d/00-do-nothing.conf', '/etc/anaconda/conf.d/01-still-do-nothing.c
+00:31:24,757 INF misc: Writing the runtime configuration to: /run/anaconda/anaconda.conf
+00:31:24,870 INF core.dbus: Connecting to the Anaconda bus at unix:path=/tmp/dbus-FfDoyKvLGb,guid=bb8360fdf8aa1d6931eb70656b0a672c.
+00:31:35,955 INF main: Found a kickstart file: /usr/share/anaconda/interactive-defaults.ks
+00:31:36,079 INF startup_utils: Parsing kickstart: /usr/share/anaconda/interactive-defaults.ks
+00:31:37,290 DBG anaconda: setting display mode to GUI
+00:31:37,312 DBG localization: setting locale to: en_US.UTF-8
+00:31:37,370 INF core.threads: Running Thread: AnaWaitForConnectingNMThread (139830160975552)
+00:31:37,374 DBG anaconda: changing display mode from GUI to GUI
+00:31:37,374 INF anaconda: Display mode is set to 'interactive graphical mode'.
+00:31:37,442 INF startup_utils: check_memory(): total:8046, needed:320
+00:31:37,442 INF startup_utils: check_memory(): total:8046, graphical:410
+00:31:37,466 INF network: got 0 NTP servers from DHCP
+00:31:37,496 INF core.threads: Thread Done: AnaWaitForConnectingNMThread (139830160975552)
+00:31:37,635 DBG core.storage: LABEL=OEMDRV matches [] for devicetree=None and disks_only=True
+00:31:37,637 INF core.threads: Running Thread: AnaStorageThread (139830160975552)
+00:31:37,657 INF core.threads: Running Thread: AnaTimeInitThread (139830135662272)
+00:31:37,913 DBG payload.manager: Restarting payload thread
+00:31:37,916 INF core.threads: Running Thread: AnaPayloadRestartThread (139830127269568)
+00:31:37,918 INF startup_utils: Geolocation is enabled.
+00:31:37,921 INF core.threads: Running Thread: AnaPayloadThread (139830118876864)
+00:31:37,921 INF core.threads: Thread Done: AnaPayloadRestartThread (139830127269568)
+00:31:37,965 DBG startup_utils: Skip the time synchronization.
+00:31:39,386 INF core.threads: Thread Done: AnaStorageThread (139830160975552)
+00:31:39,629 INF startup_utils: Geoloc: using timezone determined by geolocation
+00:31:39,650 DBG localization: setting locale to: en_US.UTF-8
+00:31:39,713 DBG ui.webui: Waiting for all threads to finish...
+00:31:39,716 DBG core.threads: Waiting for thread AnaTimeInitThread to exit
+00:31:49,541 INF core.threads: Thread Done: AnaTimeInitThread (139830135662272)
+00:31:49,542 DBG core.threads: Waiting for thread AnaPayloadThread to exit
+00:32:53,879 INF core.threads: Thread Done: AnaPayloadThread (139830118876864)
+00:32:53,885 DBG ui.webui: web-ui: starting cockpit web view
+00:32:53,885 DBG ui.webui: web-ui: watching webui-desktop pid on live environment
+00:32:53,886 WRN misc: /usr/lib64/python3.14/site-packages/gi/overrides/GLib.py:959: PyGIDeprecationWarning: Calling child_watch_add without priority as first argument is deprecated
+  warnings.warn(
+
+00:32:53,889 WRN misc: /usr/lib64/python3.14/site-packages/gi/events.py:803: DeprecationWarning: 'asyncio.AbstractEventLoopPolicy' is deprecated and slated for removal in Python 3.16
+  AbstractEventLoopPolicy = getattr(asyncio, "AbstractEventLoopPolicy", object)
+
+/tmp/anaconda.log  /tmp/anaconda-webui.log  /tmp/dbus.log  /tmp/packaging.log  /tmp/program.log  /tmp/storage.log
+]3008;end=5f21fb83-100e-4018-bb9c-56bf947393d6;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=30c7856c-8bba-4eed-94f4-38565f39cc46;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END81__
+]3008;end=30c7856c-8bba-4eed-94f4-38565f39cc46;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=4654f260-20fa-4a3d-9953-7dcd59f423d0;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=4654f260-20fa-4a3d-9953-7dcd59f423d0;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=c2912f5f-975c-46c2-afee-99777af44c94;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END82__
+]3008;end=c2912f5f-975c-46c2-afee-99777af44c94;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=459f8b12-69ce-40a0-8a38-c15483173ebe;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\]3008;end=459f8b12-69ce-40a0-8a38-c15483173ebe;exit=success\]3008;start=bd040d75-3e64-458e-9326-af3ad4e25366;type=shell;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\$ ]3008;start=c0549011-afb8-4351-9a6f-df8f0b1f21ef;type=command;machineid=248fc0dc86bb4f5d8f22583d6dd865e7;user=root;hostname=localhost-live;bootid=7137b329-09b3-4e66-a4fb-006457e3c496;pid=2573;cwd=/root\__END83__
