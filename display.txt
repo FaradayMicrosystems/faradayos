@@ -1,0 +1,33 @@
+2
+tty2
+total 0
+drwxr-xr-x. 2 root root         80 Nov 28  2026 by-path
+crw-rw----+ 1 root video  226,   1 Nov 28 01:46 card1
+crw-rw-rw-. 1 root render 226, 128 Nov 28 01:46 renderD128
+lrwxrwxrwx. 1 root root          5 Nov 28  2026 ryoku-gpu-0000-00-01-0 -> card1
+connected
+00:01.0 VGA compatible controller: Red Hat, Inc. Virtio 1.0 GPU (rev 01)
+	Subsystem: Red Hat, Inc. QEMU
+	Kernel driver in use: virtio-pci
+	Kernel modules: virtio_pci
+2026-11-28T06:46:24.344824Z  INFO niri: starting version 26.04
+2026-11-28T06:46:24.359056Z DEBUG niri_config: loaded config from "/home/liveuser/.config/niri/config.kdl"
+2026-11-28T06:46:24.670852Z  INFO niri::backend::tty: using as the render node: "/dev/dri/renderD128"
+2026-11-28T06:46:25.095999Z DEBUG niri::backend::tty: adding device: 57857 "/dev/dri/card1"
+2026-11-28T06:46:25.096075Z DEBUG niri::backend::tty: this is the primary node
+2026-11-28T06:46:29.291703Z DEBUG niri::backend::tty: got render node: renderD128
+2026-11-28T06:46:29.291736Z DEBUG niri::backend::tty: initializing the primary renderer
+2026-11-28T06:46:29.402943Z DEBUG niri::backend::tty: device changed: 57857
+2026-11-28T06:46:29.403271Z DEBUG niri::backend::tty: new connector: Virtual-1 "Red Hat, Inc. QEMU Monitor Unknown"
+2026-11-28T06:46:29.403328Z DEBUG niri::backend::tty: connecting connector: Virtual-1
+2026-11-28T06:46:29.403346Z DEBUG niri::backend::tty: picking mode: Mode { name: "1920x1080", clock: 217140, size: (1920, 1080), hsync: (2400, 2457, 2592), vsync: (1085, 1090, 1117), hskew: 0, vscan: 0, vrefresh: 75, mode_type: ModeTypeFlags(PREFERRED | DRIVER) }
+2026-11-28T06:46:29.403368Z DEBUG niri::backend::tty: couldn't reset HDR properties: couldn't find property: "HDR_OUTPUT_METADATA"
+2026-11-28T06:46:29.403384Z DEBUG niri::backend::tty: couldn't get gamma properties: missing GAMMA_LUT property
+2026-11-28T06:46:29.403390Z DEBUG niri::backend::tty: couldn't reset gamma: setting gamma is not supported
+2026-11-28T06:46:29.406466Z DEBUG niri::niri: putting output Virtual-1 at x=0 y=0
+2026-11-28T06:46:29.406525Z  INFO niri: listening on Wayland socket: wayland-1
+2026-11-28T06:46:29.406530Z  INFO niri: IPC listening on: /run/user/1000/niri.wayland-1.2710.sock
+2026-11-28T06:46:29.468893Z  INFO niri: listening on X11 socket: :0
+2026-11-28T06:46:31.046016Z DEBUG niri_config: loaded config from "/home/liveuser/.config/niri/config.kdl"
+2026-11-28T06:46:38.131686Z DEBUG niri_config: loaded config from "/home/liveuser/.config/niri/config.kdl"
+2026-11-28T06:46:39.725348Z DEBUG niri_config: loaded config from "/home/liveuser/.config/niri/config.kdl"
