@@ -1,0 +1,2 @@
+qemu-system-x86_64: egl: no drm render node available
+qemu-system-x86_64: egl: render node init failed
