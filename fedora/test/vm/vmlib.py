@@ -155,7 +155,11 @@ class VM:
         raise TimeoutError(pattern)
 
     def send(self, text):
-        self.ser.sendall(text.encode())
+        # Small pieces: the emulated serial port drops characters when a long command arrives at once
+        b = text.encode()
+        for i in range(0, len(b), 32):
+            self.ser.sendall(b[i:i + 32])
+            time.sleep(0.01)
 
     def login_root(self, timeout=1500, user="root", password=""):
         """Waits for the serial login prompt and logs in (live root has no password). Then commands can be run."""
@@ -187,7 +191,10 @@ class VM:
         """Writes a file inside the VM (as root)."""
         import base64
         b = base64.b64encode(content.encode()).decode()
-        self.run(f"echo {b} | base64 -d > {path}")
+        self.run(f": > {path}.b64")
+        for i in range(0, len(b), 1000):
+            self.run(f"echo {b[i:i + 1000]} >> {path}.b64")
+        self.run(f"base64 -d {path}.b64 > {path} && rm {path}.b64")
 
     def as_user(self, cmd, user="liveuser", uid=1000, timeout=120):
         """Runs a command as the desktop user inside the graphical session (niri socket + Wayland env)."""
