@@ -17,12 +17,16 @@ def say(*m):
 
 
 class VM:
-    def __init__(self, out, iso=None, disk=None, mem=8192, smp=4, width=1920, height=1080, disk_size="64G"):
+    def __init__(self, out, iso=None, disk=None, mem=8192, smp=4, width=1920, height=1080, disk_size="64G",
+                 gpu=None):
         os.makedirs(out, exist_ok=True)
         self.W = os.path.abspath(out)
         self.iso = iso
         self.disk = disk or f"{self.W}/disk.qcow2"
         self.mem, self.smp, self.width, self.height = mem, smp, width, height
+        # "std" = QEMU standard VGA (bochs-drm in the guest): Mesa renders in software (llvmpipe), so niri can draw.
+        # "virtio" = virtio-vga without 3D: niri cannot render there ("no allocator available"), screen stays black.
+        self.gpu = gpu or os.environ.get("VM_GPU", "std")
         self.kvm = os.access("/dev/kvm", os.R_OK | os.W_OK)
         self.mult = 1 if self.kvm else 6
         self.vars = f"{self.W}/OVMF_VARS.fd"
@@ -43,7 +47,8 @@ class VM:
         live=False: boot the installed disk through its own bootloader (UEFI)."""
         args = ["qemu-system-x86_64", "-machine", "q35", "-accel", "kvm" if self.kvm else "tcg",
                 "-cpu", "host" if self.kvm else "max", "-smp", str(self.smp), "-m", str(self.mem),
-                "-device", f"virtio-vga,xres={self.width},yres={self.height}", "-display", "none",
+                "-device", (f"VGA,xres={self.width},yres={self.height},vgamem_mb=64" if self.gpu == "std"
+                            else f"virtio-vga,xres={self.width},yres={self.height}"), "-display", "none",
                 "-device", "qemu-xhci", "-device", "usb-tablet", "-device", "usb-kbd",
                 "-audiodev", "none,id=snd0", "-device", "intel-hda", "-device", "hda-duplex,audiodev=snd0",  # a sound card, so audio can be checked
                 "-drive", f"file={self.disk},if=virtio",
