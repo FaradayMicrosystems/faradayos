@@ -60,8 +60,9 @@ jobs:
           sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
           ls -l /dev/kvm
           # Host-side 3D for the guest's virtio GPU (VM_GPU=virgl): vgem render node + Mesa software rendering
-          sudo apt-get install -y -q libegl-mesa0 libgl1-mesa-dri libgbm1 "linux-modules-extra-$(uname -r)" || true
+          sudo apt-get install -y -q libegl1 libgles2 libegl-mesa0 libgl1-mesa-dri libgbm1 mesa-utils "linux-modules-extra-$(uname -r)" || true
           sudo modprobe vgem && sudo chmod 666 /dev/dri/* && ls -l /dev/dri || echo "no vgem"
+          eglinfo -B 2>&1 | head -30 || true
 
       - name: Get ISO
         run: |
