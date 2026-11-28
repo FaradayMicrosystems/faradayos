@@ -1,0 +1,3 @@
+/usr/share/cups/data/classified.pdf
+  Title: "classified.pdf — Mozilla Firefox"
+  App ID: "org.mozilla.firefox"

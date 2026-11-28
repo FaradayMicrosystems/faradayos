@@ -1,0 +1,4 @@
+  Title: "FaradayOS Settings"
+  App ID: "org.quickshell"
+  Title: "~ : bash — Konsole"
+  App ID: "org.kde.konsole"

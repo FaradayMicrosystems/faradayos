@@ -1,0 +1,53 @@
+0.0 0 0.0
+0
+LOCAL
+FedoraWorkstation
+FedoraWorkstation (default)
+  interfaces: enp0s4
+DefaultZone=FedoraWorkstation
+/etc/firewalld/zones:
+FedoraWorkstation.xml
+FedoraWorkstation.xml.old
+
+/usr/lib/firewalld/zones:
+block.xml
+dmz.xml
+drop.xml
+external.xml
+FedoraServer.xml
+FedoraWorkstation.xml
+home.xml
+internal.xml
+nm-shared.xml
+public.xml
+trusted.xml
+work.xml
+tuned-2.28.0-1.fc44.noarch
+tuned-ppd-2.28.0-1.fc44.noarch
+package power-profiles-daemon is not installed
+xwayland-satellite-0.8.3-1.fc44.x86_64
+polkit-kde-6.8.3-1.fc44.x86_64
+package hyprpolkitagent is not installed
+package mate-polkit is not installed
+package lxpolkit is not installed
+polkitd     1231  0.9  0.1 384276 12148 ?        Ssl  00:12   0:00 /usr/lib/polkit-1/polkitd --no-debug --log-level=notice
+liveuser    2473  0.0  0.0 232232  3776 ?        Ss   00:12   0:00 /usr/bin/bash /usr/bin/ryoku-bt-agent
+liveuser    2477  0.1  0.0 236988  6160 ?        S    00:12   0:00 bluetoothctl --agent KeyboardDisplay
+liveuser    2478  0.0  0.0 232232  2884 ?        S    00:12   0:00 /usr/bin/bash /usr/bin/ryoku-bt-agent
+liveuser    2846  0.0  0.1 542352  9580 ?        Ssl  00:12   0:00 /usr/libexec/geoclue-2.0/demos/agent
+○ ryoku-greeter-guard.service
+     Loaded: masked (Reason: Unit ryoku-greeter-guard.service is masked.)
+     Active: inactive (dead)
+
+Nov 28 05:12:11 localhost-live systemd[1]: Failed to start ryoku-greeter-guard.service.
+   Mem peak: 2.2M
+        CPU: 47ms
+
+Nov 28 05:12:08 faradayos systemd[1]: Started mcelog.service - Machine Check Exception Logging Daemon.
+Nov 28 05:12:08 faradayos mcelog[1224]: mcelog: ERROR: AMD Processor family 25: mcelog does not support this processor.  Please use the edac_mce_amd module instead.
+Nov 28 05:12:08 faradayos mcelog[1224]: CPU is unsupported
+Nov 28 05:12:08 faradayos systemd[1]: mcelog.service: Main process exited, code=exited, status=1/FAILURE
+Nov 28 05:12:08 faradayos systemd[1]: mcelog.service: Failed with result 'exit-code'.
+Nov 28 05:12:08 faradayos systemd[1]: Started firewalld.service - firewalld - dynamic firewall daemon.
+Nov 28 05:12:14 localhost-live firewalld[1177]: ERROR: INVALID_ZONE: (default)
+Nov 28 05:12:15 localhost-live firewalld[1177]: ERROR: INVALID_ZONE: (default)

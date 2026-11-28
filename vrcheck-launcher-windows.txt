@@ -1,0 +1,4 @@
+  Title: "FaradayOS Settings"
+  App ID: "org.quickshell"
+  Title: "faraday-vr-check"
+  App ID: "kitty"

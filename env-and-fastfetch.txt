@@ -1,0 +1,13 @@
+WAYLAND_DISPLAY=wayland-1
+/home/liveuser/.config/fastfetch/config.jsonc:40:      "format": "\u001b[38;2;226;52;42m■\u001b[0m \u001b[38;2;143;135;112m{#keys}■{#} {#separator}FARADAYOS · a hand-built {$RYOKU_BASE_OS} desktop{#}\u001b[0m",
+/usr/share/ryoku/config/fastfetch/config.jsonc:25:    { "type": "custom", "format": "\u001b[38;2;226;52;42m\u25a0\u001b[0m \u001b[38;2;143;135;112mFARADAYOS \u00b7 a hand-built {$RYOKU_BASE_OS} desktop\u001b[0m" },
+/usr/share/ryoku/config/fish/config.fish:15:if not set -q RYOKU_BASE_OS; and command -q ryoku-base-os
+/usr/share/ryoku/config/fish/config.fish:16:  set -gx RYOKU_BASE_OS (ryoku-base-os)
+/usr/share/ryoku/config/ryoku-terminal/env.sh:12:if [ -z "${RYOKU_BASE_OS+x}" ] && command -v ryoku-base-os >/dev/null 2>&1; then
+/usr/share/ryoku/config/fastfetch/config.jsonc
+/usr/share/ryoku/config/fish/config.fish
+/usr/share/ryoku/config/ryoku-terminal/env.sh
+/usr/share/ryoku/rices/default/fastfetch.jsonc
+/usr/share/ryoku/rices/noc/fastfetch.jsonc
+/usr/bin/ryoku-fastfetch
+/usr/bin/ryoku-hub

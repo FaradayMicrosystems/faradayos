@@ -1,0 +1,2 @@
+bin_steam.sh[14490]: Setting up Steam content in /home/liveuser/.local/share/Steam
+1.1G	/home/liveuser/.local/share/Steam

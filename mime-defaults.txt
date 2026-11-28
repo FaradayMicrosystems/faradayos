@@ -1,0 +1,18 @@
+application/pdf                                              
+image/png                                                    
+image/jpeg                                                   
+text/plain                                                   ryoku-nvim.desktop
+inode/directory                                              org.gnome.Nautilus.desktop
+video/mp4                                                    
+audio/mpeg                                                   
+application/zip                                              org.gnome.Nautilus.desktop
+application/vnd.openxmlformats-officedocument.wordprocessingml.document libreoffice-writer.desktop
+x-scheme-handler/http                                        org.mozilla.firefox.desktop
+/usr/share/cups/data/classified.pdf
+/usr/share/cups/data/confidential.pdf
+/usr/share/cups/data/default-testpage.pdf
+default-dark.jxl
+default.jxl
+default.xml
+f44
+images

@@ -1,0 +1,2 @@
+  Title: "Home — Discover"
+  App ID: "org.kde.discover"

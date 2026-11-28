@@ -1,0 +1,2 @@
+  Title: "ryovm"
+  App ID: "org.quickshell"

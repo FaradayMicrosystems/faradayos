@@ -1,0 +1,6 @@
+  INFO: Launching config: "/home/liveuser/.config/quickshell/ryovm/shell.qml"
+  INFO: Shell ID: "f35cdd66fdac697e49d4111030c3dd56" Path ID "f35cdd66fdac697e49d4111030c3dd56"
+  INFO: Saving logs to "/run/user/1000/quickshell/by-id/r096f57pt/log.qslog"
+  INFO: Configuration Loaded
+  WARN quickshell.io.fileview: got operation finished from dropped operation qs::io::FileViewOperation(0x7f9856ee7820)
+  WARN quickshell.io.fileview: got operation finished from dropped operation qs::io::FileViewOperation(0x7f9856ee9260)

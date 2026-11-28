@@ -1,0 +1,17 @@
+at-spi-dbus-bus.desktop     gnome-keyring-pkcs11.desktop   liveinst-setup.desktop                   org.kde.discover.notifier.desktop                org.kde.xwaylandvideobridge.desktop        vboxclient.desktop
+baloo_file.desktop          gnome-keyring-secrets.desktop  localsearch-3.desktop                    org.kde.kdeconnect.daemon.desktop                pam_kwallet_init.desktop                   vmware-user.desktop
+faraday-vr-check.desktop    gnome-keyring-ssh.desktop      nvidia-settings-user.desktop             org.kde.kunifiedpush-distributor.desktop         polkit-kde-authentication-agent-1.desktop  xdg-user-dirs.desktop
+geoclue-demo-agent.desktop  kaccess.desktop                orca-autostart.desktop                   org.kde.plasma-fallback-session-restore.desktop  powerdevil.desktop                         xembedsniproxy.desktop
+gmenudbusmenuproxy.desktop  kxkb2locale1.desktop           org.freedesktop.problems.applet.desktop  org.kde.plasmashell.desktop                      spice-vdagent.desktop
+[Desktop Entry]
+Type=Application
+Exec=nvidia-settings -l
+Icon=nvidia-settings
+Hidden=false
+NoDisplay=false
+Name[en_GB]=nvidia-settings
+Name=nvidia-settings
+Comment[en_GB]=Load user settings
+Comment=Load user settings
+X-GNOME-Autostart-Delay=30
+X-GNOME-Autostart-enabled=true

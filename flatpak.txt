@@ -1,0 +1,13 @@
+Name   Title           URL                                    Collection ID Subset Filter Priority Options    Comment Description Homepage Icon
+fedora Fedora Flatpaks oci+https://registry.fedoraproject.org -             -      -      1        system,oci -       -           -        -
+Name   Options
+fedora oci
+/etc/flatpak/remotes.d:
+
+/var/lib/flatpak/repo:
+config
+extensions
+objects
+refs
+state
+tmp
