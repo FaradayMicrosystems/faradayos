@@ -1,0 +1,11 @@
+Window ID 8: (focused)
+  Title: "Home"
+  App ID: "org.gnome.Nautilus"
+  Is floating: no
+  PID: 10793
+  Workspace ID: 1
+  Layout:
+    Tile size: 936 x 954
+    Scrolling position: column 1, tile 1
+    Window size: 928 x 946
+    Window offset in tile: 4 x 4

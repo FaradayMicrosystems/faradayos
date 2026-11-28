@@ -1,0 +1,39 @@
+Fri Nov 27 11:40:02 PM EST 2026
+               Local time: Fri 2026-11-27 23:40:03 EST
+           Universal time: Sat 2026-11-28 04:40:03 UTC
+                 RTC time: Sat 2026-11-28 04:40:01
+                Time zone: America/New_York (EST, -0500)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: yes
+ 
+Warning: The system is configured to read the RTC time in the local time zone.
+         This mode cannot be fully supported. It will create various problems
+         with time zone changes and daylight saving time adjustments. The RTC
+         time is never updated, it relies on external facilities to maintain it.
+         If at all possible, use RTC in UTC by calling
+         'timedatectl set-local-rtc 0'.
+System Locale: LANG=en_US.UTF-8
+    VC Keymap: us
+   X11 Layout: (unset)
+NAME="FaradayOS"
+VERSION="0.91e (Fedora 44)"
+RELEASE_TYPE=stable
+ID=fedora
+  UNIT           LOAD   ACTIVE SUB    DESCRIPTION
+● mcelog.service loaded failed failed Machine Check Exception Logging Daemon
+
+Legend: LOAD   → Reflects whether the unit definition was properly loaded.
+        ACTIVE → The high-level unit activation state, i.e. generalization of SUB.
+        SUB    → The low-level unit activation state, values depend on unit type.
+
+1 loaded units listed.
+id: ‘tester’: no such user
+uid=1000(liveuser) gid=1000(liveuser) groups=1000(liveuser),10(wheel)
+SESSION  UID USER     SEAT  LEADER CLASS         TTY   IDLE SINCE
+      1 1000 liveuser seat0 1738   user          tty2  no   -
+      2 1000 liveuser -     2465   manager       -     no   -
+      3    0 root     -     1740   user-early    ttyS0 no   -
+      4    0 root     -     2546   manager-early -     no   -
+
+4 sessions listed.

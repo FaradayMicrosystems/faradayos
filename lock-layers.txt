@@ -1,0 +1,8 @@
+      Namespace: "ryoku-overview-backdrop"
+      Namespace: "ryoku-dock"
+      Namespace: "ryoku-widgets"
+      Namespace: "ryoku-bar"
+      Namespace: "ryoku-keys-hint"
+3195 flock -n /run/user/1000/ryoku-keys-hint.lock env QML_IMPORT_PATH=/home/liveuser/.local/lib/qt6/qml QML2_IMPORT_PATH=/home/liveuser/.local/lib/qt6/qml qs -c keys-hint
+3203 qs -c keys-hint
+5131 qs -c shell

@@ -1,0 +1,68 @@
+abrt	   btop		      chromium-flags.conf  equibop    ghostty  heroic	   kitty	    matugen  niri	 pip	quickshell  ryoku-terminal  starship	   tmux		     vesktop		 xfce4	  zed
+alacritty  cava		      dconf		   fastfetch  gtk-3.0  kdeconnect  kscreenlockerrc  micro    nvim	 pulse	qylock	    ryotunes	    starship.toml  user-dirs.dirs    wireplumber	 yazi	  zsh
+bash	   chrome-flags.conf  environment.d	   fish       gtk-4.0  kdeglobals  ksplashrc	    mozilla  obs-studio  qt6ct	ryoku	    Sidra	    systemd	   user-dirs.locale  xdg-desktop-portal  zathura
+desktop.json
+hypridle.conf
+keyring.json
+launcher.json
+matugen.json
+plugins.json
+rices
+ryogami.json
+shell.json
+shell.json.lock
+stage.json
+theme.json
+user_edits
+visualizer.json
+widgets.json
+/home/liveuser/.config/ryoku/shell.json
+/home/liveuser/.config/ryoku/visualizer.json
+/home/liveuser/.config/ryoku/widgets.json
+/home/liveuser/.config/ryoku/launcher.json
+/home/liveuser/.config/ryoku/rices/.baseline/lock.slug
+/home/liveuser/.config/ryoku/rices/.previous/lock.slug
+/home/liveuser/.config/ryoku/rices/default/rice.json
+/home/liveuser/.config/quickshell/welcome/art/logo-mark.svg
+/home/liveuser/.config/quickshell/welcome/PageBars.qml
+/home/liveuser/.config/quickshell/stage/services/qmldir
+"inactiveTimeout": 0
+"weather": {
+"showTime": true
+"showLocation": false
+"showTime": true
+"clock": {
+"dateInClock": true
+"timeIndicators": false
+"timeFormat": "system"
+"timeScale": 100
+"screenTime": {
+"uptime": {
+"weather": {
+"showLocation": true
+"showSunTimes": true
+"worldClock": {
+"timezones": [
+"weather": {
+"moveTime": 100
+"openTime": 100
+"clockAccent": "highlight"
+"clockScale": 100
+"clockStyle": "dateTime"
+"clock": {
+"weather": {
+"centerClock": true
+"clock": {
+"weather": true
+"timeout": 16
+"maxPopupLifetime": 30000
+"timeout": 3000
+"timeoutCritical": 0
+"timeoutLow": 5000
+"timeoutNormal": 7000
+"screenTime": {
+"worldClock": false
+"timezones": []
+"use24Hour": true
+"timerDone": ""
+"timer": false

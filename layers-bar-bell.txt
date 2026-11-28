@@ -1,0 +1,5 @@
+      Namespace: "ryoku-overview-backdrop"
+      Namespace: "ryoku-dock"
+      Namespace: "ryoku-widgets"
+      Namespace: "ryoku-bar"
+      Namespace: "ryoku-keys-hint"
