@@ -1,0 +1,14 @@
+NAME  FSTYPE   FSVER            LABEL                       UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+loop0 squashfs 4.0                                                                                     0   100% /run/rootfsbase
+sr0   iso9660  Joliet Extension FaradayOSv0-91e-performance 2026-11-26-14-50-28-00                     0   100% /run/initramfs/live
+zram0 swap     1                zram0                       621d86e9-7e37-4105-a10f-0f84ac36b693                [SWAP]
+vda                                                                                                             
+Filesystem      Size  Used Avail Use% Mounted on
+LiveOS_rootfs   1.6G  124M  1.5G   8% /
+ERROR: not a btrfs filesystem: /
+ERROR: can't access '/'
+cat: /etc/fstab: No such file or directory
+NAME       TYPE      SIZE USED PRIO
+/dev/zram0 partition 7.7G   0B  100
+NAME       ALGORITHM DISKSIZE DATA COMPR TOTAL STREAMS MOUNTPOINT
+/dev/zram0 lzo-rle       7.7G   4K   80B   12K         [SWAP]

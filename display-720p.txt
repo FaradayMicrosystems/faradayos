@@ -1,0 +1,8 @@
+Output "Red Hat, Inc. QEMU Monitor Unknown" (Virtual-1)
+  Current mode: 1920x1080 @ 74.998 Hz (preferred)
+  Variable refresh rate: not supported
+  Physical size: 480x270 mm
+  Logical position: 0, 0
+  Logical size: 1920x1080
+  Scale: 1
+  Transform: normal

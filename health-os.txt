@@ -1,0 +1,43 @@
+Terminated                 timeout 300 dnf -q check-update 2>&1 | tail -30
+rc=143
+repo id                                                                                                         repo name                                                                                                                                 
+copr:copr.fedorainfracloud.org:group_xr-sig:xrizer                                                              Copr repo for xrizer owned by @xr-sig (Fedora XR SIG)                                                                                     
+fedora                                                                                                          Fedora 44 - x86_64                                                                                                                        
+fedora-cisco-openh264                                                                                           Fedora 44 openh264 (From Cisco) - x86_64                                                                                                  
+rpmfusion-free                                                                                                  RPM Fusion for Fedora 44 - Free                                                                                                           
+rpmfusion-free-updates                                                                                          RPM Fusion for Fedora 44 - Free - Updates                                                                                                 
+rpmfusion-nonfree                                                                                               RPM Fusion for Fedora 44 - Nonfree                                                                                                        
+rpmfusion-nonfree-steam                                                                                         RPM Fusion for Fedora 44 - Nonfree - Steam                                                                                                
+rpmfusion-nonfree-updates                                                                                       RPM Fusion for Fedora 44 - Nonfree - Updates                                                                                              
+ryoku                                                                                                           Ryoku                                                                                                                                     
+ryoku-copr-sdegler-hyprland                                                                                     Ryoku dependency: sdegler/hyprland                                                                                                        
+updates                                                                                                         Fedora 44 - x86_64 - Updates                                                                                                              
+$ NAME="FaradayOS"
+VERSION="0.91e (Fedora 44)"
+RELEASE_TYPE=stable
+ID=fedora
+VERSION_ID=44
+VERSION_CODENAME=""
+PRETTY_NAME="FaradayOS v0.91e"
+ANSI_COLOR="38;5;208"
+LOGO=faradayos
+CPE_NAME="cpe:/o:fedoraproject:fedora:44"
+HOME_URL="https://fedoraproject.org/"
+DOCUMENTATION_URL="https://docs.fedoraproject.org/en-US/fedora/f44/"
+SUPPORT_URL="https://ask.fedoraproject.org/"
+BUG_REPORT_URL="https://bugzilla.redhat.com/"
+REDHAT_BUGZILLA_PRODUCT="Fedora"
+REDHAT_BUGZILLA_PRODUCT_VERSION=44
+REDHAT_SUPPORT_PRODUCT="Fedora"
+REDHAT_SUPPORT_PRODUCT_VERSION=44
+SUPPORT_END=2027-05-19
+VARIANT="KDE Plasma Desktop Edition"
+VARIANT_ID=kde
+DEFAULT_HOSTNAME=faradayos
+IMAGE_ID=faradayos
+IMAGE_VERSION=0.91e
+localhost-live
+Linux localhost-live 7.3.5-200.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC Tue Nov 17 16:08:01 UTC 2026 x86_64 GNU/Linux
+Fedora release 44 (Forty Four)
+Fedora release 44 (Forty Four)
+2600

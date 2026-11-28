@@ -1,0 +1,59 @@
+PipeWire 'pipewire-0' [1.6.11, liveuser@localhost-live, cookie:4267289008]
+ └─ Clients:
+        33. uresourced                          [1.6.11, liveuser@localhost-live, pid:2651]
+        34. WirePlumber                         [1.6.11, liveuser@localhost-live, pid:2676]
+        43. WirePlumber [client]                [1.6.11, liveuser@localhost-live, pid:2676]
+        59. pipewire                            [1.6.11, liveuser@localhost-live, pid:3245]
+        60. pactl                               [1.6.11, liveuser@localhost-live, pid:5703]
+        61. pactl                               [1.6.11, liveuser@localhost-live, pid:3295]
+        62. xdg-desktop-portal                  [1.6.11, liveuser@localhost-live, pid:5597]
+        63. quickshell                          [1.6.11, liveuser@localhost-live, pid:5257]
+        64. wpctl                               [1.6.11, liveuser@localhost-live, pid:18752]
+
+Audio
+ ├─ Devices:
+ │      44. Built-in Audio                      [alsa]
+ │  
+ ├─ Sinks:
+ │  *   51. Built-in Audio Analog Stereo        [vol: 0.40]
+ │  
+ ├─ Sources:
+ │  *   52. Built-in Audio Analog Stereo        [vol: 1.00]
+ │  
+ ├─ Filters:
+ │  
+ └─ Streams:
+
+Video
+ ├─ Devices:
+ │  
+ ├─ Sinks:
+ │  
+ ├─ Sources:
+ │  
+ ├─ Filters:
+ │  
+ └─ Streams:
+
+Settings
+ └─ Default Configured Devices:
+active
+active
+active
+Volume: 0.40
+Volume: 0.40
+Server String: /run/user/1000/pulse/native
+Library Protocol Version: 35
+Server Protocol Version: 35
+Is Local: yes
+Client Index: 110
+Tile Size: 65472
+User Name: liveuser
+Host Name: localhost-live
+Server Name: PulseAudio (on PipeWire 1.6.11)
+Server Version: 15.0.0
+Default Sample Specification: float32le 2ch 48000Hz
+Default Channel Map: front-left,front-right
+Default Sink: alsa_output.pci-0000_00_03.0.analog-stereo
+Default Source: alsa_input.pci-0000_00_03.0.analog-stereo
+Cookie: fe59:a9b0

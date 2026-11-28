@@ -1,0 +1,5 @@
+/usr/share/applications/compress-video.desktop
+/usr/share/applications/install-app.desktop
+/usr/share/applications/liveinst.desktop
+/usr/share/applications/ryoku-hub.desktop
+/usr/share/applications/ryostore.desktop

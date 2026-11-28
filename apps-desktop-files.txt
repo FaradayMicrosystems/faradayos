@@ -1,0 +1,53 @@
+Alacritty.desktop | Name=Alacritty | Exec=alacritty
+btop.desktop | Name=btop++ | Exec=btop
+calf.desktop | Name=Calf Plugin Pack for JACK | Exec=calfjackhost
+com.github.wwmm.easyeffects.desktop | Name=Easy Effects | Exec=easyeffects
+compress-video.desktop | Name=Compress video | Exec=ryoku-shell compress
+faraday-addons.desktop | Name=Install FaradayOS add-ons | Exec=/usr/bin/faraday-addons
+faraday-install-vr.desktop | Name=Install VR tools | Exec=/usr/bin/faraday-install-vr
+faraday-install-wine.desktop | Name=Install Wine and Lutris | Exec=/usr/bin/faraday-install-wine
+faraday-steamvr-setup.desktop | Name=Set up SteamVR | Exec=/usr/bin/faraday-steamvr-setup
+faraday-vr-check.desktop | Name=VR readiness check | Exec=/usr/bin/faraday-vr-check --pause
+firewall-config.desktop | Name=Firewall | Exec=firewall-config
+install-app.desktop | Name=Install app | Exec=ryoku-shell install
+kdesystemsettings.desktop | Name=KDE System Settings | Exec=systemsettings
+kitty.desktop | Name=kitty | Exec=kitty
+libreoffice-calc.desktop | Name=LibreOffice Calc | Exec=libreoffice --calc %U
+libreoffice-impress.desktop | Name=LibreOffice Impress | Exec=libreoffice --impress %U
+libreoffice-writer.desktop | Name=LibreOffice Writer | Exec=libreoffice --writer %U
+nvidia-settings.desktop | Name=NVIDIA X Server Settings | Exec=nvidia-settings
+org.freedesktop.GnomeAbrt.desktop | Name=Problem Reporting | Exec=gnome-abrt
+org.gnome.Nautilus.desktop | Name=Files | Exec=nautilus --new-window %U
+org.kde.ark.desktop | Name=Ark | Exec=ark %U
+org.kde.discover.desktop | Name=Discover | Exec=plasma-discover %F
+org.kde.dolphin.desktop | Name=Dolphin | Exec=dolphin %u
+org.kde.drkonqi.coredump.gui.desktop | Name=Crashed Processes Viewer | Exec=drkonqi-coredump-gui
+org.kde.filelight.desktop | Name=Filelight | Exec=filelight %u
+org.kde.kcharselect.desktop | Name=KCharSelect | Exec=kcharselect --qwindowtitle %c
+org.kde.kdebugsettings.desktop | Name=KDebugSettings | Exec=kdebugsettings
+org.kde.kdeconnect.app.desktop | Name=KDE Connect | Exec=kdeconnect-app
+org.kde.kdeconnect.nonplasma.desktop | Name=KDE Connect Indicator | Exec=kdeconnect-indicator
+org.kde.kdeconnect.sms.desktop | Name=KDE Connect SMS | Exec=kdeconnect-sms
+org.kde.kfind.desktop | Name=KFind | Exec=kfind %u
+org.kde.khelpcenter.desktop | Name=Help Center | Exec=khelpcenter %u
+org.kde.kinfocenter.desktop | Name=Info Center | Exec=kinfocenter
+org.kde.kjournaldbrowser.desktop | Name=Journald Browser | Exec=kjournaldbrowser %u
+org.kde.kmenuedit.desktop | Name=Menu Editor | Exec=kmenuedit
+org.kde.konsole.desktop | Name=Konsole | Exec=konsole
+org.kde.krfb.desktop | Name=Krfb | Exec=krfb -qwindowtitle %c
+org.kde.kwalletmanager.desktop | Name=KWalletManager | Exec=kwalletmanager5 %F
+org.kde.kwrite.desktop | Name=KWrite | Exec=kwrite %U
+org.kde.partitionmanager.desktop | Name=KDE Partition Manager | Exec=partitionmanager
+org.kde.plasma.emojier.desktop | Name=Emoji Selector | Exec=plasma-emojier
+org.kde.plasma-systemmonitor.desktop | Name=System Monitor | Exec=plasma-systemmonitor
+org.kde.plasma-welcome.desktop | Name=Welcome Center | Exec=plasma-welcome
+org.kde.spectacle.desktop | Name=Spectacle | Exec=/usr/bin/spectacle
+org.mozilla.firefox.desktop | Name=Firefox | Exec=firefox %u
+org.pulseaudio.pavucontrol.desktop | Name=Volume Control | Exec=pavucontrol
+ryogami.desktop | Name=Ryogami Wallpapers | Exec=ryogami wallpaper ui
+ryoku-hub.desktop | Name=FaradayOS Hub | Exec=ryoku-shell hub open
+ryoku-nvim.desktop | Name=Neovim | Exec=kitty -e nvim %F
+ryostore.desktop | Name=FaradayOS Store | Exec=env DISABLE_MANGOHUD=1 flock -n -o /tmp/ryostore.lock qs -c ryostore
+ryovm.desktop | Name=Ryoport | Exec=flock -n -o /tmp/ryovm.lock qs -c ryovm
+steam.desktop | Name=Steam | Exec=/usr/bin/steam %U
+systemsettings.desktop | Name=System Settings | Exec=systemsettings

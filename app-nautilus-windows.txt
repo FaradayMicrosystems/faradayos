@@ -1,0 +1,9 @@
+  Title: "Welcome to FaradayOS"
+  App ID: "org.quickshell"
+  Title: "Example Domain — Mozilla Firefox"
+  App ID: "org.mozilla.firefox"
+  Title: "Home"
+  App ID: "org.gnome.Nautilus"
+---LOG
+** Message: 23:55:20.285: Connecting to org.freedesktop.Tracker3.Miner.Files
+nautilus-application-Message: 23:55:20.287: Failed to initialize display server connection: GDBus.Error:org.freedesktop.DBus.Error.InvalidArgs: Invalid service client type

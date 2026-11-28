@@ -1,0 +1,3 @@
+  Title: "Volume Control"
+  App ID: "org.pulseaudio.pavucontrol"
+---LOG

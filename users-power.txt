@@ -1,0 +1,10 @@
+id: ‘tester’: no such user
+wheel:x:10:liveuser
+bash: powerprofilesctl: command not found...
+inactive
+active
+active
+active
+active
+active
+active

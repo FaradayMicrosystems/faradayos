@@ -1,0 +1,15 @@
+STATE      CONNECTIVITY  WIFI-HW  WIFI     WWAN-HW  WWAN     METERED      
+connected  full          missing  enabled  missing  enabled  no (guessed) 
+DEVICE  TYPE      STATE                   CONNECTION         
+enp0s4  ethernet  connected               Wired connection 1 
+lo      loopback  connected (externally)  lo                 
+NAME                UUID                                  TYPE      DEVICE 
+Wired connection 1  2cfd0e25-acf1-3cc1-87d7-224061069c58  ethernet  enp0s4 
+lo                  1c8f8d3f-23ae-455e-b3ed-ece80e0f52b5  loopback  lo     
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+enp0s4           UP             10.0.2.15/24 fec0::ab14:d8dc:fde0:bfde/64 fe80::8453:6ba6:a216:f9b4/64 
+HTTP/2 200 
+date: Sat, 28 Nov 2026 05:05:27 GMT
+content-type: text/html; charset=utf-8
+WIFI-HW  WIFI     WWAN-HW  WWAN    
+missing  enabled  missing  enabled 

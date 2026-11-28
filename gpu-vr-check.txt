@@ -1,0 +1,18 @@
+/usr/sbin/faraday-vr-check
+FaradayOS VR readiness check
+  [ OK ] Steam installed
+  [ OK ] Steam VR/controller udev rules (steam-devices)
+  [ OK ] mesa-dri-drivers.i686
+  [ OK ] mesa-vulkan-drivers.i686
+  [ OK ] pipewire-libs.i686
+  [ OK ] GameMode installed
+  [FAIL] Vulkan cannot see any GPU
+  [WARN] SteamVR not installed yet: open 'Set up SteamVR' from the app menu (needed for ALVR and wired headsets)
+  [FAIL] WiVRn missing (open 'Install VR tools' from the app menu)
+  [WARN] WiVRn dashboard missing (open 'Install VR tools')
+  [ OK ] Avahi running (headset can discover this PC)
+  [WARN] No xrizer/OpenComposite: SteamVR-only games won't run on WiVRn
+  [FAIL] ALVR missing (open 'Install VR tools' from the app menu)
+  [ OK ] Firewall open for WiVRn (9757) and ALVR (9943-9944)
+
+VR readiness: 8 ok, 3 warnings, 3 problems

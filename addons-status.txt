@@ -1,0 +1,80 @@
+onlyoffice   OnlyOffice                     not installed   Office and productivity
+wps          WPS Office                     not installed   Office and productivity
+thunderbird  Thunderbird                    not installed   Office and productivity
+evolution    Evolution                      not installed   Office and productivity
+gnucash      GnuCash                        not installed   Office and productivity
+kmymoney     KMyMoney                       not installed   Office and productivity
+homebank     HomeBank                       not installed   Office and productivity
+zotero       Zotero                         not installed   Office and productivity
+joplin       Joplin                         not installed   Office and productivity
+obsidian     Obsidian                       not installed   Office and productivity
+logseq       Logseq                         not installed   Office and productivity
+planify      Planify                        not installed   Office and productivity
+freecad      FreeCAD                        not installed   CAD and engineering
+librecad     LibreCAD                       not installed   CAD and engineering
+solvespace   SolveSpace                     not installed   CAD and engineering
+openscad     OpenSCAD                       not installed   CAD and engineering
+dune3d       Dune 3D                        not installed   CAD and engineering
+kicad        KiCad                          not installed   CAD and engineering
+librepcb     LibrePCB                       not installed   CAD and engineering
+sweethome3d  Sweet Home 3D                  not installed   CAD and engineering
+prusaslicer  PrusaSlicer                    not installed   CAD and engineering
+cura         UltiMaker Cura                 not installed   CAD and engineering
+gimp         GIMP                           not installed   Design, photo and video
+inkscape     Inkscape                       not installed   Design, photo and video
+krita        Krita                          not installed   Design, photo and video
+blender      Blender                        not installed   Design, photo and video
+darktable    darktable                      not installed   Design, photo and video
+rawtherapee  RawTherapee                    not installed   Design, photo and video
+pinta        Pinta                          not installed   Design, photo and video
+scribus      Scribus                        not installed   Design, photo and video
+fontforge    FontForge                      not installed   Design, photo and video
+kdenlive     Kdenlive                       not installed   Design, photo and video
+shotcut      Shotcut                        not installed   Design, photo and video
+handbrake    HandBrake                      not installed   Design, photo and video
+audacity     Audacity                       not installed   Design, photo and video
+obs          OBS Studio                     not installed   Design, photo and video
+tidal        TIDAL                          not installed   Design, photo and video
+zoom         Zoom                           not installed   Communication
+teams        Teams for Linux                not installed   Communication
+slack        Slack                          not installed   Communication
+discord      Discord                        not installed   Communication
+signal       Signal                         not installed   Communication
+telegram     Telegram                       not installed   Communication
+element      Element                        not installed   Communication
+zulip        Zulip                          not installed   Communication
+mattermost   Mattermost                     not installed   Communication
+okular       Okular                         not installed   PDF and documents
+xournalpp    Xournal++                      not installed   PDF and documents
+pdfarranger  PDF Arranger                   not installed   PDF and documents
+ocrmypdf     OCRmyPDF                       not installed   PDF and documents
+calibre      Calibre                        not installed   PDF and documents
+vscode       Visual Studio Code             not installed   Development and AI
+claudecode   Claude Code                    not installed   Development and AI
+claudedesk   Claude Desktop                 not installed   Development and AI
+lmstudio     LM Studio                      not installed   Development and AI
+podmandesk   Podman Desktop                 not installed   Development and AI
+dbeaver      DBeaver                        not installed   Development and AI
+githubdesk   GitHub Desktop                 not installed   Development and AI
+meld         Meld                           not installed   Development and AI
+bruno        Bruno                          not installed   Development and AI
+remmina      Remmina                        not installed   Remote access, security and system
+rustdesk     RustDesk                       not installed   Remote access, security and system
+anydesk      AnyDesk                        not installed   Remote access, security and system
+winboat      WinBoat                        not installed   Remote access, security and system
+wine         Wine and Lutris                not installed   Remote access, security and system
+bitwarden    Bitwarden                      not installed   Remote access, security and system
+keepassxc    KeePassXC                      not installed   Remote access, security and system
+nextcloud    Nextcloud                      not installed   Remote access, security and system
+syncthing    Syncthing                      not installed   Remote access, security and system
+kdeconnect   KDE Connect                    installed       Remote access, security and system
+qbittorrent  qBittorrent                    not installed   Remote access, security and system
+timeshift    Timeshift                      not installed   Remote access, security and system
+gnomedisks   GNOME Disks                    not installed   Remote access, security and system
+popsicle     Popsicle                       not installed   Remote access, security and system
+flatseal     Flatseal                       not installed   Remote access, security and system
+fingerprint  Fingerprint readers            installed       Remote access, security and system
+heroic       Heroic Games Launcher          not installed   Gaming and VR
+protonupqt   ProtonUp-Qt                    not installed   Gaming and VR
+ckan         CKAN                           not installed   Gaming and VR
+vr           VR tools                       not installed   Gaming and VR

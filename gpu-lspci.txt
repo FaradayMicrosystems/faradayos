@@ -1,0 +1,37 @@
+00:00.0 Host bridge: Intel Corporation 82G33/G31/P35/P31 Express DRAM Controller
+	Subsystem: Red Hat, Inc. QEMU Virtual Machine
+	Kernel modules: intel_agp
+00:01.0 VGA compatible controller: Red Hat, Inc. Virtio 1.0 GPU (rev 01)
+	Subsystem: Red Hat, Inc. QEMU
+	Kernel driver in use: virtio-pci
+	Kernel modules: virtio_pci
+00:02.0 USB controller: Red Hat, Inc. QEMU XHCI Host Controller (rev 01)
+	Subsystem: Red Hat, Inc. Device 1100
+	Kernel driver in use: xhci_hcd
+	Kernel modules: xhci_pci
+00:03.0 Audio device: Intel Corporation 82801FB/FBM/FR/FW/FRW (ICH6 Family) High Definition Audio Controller (rev 01)
+	Subsystem: Red Hat, Inc. QEMU Virtual Machine
+	Kernel driver in use: snd_hda_intel
+	Kernel modules: snd_hda_intel
+00:04.0 Ethernet controller: Red Hat, Inc. Virtio network device
+	Subsystem: Red Hat, Inc. Device 0001
+	Kernel driver in use: virtio-pci
+	Kernel modules: eni_vdpa
+00:05.0 SCSI storage controller: Red Hat, Inc. Virtio block device
+	Subsystem: Red Hat, Inc. Device 0002
+	Kernel driver in use: virtio-pci
+	Kernel modules: virtio_pci
+00:1f.0 ISA bridge: Intel Corporation 82801IB (ICH9) LPC Interface Controller (rev 02)
+	Subsystem: Red Hat, Inc. QEMU Virtual Machine
+	Kernel driver in use: lpc_ich
+	Kernel modules: lpc_ich
+00:1f.2 SATA controller: Intel Corporation 82801IR/IO/IH (ICH9R/DO/DH) 6 port SATA Controller [AHCI mode] (rev 02)
+	Subsystem: Red Hat, Inc. QEMU Virtual Machine
+	Kernel driver in use: ahci
+	Kernel modules: ahci
+00:1f.3 SMBus: Intel Corporation 82801I (ICH9 Family) SMBus Controller (rev 02)
+	Subsystem: Red Hat, Inc. QEMU Virtual Machine
+	Kernel driver in use: i801_smbus
+	Kernel modules: i2c_i801
+virtio_gpu            131072  23
+virtio_dma_buf         12288  1 virtio_gpu

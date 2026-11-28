@@ -1,0 +1,17 @@
+Nov 27 23:46:00 faradayos kernel: virt/tdx: TDX not supported by the host platform
+Nov 28 04:46:41 faradayos alsactl[1334]: /usr/sbin/alsactl: load_state:1745: Cannot open /var/lib/alsa/asound.state for reading: No such file or directory
+Nov 28 04:46:43 localhost-live systemd[1]: Failed to start ryoku-greeter-guard.service.
+Nov 28 04:46:47 localhost-live firewalld[1186]: ERROR: INVALID_ZONE: (default)
+Nov 28 04:46:47 localhost-live firewalld[1186]: ERROR: INVALID_ZONE: (default)
+Nov 27 23:46:51 localhost-live dbus-broker-launch[2505]: Ignoring duplicate name 'org.freedesktop.secrets' in service file '/usr/share//dbus-1/services/org.freedesktop.secrets.service'
+Nov 27 23:46:51 localhost-live dbus-broker-launch[2505]: Ignoring duplicate name 'org.freedesktop.FileManager1' in service file '/usr/share//dbus-1/services/org.kde.dolphin.FileManager1.service'
+Nov 27 23:46:55 localhost-live dbus-broker-launch[2583]: Ignoring duplicate name 'org.freedesktop.secrets' in service file '/usr/share//dbus-1/services/org.freedesktop.secrets.service'
+Nov 27 23:46:55 localhost-live dbus-broker-launch[2583]: Ignoring duplicate name 'org.freedesktop.FileManager1' in service file '/usr/share//dbus-1/services/org.kde.dolphin.FileManager1.service'
+Nov 27 23:47:10 localhost-live (systemd-stdio-bridge)[4846]: run-p4830-i5344.service: Failed to determine credentials for user 'tester': Unknown user
+Nov 27 23:47:10 localhost-live (systemd-stdio-bridge)[4846]: run-p4830-i5344.service: Failed at step USER spawning systemd-stdio-bridge: Invalid argument
+Nov 27 23:47:15 localhost-live sudo[5675]: liveuser : a password is required ; PWD=/home/liveuser ; USER=root ; COMMAND=/usr/sbin/snapper -c root --csvout list --columns number,type,date,description,cleanup
+Nov 27 23:53:19 localhost-live (systemd-stdio-bridge)[8211]: run-p8210-i14298.service: Failed to determine credentials for user 'tester': Unknown user
+Nov 27 23:53:19 localhost-live (systemd-stdio-bridge)[8211]: run-p8210-i14298.service: Failed at step USER spawning systemd-stdio-bridge: Invalid argument
+Nov 27 23:59:56 localhost-live kactivitymanagerd[14858]: Couldn't start kglobalaccel from org.kde.kglobalaccel.service: QDBusError("org.freedesktop.DBus.Error.ServiceUnknown", "The name is not activatable")
+Nov 28 00:00:19 localhost-live sudo[15189]: liveuser : a password is required ; PWD=/home/liveuser ; USER=root ; COMMAND=/usr/sbin/snapper -c root --csvout list --columns number,type,date,description,cleanup
+No coredumps found.

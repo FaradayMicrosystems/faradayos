@@ -1,0 +1,11 @@
+gamemode-1.8.2-4.fc44.x86_64
+gamescope-3.16.31-1.fc44.x86_64
+mangohud-0.8.3~rc1-2.fc44.x86_64
+mangohud-0.8.3~rc1-2.fc44.i686
+steam-1.0.0.87-4.fc44.x86_64
+steam-devices-1.0.0.101^git20260625.22ec85e-1.fc44.noarch
+package wine is not installed
+package lutris is not installed
+/usr/sbin/gamemoderun
+/usr/sbin/mangohud
+Failed to get properties: Transport endpoint is not connected

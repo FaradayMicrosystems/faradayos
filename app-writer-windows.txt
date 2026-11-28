@@ -1,0 +1,7 @@
+  Title: "Example Domain — Mozilla Firefox"
+  App ID: "org.mozilla.firefox"
+  Title: "Untitled 1 — LibreOffice Writer"
+  App ID: "libreoffice-writer"
+  Title: "Welcome to LibreOffice!"
+  App ID: "soffice"
+---LOG

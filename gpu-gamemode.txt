@@ -1,0 +1,2 @@
+gamemode is inactive
+rc=0

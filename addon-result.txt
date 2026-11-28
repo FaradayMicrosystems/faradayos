@@ -1,0 +1,7 @@
+package homebank is not installed
+homebank.desktop
+polkitd     1257  0.0  0.1 612520 13400 ?        Ssl  Nov27   0:00 /usr/lib/polkit-1/polkitd --no-debug --log-level=notice
+liveuser    2502  0.0  0.0 232232  3968 ?        Ss   Nov27   0:00 /usr/bin/bash /usr/bin/ryoku-bt-agent
+liveuser    2507  0.0  0.0 236988  6028 ?        S    Nov27   0:00 bluetoothctl --agent KeyboardDisplay
+liveuser    2508  0.0  0.0 232232  3076 ?        S    Nov27   0:00 /usr/bin/bash /usr/bin/ryoku-bt-agent
+liveuser    2891  0.0  0.1 542352  9568 ?        Ssl  Nov27   0:00 /usr/libexec/geoclue-2.0/demos/agent

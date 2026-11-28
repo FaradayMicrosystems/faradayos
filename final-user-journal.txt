@@ -1,0 +1,57 @@
+Nov 27 23:46:51 localhost-live dbus-broker-launch[2505]: Ignoring duplicate name 'org.freedesktop.secrets' in service file '/usr/share//dbus-1/services/org.freedesktop.secrets.service'
+Nov 27 23:46:51 localhost-live dbus-broker-launch[2505]: Service file '/usr/share//dbus-1/services/org.kde.dolphin.FileManager1.service' is not named after the D-Bus name 'org.freedesktop.FileManager1'.
+Nov 27 23:46:51 localhost-live dbus-broker-launch[2505]: Ignoring duplicate name 'org.freedesktop.FileManager1' in service file '/usr/share//dbus-1/services/org.kde.dolphin.FileManager1.service'
+Nov 27 23:46:51 localhost-live dbus-broker-launch[2505]: Service file '/usr/share//dbus-1/services/org.kde.plasma.Notifications.service' is not named after the D-Bus name 'org.freedesktop.Notifications'.
+Nov 27 23:46:58 localhost-live wireplumber[2676]: spa.bluez5: BlueZ system service is not available
+Nov 27 23:47:03 localhost-live gnome-keyring-daemon[2837]: discover_other_daemon: 0
+Nov 27 23:47:05 localhost-live systemd[2480]: app-nvidia\x2dsettings\x2duser@autostart.service: Failed with result 'exit-code'.
+Nov 27 23:47:06 localhost-live kdeconnectd[2826]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: Connection already associated with an application ID")
+Nov 27 23:47:09 localhost-live systemd[2480]: ryoku-shell.service: Control process exited, code=killed, status=15/TERM
+Nov 27 23:47:09 localhost-live systemd[2480]: ryoku-shell.service: Failed with result 'signal'.
+Nov 27 23:47:13 localhost-live systemd[2480]: ryogami.service: Found left-over process 4309 (ryoku-wm-niri) in control group while starting unit. Ignoring.
+Nov 27 23:47:13 localhost-live systemd[2480]: ryogami.service: This usually indicates unclean termination of a previous run, or service implementation deficiencies.
+Nov 27 23:47:13 localhost-live systemd[2480]: ryogami.service: Found left-over process 5320 (notify-send) in control group while starting unit. Ignoring.
+Nov 27 23:47:13 localhost-live systemd[2480]: ryogami.service: This usually indicates unclean termination of a previous run, or service implementation deficiencies.
+Nov 27 23:47:15 localhost-live sudo[5675]: liveuser : a password is required ; PWD=/home/liveuser ; USER=root ; COMMAND=/usr/sbin/snapper -c root --csvout list --columns number,type,date,description,cleanup
+Nov 27 23:53:19 localhost-live pkexec[8242]: liveuser: Error executing command as another user: Not authorized [USER=root] [TTY=unknown] [CWD=/home/liveuser] [COMMAND=/usr/libexec/cpugovctl set performance]
+Nov 27 23:53:19 localhost-live pkexec[8249]: liveuser: Error executing command as another user: Not authorized [USER=root] [TTY=unknown] [CWD=/home/liveuser] [COMMAND=/usr/libexec/procsysctl split_lock_mitigate 0]
+Nov 27 23:53:19 localhost-live pkexec[8256]: liveuser: Error executing command as another user: Not authorized [USER=root] [TTY=unknown] [CWD=/home/liveuser] [COMMAND=/usr/libexec/procsysctl split_lock_mitigate 1]
+Nov 27 23:54:18 localhost-live xwayland-satell[9645]: localhost-live xwayland-satellite[9645]: No last focused toplevel, cannot focus window Window { res_id: 4194305 }
+Nov 27 23:54:56 localhost-live xwayland-satell[9645]: localhost-live xwayland-satellite[9645]: No last focused toplevel, cannot focus window Window { res_id: 4194305 }
+Nov 27 23:55:21 localhost-live localsearch-3[10764]: Could not get file handle for '/home/liveuser': Operation not supported
+Nov 27 23:55:21 localhost-live localsearch-3[10764]: Could not get file handle for '/home/liveuser/Desktop': Operation not supported
+Nov 27 23:55:21 localhost-live localsearch-3[10764]: Could not get file handle for '/home/liveuser/Pictures': Operation not supported
+Nov 27 23:55:21 localhost-live localsearch-3[10764]: Could not get file handle for '/home/liveuser/Pictures/ryodecors': Operation not supported
+Nov 27 23:55:21 localhost-live localsearch-3[10764]: Could not get file handle for '/home/liveuser/Pictures/Wallpapers': Operation not supported
+Nov 27 23:55:21 localhost-live localsearch-3[10764]: Could not get file handle for '/home/liveuser/Downloads': Operation not supported
+Nov 27 23:55:21 localhost-live localsearch-3[10764]: Could not get file handle for '/home/liveuser/Downloads/Stash': Operation not supported
+Nov 27 23:55:21 localhost-live localsearch-3[10764]: Could not get file handle for '/home/liveuser/Templates': Operation not supported
+Nov 27 23:55:21 localhost-live localsearch-3[10764]: Could not get file handle for '/home/liveuser/Public': Operation not supported
+Nov 27 23:55:21 localhost-live localsearch-3[10764]: Could not get file handle for '/home/liveuser/Documents': Operation not supported
+Nov 27 23:55:21 localhost-live localsearch-3[10764]: Could not get file handle for '/home/liveuser/Music': Operation not supported
+Nov 27 23:55:21 localhost-live localsearch-3[10764]: Could not get file handle for '/home/liveuser/Videos': Operation not supported
+Nov 27 23:55:23 localhost-live gvfsd-recent[10790]: Unable to load /home/liveuser/.local/share/recently-used.xbel: Failed to open file “/home/liveuser/.local/share/recently-used.xbel”: No such file or directory
+Nov 27 23:56:20 localhost-live dolphin[11352]: Unknown class  ""  in session saved data!
+Nov 27 23:56:28 localhost-live kioworker[11410]: QPixmap::scaled: Pixmap is a null pixmap
+Nov 27 23:56:29 localhost-live kioworker[11405]: QPixmap::scaled: Pixmap is a null pixmap
+Nov 27 23:56:29 localhost-live kioworker[11408]: QPixmap::scaled: Pixmap is a null pixmap
+Nov 27 23:56:29 localhost-live kioworker[11412]: QPixmap::scaled: Pixmap is a null pixmap
+Nov 27 23:56:29 localhost-live kioworker[11414]: QPixmap::scaled: Pixmap is a null pixmap
+Nov 27 23:56:29 localhost-live kioworker[11414]: QPixmap::scaled: Pixmap is a null pixmap
+Nov 27 23:56:29 localhost-live kioworker[11408]: QPixmap::scaled: Pixmap is a null pixmap
+Nov 27 23:56:29 localhost-live kioworker[11412]: QPixmap::scaled: Pixmap is a null pixmap
+Nov 27 23:57:55 localhost-live ark[12156]: QObject::disconnect: wildcard call disconnects from destroyed signal of KToggleAction::show-infopanel
+Nov 27 23:59:55 localhost-live systemsettings[14845]: Error getting device list from KWin "The name is not activatable"
+Nov 27 23:59:55 localhost-live systemsettings[14845]: Error getting device list from KWin "The name is not activatable"
+Nov 27 23:59:55 localhost-live systemsettings[14845]: Error getting device list from KWin "The name is not activatable"
+Nov 27 23:59:55 localhost-live systemsettings[14845]: Failed to connect to Bolt manager DBus interface: 
+Nov 27 23:59:56 localhost-live systemsettings[14845]: PlasmaActivities: Database is not open:  "kactivities_db_resources_140098905523008_readonly" "/home/liveuser/.local/share/kactivitymanagerd/resources/database" QSqlError("14", "Error opening database", "unable to open database file")
+Nov 27 23:59:56 localhost-live systemsettings[14845]: QSqlDatabasePrivate::database: unable to open database: "unable to open database file Error opening database"
+Nov 27 23:59:56 localhost-live systemsettings[14845]: PlasmaActivities: Database is not open:  "kactivities_db_resources_140098905523008_readonly" "/home/liveuser/.local/share/kactivitymanagerd/resources/database" QSqlError("14", "Error opening database", "unable to open database file")
+Nov 27 23:59:56 localhost-live systemsettings[14845]: Plasma Activities ERROR: There is no database. This probably means that you do not have the Activity Manager running, or that something else is broken on your system. Recent documents and alike will not work!
+Nov 27 23:59:56 localhost-live kactivitymanagerd[14858]: Couldn't start kglobalaccel from org.kde.kglobalaccel.service: QDBusError("org.freedesktop.DBus.Error.ServiceUnknown", "The name is not activatable")
+Nov 27 23:59:56 localhost-live kactivitymanagerd[14858]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: App info not found for 'org.kde.ActivityManager'")
+Nov 27 23:59:56 localhost-live systemsettings[14845]: qrc:/kcm/kcm_landingpage/main.qml:285:21: Unable to assign [undefined] to QQuickItem*
+Nov 27 23:59:57 localhost-live systemsettings[14845]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: Connection already associated with an application ID")
+Nov 28 00:00:19 localhost-live sudo[15189]: liveuser : a password is required ; PWD=/home/liveuser ; USER=root ; COMMAND=/usr/sbin/snapper -c root --csvout list --columns number,type,date,description,cleanup
+Nov 28 00:01:29 localhost-live pkexec[17998]: pam_systemd(polkit-1:session): Failed to check if /run/user/0/bus exists, ignoring: Permission denied

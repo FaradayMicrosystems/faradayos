@@ -1,0 +1,4 @@
+  Title: "FaradayOS Store"
+  App ID: "org.quickshell"
+---LOG
+tail: cannot open '/tmp/app-store.log' for reading: No such file or directory

@@ -1,0 +1,4 @@
+  Title: "Ark"
+  App ID: "org.kde.ark"
+---LOG
+tail: cannot open '/tmp/app-archive.log' for reading: No such file or directory

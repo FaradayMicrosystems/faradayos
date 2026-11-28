@@ -1,0 +1,102 @@
+akmod-nvidia-620.73.04-1.fc44.x86_64
+akmods-0.6.2-14.fc44.noarch
+kmod-34.2-4.fc44.x86_64
+kmod-libs-34.2-4.fc44.x86_64
+kmod-nvidia-7.3.5-200.fc44.x86_64-620.73.04-1.fc44.x86_64
+kmodtool-1.2.1-1.fc44.noarch
+nvidia-gpu-firmware-20261019-1.fc44.noarch
+nvidia-modprobe-620.73.04-1.fc44.x86_64
+nvidia-settings-620.73.04-1.fc44.x86_64
+xorg-x11-drv-nvidia-620.73.04-1.fc44.x86_64
+xorg-x11-drv-nvidia-cuda-libs-620.73.04-1.fc44.x86_64
+xorg-x11-drv-nvidia-kmodsrc-620.73.04-1.fc44.x86_64
+xorg-x11-drv-nvidia-libs-620.73.04-1.fc44.i686
+xorg-x11-drv-nvidia-libs-620.73.04-1.fc44.x86_64
+xorg-x11-drv-nvidia-power-620.73.04-1.fc44.x86_64
+xorg-x11-drv-nvidia-xorg-libs-620.73.04-1.fc44.x86_64
+# This kernel module can be automatically loaded by non-root users. To
+# enhance system security, the module is blacklisted by default to ensure
+# system administrators make the module available for use as needed.
+# See https://access.redhat.com/articles/3760101 for more details.
+#
+# Remove the blacklist by adding a comment # at the start of the line.
+blacklist batman-adv
+install nf_conntrack /sbin/modprobe --ignore-install nf_conntrack $CMDLINE_OPTS && /sbin/sysctl --quiet --pattern 'net[.]netfilter[.]nf_conntrack.*' --system
+# This kernel module can be automatically loaded by non-root users. To
+# enhance system security, the module is blacklisted by default to ensure
+# system administrators make the module available for use as needed.
+# See https://access.redhat.com/articles/3760101 for more details.
+#
+# Remove the blacklist by adding a comment # at the start of the line.
+blacklist floppy
+# This kernel module can be automatically loaded by non-root users. To
+# enhance system security, the module is blacklisted by default to ensure
+# system administrators make the module available for use as needed.
+# See https://access.redhat.com/articles/3760101 for more details.
+#
+# Remove the blacklist by adding a comment # at the start of the line.
+blacklist l2tp_eth
+# This kernel module can be automatically loaded by non-root users. To
+# enhance system security, the module is blacklisted by default to ensure
+# system administrators make the module available for use as needed.
+# See https://access.redhat.com/articles/3760101 for more details.
+#
+# Remove the blacklist by adding a comment # at the start of the line.
+blacklist l2tp_netlink
+# This kernel module can be automatically loaded by non-root users. To
+# enhance system security, the module is blacklisted by default to ensure
+# system administrators make the module available for use as needed.
+# See https://access.redhat.com/articles/3760101 for more details.
+#
+# Remove the blacklist by adding a comment # at the start of the line.
+blacklist l2tp_ppp
+#
+# Set the NFS lock manager grace period. n is measured in seconds. 
+#options lockd nlm_grace_period=90
+#
+# Set the TCP port that the NFS lock manager should use. 
+# port must be a valid TCP port value (1-65535).
+#options lockd nlm_tcpport
+#
+# Set the UDP port that the NFS lock manager should use.
+# port must be a valid UDP port value (1-65535).
+#options lockd nlm_udpport
+#
+# Set the maximum number of outstanding connections 
+#options lockd nlm_max_connections=1024
+#
+# Set the default time value for the NFS lock manager
+# in seconds. Default is 10 secs (min 3 max 20)
+#options lockd nlm_timeout=10
+#
+# Choose whether to record the caller_name or IP address
+# this peer in the local rpc.statd's database.
+#options lockd nsm_use_hostnames=0
+
+install libnvdimm /usr/bin/ndctl load-keys ; /sbin/modprobe --ignore-install libnvdimm $CMDLINE_OPTS
+# This kernel module can be automatically loaded by non-root users. To
+# enhance system security, the module is blacklisted by default to ensure
+# system administrators make the module available for use as needed.
+# See https://access.redhat.com/articles/3760101 for more details.
+#
+# Remove the blacklist by adding a comment # at the start of the line.
+blacklist rds
+grep: /etc/default/grub: No such file or directory
+initrd=initrd root=live:CDLABEL=FaradayOSv0-91e-performance rd.driver.blacklist=nouveau modprobe.blacklist=nouveau rd.live.image quiet rhgb console=tty0 console=ttyS0,115200
+● akmods.service - Builds and install new kmods from akmod packages
+     Loaded: loaded (/usr/lib/systemd/system/akmods.service; enabled; preset: enabled)
+    Drop-In: /usr/lib/systemd/system/service.d
+             └─10-timeout-abort.conf
+     Active: active (exited) since Sat 2026-11-28 04:46:44 EST; 4h 53min left
+ Invocation: 7009a3ba7213454db2e4c6a1254fc354
+   Main PID: 1538 (code=exited, status=0/SUCCESS)
+   Mem peak: 24.3M
+        CPU: 576ms
+
+Nov 28 04:46:43 localhost-live systemd[1]: Starting akmods.service - Builds and install new kmods from akmod packages...
+Nov 28 04:46:44 localhost-live akmods[1538]: Checking kmods exist for 7.3.5-200.fc44.x86_64 [  OK  ]
+Nov 28 04:46:44 localhost-live systemd[1]: Finished akmods.service - Builds and install new kmods from akmod packages.
+nvidia-kmod-620.73.04-1.fc44.src.rpm  nvidia-kmod.latest
+Nov 28 04:46:43 localhost-live systemd[1]: Starting akmods.service - Builds and install new kmods from akmod packages...
+Nov 28 04:46:44 localhost-live akmods[1538]: Checking kmods exist for 7.3.5-200.fc44.x86_64 [  OK  ]
+Nov 28 04:46:44 localhost-live systemd[1]: Finished akmods.service - Builds and install new kmods from akmod packages.

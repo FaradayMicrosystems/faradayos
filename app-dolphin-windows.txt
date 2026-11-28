@@ -1,0 +1,7 @@
+  Title: "Welcome to FaradayOS"
+  App ID: "org.quickshell"
+  Title: "Example Domain — Mozilla Firefox"
+  App ID: "org.mozilla.firefox"
+  Title: "Home — Dolphin"
+  App ID: "org.kde.dolphin"
+---LOG

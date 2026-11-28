@@ -1,0 +1,8 @@
+  Title: "Welcome to FaradayOS"
+  App ID: "org.quickshell"
+  Title: "Example Domain — Mozilla Firefox"
+  App ID: "org.mozilla.firefox"
+  Title: "~"
+  App ID: "kitty"
+---LOG
+[1.436] [glfw error 65544]: Notify: Failed to get server capabilities error: org.freedesktop.DBus.Error.NoReply: Did not receive a reply. Possible causes include: the remote application did not send a reply, the message bus security policy blocked the reply, the reply timeout expired, or the network connection was broken.
