@@ -1,0 +1,1701 @@
+P+q6E616D65\[6n[32766;32766H[6n[!p]104\[0m[?7h[1G[0J]3008;start=3acb747002f24f54a0d8670b5b099424;user=root;hostname=faradayos;machineid=a29b4c5594f84d028ccdcfd08c4d914b;bootid=da0294fef7d04c1f93fdd0b2bbe3b7d1;pid=1;pidfdid=1;comm=systemd;type=boot\[[0;32m  OK  [0m] Started [0;1;39mplymouth-start.service[0m - Show Plymouth Boot Screen.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-ask-password-plymo…[0mquests to Plymouth Directory Watch.
+[[0;32m  OK  [0m] Reached target [0;1;39mcryptsetup.target[0m - Local Encrypted Volumes.
+[[0;32m  OK  [0m] Reached target [0;1;39mpaths.target[0m - Path Units.
+[[0;32m  OK  [0m] Reached target [0;1;39minitrd-root-device.target[0m - Initrd Root Device.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup.
+         Stopping [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup...
+         Starting [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup.
+         Mounting [0;1;39msys-kernel-config.mount[0m - Kernel Configuration File System...
+[[0;32m  OK  [0m] Mounted [0;1;39msys-kernel-config.mount[0m - Kernel Configuration File System.
+[[0;32m  OK  [0m] Reached target [0;1;39msysinit.target[0m - System Initialization.
+[[0;32m  OK  [0m] Reached target [0;1;39mbasic.target[0m - Basic System.
+[[0;32m  OK  [0m] Finished [0;1;39mdracut-initqueue.service[0m - dracut initqueue hook.
+[[0;32m  OK  [0m] Reached target [0;1;39mremote-fs-pre.targe…[0mreparation for Remote File Systems.
+[[0;32m  OK  [0m] Reached target [0;1;39mremote-cryptsetup.target[0m - Remote Encrypted Volumes.
+[[0;32m  OK  [0m] Reached target [0;1;39mremote-fs.target[0m - Remote File Systems.
+         Starting [0;1;39mdracut-pre-mount.service[0m - dracut pre-mount hook...
+[[0;32m  OK  [0m] Finished [0;1;39mdracut-pre-mount.service[0m - dracut pre-mount hook.
+         Mounting [0;1;39msysroot.mount[0m - /sysroot...
+[[0;32m  OK  [0m] Mounted [0;1;39msysroot.mount[0m - /sysroot.
+[[0;32m  OK  [0m] Reached target [0;1;39minitrd-root-fs.target[0m - Initrd Root File System.
+         Starting [0;1;39minitrd-parse-etc.service[0m …ints Configured in the Real Root...
+[[0;32m  OK  [0m] Finished [0;1;39minitrd-parse-etc.service[0m …points Configured in the Real Root.
+[[0;32m  OK  [0m] Reached target [0;1;39minitrd-fs.target[0m - Initrd File Systems.
+[[0;32m  OK  [0m] Reached target [0;1;39minitrd.target[0m - Initrd Default Target.
+         Starting [0;1;39mdracut-mount.service[0m - dracut mount hook...
+[[0;32m  OK  [0m] Finished [0;1;39mdracut-mount.service[0m - dracut mount hook.
+         Starting [0;1;39mdracut-pre-pivot.service[0m …racut pre-pivot and cleanup hook...
+[[0;32m  OK  [0m] Finished [0;1;39mdracut-pre-pivot.service[0m - dracut pre-pivot and cleanup hook.
+         Starting [0;1;39minitrd-cleanup.service[0m - …ing Up and Shutting Down Daemons...
+[[0;32m  OK  [0m] Stopped target [0;1;39mnetwork.target[0m - Network.
+[[0;32m  OK  [0m] Stopped target [0;1;39mremote-cryptsetup.target[0m - Remote Encrypted Volumes.
+[[0;32m  OK  [0m] Stopped target [0;1;39mtimers.target[0m - Timer Units.
+[[0;32m  OK  [0m] Closed [0;1;39mdbus.socket[0m - D-Bus System Message Bus Socket.
+[[0;32m  OK  [0m] Stopped [0;1;39mdracut-pre-pivot.service[0m - dracut pre-pivot and cleanup hook.
+[[0;32m  OK  [0m] Stopped target [0;1;39minitrd.target[0m - Initrd Default Target.
+[[0;32m  OK  [0m] Stopped target [0;1;39mbasic.target[0m - Basic System.
+[[0;32m  OK  [0m] Stopped target [0;1;39minitrd-root-device.target[0m - Initrd Root Device.
+[[0;32m  OK  [0m] Stopped target [0;1;39minitrd-usr-fs.target[0m - Initrd /usr File System.
+[[0;32m  OK  [0m] Stopped target [0;1;39mpaths.target[0m - Path Units.
+[[0;32m  OK  [0m] Stopped target [0;1;39mremote-fs.target[0m - Remote File Systems.
+[[0;32m  OK  [0m] Stopped target [0;1;39mremote-fs-pre.targe…[0mreparation for Remote File Systems.
+[[0;32m  OK  [0m] Stopped target [0;1;39mslices.target[0m - Slice Units.
+[[0;32m  OK  [0m] Stopped target [0;1;39msockets.target[0m - Socket Units.
+[[0;32m  OK  [0m] Stopped target [0;1;39msysinit.target[0m - System Initialization.
+[[0;32m  OK  [0m] Stopped target [0;1;39mlocal-fs.target[0m - Local File Systems.
+[[0;32m  OK  [0m] Stopped target [0;1;39mlocal-fs-pre.target[0m…Preparation for Local File Systems.
+[[0;32m  OK  [0m] Stopped target [0;1;39mswap.target[0m - Swaps.
+[[0;32m  OK  [0m] Closed [0;1;39miscsid.socket[0m - Open-iSCSI iscsid Socket.
+[[0;32m  OK  [0m] Closed [0;1;39miscsiuio.socket[0m - Open-iSCSI iscsiuio Socket.
+[[0;32m  OK  [0m] Stopped [0;1;39mdracut-mount.service[0m - dracut mount hook.
+[[0;32m  OK  [0m] Stopped [0;1;39mdracut-pre-mount.service[0m - dracut pre-mount hook.
+[[0;32m  OK  [0m] Stopped target [0;1;39mcryptsetup.target[0m - Local Encrypted Volumes.
+[[0;32m  OK  [0m] Stopped [0;1;39mdracut-initqueue.service[0m - dracut initqueue hook.
+         Starting [0;1;39mplymouth-switch-root.serv…e[0m - Plymouth switch root service...
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-sysctl.service[0m - Apply Kernel Variables.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-modules-load.service[0m - Load Kernel Modules.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-tmpfiles-setup.ser…[0mreate System Files and Directories.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-udev-trigger.service[0m - Coldplug All udev Devices.
+[[0;32m  OK  [0m] Stopped [0;1;39mdracut-pre-trigger.service[0m - dracut pre-trigger hook.
+         Stopping [0;1;39msystemd-udevd.service[0m - R…ager for Device Events and Files...
+[[0;32m  OK  [0m] Finished [0;1;39minitrd-cleanup.service[0m - …aning Up and Shutting Down Daemons.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-udevd.service[0m - Ru…anager for Device Events and Files.
+[[0;32m  OK  [0m] Closed [0;1;39msystemd-udevd-control.socket[0m - udev Control Socket.
+[[0;32m  OK  [0m] Stopped [0;1;39mdracut-pre-udev.service[0m - dracut pre-udev hook.
+[[0;32m  OK  [0m] Stopped [0;1;39mdracut-cmdline.service[0m - dracut cmdline hook.
+[[0;32m  OK  [0m] Stopped [0;1;39mdracut-cmdline-ask.service[0m… for additional cmdline parameters.
+         Starting [0;1;39minitrd-udevadm-cleanup-db.service[0m - Cleanup udev Database...
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-tmpfiles-setup-dev…[0mCreate Static Device Nodes in /dev.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-tmpfiles-setup-dev…[0mic Device Nodes in /dev gracefully.
+[[0;32m  OK  [0m] Stopped [0;1;39mkmod-static-nodes.service[0m …Create List of Static Device Nodes.
+[[0;32m  OK  [0m] Finished [0;1;39minitrd-udevadm-cleanup-db.service[0m - Cleanup udev Database.
+[[0;32m  OK  [0m] Reached target [0;1;39minitrd-switch-root.target[0m - Switch Root.
+[[0;32m  OK  [0m] Finished [0;1;39mplymouth-switch-root.service[0m - Plymouth switch root service.
+         Starting [0;1;39minitrd-switch-root.service[0m - Switch Root...
+P+q6E616D65\[6n[32766;32766H[6n[!p]104\[0m[?7h[1G[0J]3008;start=b1b1471cebda4b82869abdf7cad73044;user=root;hostname=faradayos;machineid=5f273b82471f483485db91917e6fb9ec;bootid=da0294fef7d04c1f93fdd0b2bbe3b7d1;pid=1;pidfdid=1;comm=systemd;type=boot\[[0;32m  OK  [0m] Stopped [0;1;39minitrd-switch-root.service[0m - Switch Root.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-akmods\x2dkey…lice[0m - Slice /system/akmods-keygen.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-getty.slice[0m - Slice /system/getty.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-serial\x2dget…slice[0m - Slice /system/serial-getty.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-systemd\x2dzr…[0m- Slice /system/systemd-zram-setup.
+[[0;32m  OK  [0m] Created slice [0;1;39muser.slice[0m - User and Session Slice.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-ask-password-wall.…[0md Requests to Wall Directory Watch.
+[[0;32m  OK  [0m] Set up automount [0;1;39mproc-sys-fs-binfm…[0mormats File System Automount Point.
+         Expecting device [0;1;39mdev-ttyS0.device[0m - /dev/ttyS0...
+         Expecting device [0;1;39mdev-zram0.device[0m - /dev/zram0...
+[[0;32m  OK  [0m] Reached target [0;1;39mimports.target[0m - Image Downloads.
+[[0;32m  OK  [0m] Stopped target [0;1;39minitrd-switch-root.target[0m - Switch Root.
+[[0;32m  OK  [0m] Stopped target [0;1;39minitrd-fs.target[0m - Initrd File Systems.
+[[0;32m  OK  [0m] Stopped target [0;1;39minitrd-root-fs.target[0m - Initrd Root File System.
+[[0;32m  OK  [0m] Reached target [0;1;39mintegritysetup.targ…[0m Local Integrity Protected Volumes.
+[[0;32m  OK  [0m] Reached target [0;1;39mrpc_pipefs.target[0m.
+[[0;32m  OK  [0m] Reached target [0;1;39mslices.target[0m - Slice Units.
+[[0;32m  OK  [0m] Reached target [0;1;39mveritysetup.target[0m - Local Verity Protected Volumes.
+[[0;32m  OK  [0m] Listening on [0;1;39mdm-event.socket[0m - Device-mapper event daemon FIFOs.
+[[0;32m  OK  [0m] Listening on [0;1;39mlvm2-lvmpolld.socket[0m - LVM2 poll daemon socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-ask-password.…[0m User Interactively for a Password.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-coredump.socket[0m - Process Core Dump Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-creds.socket[0m - Credential Encryption/Decryption.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-factory-reset.socket[0m - Factory Reset Management.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-journald-audit.socket[0m - Journal Audit Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-mute-console.…[0mnsole Output Muting Service Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-oomd.socket[0m -… Out-Of-Memory (OOM) Killer Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-repart.socket[0m…Disk Repartitioning Service Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-resolved-moni…t[0m - Resolve Monitor Varlink Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-resolved-varl…t[0m - Resolve Service Varlink Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-udevd-control.socket[0m - udev Control Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-udevd-varlink.socket[0m - udev Varlink Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-userdbd.socket[0m - User Database Manager Socket.
+         Mounting [0;1;39mdev-hugepages.mount[0m - Huge Pages File System...
+         Mounting [0;1;39mdev-mqueue.mount[0m - POSIX Message Queue File System...
+         Mounting [0;1;39msys-kernel-debug.mount[0m - Kernel Debug File System...
+         Mounting [0;1;39msys-kernel-tracing.mount[0m - Kernel Trace File System...
+         Starting [0;1;39mkmod-static-nodes.service[0m…eate List of Static Device Nodes...
+         Starting [0;1;39mlvm2-monitor.service[0m - Mo…ing dmeventd or progress polling...
+         Mounting [0;1;39msys-fs-fuse-connections.mount[0m - FUSE Control File System...
+[[0;32m  OK  [0m] Stopped [0;1;39mplymouth-switch-root.service[0m - Plymouth switch root service.
+         Starting [0;1;39msystemd-journald.service[0m - Journal Service...
+         Starting [0;1;39msystemd-modules-load.service[0m - Load Kernel Modules...
+         Starting [0;1;39msystemd-network-generator…[0mk Units from Kernel Command Line...
+         Starting [0;1;39msystemd-remount-fs.servic…[0munt Root and Kernel File Systems...
+[[0;32m  OK  [0m] Reached target [0;1;39mcryptsetup.target[0m - Local Encrypted Volumes.
+         Starting [0;1;39msystemd-udev-load-credent…[0mLoad udev Rules from Credentials...
+         Starting [0;1;39msystemd-udev-trigger.service[0m - Coldplug All udev Devices...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-remount-fs.servic…[0mmount Root and Kernel File Systems.
+         Starting [0;1;39msystemd-hwdb-update.service[0m - Rebuild Hardware Database...
+         Starting [0;1;39msystemd-random-seed.service[0m - Load/Save OS Random Seed...
+[[0;32m  OK  [0m] Finished [0;1;39mkmod-static-nodes.service[0m…Create List of Static Device Nodes.
+[[0;32m  OK  [0m] Mounted [0;1;39mdev-hugepages.mount[0m - Huge Pages File System.
+[[0;32m  OK  [0m] Mounted [0;1;39mdev-mqueue.mount[0m - POSIX Message Queue File System.
+[[0;32m  OK  [0m] Mounted [0;1;39msys-kernel-debug.mount[0m - Kernel Debug File System.
+[[0;32m  OK  [0m] Mounted [0;1;39msys-kernel-tracing.mount[0m - Kernel Trace File System.
+[[0;32m  OK  [0m] Mounted [0;1;39msys-fs-fuse-connections.mount[0m - FUSE Control File System.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-network-generator…[0mork Units from Kernel Command Line.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-udev-load-credent…[0m- Load udev Rules from Credentials.
+         Starting [0;1;39msystemd-tmpfiles-setup-de…[0m Device Nodes in /dev gracefully...
+[[0;32m  OK  [0m] Started [0;1;39msystemd-journald.service[0m - Journal Service.
+         Starting [0;1;39msystemd-journal-flush.ser…[0msh Journal to Persistent Storage...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-random-seed.service[0m - Load/Save OS Random Seed.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-udev-trigger.service[0m - Coldplug All udev Devices.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-modules-load.service[0m - Load Kernel Modules.
+         Starting [0;1;39msystemd-sysctl.service[0m - Apply Kernel Variables...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-journal-flush.ser…[0mlush Journal to Persistent Storage.
+         Starting [0;1;39msystemd-userdbd.service[0m - User Database Manager...
+[[0;32m  OK  [0m] Finished [0;1;39mlvm2-monitor.service[0m - Mo…using dmeventd or progress polling.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-sysctl.service[0m - Apply Kernel Variables.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-userdbd.service[0m - User Database Manager.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-tmpfiles-setup-de…[0mic Device Nodes in /dev gracefully.
+         Starting [0;1;39msystemd-sysusers.service[0m - Create System Users...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-sysusers.service[0m - Create System Users.
+         Starting [0;1;39msystemd-resolved.service[0m - Network Name Resolution...
+         Starting [0;1;39msystemd-tmpfiles-setup-de…[0meate Static Device Nodes in /dev...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-tmpfiles-setup-de…[0mCreate Static Device Nodes in /dev.
+[[0;32m  OK  [0m] Reached target [0;1;39mlocal-fs-pre.target[0m…Preparation for Local File Systems.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-resolved.service[0m - Network Name Resolution.
+[[0;32m  OK  [0m] Reached target [0;1;39mnss-lookup.target[0m - Host and Network Name Lookups.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-hwdb-update.service[0m - Rebuild Hardware Database.
+         Starting [0;1;39msystemd-udevd.service[0m - R…ager for Device Events and Files...
+[[0;32m  OK  [0m] Started [0;1;39msystemd-udevd.service[0m - Ru…anager for Device Events and Files.
+[[0;32m  OK  [0m] Found device [0;1;39mdev-zram0.device[0m - /dev/zram0.
+         Starting [0;1;39msystemd-zram-setup@zram0.…vice[0m - Create swap on /dev/zram0...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-zram-setup@zram0.service[0m - Create swap on /dev/zram0.
+         Activating swap [0;1;39mdev-zram0.swap[0m - Compressed Swap on /dev/zram0...
+[[0;32m  OK  [0m] Activated swap [0;1;39mdev-zram0.swap[0m - Compressed Swap on /dev/zram0.
+[[0;32m  OK  [0m] Reached target [0;1;39mswap.target[0m - Swaps.
+         Mounting [0;1;39mtmp.mount[0m - Temporary Directory /tmp...
+         Starting [0;1;39msystemd-oomd.service[0m - Us…space Out-Of-Memory (OOM) Killer...
+[[0;32m  OK  [0m] Mounted [0;1;39mtmp.mount[0m - Temporary Directory /tmp.
+[[0;32m  OK  [0m] Reached target [0;1;39mlocal-fs.target[0m - Local File Systems.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-bootctl.socket[0m - Boot Entries Service Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-sysext.socket[0m… System Extension Image Management.
+         Starting [0;1;39mplymouth-read-write.servi…[0mymouth To Write Out Runtime Data...
+         Starting [0;1;39msystemd-binfmt.service[0m - Set Up Additional Binary Formats...
+         Starting [0;1;39msystemd-tmpfiles-setup.se…[0mate System Files and Directories...
+         Starting [0;1;39msystemd-userdb-load-crede…[0mr/group Records from Credentials...
+[[0;32m  OK  [0m] Started [0;1;39msystemd-oomd.service[0m - Userspace Out-Of-Memory (OOM) Killer.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup.
+         Stopping [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup...
+         Starting [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup...
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup.
+         Mounting [0;1;39mproc-sys-fs-binfmt_misc.m…[0mcutable File Formats File System...
+         Starting [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup...
+[[0;32m  OK  [0m] Finished [0;1;39mplymouth-read-write.servi…[0mPlymouth To Write Out Runtime Data.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-userdb-load-crede…[0mser/group Records from Credentials.
+[[0;32m  OK  [0m] Mounted [0;1;39mproc-sys-fs-binfmt_misc.mo…[0mxecutable File Formats File System.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-binfmt.service[0m - Set Up Additional Binary Formats.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-tmpfiles-setup.se…[0mreate System Files and Directories.
+         Starting [0;1;39mauditd.service[0m - Security Audit Logging Service...
+         Starting [0;1;39mldconfig.service[0m - Rebuild Dynamic Linker Cache...
+         Starting [0;1;39msystemd-journal-catalog-u…ervice[0m - Rebuild Journal Catalog...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup.
+[[0;32m  OK  [0m] Started [0;1;39mauditd.service[0m - Security Audit Logging Service.
+         Starting [0;1;39maudit-rules.service[0m - Load Audit Rules...
+         Starting [0;1;39msystemd-update-utmp.servi…[0mord System Boot/Shutdown in UTMP...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-journal-catalog-u….service[0m - Rebuild Journal Catalog.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-update-utmp.servi…[0mecord System Boot/Shutdown in UTMP.
+[[0;32m  OK  [0m] Finished [0;1;39maudit-rules.service[0m - Load Audit Rules.
+[[0m[0;31m*     [0m] Job ldconfig.service/start running (2s / no limit)
+M[K[[0;1;31m*[0m[0;31m*    [0m] Job ldconfig.service/start running (3s / no limit)
+M[K[[0;31m*[0;1;31m*[0m[0;31m*   [0m] Job ldconfig.service/start running (3s / no limit)
+M[K[ [0;31m*[0;1;31m*[0m[0;31m*  [0m] Job ldconfig.service/start running (4s / no limit)
+M[K[  [0;31m*[0;1;31m*[0m[0;31m* [0m] Job ldconfig.service/start running (4s / no limit)
+M[K[   [0;31m*[0;1;31m*[0m[0;31m*[0m] Job ldconfig.service/start running (5s / no limit)
+M[K[    [0;31m*[0;1;31m*[0m] Job ldconfig.service/start running (5s / no limit)
+M[K[     [0;31m*[0m] Job ldconfig.service/start running (6s / no limit)
+M[K[    [0;31m*[0;1;31m*[0m] Job ldconfig.service/start running (6s / no limit)
+M[K[   [0;31m*[0;1;31m*[0m[0;31m*[0m] Job ldconfig.service/start running (7s / no limit)
+M[K[  [0;31m*[0;1;31m*[0m[0;31m* [0m] Job ldconfig.service/start running (7s / no limit)
+M[K[ [0;31m*[0;1;31m*[0m[0;31m*  [0m] Job ldconfig.service/start running (8s / no limit)
+M[K[[0;31m*[0;1;31m*[0m[0;31m*   [0m] Job ldconfig.service/start running (8s / no limit)
+M[K[[0;1;31m*[0m[0;31m*    [0m] Job ldconfig.service/start running (9s / no limit)
+M[K[[0m[0;31m*     [0m] Job ldconfig.service/start running (9s / no limit)
+M[K[[0;1;31m*[0m[0;31m*    [0m] Job ldconfig.service/start running (10s / no limit)
+M[K[[0;31m*[0;1;31m*[0m[0;31m*   [0m] Job ldconfig.service/start running (10s / no limit)
+M[K[ [0;31m*[0;1;31m*[0m[0;31m*  [0m] Job ldconfig.service/start running (11s / no limit)
+M[K[  [0;31m*[0;1;31m*[0m[0;31m* [0m] Job ldconfig.service/start running (11s / no limit)
+M[K[   [0;31m*[0;1;31m*[0m[0;31m*[0m] Job ldconfig.service/start running (12s / no limit)
+M[K[    [0;31m*[0;1;31m*[0m] Job ldconfig.service/start running (12s / no limit)
+M[K[     [0;31m*[0m] Job ldconfig.service/start running (13s / no limit)
+M[K[    [0;31m*[0;1;31m*[0m] Job ldconfig.service/start running (13s / no limit)
+M[K[   [0;31m*[0;1;31m*[0m[0;31m*[0m] Job ldconfig.service/start running (14s / no limit)
+M[K[  [0;31m*[0;1;31m*[0m[0;31m* [0m] Job ldconfig.service/start running (14s / no limit)
+M[K[ [0;31m*[0;1;31m*[0m[0;31m*  [0m] Job ldconfig.service/start running (15s / no limit)
+M[K[[0;31m*[0;1;31m*[0m[0;31m*   [0m] Job ldconfig.service/start running (15s / no limit)
+M[K[[0;1;31m*[0m[0;31m*    [0m] Job ldconfig.service/start running (16s / no limit)
+M[K[[0m[0;31m*     [0m] Job ldconfig.service/start running (16s / no limit)
+M[K[[0;1;31m*[0m[0;31m*    [0m] Job ldconfig.service/start running (17s / no limit)
+M[K[[0;31m*[0;1;31m*[0m[0;31m*   [0m] Job ldconfig.service/start running (17s / no limit)
+M[K[ [0;31m*[0;1;31m*[0m[0;31m*  [0m] Job ldconfig.service/start running (18s / no limit)
+M[K[  [0;31m*[0;1;31m*[0m[0;31m* [0m] Job ldconfig.service/start running (18s / no limit)
+M[K[   [0;31m*[0;1;31m*[0m[0;31m*[0m] Job ldconfig.service/start running (19s / no limit)
+M[K[    [0;31m*[0;1;31m*[0m] Job ldconfig.service/start running (19s / no limit)
+M[K[     [0;31m*[0m] Job ldconfig.service/start running (20s / no limit)
+M[K[    [0;31m*[0;1;31m*[0m] Job ldconfig.service/start running (20s / no limit)
+M[K[   [0;31m*[0;1;31m*[0m[0;31m*[0m] Job ldconfig.service/start running (21s / no limit)
+M[K[  [0;31m*[0;1;31m*[0m[0;31m* [0m] Job ldconfig.service/start running (21s / no limit)
+M[K[ [0;31m*[0;1;31m*[0m[0;31m*  [0m] Job ldconfig.service/start running (22s / no limit)
+M[K[[0;31m*[0;1;31m*[0m[0;31m*   [0m] Job ldconfig.service/start running (22s / no limit)
+M[K[[0;1;31m*[0m[0;31m*    [0m] Job ldconfig.service/start running (23s / no limit)
+M[K[[0m[0;31m*     [0m] Job ldconfig.service/start running (23s / no limit)
+M[K[[0;1;31m*[0m[0;31m*    [0m] Job ldconfig.service/start running (24s / no limit)
+M[K[[0;31m*[0;1;31m*[0m[0;31m*   [0m] Job ldconfig.service/start running (24s / no limit)
+M[K[ [0;31m*[0;1;31m*[0m[0;31m*  [0m] Job ldconfig.service/start running (25s / no limit)
+M[K[  [0;31m*[0;1;31m*[0m[0;31m* [0m] Job ldconfig.service/start running (25s / no limit)
+M[K[   [0;31m*[0;1;31m*[0m[0;31m*[0m] Job ldconfig.service/start running (26s / no limit)
+M[K[    [0;31m*[0;1;31m*[0m] Job ldconfig.service/start running (26s / no limit)
+M[K[[0;32m  OK  [0m] Finished [0;1;39mldconfig.service[0m - Rebuild Dynamic Linker Cache.
+[K         Starting [0;1;39msystemd-update-done.service[0m - Update is Completed...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-update-done.service[0m - Update is Completed.
+[[0;32m  OK  [0m] Reached target [0;1;39msysinit.target[0m - System Initialization.
+[[0;32m  OK  [0m] Started [0;1;39mcups.path[0m - CUPS Scheduler.
+[[0;32m  OK  [0m] Started [0;1;39mryoku-snapshot-menu.path[0m - Ryoku snapshot boot menu trigger.
+[[0;32m  OK  [0m] Started [0;1;39mfstrim.timer[0m - Discard unused filesystem blocks once a week.
+[[0;32m  OK  [0m] Started [0;1;39mlogrotate.timer[0m - Daily rotation of log files.
+[[0;32m  OK  [0m] Started [0;1;39mplocate-updatedb.timer[0m - Update the plocate database daily.
+[[0;32m  OK  [0m] Started [0;1;39mraid-check.timer[0m - Weekly RAID setup health check.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-tmpfiles-clean.tim…[0my Cleanup of Temporary Directories.
+[[0;32m  OK  [0m] Started [0;1;39munbound-anchor.timer[0m - dai…f the root trust anchor for DNSSEC.
+[[0;32m  OK  [0m] Reached target [0;1;39mpaths.target[0m - Path Units.
+[[0;32m  OK  [0m] Reached target [0;1;39mtimers.target[0m - Timer Units.
+[[0;32m  OK  [0m] Listening on [0;1;39mavahi-daemon.socket[0m -…DNS/DNS-SD Stack Activation Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mcups.socket[0m - CUPS Scheduler.
+[[0;32m  OK  [0m] Listening on [0;1;39mdbus.socket[0m - D-Bus System Message Bus Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39miscsid.socket[0m - Open-iSCSI iscsid Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39miscsiuio.socket[0m - Open-iSCSI iscsiuio Socket.
+         Starting [0;1;39mpcscd.socket[0m - PC/SC Smart Card Daemon Activation Socket...
+[[0;32m  OK  [0m] Listening on [0;1;39msshd-unix-local.socke…[0mtemd-ssh-generator, AF_UNIX Local).
+         Starting [0;1;39msshd-vsock.socket[0m - OpenS…systemd-ssh-generator, AF_VSOCK)...
+[[0;32m  OK  [0m] Listening on [0;1;39msssd-kcm.socket[0m - SSS…ros Cache Manager responder socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-hostnamed.socket[0m - Hostname Service Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-logind-varlin…[0mer Login Management Varlink Socket.
+         Starting [0;1;39mdbus-broker.service[0m - D-Bus System Message Bus...
+[[0;32m  OK  [0m] Listening on [0;1;39msshd-vsock.socket[0m - O… (systemd-ssh-generator, AF_VSOCK).
+[[0;32m  OK  [0m] Reached target [0;1;39mssh-access.target[0m - SSH Access Available.
+[[0;32m  OK  [0m] Listening on [0;1;39mpcscd.socket[0m - PC/SC Smart Card Daemon Activation Socket.
+[[0;32m  OK  [0m] Reached target [0;1;39msockets.target[0m - Socket Units.
+[[0;32m  OK  [0m] Started [0;1;39mdbus-broker.service[0m - D-Bus System Message Bus.
+[[0;32m  OK  [0m] Reached target [0;1;39mbasic.target[0m - Basic System.
+         Starting [0;1;39mabrtd.service[0m - ABRT Daemon...
+         Starting [0;1;39makmods-keygen@akmods-keyg…[0ms Secure boot MOK Key Generation...
+         Starting [0;1;39mauthselect-apply-changes.…rvice[0m - Apply authselect changes...
+         Starting [0;1;39mavahi-daemon.service[0m - Avahi mDNS/DNS-SD Stack...
+         Starting [0;1;39mdkms.service[0m - Builds and… new kernel modules through DKMS...
+         Starting [0;1;39mdracut-shutdown.service[0m -…store /run/initramfs on shutdown...
+         Starting [0;1;39mfaraday-rebrand.service[0m - FaradayOS branding...
+[[0;32m  OK  [0m] Started [0;1;39mfirewalld.service[0m - firewalld - dynamic firewall daemon.
+         Starting [0;1;39mflatpak-add-fedora-repos.…[0m Add Fedora flatpak repositories...
+[[0;32m  OK  [0m] Started [0;1;39mirqbalance.service[0m - irqbalance daemon.
+         Starting [0;1;39mlivesys.service[0m - Initialization for live environments...
+         Starting [0;1;39mlm_sensors.service[0m - Hardware Monitoring Sensors...
+[[0;32m  OK  [0m] Started [0;1;39mmcelog.service[0m - Machine Check Exception Logging Daemon.
+[[0;32m  OK  [0m] Started [0;1;39mnvidia-powerd.service[0m - nvidia-powerd service.
+         Starting [0;1;39mpolkit.service[0m - Authorization Manager...
+         Starting [0;1;39mrtkit-daemon.service[0m - Re…imeKit Scheduling Policy Service...
+         Starting [0;1;39mswitcheroo-control.servic…[0mSwitcheroo Control Proxy service...
+         Starting [0;1;39msystemd-homed.service[0m - Home Area Manager...
+         Starting [0;1;39mudisks2.service[0m - Disk Manager...
+         Starting [0;1;39mupower.service[0m - Daemon for power management...
+[[0;32m  OK  [0m] Finished [0;1;39mauthselect-apply-changes.service[0m - Apply authselect changes.
+[[0;32m  OK  [0m] Finished [0;1;39mdracut-shutdown.service[0m - Restore /run/initramfs on shutdown.
+[[0;32m  OK  [0m] Reached target [0;1;39mnss-user-lookup.target[0m - User and Group Name Lookups.
+         Starting [0;1;39maccounts-daemon.service[0m - Accounts Service...
+         Starting [0;1;39msystemd-logind.service[0m - User Login Management...
+[[0;32m  OK  [0m] Started [0;1;39msystemd-homed.service[0m - Home Area Manager.
+[[0;32m  OK  [0m] Started [0;1;39mswitcheroo-control.service[0m - Switcheroo Control Proxy service.
+[[0;32m  OK  [0m] Started [0;1;39mrtkit-daemon.service[0m - RealtimeKit Scheduling Policy Service.
+[[0;32m  OK  [0m] Started [0;1;39malsa-state.service[0m - Manag…und Card State (restore and store).
+[[0;32m  OK  [0m] Reached target [0;1;39msound.target[0m - Sound Card.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-homed-activate.service[0m - Home Area Activation.
+[[0;32m  OK  [0m] Started [0;1;39mavahi-daemon.service[0m - Avahi mDNS/DNS-SD Stack.
+[[0;32m  OK  [0m] Finished [0;1;39mflatpak-add-fedora-repos.…[0m - Add Fedora flatpak repositories.
+[[0;32m  OK  [0m] Finished [0;1;39mlm_sensors.service[0m - Hardware Monitoring Sensors.
+[[0;32m  OK  [0m] Finished [0;1;39mfaraday-rebrand.service[0m - FaradayOS branding.
+[[0;32m  OK  [0m] Started [0;1;39mabrtd.service[0m - ABRT Daemon.
+[[0;32m  OK  [0m] Started [0;1;39mabrt-journal-core.service[0m - ABRT coredumpctl message creator.
+[[0;32m  OK  [0m] Started [0;1;39mabrt-oops.service[0m - ABRT kernel log watcher.
+[[0;32m  OK  [0m] Started [0;1;39mabrt-xorg.service[0m - ABRT Xorg log watcher.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-logind.service[0m - User Login Management.
+[[0;32m  OK  [0m] Finished [0;1;39makmods-keygen@akmods-keyg…[0mods Secure boot MOK Key Generation.
+[[0;32m  OK  [0m] Reached target [0;1;39makmods-keygen.target[0m.
+         Starting [0;1;39makmods.service[0m - Builds a…ll new kmods from akmod packages...
+[[0;32m  OK  [0m] Started [0;1;39mpolkit.service[0m - Authorization Manager.
+         Starting [0;1;39mModemManager.service[0m - Modem Manager...
+[[0;32m  OK  [0m] Started [0;1;39maccounts-daemon.service[0m - Accounts Service.
+[[0;32m  OK  [0m] Started [0;1;39mudisks2.service[0m - Disk Manager.
+         Stopping [0;1;39mabrt-journal-core.service[0m…ABRT coredumpctl message creator...
+         Stopping [0;1;39mabrt-oops.service[0m - ABRT kernel log watcher...
+         Stopping [0;1;39mabrt-xorg.service[0m - ABRT Xorg log watcher...
+[[0;32m  OK  [0m] Started [0;1;39mupower.service[0m - Daemon for power management.
+[[0;32m  OK  [0m] Stopped [0;1;39mabrt-xorg.service[0m - ABRT Xorg log watcher.
+[[0;32m  OK  [0m] Stopped [0;1;39mabrt-journal-core.service[0m - ABRT coredumpctl message creator.
+[[0;32m  OK  [0m] Stopped [0;1;39mabrt-oops.service[0m - ABRT kernel log watcher.
+         Stopping [0;1;39mabrtd.service[0m - ABRT Daemon...
+[[0;32m  OK  [0m] Stopped [0;1;39mabrtd.service[0m - ABRT Daemon.
+         Starting [0;1;39msystemd-hostnamed.service[0m - Hostname Service...
+[[0;32m  OK  [0m] Started [0;1;39mModemManager.service[0m - Modem Manager.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-hostnamed.service[0m - Hostname Service.
+[[0;32m  OK  [0m] Finished [0;1;39mdkms.service[0m - Builds and…ll new kernel modules through DKMS.
+[[0;32m  OK  [0m] Finished [0;1;39makmods.service[0m - Builds a…tall new kmods from akmod packages.
+[[0;32m  OK  [0m] Reached target [0;1;39mnetwork-pre.target[0m - Preparation for Network.
+         Starting [0;1;39mNetworkManager.service[0m - Network Manager...
+[[0;1;31mFAILED[0m] Failed to start [0;1;39mryoku-greeter-guard.service[0m.
+See 'systemctl status ryoku-greeter-guard.service' for details.
+[[0;32m  OK  [0m] Started [0;1;39mNetworkManager.service[0m - Network Manager.
+[[0;32m  OK  [0m] Reached target [0;1;39mnetwork.target[0m - Network.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-rfkill.socket[0m…ll Switch Status /dev/rfkill Watch.
+         Starting [0;1;39mNetworkManager-dispatcher…[0manager Script Dispatcher Service...
+         Starting [0;1;39mNetworkManager-wait-onlin…ce[0m - Network Manager Wait Online...
+         Starting [0;1;39mgssproxy.service[0m - GSSAPI Proxy Daemon...
+         Starting [0;1;39mtuned.service[0m - Dynamic System Tuning Daemon...
+[[0;32m  OK  [0m] Started [0;1;39mNetworkManager-dispatcher.…[0m Manager Script Dispatcher Service.
+[[0;32m  OK  [0m] Finished [0;1;39mNetworkManager-wait-onlin…vice[0m - Network Manager Wait Online.
+[[0;32m  OK  [0m] Reached target [0;1;39mnetwork-online.target[0m - Network is Online.
+         Starting [0;1;39mfaraday-vr-setup.service[0m …WiVRn/ALVR, SteamVR permissions)...
+         Starting [0;1;39mrpc-statd-notify.service[0m - Notify NFS peers of a restart...
+         Starting [0;1;39mrsyslog.service[0m - System Logging Service...
+[[0;32m  OK  [0m] Finished [0;1;39mlivesys.service[0m - Initialization for live environments.
+[[0;32m  OK  [0m] Started [0;1;39mrpc-statd-notify.service[0m - Notify NFS peers of a restart.
+         Starting [0;1;39mlivesys-late.service[0m - La…ialization for live environments...
+[[0;32m  OK  [0m] Finished [0;1;39mlivesys-late.service[0m - La…itialization for live environments.
+         Starting [0;1;39mchronyd.service[0m - NTP client/server...
+[[0;32m  OK  [0m] Started [0;1;39mchronyd.service[0m - NTP client/server.
+[[0;32m  OK  [0m] Started [0;1;39mrsyslog.service[0m - System Logging Service.
+[[0;32m  OK  [0m] Started [0;1;39mgssproxy.service[0m - GSSAPI Proxy Daemon.
+[[0;32m  OK  [0m] Reached target [0;1;39mnfs-client.target[0m - NFS client services.
+[[0;32m  OK  [0m] Reached target [0;1;39mremote-fs-pre.targe…[0mreparation for Remote File Systems.
+[[0;32m  OK  [0m] Reached target [0;1;39mremote-cryptsetup.target[0m - Remote Encrypted Volumes.
+[[0;32m  OK  [0m] Reached target [0;1;39mremote-fs.target[0m - Remote File Systems.
+[[0;32m  OK  [0m] Reached target [0;1;39mremote-veritysetup.…[0m - Remote Verity Protected Volumes.
+         Starting [0;1;39msystemd-user-sessions.service[0m - Permit User Sessions...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-user-sessions.service[0m - Permit User Sessions.
+         Starting [0;1;39mplymouth-quit-wait.servic…[0md until boot process finishes up...
+         Starting [0;1;39mplymouth-quit.service[0m - Terminate Plymouth Boot Screen...
+[!p]104\[0m[?7h[1G[0J[6n[32766;32766H[6n[!p]104\[0m[?7h[1G[0J[6n[32766;32766H[6n]3008;start=3830ab165cd445d0b792652d104f642c;user=root;hostname=localhost-live;machineid=5f273b82471f483485db91917e6fb9ec;bootid=da0294fef7d04c1f93fdd0b2bbe3b7d1;pid=1818;pidfdid=8626;comm=(agetty);servicename=serial-getty@ttyS0.service;invocationid=e244202066eb40779737e54baeaf8b0e;type=service\P+q6E616D65\
+FaradayOS v0.92e
+Kernel 7.3.6-200.fc44.x86_64 on x86_64 (ttyS0)
+
+Activate the web console with: systemctl enable --now cockpit.socket
+
+Try contacting this VM's SSH server via 'ssh vsock%4294967295' from host.
+
+localhost-live login: root
+]3008;start=b1915f938fe74c91800426516592c280;user=root;hostname=localhost-live;machineid=5f273b82471f483485db91917e6fb9ec;bootid=da0294fef7d04c1f93fdd0b2bbe3b7d1;pid=1818;pidfdid=8626;comm=login;targetuser=root;sessionid=3;type=session\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\[?2004h[root@localhost-live ~]# unset command_not_found_handle; export PS1='$ ' TERM=dumb SYSTEMD_PAGER= PAGER=cat; bind 'set enable-bracketed-paste off'; stty -echo cols 250; dmesg -n 1
+[?2004l]3008;start=977f4f42-1531-4177-b3db-a4271923092b;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\pgrep -u liveuser -f '^qs.-c.shell$' >/dev/null && pgrep -x niri >/dev/null && echo UP || echo D]3008;end=977f4f42-1531-4177-b3db-a4271923092b;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=a5ce346f-0cae-43f8-b524-c34a3bc1db9a;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\DOWN
+]3008;end=a5ce346f-0cae-43f8-b524-c34a3bc1db9a;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=f17598f9-d9fb-4e2e-9b8a-398f7843a28e;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END1__
+]3008;end=f17598f9-d9fb-4e2e-9b8a-398f7843a28e;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=4ccedca2-04a7-4ba0-9db5-0003c62276ac;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\/usr/sbin/grim
+/usr/sbin/grim
+]3008;end=4ccedca2-04a7-4ba0-9db5-0003c62276ac;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=833141dd-3703-440b-8311-848507f7b2ce;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END2__
+]3008;end=833141dd-3703-440b-8311-848507f7b2ce;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=a2ef5316-b1f9-4e94-9fdf-04381afc0d0b;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\]3008;end=a2ef5316-b1f9-4e94-9fdf-04381afc0d0b;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=601afcbf-bd80-4c5c-80df-8182dd2c5877;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END3__
+]3008;end=601afcbf-bd80-4c5c-80df-8182dd2c5877;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=32ee89c5-5370-45ea-afd6-e8e479f44231;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\]3008;end=32ee89c5-5370-45ea-afd6-e8e479f44231;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=a8fdb48b-e5fd-4c73-ab42-0efa31cc4ea1;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END4__
+]3008;end=a8fdb48b-e5fd-4c73-ab42-0efa31cc4ea1;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=e9880cc9-ad7f-4265-87d4-f315e673ec1c;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\2
+tty2
+total 0
+drwxr-xr-x. 2 root root         80 Nov 28  2026 [0m[01;34mby-path[0m
+crw-rw----+ 1 root video  226,   1 Nov 28 02:08 [40;33;01mcard1[0m
+crw-rw-rw-. 1 root render 226, 128 Nov 28 02:08 [40;33;01mrenderD128[0m
+lrwxrwxrwx. 1 root root          5 Nov 28  2026 [01;36mryoku-gpu-0000-00-01-0[0m -> [40;33;01mcard1[0m
+connected
+00:01.0 VGA compatible controller: Red Hat, Inc. Virtio 1.0 GPU (rev 01)
+	Subsystem: Red Hat, Inc. QEMU
+	Kernel driver in use: virtio-pci
+	Kernel modules: virtio_pci
+[2m2026-11-28T07:08:13.941923Z[0m [32m INFO[0m [2mniri[0m[2m:[0m starting version 26.04
+[2m2026-11-28T07:08:13.958807Z[0m [34mDEBUG[0m [2mniri_config[0m[2m:[0m loaded config from "/home/liveuser/.config/niri/config.kdl"
+[2m2026-11-28T07:08:14.209425Z[0m [32m INFO[0m [2mniri::backend::tty[0m[2m:[0m using as the render node: "/dev/dri/renderD128"
+[2m2026-11-28T07:08:14.567089Z[0m [34mDEBUG[0m [2mniri::backend::tty[0m[2m:[0m adding device: 57857 "/dev/dri/card1"
+[2m2026-11-28T07:08:14.567204Z[0m [34mDEBUG[0m [2mniri::backend::tty[0m[2m:[0m this is the primary node
+[2m2026-11-28T07:08:18.683949Z[0m [34mDEBUG[0m [2mniri::backend::tty[0m[2m:[0m got render node: renderD128
+[2m2026-11-28T07:08:18.683979Z[0m [34mDEBUG[0m [2mniri::backend::tty[0m[2m:[0m initializing the primary renderer
+[2m2026-11-28T07:08:18.862043Z[0m [34mDEBUG[0m [2mniri::backend::tty[0m[2m:[0m device changed: 57857
+[2m2026-11-28T07:08:18.862258Z[0m [34mDEBUG[0m [2mniri::backend::tty[0m[2m:[0m new connector: Virtual-1 "Red Hat, Inc. QEMU Monitor Unknown"
+[2m2026-11-28T07:08:18.862307Z[0m [34mDEBUG[0m [2mniri::backend::tty[0m[2m:[0m connecting connector: Virtual-1
+[2m2026-11-28T07:08:18.862323Z[0m [34mDEBUG[0m [2mniri::backend::tty[0m[2m:[0m picking mode: Mode { name: "1920x1080", clock: 217140, size: (1920, 1080), hsync: (2400, 2457, 2592), vsync: (1085, 1090, 1117), hskew: 0, vscan: 0, vrefresh: 75, mode_type: ModeTypeFlags(PREFERRED | DRIVER) }
+[2m2026-11-28T07:08:18.862341Z[0m [34mDEBUG[0m [2mniri::backend::tty[0m[2m:[0m couldn't reset HDR properties: couldn't find property: "HDR_OUTPUT_METADATA"
+[2m2026-11-28T07:08:18.862351Z[0m [34mDEBUG[0m [2mniri::backend::tty[0m[2m:[0m couldn't get gamma properties: missing GAMMA_LUT property
+[2m2026-11-28T07:08:18.862356Z[0m [34mDEBUG[0m [2mniri::backend::tty[0m[2m:[0m couldn't reset gamma: setting gamma is not supported
+[2m2026-11-28T07:08:18.864519Z[0m [34mDEBUG[0m [2mniri::niri[0m[2m:[0m putting output Virtual-1 at x=0 y=0
+[2m2026-11-28T07:08:18.864610Z[0m [32m INFO[0m [2mniri[0m[2m:[0m listening on Wayland socket: wayland-1
+[2m2026-11-28T07:08:18.864629Z[0m [32m INFO[0m [2mniri[0m[2m:[0m IPC listening on: /run/user/1000/niri.wayland-1.2654.sock
+[2m2026-11-28T07:08:18.924942Z[0m [32m INFO[0m [2mniri[0m[2m:[0m listening on X11 socket: :0
+[2m2026-11-28T07:08:20.564033Z[0m [34mDEBUG[0m [2mniri_config[0m[2m:[0m loaded config from "/home/liveuser/.config/niri/config.kdl"
+[2m2026-11-28T07:08:27.119647Z[0m [34mDEBUG[0m [2mniri_config[0m[2m:[0m loaded config from "/home/liveuser/.config/niri/config.kdl"
+[2m2026-11-28T07:08:28.155789Z[0m [34mDEBUG[0m [2mniri_config[0m[2m:[0m loaded config from "/home/liveuser/.config/niri/config.kdl"
+[2m2026-11-28T07:08:31.692442Z[0m [34mDEBUG[0m [2mniri_config[0m[2m:[0m loaded config from "/home/liveuser/.config/niri/config.kdl"
+]3008;end=e9880cc9-ad7f-4265-87d4-f315e673ec1c;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=b07506ae-96fb-401d-8159-dbbdedbf1a68;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END5__
+]3008;end=b07506ae-96fb-401d-8159-dbbdedbf1a68;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=af063fb9-0efc-4027-ab2a-f79ce854835e;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\Output "Red Hat, Inc. QEMU Monitor Unknown" (Virtual-1)
+  Current mode: 1920x1080 @ 74.998 Hz (preferred)
+  Variable refresh rate: not supported
+  Physical size: 480x270 mm
+  Logical position: 0, 0
+  Logical size: 1920x1080
+  Scale: 1
+  Transform: normal
+  Available modes:
+    1920x1080@74.998 (current, preferred)
+    5120x2160@50.000
+    4096x2160@50.000
+    3840x2160@60.000
+    3840x2160@59.940
+    3840x2160@50.000
+    1920x1440@60.000
+    2560x1080@50.000
+    1856x1392@59.995
+    1792x1344@60.000
+    2048x1152@60.000
+    1920x1200@59.885
+    1920x1080@60.000
+    1920x1080@50.000
+    1600x1200@60.000
+    1680x1050@59.954
+    1400x1050@59.978
+    1280x1024@60.020
+    1440x900@59.887
+    1280x960@60.000
+    1360x768@60.015
+    1280x768@59.870
+    1024x768@60.004
+    800x600@60.317
+    640x480@60.000
+    640x480@59.940
+
+Output "Virtual-1":
+  Background layer: (empty)
+
+  Bottom layer: (empty)
+
+  Top layer: (empty)
+
+  Overlay layer:
+    Surface:
+      Namespace: "ryoku-keys-hint"
+      Keyboard interactivity: none
+
+    Surface:
+      Namespace: "ryoku-reload-cover"
+      Keyboard interactivity: none
+
+Window ID 2: (focused)
+  Title: "Welcome to FaradayOS"
+  App ID: "org.quickshell"
+  Is floating: yes
+  PID: 5326
+  Workspace ID: 1
+  Layout:
+    Tile size: 1188 x 768
+    Workspace-view position: 366, 156
+    Window size: 1180 x 760
+    Window offset in tile: 4 x 4
+
+]3008;end=af063fb9-0efc-4027-ab2a-f79ce854835e;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=0bd49c08-0563-4ac5-8abe-70a01676b0e2;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END6__
+]3008;end=0bd49c08-0563-4ac5-8abe-70a01676b0e2;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=07f71379-9a3c-4ccd-a084-26c5a5eda649;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\]3008;end=07f71379-9a3c-4ccd-a084-26c5a5eda649;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=8d9f8de2-8929-4801-934e-87f3b9263a1e;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END7__
+]3008;end=8d9f8de2-8929-4801-934e-87f3b9263a1e;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=c33392bf-dcfc-4074-9614-2c6fcea5d79b;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\]3008;end=c33392bf-dcfc-4074-9614-2c6fcea5d79b;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=3073f84e-d96c-4422-82ce-e1d5c49712b9;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END8__
+]3008;end=3073f84e-d96c-4422-82ce-e1d5c49712b9;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=44c15320-c874-48b5-a5e6-11bf9d15d099;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\]3008;end=44c15320-c874-48b5-a5e6-11bf9d15d099;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=bdd82787-d000-4a56-830e-9265964c68a1;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END9__
+]3008;end=bdd82787-d000-4a56-830e-9265964c68a1;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=ab7cccdc-e09f-43ec-a32a-1148cddef6a0;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\]3008;end=ab7cccdc-e09f-43ec-a32a-1148cddef6a0;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=d08eb73e-d76f-4e69-8640-59c049228813;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END10__
+]3008;end=d08eb73e-d76f-4e69-8640-59c049228813;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=24c30693-499e-4db5-ae7b-b0ad8fd848a7;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\WROTE
+]3008;end=24c30693-499e-4db5-ae7b-b0ad8fd848a7;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=9a083e36-5169-42f3-a017-a0f2eecaff61;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END11__
+]3008;end=9a083e36-5169-42f3-a017-a0f2eecaff61;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=e73585bb-dc8f-40f3-b7ea-c6a800964537;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\-rw-r--r--. 1 root root 4348235776 Nov 28 01:17 /run/initramfs/live/LiveOS/squashfs.img
+]3008;end=e73585bb-dc8f-40f3-b7ea-c6a800964537;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=3a1f9572-6115-4bf8-81d4-cfa1a07bff88;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END12__
+]3008;end=3a1f9572-6115-4bf8-81d4-cfa1a07bff88;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=57ff100b-9799-4e32-ba25-3359395b0288;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\[1] 7027
+]3008;end=57ff100b-9799-4e32-ba25-3359395b0288;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=6ca4976b-4a2e-4c18-8555-97b59a02d8b1;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END13__
+]3008;end=6ca4976b-4a2e-4c18-8555-97b59a02d8b1;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=055ddea9-b064-4bff-ba1c-c36a850d39eb;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\Installing software 0%
+Installing software 1%
+Installing software 2%
+]3008;end=055ddea9-b064-4bff-ba1c-c36a850d39eb;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=f7af2d91-088f-4821-96cb-fc634741ca26;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END14__
+]3008;end=f7af2d91-088f-4821-96cb-fc634741ca26;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=370be8df-a467-47f0-86d8-df84a56cd4b4;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\Installing software 11%
+Installing software 12%
+Installing software 13%
+]3008;end=370be8df-a467-47f0-86d8-df84a56cd4b4;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=e96f4d62-c630-406c-8353-ce5d21db77f4;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END15__
+]3008;end=e96f4d62-c630-406c-8353-ce5d21db77f4;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=1168ffa3-2b38-478d-b714-e610288ceda2;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\Installing software 26%
+Installing software 27%
+Installing software 28%
+]3008;end=1168ffa3-2b38-478d-b714-e610288ceda2;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=c3a4934c-6fad-4fb4-bd48-6816d6f46c9f;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END16__
+]3008;end=c3a4934c-6fad-4fb4-bd48-6816d6f46c9f;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=5d5ca5e1-bf24-4cfb-8f35-46e3cc243ad1;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\Installing software 36%
+Installing software 37%
+Installing software 38%
+]3008;end=5d5ca5e1-bf24-4cfb-8f35-46e3cc243ad1;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=5c01fde7-47cb-4d2c-9dd2-2db01bb760b8;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END17__
+]3008;end=5c01fde7-47cb-4d2c-9dd2-2db01bb760b8;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=2bcb5200-fead-4cd5-9c78-d88968818841;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\Installing software 48%
+Installing software 49%
+Installing software 50%
+]3008;end=2bcb5200-fead-4cd5-9c78-d88968818841;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=324cbd0f-6d2c-465b-85c2-177d16a17707;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END18__
+]3008;end=324cbd0f-6d2c-465b-85c2-177d16a17707;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=72ef3c57-7f63-47d7-af6b-65126bb4b662;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\Installing software 57%
+Installing software 58%
+Installing software 59%
+]3008;end=72ef3c57-7f63-47d7-af6b-65126bb4b662;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=d23f92f9-7cc3-475f-af5c-3e8c5763f288;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END19__
+]3008;end=d23f92f9-7cc3-475f-af5c-3e8c5763f288;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=c9c3da11-07e9-4729-b59e-337b986c3f72;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\Installing software 66%
+Installing software 67%
+Installing software 68%
+]3008;end=c9c3da11-07e9-4729-b59e-337b986c3f72;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=3b131242-032d-4545-871d-25fbde318187;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END20__
+]3008;end=3b131242-032d-4545-871d-25fbde318187;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=208f1f98-86e6-4cee-9558-5dd6683f46fc;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\Installing software 77%
+Installing software 78%
+Installing software 79%
+]3008;end=208f1f98-86e6-4cee-9558-5dd6683f46fc;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=41974c1e-ab22-4dcb-9558-d66f07181d06;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END21__
+]3008;end=41974c1e-ab22-4dcb-9558-d66f07181d06;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=22d379b6-48b5-40a0-a17b-8defce9df3a2;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\Installing software 79%
+Installing software 80%
+Installing software 81%
+]3008;end=22d379b6-48b5-40a0-a17b-8defce9df3a2;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=16d809b8-d3bb-4421-8442-28fb6f7cbb6c;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END22__
+]3008;end=16d809b8-d3bb-4421-8442-28fb6f7cbb6c;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=fd67930b-32be-4a8d-838b-b3e56a52a649;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\Installing software 85%
+Installing software 86%
+Installing software 87%
+]3008;end=fd67930b-32be-4a8d-838b-b3e56a52a649;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=979837e8-8b53-4c2a-95bd-e084800738cb;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END23__
+]3008;end=979837e8-8b53-4c2a-95bd-e084800738cb;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=6f7df2ef-53e8-4dca-bef1-53c285a071cb;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\Installing software 94%
+Installing software 95%
+Installing software 96%
+]3008;end=6f7df2ef-53e8-4dca-bef1-53c285a071cb;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=22956a90-19b6-435a-96cf-cda75090e6cf;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END24__
+]3008;end=22956a90-19b6-435a-96cf-cda75090e6cf;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=bf19f0c0-db0e-4c0c-8541-274e6928a368;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\Configuring storage
+.
+Installing boot loader
+]3008;end=bf19f0c0-db0e-4c0c-8541-274e6928a368;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=cd4ce744-61ea-4753-aa5d-5ddc5061a581;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END25__
+]3008;end=cd4ce744-61ea-4753-aa5d-5ddc5061a581;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=5ffef811-8162-4932-8286-163e81bcdf51;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\Configuring storage
+.
+Installing boot loader
+]3008;end=5ffef811-8162-4932-8286-163e81bcdf51;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=2460b267-3f6b-4c22-8ba9-23521096f8f7;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END26__
+]3008;end=2460b267-3f6b-4c22-8ba9-23521096f8f7;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=463a336a-ed1d-4fd9-9dc9-71be7bb88e43;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\Configuring storage
+.
+Installing boot loader
+]3008;end=463a336a-ed1d-4fd9-9dc9-71be7bb88e43;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=18dc02ab-a0c6-49f3-be29-30a661c52e64;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END27__
+]3008;end=18dc02ab-a0c6-49f3-be29-30a661c52e64;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=44564197-824f-476a-8748-36dd3042bfc6;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\Configuring addons
+.
+Generating initramfs
+]3008;end=44564197-824f-476a-8748-36dd3042bfc6;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;start=5b60e78f-a630-408e-b2ff-03056810df01;type=command;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\__END28__
+]3008;end=5b60e78f-a630-408e-b2ff-03056810df01;exit=success\]3008;start=9d7478fe-f58c-426c-8f63-c75aa4a28c95;type=shell;machineid=5f273b82471f483485db91917e6fb9ec;user=root;hostname=localhost-live;bootid=da0294fe-f7d0-4c1f-93fd-d0b2bbe3b7d1;pid=2688;cwd=/root\$ ]3008;end=b1915f938fe74c91800426516592c280\[!p]104\[0m[?7h[1G[0J[6n[32766;32766H[6n[[0;32m  OK  [0m] Removed slice [0;1;39msystem-dbus\x2d:1.3\…[0mdbus-:1.3-org.freedesktop.problems.
+[[0;32m  OK  [0m] Removed slice [0;1;39msystem-getty.slice[0m - Slice /system/getty.
+[[0;32m  OK  [0m] Stopped target [0;1;39mnetwork-online.target[0m - Network is Online.
+         Stopping [0;1;39muser@1000.service[0m - User Manager for UID 1000...
+[[0;32m  OK  [0m] Stopped [0;1;39mNetworkManager-wait-online…vice[0m - Network Manager Wait Online.
+         Stopping [0;1;39mswitcheroo-control.servic…[0mSwitcheroo Control Proxy service...
+         Stopping [0;1;39mtuned.service[0m - Dynamic System Tuning Daemon...
+[[0;32m  OK  [0m] Stopped [0;1;39mserial-getty@ttyS0.service[0m - Serial Getty on ttyS0.
+]3008;end=3830ab165cd445d0b7926[[0;32m  OK  [0m] Unmounted [0;1;39mrun-user-1000-doc.mount[0m - /run/user/1000/doc.
+[[0;32m  OK  [0m] Unmounted [0;1;39mrun-user-1000-gvfs.mount[0m - /run/user/1000/gvfs.
+[[0;32m  OK  [0m] Stopped [0;1;39mswitcheroo-control.service[0m - Switcheroo Control Proxy service.
+[[0;32m  OK  [0m] Started [0;1;39mplymouth-poweroff.service[0m - Show Plymouth Power Off Screen.
+[[0;32m  OK  [0m] Stopped [0;1;39msession-3.scope[0m - Session 3 of User root.
+[[0;32m  OK  [0m] Removed slice [0;1;39msystem-serial\x2dget…slice[0m - Slice /system/serial-getty.
+[[0;32m  OK  [0m] Stopped [0;1;39mplymouth-quit-wait.service[0m…old until boot process finishes up.
+         Stopping [0;1;39muser@0.service[0m - User Manager for UID 0...
+[[0;32m  OK  [0m] Stopped [0;1;39mtuned.service[0m - Dynamic System Tuning Daemon.
+         Stopping [0;1;39mpolkit.service[0m - Authorization Manager...
+[[0;32m  OK  [0m] Stopped [0;1;39mpolkit.service[0m - Authorization Manager.
+[[0;32m  OK  [0m] Stopped [0;1;39muser@0.service[0m - User Manager for UID 0.
+         Stopping [0;1;39muser-runtime-dir@0.servic…[0mer Runtime Directory /run/user/0...
+[[0;32m  OK  [0m] Unmounted [0;1;39mrun-user-0.mount[0m - /run/user/0.
+[[0;32m  OK  [0m] Stopped [0;1;39muser-runtime-dir@0.service[0m…User Runtime Directory /run/user/0.
+[[0;32m  OK  [0m] Removed slice [0;1;39muser-0.slice[0m - User Slice of UID 0.
+[[0;32m  OK  [0m] Stopped [0;1;39muser@1000.service[0m - User Manager for UID 1000.
+         Stopping [0;1;39msystemd-oomd.service[0m - Us…space Out-Of-Memory (OOM) Killer...
+         Stopping [0;1;39msystemd-user-sessions.service[0m - Permit User Sessions...
+         Stopping [0;1;39muresourced.service[0m - User resource assignment daemon...
+         Stopping [0;1;39muser-runtime-dir@1000.ser…[0mRuntime Directory /run/user/1000...
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-oomd.service[0m - Userspace Out-Of-Memory (OOM) Killer.
+[[0;32m  OK  [0m] Unmounted [0;1;39mrun-user-1000.mount[0m - /run/user/1000.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-user-sessions.service[0m - Permit User Sessions.
+[[0;32m  OK  [0m] Stopped [0;1;39muser-runtime-dir@1000.serv…[0mr Runtime Directory /run/user/1000.
+[[0;32m  OK  [0m] Removed slice [0;1;39muser-1000.slice[0m - User Slice of UID 1000.
+[[0;32m  OK  [0m] Stopped target [0;1;39mremote-fs.target[0m - Remote File Systems.
+[[0;32m  OK  [0m] Stopped target [0;1;39mremote-fs-pre.targe…[0mreparation for Remote File Systems.
+[[0;32m  OK  [0m] Stopped target [0;1;39mnfs-client.target[0m - NFS client services.
+         Stopping [0;1;39mgssproxy.service[0m - GSSAPI Proxy Daemon...
+         Stopping [0;1;39msystemd-homed-activate.service[0m - Home Area Activation...
+         Stopping [0;1;39msystemd-logind.service[0m - User Login Management...
+[[0;32m  OK  [0m] Stopped [0;1;39mgssproxy.service[0m - GSSAPI Proxy Daemon.
+[[0;32m  OK  [0m] Stopped [0;1;39muresourced.service[0m - User resource assignment daemon.
+[[0;32m  OK  [0m] Stopped target [0;1;39mnetwork.target[0m - Network.
+         Stopping [0;1;39mNetworkManager.service[0m - Network Manager...
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-logind.service[0m - User Login Management.
+[[0;32m  OK  [0m] Stopped target [0;1;39mnss-user-lookup.target[0m - User and Group Name Lookups.
+[[0;32m  OK  [0m] Stopped [0;1;39mauthselect-apply-changes.service[0m - Apply authselect changes.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-userdb-load-creden…[0mser/group Records from Credentials.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-homed-activate.service[0m - Home Area Activation.
+         Stopping [0;1;39msystemd-homed.service[0m - Home Area Manager...
+[[0;32m  OK  [0m] Stopped [0;1;39mNetworkManager.service[0m - Network Manager.
+[[0;32m  OK  [0m] Stopped target [0;1;39mnetwork-pre.target[0m - Preparation for Network.
+[[0;32m  OK  [0m] Stopped [0;1;39mdkms.service[0m - Builds and …ll new kernel modules through DKMS.
+         Stopping [0;1;39mfirewalld.service[0m - firewalld - dynamic firewall daemon...
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-network-generator.…[0mork Units from Kernel Command Line.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-homed.service[0m - Home Area Manager.
+[[0;32m  OK  [0m] Stopped [0;1;39mfirewalld.service[0m - firewalld - dynamic firewall daemon.
+[[0;32m  OK  [0m] Stopped [0;1;39mdracut-shutdown.service[0m - Restore /run/initramfs on shutdown.
+[[0;32m  OK  [0m] Stopped target [0;1;39mbasic.target[0m - Basic System.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-ask-password-plymo…[0mquests to Plymouth Directory Watch.
+[[0;32m  OK  [0m] Stopped target [0;1;39mpaths.target[0m - Path Units.
+[[0;32m  OK  [0m] Stopped [0;1;39mcups.path[0m - CUPS Scheduler.
+[[0;32m  OK  [0m] Stopped [0;1;39mryoku-snapshot-menu.path[0m - Ryoku snapshot boot menu trigger.
+[[0;32m  OK  [0m] Stopped target [0;1;39mslices.target[0m - Slice Units.
+[[0;32m  OK  [0m] Removed slice [0;1;39muser.slice[0m - User and Session Slice.
+[[0;32m  OK  [0m] Stopped target [0;1;39msockets.target[0m - Socket Units.
+[[0;32m  OK  [0m] Closed [0;1;39mavahi-daemon.socket[0m - Avahi…DNS/DNS-SD Stack Activation Socket.
+[[0;32m  OK  [0m] Closed [0;1;39mcups.socket[0m - CUPS Scheduler.
+[[0;32m  OK  [0m] Closed [0;1;39miscsid.socket[0m - Open-iSCSI iscsid Socket.
+[[0;32m  OK  [0m] Closed [0;1;39miscsiuio.socket[0m - Open-iSCSI iscsiuio Socket.
+[[0;32m  OK  [0m] Closed [0;1;39mpcscd.socket[0m - PC/SC Smart Card Daemon Activation Socket.
+[[0;32m  OK  [0m] Closed [0;1;39msshd-unix-local.socket[0m - Op…temd-ssh-generator, AF_UNIX Local).
+         Stopping [0;1;39msshd-vsock.socket[0m - OpenS…systemd-ssh-generator, AF_VSOCK)...
+[[0;32m  OK  [0m] Closed [0;1;39msssd-kcm.socket[0m - SSSD Kerberos Cache Manager responder socket.
+[[0;32m  OK  [0m] Closed [0;1;39msystemd-hostnamed.socket[0m - Hostname Service Socket.
+[[0;32m  OK  [0m] Closed [0;1;39msystemd-logind-varlink.sock…[0mer Login Management Varlink Socket.
+[[0;32m  OK  [0m] Closed [0;1;39msystemd-mute-console.socket[0m…nsole Output Muting Service Socket.
+[[0;32m  OK  [0m] Closed [0;1;39msystemd-oomd.socket[0m - Users… Out-Of-Memory (OOM) Killer Socket.
+[[0;32m  OK  [0m] Closed [0;1;39msystemd-repart.socket[0m - Disk Repartitioning Service Socket.
+         Stopping [0;1;39mdbus-broker.service[0m - D-Bus System Message Bus...
+         Starting [0;1;39mplymouth-switch-root-init…[0mll Plymouth To Jump To initramfs...
+[[0;32m  OK  [0m] Stopped [0;1;39mdbus-broker.service[0m - D-Bus System Message Bus.
+[[0;32m  OK  [0m] Closed [0;1;39msshd-vsock.socket[0m - OpenSSH… (systemd-ssh-generator, AF_VSOCK).
+[[0;32m  OK  [0m] Finished [0;1;39mplymouth-switch-root-init…[0mTell Plymouth To Jump To initramfs.
+[[0;32m  OK  [0m] Closed [0;1;39mdbus.socket[0m - D-Bus System Message Bus Socket.
+[[0;32m  OK  [0m] Stopped target [0;1;39msysinit.target[0m - System Initialization.
+[[0;32m  OK  [0m] Stopped target [0;1;39mcryptsetup.target[0m - Local Encrypted Volumes.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-ask-password-wall.…[0md Requests to Wall Directory Watch.
+[[0;32m  OK  [0m] Stopped target [0;1;39mimports.target[0m - Image Downloads.
+[[0;32m  OK  [0m] Stopped target [0;1;39mintegritysetup.targ…[0m Local Integrity Protected Volumes.
+[[0;32m  OK  [0m] Stopped target [0;1;39mveritysetup.target[0m - Local Verity Protected Volumes.
+         Stopping [0;1;39msystemd-binfmt.service[0m - Set Up Additional Binary Formats...
+         Stopping [0;1;39msystemd-resolved.service[0m - Network Name Resolution...
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-update-done.service[0m - Update is Completed.
+[[0;32m  OK  [0m] Stopped [0;1;39mldconfig.service[0m - Rebuild Dynamic Linker Cache.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-hwdb-update.service[0m - Rebuild Hardware Database.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-journal-catalog-up….service[0m - Rebuild Journal Catalog.
+         Stopping [0;1;39msystemd-update-utmp.servi…[0mord System Boot/Shutdown in UTMP...
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-resolved.service[0m - Network Name Resolution.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-binfmt.service[0m - Set Up Additional Binary Formats.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-update-utmp.servic…[0mecord System Boot/Shutdown in UTMP.
+[[0;32m  OK  [0m] Unset automount [0;1;39mproc-sys-fs-binfmt…[0mormats File System Automount Point.
+[[0;32m  OK  [0m] Closed [0;1;39msystemd-resolved-monitor.so…t[0m - Resolve Monitor Varlink Socket.
+[[0;32m  OK  [0m] Closed [0;1;39msystemd-resolved-varlink.so…t[0m - Resolve Service Varlink Socket.
+         Stopping [0;1;39mauditd.service[0m - Security Audit Logging Service...
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-sysctl.service[0m - Apply Kernel Variables.
+[[0;32m  OK  [0m] Closed [0;1;39msystemd-coredump.socket[0m - Process Core Dump Socket.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-modules-load.service[0m - Load Kernel Modules.
+[[0;32m  OK  [0m] Stopped [0;1;39mauditd.service[0m - Security Audit Logging Service.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-tmpfiles-setup.ser…[0mreate System Files and Directories.
+[[0;32m  OK  [0m] Stopped target [0;1;39mlocal-fs.target[0m - Local File Systems.
+         Unmounting [0;1;39mmnt-sysimage-boot-efi.mount[0m - /mnt/sysimage/boot/efi...
+         Unmounting [0;1;39mmnt-sysimage-dev-pts.mount[0m - /mnt/sysimage/dev/pts...
+         Unmounting [0;1;39mmnt-sysimage-dev-shm.mount[0m - /mnt/sysimage/dev/shm...
+         Unmounting [0;1;39mmnt-sysimage-home.mount[0m - /mnt/sysimage/home...
+         Unmounting [0;1;39mmnt-sysimage-proc.mount[0m - /mnt/sysimage/proc...
+         Unmounting [0;1;39mmnt-sysimage-run.mount[0m - /mnt/sysimage/run...
+         Unmounting [0;1;39mmnt-sysimage-sys-firmwa…[0mysimage/sys/firmware/efi/efivars...
+         Unmounting [0;1;39mmnt-sysimage-sys-fs-sel…t[0m - /mnt/sysimage/sys/fs/selinux...
+         Unmounting [0;1;39mmnt-sysimage-tmp.mount[0m - /mnt/sysimage/tmp...
+         Unmounting [0;1;39mmnt-sysroot-boot-efi.mount[0m - /mnt/sysroot/boot/efi...
+         Unmounting [0;1;39mmnt-sysroot-dev-pts.mount[0m - /mnt/sysroot/dev/pts...
+         Unmounting [0;1;39mmnt-sysroot-dev-shm.mount[0m - /mnt/sysroot/dev/shm...
+         Unmounting [0;1;39mmnt-sysroot-home.mount[0m - /mnt/sysroot/home...
+         Unmounting [0;1;39mmnt-sysroot-proc.mount[0m - /mnt/sysroot/proc...
+         Unmounting [0;1;39mmnt-sysroot-run.mount[0m - /mnt/sysroot/run...
+         Unmounting [0;1;39mmnt-sysroot-sys-firmwar…[0msysroot/sys/firmware/efi/efivars...
+         Unmounting [0;1;39mmnt-sysroot-sys-fs-seli…nt[0m - /mnt/sysroot/sys/fs/selinux...
+         Unmounting [0;1;39mmnt-sysroot-tmp.mount[0m - /mnt/sysroot/tmp...
+         Unmounting [0;1;39mrun-rootfsbase.mount[0m - /run/rootfsbase...
+         Unmounting [0;1;39mtmp.mount[0m - Temporary Directory /tmp...
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysimage-boot-efi.mount[0m - /mnt/sysimage/boot/efi.
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysimage-dev-pts.mount[0m - /mnt/sysimage/dev/pts.
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysimage-dev-shm.mount[0m - /mnt/sysimage/dev/shm.
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysimage-home.mount[0m - /mnt/sysimage/home.
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysimage-proc.mount[0m - /mnt/sysimage/proc.
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysimage-run.mount[0m - /mnt/sysimage/run.
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysimage-sys-firmwar…[0m/sysimage/sys/firmware/efi/efivars.
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysimage-sys-fs-seli…unt[0m - /mnt/sysimage/sys/fs/selinux.
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysimage-tmp.mount[0m - /mnt/sysimage/tmp.
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysroot-boot-efi.mount[0m - /mnt/sysroot/boot/efi.
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysroot-dev-pts.mount[0m - /mnt/sysroot/dev/pts.
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysroot-dev-shm.mount[0m - /mnt/sysroot/dev/shm.
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysroot-home.mount[0m - /mnt/sysroot/home.
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysroot-proc.mount[0m - /mnt/sysroot/proc.
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysroot-run.mount[0m - /mnt/sysroot/run.
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysroot-sys-firmware…[0mt/sysroot/sys/firmware/efi/efivars.
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysroot-sys-fs-selin…ount[0m - /mnt/sysroot/sys/fs/selinux.
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysroot-tmp.mount[0m - /mnt/sysroot/tmp.
+[[0;32m  OK  [0m] Unmounted [0;1;39mrun-rootfsbase.mount[0m - /run/rootfsbase.
+[[0;32m  OK  [0m] Unmounted [0;1;39mtmp.mount[0m - Temporary Directory /tmp.
+[[0;32m  OK  [0m] Stopped target [0;1;39mswap.target[0m - Swaps.
+         Deactivating swap [0;1;39mdev-disk-by\x2dd…-6.swap[0m - /dev/disk/by-diskseq/6...
+         Unmounting [0;1;39mmnt-sysimage-boot.mount[0m - /mnt/sysimage/boot...
+         Unmounting [0;1;39mmnt-sysimage-dev.mount[0m - /mnt/sysimage/dev...
+         Unmounting [0;1;39mmnt-sysimage-sys.mount[0m - /mnt/sysimage/sys...
+         Unmounting [0;1;39mmnt-sysroot-boot.mount[0m - /mnt/sysroot/boot...
+         Unmounting [0;1;39mmnt-sysroot-dev.mount[0m - /mnt/sysroot/dev...
+         Unmounting [0;1;39mmnt-sysroot-sys.mount[0m - /mnt/sysroot/sys...
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysimage-boot.mount[0m - /mnt/sysimage/boot.
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysimage-dev.mount[0m - /mnt/sysimage/dev.
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysimage-sys.mount[0m - /mnt/sysimage/sys.
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysroot-boot.mount[0m - /mnt/sysroot/boot.
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysroot-dev.mount[0m - /mnt/sysroot/dev.
+         Unmounting [0;1;39mmnt-sysimage.mount[0m - /mnt/sysimage...
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysroot-sys.mount[0m - /mnt/sysroot/sys.
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysimage.mount[0m - /mnt/sysimage.
+         Unmounting [0;1;39mmnt-sysroot.mount[0m - /mnt/sysroot...
+[[0;32m  OK  [0m] Unmounted [0;1;39mmnt-sysroot.mount[0m - /mnt/sysroot.
+[[0;32m  OK  [0m] Deactivated swap [0;1;39mdev-disk-by\x2ddi…eq-6.swap[0m - /dev/disk/by-diskseq/6.
+[[0;32m  OK  [0m] Deactivated swap [0;1;39mdev-disk-by\x2dla…m0.swap[0m - /dev/disk/by-label/zram0.
+[[0;32m  OK  [0m] Deactivated swap [0;1;39mdev-disk-by\x2duu…[0m507ef6-1d61-4c3b-997d-4f6bf9b9c7b1.
+[[0;32m  OK  [0m] Deactivated swap [0;1;39mdev-zram0.swap[0m - Compressed Swap on /dev/zram0.
+[[0;32m  OK  [0m] Stopped target [0;1;39mlocal-fs-pre.target[0m…Preparation for Local File Systems.
+[[0;32m  OK  [0m] Reached target [0;1;39mumount.target[0m - Unmount All Filesystems.
+         Stopping [0;1;39mlvm2-monitor.service[0m - Mo…ing dmeventd or progress polling...
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-tmpfiles-setup-dev…[0mCreate Static Device Nodes in /dev.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-sysusers.service[0m - Create System Users.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-remount-fs.service[0m…mount Root and Kernel File Systems.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-tmpfiles-setup-dev…[0mic Device Nodes in /dev gracefully.
+         Stopping [0;1;39msystemd-zram-setup@zram0.…vice[0m - Create swap on /dev/zram0...
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-zram-setup@zram0.service[0m - Create swap on /dev/zram0.
+[[0;32m  OK  [0m] Removed slice [0;1;39msystem-systemd\x2dzr…[0m- Slice /system/systemd-zram-setup.
+[[0;32m  OK  [0m] Stopped [0;1;39mlvm2-monitor.service[0m - Mon…using dmeventd or progress polling.
+[[0;32m  OK  [0m] Reached target [0;1;39mshutdown.target[0m - System Shutdown.
+[[0;32m  OK  [0m] Reached target [0;1;39mfinal.target[0m - Late Shutdown Services.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-poweroff.service[0m - System Power Off.
+[[0;32m  OK  [0m] Reached target [0;1;39mpoweroff.target[0m - System Power Off.
+]3008;end=b1b1471cebda4b82869abdf7cad73044\[6n[32766;32766H[6n[!p]104\[0m[?7h[1G[0JPowering off.
+[  601.706119] reboot: Power down
+[H[J[1;1H[?25l[m[H[J[1;1H[2;32HGRUB version 2.12
+
+[m[4;2H+----------------------------------------------------------------------------+[5;2H|[5;79H|[6;2H|[6;79H|[7;2H|[7;79H|[8;2H|[8;79H|[9;2H|[9;79H|[10;2H|[10;79H|[11;2H|[11;79H|[12;2H|[12;79H|[13;   33.627618] futex hash table entries: 1024 (65536 bytes on 1 NUMA nodes, total 64 KiB, linear).
+[   33.628742] xor: automatically using best checksumming function   avx       
+[   33.630185] PM: RTC time: 07:18:52, date: 2026-11-28
+[   33.631275] NET: Registered PF_NETLINK/PF_ROUTE protocol family
+[   33.631968] DMA: preallocated 1024 KiB GFP_KERNEL pool for atomic allocations
+[   33.635300] DMA: preallocated 1024 KiB GFP_KERNEL|GFP_DMA pool for atomic allocations
+[   33.635696] DMA: preallocated 1024 KiB GFP_KERNEL|GFP_DMA32 pool for atomic allocations
+[   33.636607] audit: initializing netlink subsys (disabled)
+[   33.637654] audit: type=2000 audit(1795850285.209:1): state=initialized audit_enabled=0 res=1
+[   33.649206] thermal_sys: Registered thermal governor 'fair_share'
+[   33.649209] thermal_sys: Registered thermal governor 'bang_bang'
+[   33.649588] thermal_sys: Registered thermal governor 'step_wise'
+[   33.650584] thermal_sys: Registered thermal governor 'user_space'
+[   33.651603] cpuidle: using governor menu
+[   33.655084] efi: Freeing EFI boot services memory: 42776K
+[   33.655588] acpiphp: ACPI Hot Plug PCI Controller Driver version: 0.5
+[   33.656893] PCI: ECAM [mem 0xe0000000-0xefffffff] (base 0xe0000000) for domain 0000 [bus 00-ff]
+[   33.657597] PCI: Using configuration type 1 for base access
+[   33.658634] virt/tdx: TDX not supported by the host platform
+[   33.659626] kprobes: kprobe jump-optimization is enabled. All kprobes are optimized if possible.
+[   33.659743] HugeTLB: registered 1.00 GiB page size, pre-allocated 0 pages
+[   33.659743] HugeTLB: 16380 KiB vmemmap can be freed for a 1.00 GiB page
+[   33.659743] HugeTLB: registered 2.00 MiB page size, pre-allocated 0 pages
+[   33.659743] HugeTLB: 28 KiB vmemmap can be freed for a 2.00 MiB page
+[   33.676855] raid6: using avx512x2 recovery algorithm
+[   33.677213] fbcon: Taking over console
+[   33.677236] ACPI: Added _OSI(Module Device)
+[   33.677237] ACPI: Added _OSI(Processor Device)
+[   33.677238] ACPI: Added _OSI(Processor Aggregator Device)
+[   33.678329] ACPI: 1 ACPI AML tables successfully acquired and loaded
+[   33.680045] ACPI: \_SB_: platform _OSC: OS support mask [006e7eff]
+[   33.680199] ACPI: Interpreter enabled
+[   33.680211] ACPI: PM: (supports S0 S3 S4 S5)
+[   33.680213] ACPI: Using IOAPIC for interrupt routing
+[   33.680299] PCI: Using host bridge windows from ACPI; if necessary, use "pci=nocrs" and report a bug
+[   33.680302] PCI: Ignoring E820 reservations for host bridge windows
+[   33.680441] ACPI: Enabled 2 GPEs in block 00 to 3F
+[   33.683707] ACPI: PCI Root Bridge [PCI0] (domain 0000 [bus 00-ff])
+[   33.683716] acpi PNP0A08:00: _OSC: OS supports [ExtendedConfig ASPM ClockPM Segments MSI EDR HPX-Type3]
+[   33.683757] acpi PNP0A08:00: _OSC: platform does not support [PCIeHotplug LTR DPC]
+[   33.683808] acpi PNP0A08:00: _OSC: OS now controls [SHPCHotplug PME AER PCIeCapability]
+[   33.684454] PCI host bridge to bus 0000:00
+[   33.684459] pci_bus 0000:00: root bus resource [io  0x0000-0x0cf7 window]
+[   33.684462] pci_bus 0000:00: root bus resource [io  0x0d00-0xffff window]
+[   33.684465] pci_bus 0000:00: root bus resource [mem 0x000a0000-0x000bffff window]
+[   33.684467] pci_bus 0000:00: root bus resource [mem 0x80000000-0xdfffffff window]
+[   33.684470] pci_bus 0000:00: root bus resource [mem 0xf0000000-0xfebfffff window]
+[   33.684472] pci_bus 0000:00: root bus resource [mem 0x380000000000-0x3807ffffffff window]
+[   33.684475] pci_bus 0000:00: root bus resource [bus 00-ff]
+[   33.684477] acpi PNP0A08:00: OS native features: SHPCHotplug+ PCIeHotplug- PME+ AER+ DPC- LTR-
+[   33.684707] pci 0000:00:00.0: [8086:29c0] type 00 class 0x060000 conventional PCI endpoint
+[   33.688303] pci 0000:00:01.0: [1af4:1050] type 00 class 0x030000 conventional PCI endpoint
+[   33.689648] pci 0000:00:01.0: BAR 0 [mem 0x80000000-0x807fffff pref]
+[   33.689753] pci 0000:00:01.0: BAR 2 [mem 0x380000000000-0x380000003fff 64bit pref]
+[   33.689783] pci 0000:00:01.0: BAR 4 [mem 0x80887000-0x80887fff]
+[   33.689855] pci 0000:00:01.0: ROM [mem 0xffff0000-0xffffffff pref]
+[   33.690038] pci 0000:00:01.0: Video device with shadowed ROM at [mem 0x000c0000-0x000dffff]
+[   33.692167] pci 0000:00:02.0: [1b36:000d] type 00 class 0x0c0330 PCIe Root Complex Integrated Endpoint
+[   33.693661] pci 0000:00:02.0: BAR 0 [mem 0x38000000c000-0x38000000ffff 64bit]
+[   33.693977] pci 0000:00:02.0: enabling Extended Tags
+[   33.695911] pci 0000:00:03.0: [8086:2668] type 00 class 0x040300 conventional PCI endpoint
+[   33.698501] pci 0000:00:03.0: BAR 0 [mem 0x80880000-0x80883fff]
+[   33.700622] pci 0000:00:04.0: [1af4:1000] type 00 class 0x020000 conventional PCI endpoint
+[   33.703462] pci 0000:00:04.0: BAR 0 [io  0x60e0-0x60ff]
+[   33.703504] pci 0000:00:04.0: BAR 1 [mem 0x80886000-0x80886fff]
+[   33.703621] pci 0000:00:04.0: BAR 4 [mem 0x380000004000-0x380000007fff 64bit pref]
+[   33.703674] pci 0000:00:04.0: ROM [mem 0xfff80000-0xffffffff pref]
+[   33.707014] pci 0000:00:05.0: [1af4:1001] type 00 class 0x010000 conventional PCI endpoint
+[   33.709513] pci 0000:00:05.0: BAR 0 [io  0x6000-0x607f]
+[   33.709553] pci 0000:00:05.0: BAR 1 [mem 0x80885000-0x80885fff]
+[   33.709707] pci 0000:00:05.0: BAR 4 [mem 0x380000008000-0x38000000bfff 64bit pref]
+[   33.714024] pci 0000:00:1f.0: [8086:2918] type 00 class 0x060100 conventional PCI endpoint
+[   33.715847] pci 0000:00:1f.0: quirk: [io  0x0600-0x067f] claimed by ICH6 ACPI/GPIO/TCO
+[   33.716845] pci 0000:00:1f.2: [8086:2922] type 00 class 0x010601 conventional PCI endpoint
+[   33.719323] pci 0000:00:1f.2: BAR 4 [io  0x60c0-0x60df]
+[   33.719363] pci 0000:00:1f.2: BAR 5 [mem 0x80884000-0x80884fff]
+[   33.720984] pci 0000:00:1f.3: [8086:2930] type 00 class 0x0c0500 conventional PCI endpoint
+[   33.723080] pci 0000:00:1f.3: BAR 4 [io  0x6080-0x60bf]
+[   33.730998] ACPI: PCI: Interrupt link LNKA configured for IRQ 10
+[   33.731148] ACPI: PCI: Interrupt link LNKB configured for IRQ 10
+[   33.731292] ACPI: PCI: Interrupt link LNKC configured for IRQ 11
+[   33.731435] ACPI: PCI: Interrupt link LNKD configured for IRQ 11
+[   33.731593] ACPI: PCI: Interrupt link LNKE configured for IRQ 10
+[   33.731718] ACPI: PCI: Interrupt link LNKF configured for IRQ 10
+[   33.731895] ACPI: PCI: Interrupt link LNKG configured for IRQ 11
+[   33.732031] ACPI: PCI: Interrupt link LNKH configured for IRQ 11
+[   33.732103] ACPI: PCI: Interrupt link GSIA configured for IRQ 16
+[   33.732109] ACPI: PCI: Interrupt link GSIB configured for IRQ 17
+[   33.732113] ACPI: PCI: Interrupt link GSIC configured for IRQ 18
+[   33.732118] ACPI: PCI: Interrupt link GSID configured for IRQ 19
+[   33.732122] ACPI: PCI: Interrupt link GSIE configured for IRQ 20
+[   33.732128] ACPI: PCI: Interrupt link GSIF configured for IRQ 21
+[   33.732135] ACPI: PCI: Interrupt link GSIG configured for IRQ 22
+[   33.732140] ACPI: PCI: Interrupt link GSIH configured for IRQ 23
+[   33.732616] iommu: Default domain type: Translated
+[   33.732616] iommu: DMA domain TLB invalidation policy: lazy mode
+[   33.738718] SCSI subsystem initialized
+[   33.738749] ACPI: bus type USB registered
+[   33.738749] usbcore: registered new interface driver usbfs
+[   33.738749] usbcore: registered new interface driver hub
+[   33.738749] usbcore: registered new device driver usb
+[   33.739597] pps_core: LinuxPPS API ver. 1 registered
+[   33.739599] pps_core: Software ver. 5.3.6 - Copyright 2005-2007 Rodolfo Giometti <giometti@linux.it>
+[   33.739603] PTP clock support registered
+[   33.739652] EDAC MC: Ver: 3.0.0
+[   33.740585] efivars: Registered efivars operations
+[   33.740742] NetLabel: Initializing
+[   33.740745] NetLabel:  domain hash size = 128
+[   33.740746] NetLabel:  protocols = UNLABELED CIPSOv4 CALIPSO
+[   33.740756] NetLabel:  unlabeled traffic allowed by default
+[   33.740759] mctp: management component transport protocol core
+[   33.740761] NET: Registered PF_MCTP protocol family
+[   33.740771] PCI: Using ACPI for IRQ routing
+[   33.984768] e820: register RAM buffer resource [mem 0x0080b000-0x008fffff]
+[   33.984870] e820: register RAM buffer resource [mem 0x00814000-0x008fffff]
+[   33.984873] e820: register RAM buffer resource [mem 0x7e02c000-0x7fffffff]
+[   33.984875] e820: register RAM buffer resource [mem 0x7ed3f000-0x7fffffff]
+[   33.984876] e820: register RAM buffer resource [mem 0x7f8ed000-0x7fffffff]
+[   33.984878] e820: register RAM buffer resource [mem 0x7fedc000-0x7fffffff]
+[   33.984946] pci 0000:00:01.0: vgaarb: setting as boot VGA device
+[   33.984946] pci 0000:00:01.0: vgaarb: bridge control possible
+[   33.984946] pci 0000:00:01.0: vgaarb: VGA device added: decodes=io+mem,owns=io+mem,locks=none
+[   33.984946] vgaarb: loaded
+[   33.984946] hpet0: at MMIO 0xfed00000, IRQs 2, 8, 0
+[   33.984946] hpet0: 3 comparators, 64-bit 100.000000 MHz counter
+[   33.988020] clocksource: Switched to clocksource kvm-clock
+[   33.992800] acpi PNP0C01:00: Reserved [mem 0xe0000000-0xefffffff]
+[   33.992829] pnp: PnP ACPI init
+[   33.993493] pnp: PnP ACPI: found 4 devices
+[   34.003181] clocksource: acpi_pm: mask: 0xffffff max_cycles: 0xffffff, max_idle_ns: 2085701024 ns
+[   34.003238] NET: Registered PF_INET protocol family
+[   34.003630] IP idents hash table entries: 131072 (order: 8, 1048576 bytes, linear)
+[   34.004801] tcp_listen_portaddr_hash hash table entries: 4096 (order: 4, 65536 bytes, linear)
+[   34.004825] Table-perturb hash table entries: 65536 (order: 6, 262144 bytes, linear)
+[   34.004861] TCP established hash table entries: 65536 (order: 7, 524288 bytes, linear)
+[   34.005322] TCP bind hash table entries: 65536 (order: 9, 2097152 bytes, linear)
+[   34.005501] TCP: Hash tables configured (established 65536 bind 65536)
+[   34.005846] MPTCP token hash table entries: 8192 (order: 6, 196608 bytes, linear)
+[   34.005917] UDP hash table entries: 4096 (order: 6, 262144 bytes, linear)
+[   34.006014] NET: Registered PF_UNIX/PF_LOCAL protocol family
+[   34.006022] NET: Registered PF_XDP protocol family
+[   34.006030] pci 0000:00:04.0: ROM [mem 0xfff80000-0xffffffff pref]: can't claim; no compatible bridge window
+[   34.006042] pci 0000:00:04.0: ROM [mem 0x80800000-0x8087ffff pref]: assigned
+[   34.006048] pci_bus 0000:00: resource 4 [io  0x0000-0x0cf7 window]
+[   34.006050] pci_bus 0000:00: resource 5 [io  0x0d00-0xffff window]
+[   34.006053] pci_bus 0000:00: resource 6 [mem 0x000a0000-0x000bffff window]
+[   34.006055] pci_bus 0000:00: resource 7 [mem 0x80000000-0xdfffffff window]
+[   34.006057] pci_bus 0000:00: resource 8 [mem 0xf0000000-0xfebfffff window]
+[   34.006059] pci_bus 0000:00: resource 9 [mem 0x380000000000-0x3807ffffffff window]
+[   34.006434] ACPI: \_SB_.GSIG: Enabled at IRQ 22
+[   34.007694] PCI: CLS 0 bytes, default 64
+[   34.007920] PCI-DMA: Using software bounce buffering for IO (SWIOTLB)
+[   34.007923] software IO TLB: mapped [mem 0x0000000077ebe000-0x000000007bebe000] (64MB)
+[   34.007995] Trying to unpack rootfs image as initramfs...
+[   34.008015] clocksource: tsc: mask: 0xffffffffffffffff max_cycles: 0x26eb3e3cc63, max_idle_ns: 440795236593 ns
+[   34.020465] Initialise system trusted keyrings
+[   34.020491] Key type blacklist registered
+[   34.022711] workingset: timestamp_bits=36 (anon: 31) max_order=21 bucket_order=0 (anon: 0)
+[   34.069765] integrity: Platform Keyring initialized
+[   34.069777] integrity: Machine keyring initialized
+[   34.069974] cryptd: max_cpu_qlen set to 1000
+[   34.079214] NET: Registered PF_ALG protocol family
+[   34.079227] Key type asymmetric registered
+[   34.079230] Asymmetric key parser 'x509' registered
+[   34.081020] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 244)
+[   34.082046] io scheduler mq-deadline registered
+[   34.082050] io scheduler kyber registered
+[   34.082079] io scheduler bfq registered
+[   34.082180] raid6: skipped pq benchmark and selected avx512x4
+[   34.085991] atomic64_test: passed for x86-64 platform with CX8 and with SSE
+[   34.086209] input: Power Button as /devices/platform/LNXPWRBN:00/input/input0
+[   34.086319] ACPI: button: Power Button [PWRF]
+[   34.088573] ACPI: \_SB_.GSIF: Enabled at IRQ 21
+[   34.091972] ACPI: \_SB_.GSIE: Enabled at IRQ 20
+[   34.098173] Serial: 8250/16550 driver, 32 ports, IRQ sharing enabled
+[   34.105440] 00:03: ttyS0 I/O:0x3f8 (irq = 4, base_baud = 115200) is a 16550A
+[   34.116169] Non-volatile memory driver v1.3
+[   34.116309] ACPI: bus type drm_connector registered
+[   34.118775] virtio_blk virtio2: 4/0/0 default/read/poll queues
+[   34.125159] virtio_blk virtio2: [vda] 134217728 512-byte logical blocks (68.7 GB/64.0 GiB)
+[   34.126710]  vda: vda1 vda2 vda3
+[   34.127408] ACPI: \_SB_.GSIA: Enabled at IRQ 16
+[   34.129848] ahci 0000:00:1f.2: AHCI vers 0001.0000, 32 command slots, 1.5 Gbps, SATA mode
+[   34.129854] ahci 0000:00:1f.2: 6/6 ports implemented (port mask 0x3f)
+[   34.129855] ahci 0000:00:1f.2: flags: 64bit ncq only 
+[   34.132532] scsi host0: ahci
+[   34.132680] scsi host1: ahci
+[   34.132798] scsi host2: ahci
+[   34.132954] scsi host3: ahci
+[   34.133078] scsi host4: ahci
+[   34.133184] scsi host5: ahci
+[   34.133239] ata1: SATA max UDMA/133 abar m4096@0x80884000 port 0x80884100 irq 29 lpm-pol 1
+[   34.133261] ata2: SATA max UDMA/133 abar m4096@0x80884000 port 0x80884180 irq 29 lpm-pol 1
+[   34.133282] ata3: SATA max UDMA/133 abar m4096@0x80884000 port 0x80884200 irq 29 lpm-pol 1
+[   34.133302] ata4: SATA max UDMA/133 abar m4096@0x80884000 port 0x80884280 irq 29 lpm-pol 1
+[   34.133320] ata5: SATA max UDMA/133 abar m4096@0x80884000 port 0x80884300 irq 29 lpm-pol 1
+[   34.133338] ata6: SATA max UDMA/133 abar m4096@0x80884000 port 0x80884380 irq 29 lpm-pol 1
+[   34.133714] CAN device driver interface
+[   34.134680] xhci_hcd 0000:00:02.0: xHCI Host Controller
+[   34.137182] xhci_hcd 0000:00:02.0: new USB bus registered, assigned bus number 1
+[   34.144161] xhci_hcd 0000:00:02.0: hcc params 0x00087001 hci version 0x100 quirks 0x0000000000000010
+[   34.148028] xhci_hcd 0000:00:02.0: xHCI Host Controller
+[   34.148073] xhci_hcd 0000:00:02.0: new USB bus registered, assigned bus number 2
+[   34.148083] xhci_hcd 0000:00:02.0: Host supports USB 3.0 SuperSpeed
+[   34.148382] usb usb1: New USB device found, idVendor=1d6b, idProduct=0002, bcdDevice= 7.03
+[   34.148426] usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[   34.148429] usb usb1: Product: xHCI Host Controller
+[   34.148431] usb usb1: Manufacturer: Linux 7.3.6-200.fc44.x86_64 xhci-hcd
+[   34.148432] usb usb1: SerialNumber: 0000:00:02.0
+[   34.148527] hub 1-0:1.0: USB hub found
+[   34.148701] hub 1-0:1.0: 4 ports detected
+[   34.149355] usb usb2: We don't know the algorithms for LPM for this host, disabling LPM.
+[   34.149360] usb usb2: New USB device found, idVendor=1d6b, idProduct=0003, bcdDevice= 7.03
+[   34.149384] usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[   34.149387] usb usb2: Product: xHCI Host Controller
+[   34.149389] usb usb2: Manufacturer: Linux 7.3.6-200.fc44.x86_64 xhci-hcd
+[   34.149391] usb usb2: SerialNumber: 0000:00:02.0
+[   34.149463] hub 2-0:1.0: USB hub found
+[   34.149592] hub 2-0:1.0: 4 ports detected
+[   34.151033] usbcore: registered new interface driver usbserial_generic
+[   34.151042] usbserial: USB Serial support registered for generic
+[   34.151075] i8042: PNP: PS/2 Controller [PNP0303:KBD,PNP0f13:MOU] at 0x60,0x64 irq 1,12
+[   34.154523] serio: i8042 KBD port at 0x60,0x64 irq 1
+[   34.154535] serio: i8042 AUX port at 0x60,0x64 irq 12
+[   34.154702] mousedev: PS/2 mouse device common for all mice
+[   34.154787] rtc_cmos PNP0B00:00: RTC can wake from S4
+[   34.159229] rtc_cmos PNP0B00:00: registered as rtc0
+[   34.159690] rtc_cmos PNP0B00:00: setting system clock to 2026-11-28T07:18:53 UTC (1795850333)
+[   34.160051] rtc_cmos PNP0B00:00: alarms up to one day, y3k, 242 bytes nvram
+[   34.160102] device-mapper: core: CONFIG_IMA_DISABLE_HTABLE is disabled. Duplicate IMA measurements will not be recorded in the IMA log.
+[   34.160114] device-mapper: uevent: version 1.0.3
+[   34.160179] device-mapper: ioctl: 4.50.0-ioctl (2025-04-28) initialised: dm-devel@lists.linux.dev
+[   34.160376] input: AT Translated Set 2 keyboard as /devices/platform/i8042/serio0/input/input1
+[   34.160611] intel_pstate: CPU model not supported
+[   34.161054] simple-framebuffer simple-framebuffer.0: [drm] Registered 1 planes with drm panic
+[   34.166100] [drm] Initialized simpledrm 1.0.0 for simple-framebuffer.0 on minor 0
+[   34.172756] input: VirtualPS/2 VMware VMMouse as /devices/platform/i8042/serio1/input/input4
+[   34.173660] input: VirtualPS/2 VMware VMMouse as /devices/platform/i8042/serio1/input/input3
+[   34.190415] Console: switching to colour frame buffer device 160x50
+[   34.192532] simple-framebuffer simple-framebuffer.0: [drm] fb0: simpledrmdrmfb frame buffer device
+[   34.192612] hid: raw HID events driver (C) Jiri Kosina
+[   34.192653] usbcore: registered new interface driver usbhid
+[   34.192659] usbhid: USB HID core driver
+[   34.192796] drop_monitor: Initializing network drop monitor service
+[   34.193716] Initializing XFRM netlink socket
+[   34.193768] NET: Registered PF_INET6 protocol family
+[   34.194317] Segment Routing with IPv6
+[   34.194330] RPL Segment Routing with IPv6
+[   34.194340] In-situ OAM (IOAM) with IPv6
+[   34.194361] mip6: Mobile IPv6
+[   34.194367] NET: Registered PF_PACKET protocol family
+[   34.194373] can: controller area network core
+[   34.194388] NET: Registered PF_CAN protocol family
+[   34.197816] IPI shorthand broadcast: enabled
+[   34.199604] sched_clock: Marking stable (782016829, 33416927725)->(49166806063, -14967861509)
+[   34.208598] registered taskstats version 1
+[   34.214811] Loading compiled-in X.509 certificates
+[   34.215337] alg: No test for mldsa87 (mldsa87-lib)
+[   34.215672] Loaded X.509 cert 'Fedora kernel signing key: b4a17de8087ddf4600be62cf1852d8a7f65b0c33'
+[   34.251699] Freeing initrd memory: 67420K
+[   34.269515] Loaded X.509 cert 'Fedora IMA CA: a8a00c31663f853f9c6ff2564872e378af026b28'
+[   34.275082] Demotion targets for Node 0: null
+[   34.275312] page_owner is disabled
+[   34.275548] Key type .fscrypt registered
+[   34.275727] Key type fscrypt-provisioning registered
+[   34.279923] Btrfs loaded, zoned=yes, fsverity=yes
+[   34.280666] Key type big_key registered
+[   34.281345] Key type encrypted registered
+[   34.281488] ima: No TPM chip found, activating TPM-bypass!
+[   34.281658] Loading compiled-in module X.509 certificates
+[   34.282425] Loaded X.509 cert 'Fedora kernel signing key: b4a17de8087ddf4600be62cf1852d8a7f65b0c33'
+[   34.283412] ima: Allocated hash algorithm: sha256
+[   34.287210] ima: No architecture policies found
+[   34.287429] evm: Initialising EVM extended attributes:
+[   34.287610] evm: security.selinux
+[   34.287778] evm: security.SMACK64 (disabled)
+[   34.288012] evm: security.SMACK64EXEC (disabled)
+[   34.288174] evm: security.SMACK64TRANSMUTE (disabled)
+[   34.288333] evm: security.SMACK64MMAP (disabled)
+[   34.288488] evm: security.apparmor (disabled)
+[   34.288640] evm: security.ima
+[   34.288791] evm: security.capability
+[   34.289002] evm: HMAC attrs: 0x1
+[   34.294732] alg: No test for 842 (842-scomp)
+[   34.298249] alg: No test for mldsa65 (mldsa65-lib)
+[   34.298297] alg: No test for mldsa44 (mldsa44-lib)
+[   34.312075] PM:   Magic number: 2:149:320
+[   34.312260] tty tty45: hash matches
+[   34.313702] RAS: Correctable Errors collector initialized.
+[   34.314668] clk: Disabling unused clocks
+[   34.314811] PM: genpd: Disabling unused power domains
+[   34.388976] usb 1-1: new high-speed USB device number 2 using xhci_hcd
+[   34.460597] ata1: SATA link down (SStatus 0 SControl 300)
+[   34.461335] ata5: SATA link down (SStatus 0 SControl 300)
+[   34.462034] ata6: SATA link down (SStatus 0 SControl 300)
+[   34.462782] ata3: SATA link up 1.5 Gbps (SStatus 113 SControl 300)
+[   34.463678] ata2: SATA link down (SStatus 0 SControl 300)
+[   34.464076] ata3.00: ATAPI: QEMU DVD-ROM, 2.5+, max UDMA/100
+[   34.464311] ata3.00: applying bridge limits
+[   34.465348] ata4: SATA link down (SStatus 0 SControl 300)
+[   34.466161] ata3.00: configured for UDMA/100
+[   34.467339] scsi 2:0:0:0: CD-ROM            QEMU     QEMU DVD-ROM     2.5+ PQ: 0 ANSI: 5
+[   34.484463] sr 2:0:0:0: [sr0] scsi3-mmc drive: 4x/4x cd/rw xa/form2 tray
+[   34.496253] cdrom: Uniform CD-ROM driver Revision: 3.20
+[   34.502829] sr 2:0:0:0: Attached scsi generic sg0 type 5
+[   34.515145] usb 1-1: New USB device found, idVendor=0627, idProduct=0001, bcdDevice= 0.00
+[   34.519142] usb 1-1: New USB device strings: Mfr=1, Product=3, SerialNumber=10
+[   34.519300] usb 1-1: Product: QEMU USB Tablet
+[   34.519446] usb 1-1: Manufacturer: QEMU
+[   34.519604] usb 1-1: SerialNumber: 28754-0000:00:02.0-1
+[   34.521834] input: QEMU QEMU USB Tablet as /devices/pci0000:00/0000:00:02.0/usb1/1-1/1-1:1.0/0003:0627:0001.0001/input/input5
+[   34.522600] hid-generic 0003:0627:0001.0001: input,hidraw0: USB HID v0.01 Mouse [QEMU QEMU USB Tablet] on usb-0000:00:02.0-1/input0
+[   34.530962] Freeing unused decrypted memory: 2028K
+[   34.532335] Freeing unused kernel image (initmem) memory: 5376K
+[   34.532516] Write protecting the kernel read-only data: 47104k
+[   34.536528] Freeing unused kernel image (text/rodata gap) memory: 1832K
+[   34.538109] Freeing unused kernel image (rodata/data gap) memory: 1488K
+[   34.545434] x86/mm: Checked W+X mappings: passed, no W+X pages found.
+[   34.545573] Run /init as init process
+P+q6E616D65\[   34.634984] usb 1-2: new high-speed USB device number 3 using xhci_hcd
+[   34.761282] usb 1-2: New USB device found, idVendor=0627, idProduct=0001, bcdDevice= 0.00
+[   34.765164] usb 1-2: New USB device strings: Mfr=1, Product=4, SerialNumber=11
+[   34.765299] usb 1-2: Product: QEMU USB Keyboard
+[   34.765408] usb 1-2: Manufacturer: QEMU
+[   34.765511] usb 1-2: SerialNumber: 68284-0000:00:02.0-2
+[   34.768181] input: QEMU QEMU USB Keyboard as /devices/pci0000:00/0000:00:02.0/usb1/1-2/1-2:1.0/0003:0627:0001.0002/input/input6
+[   34.835238] hid-generic 0003:0627:0001.0002: input,hidraw1: USB HID v1.11 Keyboard [QEMU QEMU USB Keyboard] on usb-0000:00:02.0-2/input0
+[   34.894318] PKCS7: Waived invalid module sig (has authattrs)
+[   34.901889] fuse: init (API version 7.46)
+[6n[32766;3276[   34.919124] systemd[1]: Successfully made /usr/ read-only.
+6H[6n[   35.028424] clocksource: Watchdog remote CPU 2 read timed out
+[!p]104\[0m[?7h[1G[0J[   35.254196] systemd[1]: systemd 259.10-1.fc44 running in system mode (+PAM +AUDIT +SELINUX -APPARMOR +IMA +IPE +SMACK +SECCOMP -GCRYPT +GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 -IDN +KMOD +LIBCRYPTSETUP +LIBCRYPTSETUP_PLUGINS +LIBFDISK +PCRE2 +PWQUALITY +P11KIT +QRENCODE +TPM2 +BZIP2 +LZ4 +XZ +ZLIB +ZSTD +BPF_FRAMEWORK +BTF +XKBCOMMON +UTMP +SYSVINIT +LIBARCHIVE)
+[   35.254699] systemd[1]: Detected virtualization kvm.
+[   35.254914] systemd[1]: Detected architecture x86-64.
+[   35.255140] systemd[1]: Running in initrd.
+[0;1;39mBooting initrd of [0m[38;5;208mFaradayOS v0.92e dracut-108-8.fc44 (Initramfs)[0m[0;1;39m.[0m
+[   35.267394] systemd[1]: Hostname set to <faradayos>.
+]3008;start=b824a8e0fa81440f9f2fa30bbeff17b2;user=root;hostname=faradayos;machineid=350353dd97fd456eb199aa74d9acafed;bootid=1bc6c9413de3401ea6630ddbe3f02223;pid=1;pidfdid=1;comm=systemd;type=boot\[   35.322476] systemd[1]: bpf-restrict-fs: LSM BPF program attached
+[   35.357152] systemd[1]: /usr/lib/systemd/system/systemd-udevd.service:56: System call bpf cannot be resolved as libseccomp is not available, ignoring: Operation not supported
+[   35.369385] systemd[1]: Queued start job for default target initrd.target.
+[   35.376491] systemd[1]: Expecting device dev-disk-by\x2duuid-c3696282\x2d1fa0\x2d42e6\x2d9dd7\x2d1be3366a43a1.device - /dev/disk/by-uuid/c3696282-1fa0-42e6-9dd7-1be3366a43a1...
+         Expecting device [0;1;39mdev-disk-by\x2duu…[0m6282-1fa0-42e6-9dd7-1be3366a43a1...
+[[0;32m  OK  [0m] Reached target [0;1;39minit[   35.384023] systemd[1]: Reached target initrd-usr-fs.target - Initrd /usr File System.
+rd-usr-fs.target[0m - Initrd /usr File System.
+[   35.388810] systemd[1]: Reached target slices.target - Slice Units.
+[[0;32m  OK  [0m] Reached target [0;1;39mslices.target[0m - Slice Units.
+[   35.392550] systemd[1]: Reached target swap.target - Swaps.
+[[0;32m  OK  [0m] Reached target [0;1;39mswap.target[0m - Swaps.
+[[0;32m  OK  [[   35.396257] systemd[1]: Reached target timers.target - Timer Units.
+0m] Reached target [0;1;39mtimers.target[0m - Timer Units.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-journald-dev-�[   35.399985] systemd[1]: Listening on systemd-journald-dev-log.socket - Journal Socket (/dev/log).
+��socket[0m - Journal Socket (/dev/log).
+[   35.404503] systemd[1]: Listening on systemd-journald.socket - Journal Sockets.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-journald.socket[0m - Journal Sockets.
+[   35.408789] systemd[1]: Listening on systemd-udevd-control.socket - udev Control Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-udevd-control.socket[0m - udev Control Socket.
+[   35.413813] systemd[1]: Listening on systemd-udevd-kernel.socket - udev Kernel Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-udevd-kernel.socket[0m - udev Kernel Socket.
+[   35.418605] systemd[1]: Reached target sockets.target - Socket Units.
+[[0;32m  OK  [0m] Reached target [0;1;39msockets.target[0m - Socket Units.
+         Startin[   35.422995] systemd[1]: Starting kmod-static-nodes.service - Create List of Static Device Nodes...
+g [0;1;39mkmod-static-nodes.service[0m…eate List of Static Device Nodes...
+[   35.427946] systemd[1]: memstrack.service - Memstrack Anylazing Service skipped, no trigger condition checks were met.
+[   35.436743] systemd[1]: Starting systemd-journald.service - Journal Service...
+         Starting [0;1;39msystemd-journald.service[0m - Journal Service...
+[   35.448422] systemd[1]: Starting systemd-modules-load.service - Load Kernel Modules...
+         Starting [0;1;39msystemd-modules-load.service[0m - Load Kernel Modules...
+[   35.453036] systemd[1]: systemd-pcrphase-initrd.service - TPM PCR Barrier (initrd) skipped, unmet condition check ConditionSecurity=measured-uki
+[   35.454774] systemd-journald[224]: Collecting audit messages is disabled.
+[   35.455381] systemd[1]: Starting systemd-vconsole-setup.service - Virtual Console Setup...
+         Starting [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup...
+[   35.465889] i2c_dev: i2c /dev entries driver
+[   35.467696] systemd[1]: Finished kmod-static-nodes.service - Create List of Static Device Nodes.
+[[0;32m  OK  [0m] Finished [0;1;39mkmod-static-nodes.service[0m…Create List of Static Device Nodes.
+[   35.473773] systemd[1]: Finished systemd-modules-load.service - Load Kernel Modules.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-modules-load.service[0m - Load Kernel Modules.
+         Starting [0;1;39msystemd-sysctl.service[0m - Apply Kernel Variables...
+[   35.480595] systemd[1]: Starting systemd-sysctl.service - Apply Kernel Variables...
+         Starting [0;1;39msystemd-tmpfiles-setu[   35.485982] systemd[1]: Starting systemd-tmpfiles-setup-dev-early.service - Create Static Device Nodes in /dev gracefully...
+p-de…[0m Devi[   35.486521] systemd[1]: Started systemd-journald.service - Journal Service.
+ce Nodes in /dev gracefully...
+[[0;32m  OK  [0m] Started [0;1;39msystemd-journald.service[0m - Journal Service.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup.
+         Starting [0;1;39mdracut-cmdline-ask.servic…[0mor additional cmdline parameters...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-sysctl.service[0m - Apply Kernel Variables.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-tmpfiles-setup-de…[0mic Device Nodes in /dev gracefully.
+         Starting [0;1;39msystemd-tmpfiles-setup-de…[0meate Static Device Nodes in /dev...
+[[0;32m  OK  [0m] Finished [0;1;39mdracut-cmdline-ask.servic…[0m for additional cmdline parameters.
+         Starting [0;1;39mdracut-cmdline.service[0m - dracut cmdline hook...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-tmpfiles-setup-de…[0mCreate Static Device Nodes in /dev.
+[[0;32m  OK  [0m] Reached target [0;1;39mlocal-fs-pre.target[0m…Preparation for Local File Systems.
+[[0;32m  OK  [0m] Reached target [0;1;39mlocal-fs.target[0m - Local File Systems.
+         Starting [0;1;39msystemd-tmpfiles-setup.se…[0mate System Files and Directories...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-tmpfiles-setup.se…[0mreate System Files and Directories.
+[[0;32m  OK  [0m] Finished [0;1;39mdracut-cmdline.service[0m - dracut cmdline hook.
+         Starting [0;1;39mdracut-pre-udev.service[0m - dracut pre-udev hook...
+[[0;32m  OK  [0m] Finished [0;1;39mdracut-pre-udev.service[0m - dracut pre-udev hook.
+         Starting [0;1;39msystemd-udevd.service[0m - R…ager for Device Events and Files...
+[[0;32m  OK  [0m] Started [0;1;39msystemd-udevd.service[0m - Ru…anager for Device Events and Files.
+         Starting [0;1;39msystemd-udev-trigger.service[0m - Coldplug All udev Devices...
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-modprobe.slice[0m - Slice /system/modprobe.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-udev-trigger.service[0m - Coldplug All udev Devices.
+         Starting [0;1;39mdracut-initqueue.service[0m - dracut initqueue hook...
+         Starting [0;1;39mplymouth-start.service[0m - Show Plymouth Boot Screen...
+[[0;32m  OK  [0m] Started [0;1;39mplymouth-start.service[0m - Show Plymouth Boot Screen.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-ask-password-plymo…[0mquests to Plymouth Directory Watch.
+[[0;32m  OK  [0m] Reached target [0;1;39mpaths.target[0m - Path Units.
+[[0;32m  OK  [0m] Found device [0;1;39mdev-disk-by\x2duuid-c…[0m696282-1fa0-42e6-9dd7-1be3366a43a1.
+[[0;32m  OK  [0m] Reached target [0;1;39minitrd-root-device.target[0m - Initrd Root Device.
+[0;21;39m[drm] pci: virtio-vga detected at 0000:00:01.0[0m
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup.
+         Stopping [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup...
+[0;21;39mConsole: switching to colour dummy device 80x25[0m
+         Starting [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup...
+[0;21;39mvirtio-pci 0000:00:01.0: vgaarb: deactivate vga console[0m
+[0;21;39m[drm] features: +virgl +edid -resource_blob -host_visible[0m
+[0;21;39m[drm] features: +context_init -blob_alignment[0m
+[0;21;39m[drm] number of scanouts: 1[0m
+[0;21;39m[drm] number of cap sets: 2[0m
+[0;21;39m[drm] cap set 0: id 1, max-version 1, max-size 308[0m
+[0;21;39m[drm] cap set 1: id 2, max-version 2, max-size 1408[0m
+[0;21;39mvirtio-pci 0000:00:01.0: [drm] Registered 1 planes with drm panic[0m
+[0;21;39m[drm] Initialized virtio_gpu 0.1.0 for 0000:00:01.0 on minor 1[0m
+[0;21;39mfbcon: virtio_gpudrmfb (fb0) is primary device[0m
+[0;21;39mConsole: switching to colour frame buffer device 240x67[0m
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup.
+[0;21;39mvirtio-pci 0000:00:01.0: [drm] fb0: virtio_gpudrmfb frame buffer device[0m
+         Starting [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup...
+[[0;32m  OK  [0m] Finished [0;1;39mdracut-initqueue.service[0m - dracut initqueue hook.
+[[0;32m  OK  [0m] Reached target [0;1;39mremote-fs-pre.targe…[0mreparation for Remote File Systems.
+[[0;32m  OK  [0m] Reached target [0;1;39mremote-fs.target[0m - Remote File Systems.
+         Starting [0;1;39mdracut-pre-mount.service[0m - dracut pre-mount hook...
+[[0;32m  OK  [0m] Finished [0;1;39mdracut-pre-mount.service[0m - dracut pre-mount hook.
+         Starting [0;1;39msystemd-fsck-root.service[0m…6282-1fa0-42e6-9dd7-1be3366a43a1...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-fsck-root.service[0m…696282-1fa0-42e6-9dd7-1be3366a43a1.
+         Mounting [0;1;39msys-kernel-config.mount[0m - Kernel Configuration File System...
+         Mounting [0;1;39msysroot.mount[0m - /sysroot...
+[[0;32m  OK  [0m] Mounted [0;1;39msys-kernel-config.mount[0m - Kernel Configuration File System.
+[0;21;39mBTRFS: device label anaconda_faradayos devid 1 transid 48 /dev/vda3 (253:3) scanned by mount (412)[0m
+[[0;32m  OK  [0m] Reached target [0;1;39msysinit.target[0m - System Initialization.
+[[0;32m  OK  [0m] Reached target [0;1;39mbasic.target[0m - Basic System.
+[0;21;39mBTRFS info (device vda3): first mount of filesystem c3696282-1fa0-42e6-9dd7-1be3366a43a1[0m
+[0;21;39mBTRFS info (device vda3): using crc32c checksum algorithm[0m
+[0;21;39mBTRFS info (device vda3): turning on async discard[0m
+[0;21;39mBTRFS info (device vda3): enabling free space tree[0m
+[[0;32m  OK  [0m] Mounted [0;1;39msysroot.mount[0m - /sysroot.
+[[0;32m  OK  [0m] Reached target [0;1;39minitrd-root-fs.target[0m - Initrd Root File System.
+         Starting [0;1;39minitrd-parse-etc.service[0m …ints Configured in the Real Root...
+[[0;32m  OK  [0m] Finished [0;1;39minitrd-parse-etc.service[0m …points Configured in the Real Root.
+[[0;32m  OK  [0m] Reached target [0;1;39minitrd-fs.target[0m - Initrd File Systems.
+[[0;32m  OK  [0m] Reached target [0;1;39minitrd.target[0m - Initrd Default Target.
+         Starting [0;1;39mdracut-pre-pivot.service[0m …racut pre-pivot and cleanup hook...
+[[0;32m  OK  [0m] Finished [0;1;39mdracut-pre-pivot.service[0m - dracut pre-pivot and cleanup hook.
+         Starting [0;1;39minitrd-cleanup.service[0m - …ing Up and Shutting Down Daemons...
+[[0;32m  OK  [0m] Stopped target [0;1;39mtimers.target[0m - Timer Units.
+[[0;32m  OK  [0m] Stopped [0;1;39mdracut-pre-pivot.service[0m - dracut pre-pivot and cleanup hook.
+[[0;32m  OK  [0m] Stopped target [0;1;39minitrd.target[0m - Initrd Default Target.
+[[0;32m  OK  [0m] Stopped target [0;1;39mbasic.target[0m - Basic System.
+[[0;32m  OK  [0m] Stopped target [0;1;39minitrd-root-device.target[0m - Initrd Root Device.
+[[0;32m  OK  [0m] Stopped target [0;1;39minitrd-usr-fs.target[0m - Initrd /usr File System.
+[[0;32m  OK  [0m] Stopped target [0;1;39mpaths.target[0m - Path Units.
+[[0;32m  OK  [0m] Stopped target [0;1;39mremote-fs.target[0m - Remote File Systems.
+[[0;32m  OK  [0m] Stopped target [0;1;39mremote-fs-pre.targe…[0mreparation for Remote File Systems.
+[[0;32m  OK  [0m] Stopped target [0;1;39mslices.target[0m - Slice Units.
+[[0;32m  OK  [0m] Stopped target [0;1;39msockets.target[0m - Socket Units.
+[[0;32m  OK  [0m] Stopped target [0;1;39msysinit.target[0m - System Initialization.
+[[0;32m  OK  [0m] Stopped target [0;1;39mswap.target[0m - Swaps.
+[[0;32m  OK  [0m] Stopped [0;1;39mdracut-pre-mount.service[0m - dracut pre-mount hook.
+[[0;32m  OK  [0m] Stopped [0;1;39mdracut-initqueue.service[0m - dracut initqueue hook.
+         Starting [0;1;39mplymouth-switch-root.serv…e[0m - Plymouth switch root service...
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-sysctl.service[0m - Apply Kernel Variables.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-modules-load.service[0m - Load Kernel Modules.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-tmpfiles-setup.ser…[0mreate System Files and Directories.
+[[0;32m  OK  [0m] Stopped target [0;1;39mlocal-fs.target[0m - Local File Systems.
+[[0;32m  OK  [0m] Stopped target [0;1;39mlocal-fs-pre.target[0m…Preparation for Local File Systems.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-udev-trigger.service[0m - Coldplug All udev Devices.
+         Stopping [0;1;39msystemd-udevd.service[0m - R…ager for Device Events and Files...
+[[0;32m  OK  [0m] Finished [0;1;39minitrd-cleanup.service[0m - …aning Up and Shutting Down Daemons.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-udevd.service[0m - Ru…anager for Device Events and Files.
+[[0;32m  OK  [0m] Closed [0;1;39msystemd-udevd-control.socket[0m - udev Control Socket.
+[[0;32m  OK  [0m] Stopped [0;1;39mdracut-pre-udev.service[0m - dracut pre-udev hook.
+[[0;32m  OK  [0m] Stopped [0;1;39mdracut-cmdline.service[0m - dracut cmdline hook.
+[[0;32m  OK  [0m] Stopped [0;1;39mdracut-cmdline-ask.service[0m… for additional cmdline parameters.
+         Starting [0;1;39minitrd-udevadm-cleanup-db.service[0m - Cleanup udev Database...
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-tmpfiles-setup-dev…[0mCreate Static Device Nodes in /dev.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-tmpfiles-setup-dev…[0mic Device Nodes in /dev gracefully.
+[[0;32m  OK  [0m] Stopped [0;1;39mkmod-static-nodes.service[0m …Create List of Static Device Nodes.
+[[0;32m  OK  [0m] Finished [0;1;39mplymouth-switch-root.service[0m - Plymouth switch root service.
+[[0;32m  OK  [0m] Finished [0;1;39minitrd-udevadm-cleanup-db.service[0m - Cleanup udev Database.
+[[0;32m  OK  [0m] Reached target [0;1;39minitrd-switch-root.target[0m - Switch Root.
+         Starting [0;1;39minitrd-switch-root.service[0m - Switch Root...
+[0;21;39msystemd-journald[224]: Received SIGTERM from PID 1 (systemd).[0m
+[0;21;32maudit: type=1404 audit(1795850336.130:2): enforcing=1 old_enforcing=0 auid=4294967295 ses=4294967295 enabled=1 old-enabled=1 lsm=selinux res=1[0m
+[0;21;39mSELinux:  Permission firmware_load in class system not defined in policy.[0m
+[0;21;39mSELinux:  Permission kexec_image_load in class system not defined in policy.[0m
+[0;21;39mSELinux:  Permission kexec_initramfs_load in class system not defined in policy.[0m
+[0;21;39mSELinux:  Permission policy_load in class system not defined in policy.[0m
+[0;21;39mSELinux:  Permission x509_certificate_load in class system not defined in policy.[0m
+[0;21;39mSELinux:  Permission map_create_as in class bpf not defined in policy.[0m
+[0;21;39mSELinux:  Permission prog_load_as in class bpf not defined in policy.[0m
+[0;21;39mSELinux:  Permission allowed in class io_uring not defined in policy.[0m
+[0;21;39mSELinux:  Class memfd_file not defined in policy.[0m
+[0;21;39mSELinux: the above unknown classes and permissions will be allowed[0m
+[0;21;39mSELinux:  policy capability network_peer_controls=1[0m
+[0;21;39mSELinux:  policy capability open_perms=1[0m
+[0;21;39mSELinux:  policy capability extended_socket_class=1[0m
+[0;21;39mSELinux:  policy capability always_check_network=0[0m
+[0;21;39mSELinux:  policy capability cgroup_seclabel=1[0m
+[0;21;39mSELinux:  policy capability nnp_nosuid_transition=1[0m
+[0;21;39mSELinux:  policy capability genfs_seclabel_symlinks=1[0m
+[0;21;39mSELinux:  policy capability ioctl_skip_cloexec=0[0m
+[0;21;39mSELinux:  policy capability userspace_initial_context=0[0m
+[0;21;39mSELinux:  policy capability netlink_xperm=0[0m
+[0;21;39mSELinux:  policy capability netif_wildcard=0[0m
+[0;21;39mSELinux:  policy capability genfs_seclabel_wildcard=0[0m
+[0;21;39mSELinux:  policy capability functionfs_seclabel=0[0m
+[0;21;39mSELinux:  policy capability memfd_class=0[0m
+[0;21;39mSELinux:  policy capability bpf_token_perms=0[0m
+[0;21;32maudit: type=1403 audit(1795850336.230:3): auid=4294967295 ses=4294967295 lsm=selinux res=1[0m
+[0;21;39msystemd[1]: Successfully loaded SELinux policy in 104.358ms.[0m
+P+q6E616D65\[0;21;39mNET: Registered PF_VSOCK protocol family[0m
+[0;21;39msystemd[1]: Relabeled /dev/, /dev/shm/, /run/ in 7.349ms.[0m
+[6n[32766;32766H[6n[!p]104\[0m[?7h[1G[0J[0;21;39msystemd[1]: systemd 259.10-1.fc44 running in system mode (+PAM +AUDIT +SELINUX -APPARMOR +IMA +IPE +SMACK +SECCOMP -GCRYPT +GNUTLS +OPENSSL +ACL +BLKID +CURL +ELFUTILS +FIDO2 +IDN2 -IDN +KMOD +LIBCRYPTSETUP +LIBCRYPTSETUP_PLUGINS +LIBFDISK +PCRE2 +PWQUALITY +P11KIT +QRENCODE +TPM2 +BZIP2 +LZ4 +XZ +ZLIB +ZSTD +BPF_FRAMEWORK +BTF +XKBCOMMON +UTMP +SYSVINIT +LIBARCHIVE)[0m
+[0;21;39msystemd[1]: Detected virtualization kvm.[0m
+[0;21;39msystemd[1]: Detected architecture x86-64.[0m
+
+[0;1;39mWelcome to [0m[38;5;208mFaradayOS v0.92e[0m[0;1;39m![0m
+
+]3008;start=21d13a6013fd4385aa45be130d3d158b;user=root;hostname=faradayos;machineid=350353dd97fd456eb199aa74d9acafed;bootid=1bc6c9413de3401ea6630ddbe3f02223;pid=1;pidfdid=1;comm=systemd;type=boot\[0;21;39msystemd[1]: bpf-restrict-fs: LSM BPF program attached[0m
+[0;21;39mzram: Added device: zram0[0m
+[[0;32m  OK  [0m] Stopped [0;1;39minitrd-switch-root.service[0m - Switch Root.
+[0;21;39msystemd[1]: initrd-switch-root.service: Deactivated successfully.[0m
+[0;21;39msystemd[1]: Stopped initrd-switch-root.service - Switch Root.[0m
+[0;21;39msystemd[1]: systemd-journald.service: Scheduled restart job, restart counter is at 1.[0m
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-akmods\x2dkey…lice[0m - Slice /system/akmods-keygen.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-getty.slice[0m - Slice /system/getty.
+[0;21;39msystemd[1]: Created slice system-akmods\x2dkeygen.slice - Slice /system/akmods-keygen.[0m
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-serial\x2dget…slice[0m - Slice /system/serial-getty.
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-systemd\x2dfs…slice[0m - Slice /system/systemd-fsck.
+[0;21;39msystemd[1]: Created slice system-getty.slice - Slice /system/getty.[0m
+[[0;32m  OK  [0m] Created slice [0;1;39msystem-systemd\x2dzr…[0m- Slice /system/systemd-zram-setup.
+[[0;32m  OK  [0m] Created slice [0;1;39muser.slice[0m - User and Session Slice.
+[0;21;39msystemd[1]: Created slice system-serial\x2dgetty.slice - Slice /system/serial-getty.[0m
+[[0;32m  OK  [0m] Started [0;1;39msystemd-ask-password-wall.…[0md Requests to Wall Directory Watch.
+[[0;32m  OK  [0m] Set up automount [0;1;39mproc-sys-fs-binfm…[0mormats File System Automount Point.
+         Expecting device [0;1;39mdev-disk-by\x2duu…ce[0m - /dev/disk/by-uuid/E27D-A22B...
+         Expecting device [0;1;39mdev-disk-by\x2duu…[0m6282-1fa0-42e6-9dd7-1be3366a43a1...
+[0;21;39msystemd[1]: Created slice system-systemd\x2dfsck.slice - Slice /system/systemd-fsck.[0m
+         Expecting device [0;1;39mdev-disk-by\x2duu…[0m2bbf-b7c6-4e31-9888-e9d01c6df178...
+         Expecting device [0;1;39mdev-ttyS0.device[0m - /dev/ttyS0...
+         Expecting device [0;1;39mdev-zram0.device[0m - /dev/zram0...
+[[0;32m  OK  [0m] Reached target [0;1;39mimports.target[0m - Image Downloads.
+[0;21;39msystemd[1]: Created slice system-systemd\x2dzram\x2dsetup.slice - Slice /system/systemd-zram-setup.[0m
+[[0;32m  OK  [0m] Stopped target [0;1;39minitrd-switch-root.target[0m - Switch Root.
+[[0;32m  OK  [0m] Stopped target [0;1;39minitrd-fs.target[0m - Initrd File Systems.
+[[0;32m  OK  [0m] Stopped target [0;1;39minitrd-root-fs.target[0m - Initrd Root File System.
+[[0;32m  OK  [0m] Reached target [0;1;39mintegritysetup.targ…[0m Local Integrity Protected Volumes.
+[0;21;39msystemd[1]: Created slice user.slice - User and Session Slice.[0m
+[[0;32m  OK  [0m] Reached target [0;1;39mslices.target[0m - Slice Units.
+[[0;32m  OK  [0m] Reached target [0;1;39mveritysetup.target[0m - Local Verity Protected Volumes.
+[[0;32m  OK  [0m] Listening on [0;1;39mdm-event.socket[0m - Device-mapper event daemon FIFOs.
+[0;21;39msystemd[1]: systemd-ask-password-console.path - Dispatch Password Requests to Console Directory Watch skipped, unmet condition check ConditionPathExists=!/run/plymouth/pid[0m
+[[0;32m  OK  [0m] Listening on [0;1;39mlvm2-lvmpolld.socket[0m - LVM2 poll daemon socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-ask-password.…[0m User Interactively for a Password.
+[0;21;39msystemd[1]: Started systemd-ask-password-wall.path - Forward Password Requests to Wall Directory Watch.[0m
+[0;21;39msystemd[1]: Set up automount proc-sys-fs-binfmt_misc.automount - Arbitrary Executable File Formats File System Automount Point.[0m
+[0;21;39msystemd[1]: Expecting device dev-disk-by\x2duuid-E27D\x2dA22B.device - /dev/disk/by-uuid/E27D-A22B...[0m
+[0;21;39msystemd[1]: Expecting device dev-disk-by\x2duuid-c3696282\x2d1fa0\x2d42e6\x2d9dd7\x2d1be3366a43a1.device - /dev/disk/by-uuid/c3696282-1fa0-42e6-9dd7-1be3366a43a1...[0m
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-coredump.socket[0m - Process Core Dump Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-creds.socket[0m - Credential Encryption/Decryption.
+[0;21;39msystemd[1]: Expecting device dev-disk-by\x2duuid-ddc82bbf\x2db7c6\x2d4e31\x2d9888\x2de9d01c6df178.device - /dev/disk/by-uuid/ddc82bbf-b7c6-4e31-9888-e9d01c6df178...[0m
+[0;21;39msystemd[1]: Expecting device dev-ttyS0.device - /dev/ttyS0...[0m
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-factory-reset.socket[0m - Factory Reset Management.
+[0;21;39msystemd[1]: Expecting device dev-zram0.device - /dev/zram0...[0m
+[0;21;39msystemd[1]: Reached target imports.target - Image Downloads.[0m
+[0;21;39msystemd[1]: Stopped target initrd-switch-root.target - Switch Root.[0m
+[0;21;39msystemd[1]: Stopped target initrd-fs.target - Initrd File Systems.[0m
+[0;21;39msystemd[1]: Stopped target initrd-root-fs.target - Initrd Root File System.[0m
+[0;21;39msystemd[1]: Reached target integritysetup.target - Local Integrity Protected Volumes.[0m
+[0;21;39msystemd[1]: Reached target slices.target - Slice Units.[0m
+[0;21;39msystemd[1]: Reached target veritysetup.target - Local Verity Protected Volumes.[0m
+[0;21;39msystemd[1]: Listening on dm-event.socket - Device-mapper event daemon FIFOs.[0m
+[0;21;39msystemd[1]: Listening on lvm2-lvmpolld.socket - LVM2 poll daemon socket.[0m
+[0;21;39msystemd[1]: Listening on systemd-ask-password.socket - Query the User Interactively for a Password.[0m
+[0;21;39msystemd[1]: Listening on systemd-coredump.socket - Process Core Dump Socket.[0m
+[0;21;39msystemd[1]: Listening on systemd-creds.socket - Credential Encryption/Decryption.[0m
+[0;21;39msystemd[1]: Listening on systemd-factory-reset.socket - Factory Reset Management.[0m
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-journald-audit.socket[0m - Journal Audit Socket.
+[0;21;39msystemd[1]: Listening on systemd-journald-audit.socket - Journal Audit Socket.[0m
+[0;21;39msystemd[1]: Listening on systemd-mute-console.socket - Console Output Muting Service Socket.[0m
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-mute-console.…[0mnsole Output Muting Service Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-oomd.socket[0m -… Out-Of-Memory (OOM) Killer Socket.
+[0;21;39msystemd[1]: Listening on systemd-oomd.socket - Userspace Out-Of-Memory (OOM) Killer Socket.[0m
+[0;21;39msystemd[1]: systemd-pcrextend.socket - TPM PCR Measurements skipped, unmet condition check ConditionSecurity=measured-uki[0m
+[0;21;39msystemd[1]: systemd-pcrlock.socket - Make TPM PCR Policy skipped, unmet condition check ConditionSecurity=measured-uki[0m
+[0;21;39msystemd[1]: Listening on systemd-repart.socket - Disk Repartitioning Service Socket.[0m
+[0;21;39msystemd[1]: Listening on systemd-resolved-monitor.socket - Resolve Monitor Varlink Socket.[0m
+[0;21;39msystemd[1]: Listening on systemd-resolved-varlink.socket - Resolve Service Varlink Socket.[0m
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-repart.socket[0m…Disk Repartitioning Service Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-resolved-moni…t[0m - Resolve Monitor Varlink Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-resolved-varl…t[0m - Resolve Service Varlink Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-udevd-control.socket[0m - udev Control Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-udevd-varlink.socket[0m - udev Varlink Socket.
+[0;21;39msystemd[1]: Listening on systemd-udevd-control.socket - udev Control Socket.[0m
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-userdbd.socket[0m - User Database Manager Socket.
+[0;21;39msystemd[1]: Listening on systemd-udevd-varlink.socket - udev Varlink Socket.[0m
+[0;21;39msystemd[1]: Listening on systemd-userdbd.socket - User Database Manager Socket.[0m
+         Mounting [0;1;39mdev-hugepages.mount[0m - Huge Pages File System...
+[0;21;39msystemd[1]: Mounting dev-hugepages.mount - Huge Pages File System...[0m
+         Mounting [0;1;39mdev-mqueue.mount[0m - POSIX Message Queue File System...
+[0;21;39msystemd[1]: Mounting dev-mqueue.mount - POSIX Message Queue File System...[0m
+         Mounting [0;1;39msys-kernel-debug.mount[0m - Kernel Debug File System...
+[0;21;39msystemd[1]: Mounting sys-kernel-debug.mount - Kernel Debug File System...[0m
+[0;21;39msystemd[1]: Mounting sys-kernel-tracing.mount - Kernel Trace File System...[0m
+         Mounting [0;1;39msys-kernel-tracing.mount[0m - Kernel Trace File System...
+[0;21;39msystemd[1]: auth-rpcgss-module.service - Kernel Module supporting RPCSEC_GSS skipped, unmet condition check ConditionPathExists=/etc/krb5.keytab[0m
+[0;21;39msystemd[1]: fips-crypto-policy-overlay.service - Bind-mount FIPS crypto-policy in FIPS mode skipped, unmet condition check ConditionKernelCommandLine=fips=1[0m
+[0;21;39msystemd[1]: iscsi-starter.service skipped, unmet condition check ConditionDirectoryNotEmpty=/var/lib/iscsi/nodes[0m
+         Starting [0;1;39mkmod-static-nodes.service[0m…eate List of Static Device Nodes...
+[0;21;39msystemd[1]: Starting kmod-static-nodes.service - Create List of Static Device Nodes...[0m
+[0;21;39msystemd[1]: Starting lvm2-monitor.service - Monitoring of LVM2 mirrors, snapshots etc. using dmeventd or progress polling...[0m
+         Starting [0;1;39mlvm2-monitor.service[0m - Mo…ing dmeventd or progress polling...
+         Mounting [0;1;39msys-fs-fuse-connections.mount[0m - FUSE Control File System...
+[0;21;39msystemd[1]: modprobe@configfs.service - Load Kernel Module configfs skipped, unmet condition check ConditionKernelModuleLoaded=!configfs[0m
+[[0;32m  OK  [0m] Stopped [0;1;39mplymouth-switch-root.service[0m - Plymouth switch root service.
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-fsck-root.service[0m - File System Check on Root Device.
+[0;21;39msystemd[1]: modprobe@drm.service - Load Kernel Module drm skipped, unmet condition check ConditionKernelModuleLoaded=!drm[0m
+[0;21;39msystemd[1]: modprobe@efi_pstore.service - Load Kernel Module efi_pstore skipped, unmet condition check ConditionKernelModuleLoaded=!efi_pstore[0m
+[0;21;39msystemd[1]: modprobe@fuse.service - Load Kernel Module fuse skipped, unmet condition check ConditionKernelModuleLoaded=!fuse[0m
+[0;21;39msystemd[1]: Mounting sys-fs-fuse-connections.mount - FUSE Control File System...[0m
+[0;21;39msystemd[1]: plymouth-switch-root.service: Deactivated successfully.[0m
+[0;21;39msystemd[1]: Stopped plymouth-switch-root.service - Plymouth switch root service.[0m
+[0;21;39msystemd[1]: systemd-boot-clear-sysfail.service - Clear SysFail Entry If The Boot Is Successful skipped, unmet condition check ConditionPathExists=/sys/firmware/efi/efivars/LoaderEntrySysFail-4a67b082-0a4c-41cf-b6c7-440b29bb8c4f[0m
+[0;21;39msystemd[1]: systemd-fsck-root.service: Deactivated successfully.[0m
+[0;21;39msystemd[1]: Stopped systemd-fsck-root.service - File System Check on Root Device.[0m
+[0;21;39msystemd[1]: systemd-hibernate-clear.service - Clear Stale Hibernate Storage Info skipped, unmet condition check ConditionPathExists=/sys/firmware/efi/efivars/HibernateLocation-8cf2644b-4b0b-428f-9387-6d876050dc67[0m
+         Starting [0;1;39msystemd-journald.service[0m - Journal Service...
+[0;21;39msystemd[1]: Starting systemd-journald.service - Journal Service...[0m
+[0;21;39msystemd[1]: Starting systemd-modules-load.service - Load Kernel Modules...[0m
+         Starting [0;1;39msystemd-modules-load.service[0m - Load Kernel Modules...
+[0;21;39msystemd[1]: Starting systemd-network-generator.service - Generate Network Units from Kernel Command Line...[0m
+         Starting [0;1;39msystemd-network-generator…[0mk Units from Kernel Command Line...
+[0;21;39msystemd[1]: systemd-pcrmachine.service - TPM PCR Machine ID Measurement skipped, unmet condition check ConditionSecurity=measured-uki[0m
+         Starting [0;1;39msystemd-remount-fs.servic…[0munt Root and Kernel File Systems...
+[[0;32m  OK  [0m] Reached target [0;1;39mcryptsetup.target[0m - Local Encrypted Volumes.
+         Starting [0;1;39msystemd-udev-load-credent…[0mLoad udev Rules from Credentials...
+[0;21;39msystemd[1]: Starting systemd-remount-fs.service - Remount Root and Kernel File Systems...[0m
+         Starting [0;1;39msystemd-udev-trigger.service[0m - Coldplug All udev Devices...
+[0;21;39msystemd[1]: systemd-tpm2-setup-early.service - Early TPM SRK Setup skipped, unmet condition check ConditionSecurity=measured-uki[0m
+[[0;32m  OK  [0m] Mounted [0;1;39mdev-hugepages.mount[0m - Huge Pages File System.
+[[0;32m  OK  [0m] Mounted [0;1;39mdev-mqueue.mount[0m - POSIX Message Queue File System.
+[[0;32m  OK  [0m] Mounted [0;1;39msys-kernel-debug.mount[0m - Kernel Debug File System.
+[[0;32m  OK  [0m] Mounted [0;1;39msys-kernel-tracing.mount[0m - Kernel Trace File System.
+[[0;32m  OK  [0m] Finished [0;1;39mkmod-static-nodes.service[0m…Create List of Static Device Nodes.
+[0;21;39msystemd[1]: systemd-pcrnvdone.service - TPM PCR NvPCR Initialization Separator skipped, unmet condition check ConditionPathExists=/etc/initrd-release[0m
+[[0;32m  OK  [0m] Finished [0;1;39mlvm2-monitor.service[0m - Mo…using dmeventd or progress polling.
+[[0;32m  OK  [0m] Mounted [0;1;39msys-fs-fuse-connections.mount[0m - FUSE Control File System.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-modules-load.service[0m - Load Kernel Modules.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-network-generator…[0mork Units from Kernel Command Line.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-journald.service[0m - Journal Service.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-remount-fs.servic…[0mmount Root and Kernel File Systems.
+         Starting [0;1;39msystemd-hwdb-update.service[0m - Rebuild Hardware Database...
+         Starting [0;1;39msystemd-journal-flush.ser…[0msh Journal to Persistent Storage...
+[0;21;39msystemd[1]: Reached target cryptsetup.target - Local Encrypted Volumes.[0m
+[0;21;39msystemd[1]: systemd-pcrproduct.service - TPM NvPCR Product ID Measurement skipped, unmet condition check ConditionSecurity=measured-uki[0m
+[0;21;39msystemd[1]: Starting systemd-udev-load-credentials.service - Load udev Rules from Credentials...[0m
+         Starting [0;1;39msystemd-random-seed.service[0m - Load/Save OS Random Seed...
+         Starting [0;1;39msystemd-sysctl.service[0m - Apply Kernel Variables...
+[0;21;39msystemd[1]: Starting systemd-udev-trigger.service - Coldplug All udev Devices...[0m
+         Starting [0;1;39msystemd-tmpfiles-setup-de…[0m Device Nodes in /dev gracefully...
+[0;21;39msystemd[1]: Mounted dev-hugepages.mount - Huge Pages File System.[0m
+[0;21;39msystemd-journald[511]: Collecting audit messages is enabled.[0m
+[0;21;39msystemd[1]: Mounted dev-mqueue.mount - POSIX Message Queue File System.[0m
+[0;21;39msystemd[1]: Mounted sys-kernel-debug.mount - Kernel Debug File System.[0m
+[0;21;39msystemd[1]: Mounted sys-kernel-tracing.mount - Kernel Trace File System.[0m
+[0;21;39msystemd[1]: Finished kmod-static-nodes.service - Create List of Static Device Nodes.[0m
+[0;21;39mBTRFS info (device vda3 state M): use zstd compression, level 1[0m
+[0;21;32maudit: type=1130 audit(1795850337.712:4): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=kmod-static-nodes comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'[0m
+[0;21;39msystemd[1]: Finished lvm2-monitor.service - Monitoring of LVM2 mirrors, snapshots etc. using dmeventd or progress polling.[0m
+[0;21;32maudit: type=1130 audit(1795850337.714:5): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=lvm2-monitor comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'[0m
+[0;21;39msystemd[1]: Mounted sys-fs-fuse-connections.mount - FUSE Control File System.[0m
+[0;21;39msystemd[1]: Finished systemd-modules-load.service - Load Kernel Modules.[0m
+[0;21;32maudit: type=1130 audit(1795850337.714:6): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-modules-load comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'[0m
+[0;21;39msystemd[1]: Finished systemd-network-generator.service - Generate Network Units from Kernel Command Line.[0m
+[0;21;39msystemd[1]: Started systemd-journald.service - Journal Service.[0m
+[0;21;32maudit: type=1130 audit(1795850337.719:7): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-network-generator comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'[0m
+[0;21;32maudit: type=1130 audit(1795850337.719:8): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-journald comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'[0m
+[0;21;32maudit: type=1130 audit(1795850337.719:9): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-remount-fs comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'[0m
+[0;21;39msystemd-journald[511]: Received client request to flush runtime journal.[0m
+[0;21;32msystemd-journald[511]: Creating journal file /var/log/journal/350353dd97fd456eb199aa74d9acafed/system.journal on a btrfs file system, and copy-on-write is enabled. This is likely to slow down journal access substantially, please consider turning off the copy-on-write file attribute on the journal directory, using chattr +C.[0m
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-udev-load-credent…[0m- Load udev Rules from Credentials.
+[0;21;32maudit: type=1130 audit(1795850337.887:10): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-udev-load-credentials comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'[0m
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-random-seed.service[0m - Load/Save OS Random Seed.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-journal-flush.ser…[0mlush Journal to Persistent Storage.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-udev-trigger.service[0m - Coldplug All udev Devices.
+         Starting [0;1;39msystemd-userdbd.service[0m - User Database Manager...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-sysctl.service[0m - Apply Kernel Variables.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-userdbd.service[0m - User Database Manager.
+[0;21;33mkauditd_printk_skb: 7 callbacks suppressed[0m
+[0;21;32maudit: type=1130 audit(1795850338.002:18): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-userdbd comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'[0m
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-tmpfiles-setup-de…[0mic Device Nodes in /dev gracefully.
+         Starting [0;1;39msystemd-sysusers.service[0m - Create System Users...
+[0;21;32maudit: type=1130 audit(1795850338.049:19): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-tmpfiles-setup-dev-early comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'[0m
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-sysusers.service[0m - Create System Users.
+[0;21;32maudit: type=1130 audit(1795850338.089:20): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-sysusers comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'[0m
+[0;21;32maudit: type=1334 audit(1795850338.090:21): prog-id=51 op=LOAD[0m
+         Starting [0;1;39msystemd-resolved.service[0m - Network Name Resolution...
+         Starting [0;1;39msystemd-tmpfiles-setup-de…[0meate Static Device Nodes in /dev...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-tmpfiles-setup-de…[0mCreate Static Device Nodes in /dev.
+[[0;32m  OK  [0m] Reached target [0;1;39mlocal-fs-pre.target[0m…Preparation for Local File Systems.
+[0;21;32maudit: type=1130 audit(1795850338.145:22): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-tmpfiles-setup-dev comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'[0m
+[[0;32m  OK  [0m] Started [0;1;39msystemd-resolved.service[0m - Network Name Resolution.
+[0;21;32maudit: type=1130 audit(1795850338.166:23): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-resolved comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'[0m
+[[0;32m  OK  [0m] Reached target [0;1;39mnss-lookup.target[0m - Host and Network Name Lookups.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-hwdb-update.service[0m - Rebuild Hardware Database.
+[0;21;32maudit: type=1130 audit(1795850338.293:24): pid=1 uid=0 auid=4294967295 ses=4294967295 subj=system_u:system_r:init_t:s0 msg='unit=systemd-hwdb-update comm="systemd" exe="/usr/lib/systemd/systemd" hostname=? addr=? terminal=? res=success'[0m
+[0;21;32maudit: type=1334 audit(1795850338.299:25): prog-id=23 op=UNLOAD[0m
+[0;21;32maudit: type=1334 audit(1795850338.299:26): prog-id=22 op=UNLOAD[0m
+         Starting [0;1;39msystemd-udevd.service[0m - R…ager for Device Events and Files...
+[0;21;32maudit: type=1334 audit(1795850338.299:27): prog-id=52 op=LOAD[0m
+[[0;32m  OK  [0m] Started [0;1;39msystemd-udevd.service[0m - Ru…anager for Device Events and Files.
+[[0;32m  OK  [0m] Found device [0;1;39mdev-zram0.device[0m - /dev/zram0.
+         Starting [0;1;39msystemd-zram-setup@zram0.…vice[0m - Create swap on /dev/zram0...
+[0;21;39mzram0: detected capacity change from 0 to 16216064[0m
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-zram-setup@zram0.service[0m - Create swap on /dev/zram0.
+         Activating swap [0;1;39mdev-zram0.swap[0m - Compressed Swap on /dev/zram0...
+[0;21;39mAdding 8108028k swap on /dev/zram0.  Priority:100 extents:1 across:8108028k SSDsc[0m
+[[0;32m  OK  [0m] Activated swap [0;1;39mdev-zram0.swap[0m - Compressed Swap on /dev/zram0.
+[[0;32m  OK  [0m] Reached target [0;1;39mswap.target[0m - Swaps.
+         Mounting [0;1;39mtmp.mount[0m - Temporary Directory /tmp...
+         Starting [0;1;39msystemd-oomd.service[0m - Us…space Out-Of-Memory (OOM) Killer...
+[0;21;39mvirtio_net virtio1 enp0s4: renamed from eth0[0m
+[[0;32m  OK  [0m] Mounted [0;1;39mtmp.mount[0m - Temporary Directory /tmp.
+         Starting [0;1;39msystemd-fsck@dev-disk-by\…[0m2bbf-b7c6-4e31-9888-e9d01c6df178...
+         Starting [0;1;39msystemd-fsck@dev-disk-by\…[0mk on /dev/disk/by-uuid/E27D-A22B...
+[[0;32m  OK  [0m] Started [0;1;39msystemd-oomd.service[0m - Userspace Out-Of-Memory (OOM) Killer.
+[0;21;32mlpc_ich 0000:00:1f.0: I/O space for GPIO uninitialized[0m
+[[0;32m  OK  [0m] Found device [0;1;39mdev-disk-by\x2duuid-c…[0m696282-1fa0-42e6-9dd7-1be3366a43a1.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-fsck@dev-disk-by\…[0mc82bbf-b7c6-4e31-9888-e9d01c6df178.
+[0;21;39minput: PC Speaker as /devices/platform/pcspkr/input/input7[0m
+[0;21;39mparport_pc 00:02: reported by Plug and Play ACPI[0m
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-fsck@dev-disk-by\…[0meck on /dev/disk/by-uuid/E27D-A22B.
+[0;21;39mparport0: PC-style at 0x378, irq 7 [PCSPP,TRISTATE][0m
+[0;21;39mi801_smbus 0000:00:1f.3: Enabling SMBus device[0m
+[0;21;39mi801_smbus 0000:00:1f.3: SMBus using PCI interrupt[0m
+[0;21;39mi2c i2c-0: Memory type 0x07 not supported yet, not instantiating SPD[0m
+[0;21;39miTCO_wdt iTCO_wdt.1.auto: Found a ICH9 TCO device (Version=2, TCOBASE=0x0660)[0m
+[0;21;39miTCO_wdt iTCO_wdt.1.auto: initialized. heartbeat=30 sec (nowayout=0)[0m
+[[0;32m  OK  [0m] Stopped [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup.
+         Stopping [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup...
+         Starting [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup...
+[0;21;39mppdev: user-space parallel port driver[0m
+[0;21;39mACPI: \_SB_.GSIH: Enabled at IRQ 23[0m
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-vconsole-setup.service[0m - Virtual Console Setup.
+[0;21;39msnd_hda_codec_generic hdaudioC0D0: autoconfig for Generic: line_outs=1 (0x3/0x0/0x0/0x0/0x0) type:line[0m
+[0;21;39msnd_hda_codec_generic hdaudioC0D0:    speaker_outs=0 (0x0/0x0/0x0/0x0/0x0)[0m
+[0;21;39msnd_hda_codec_generic hdaudioC0D0:    hp_outs=0 (0x0/0x0/0x0/0x0/0x0)[0m
+[0;21;39msnd_hda_codec_generic hdaudioC0D0:    mono: mono_out=0x0[0m
+[0;21;39msnd_hda_codec_generic hdaudioC0D0:    inputs:[0m
+[0;21;39msnd_hda_codec_generic hdaudioC0D0:      Line=0x5[0m
+         Mounting [0;1;39mboot.mount[0m - /boot...
+         Mounting [0;1;39mhome.mount[0m - /home...
+[[0;32m  OK  [0m] Mounted [0;1;39mhome.mount[0m - /home.
+[0;21;39mEXT4-fs (vda2): mounted filesystem ddc82bbf-b7c6-4e31-9888-e9d01c6df178 r/w with ordered data mode. Quota mode: none.[0m
+[[0;32m  OK  [0m] Mounted [0;1;39mboot.mount[0m - /boot.
+         Mounting [0;1;39mboot-efi.mount[0m - /boot/efi...
+[[0;32m  OK  [0m] Mounted [0;1;39mboot-efi.mount[0m - /boot/efi.
+[[0;32m  OK  [0m] Reached target [0;1;39mlocal-fs.target[0m - Local File Systems.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-bootctl.socket[0m - Boot Entries Service Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-sysext.socket[0m… System Extension Image Management.
+         Starting [0;1;39mplymouth-read-write.servi…[0mymouth To Write Out Runtime Data...
+         Starting [0;1;39msystemd-binfmt.service[0m - Set Up Additional Binary Formats...
+         Starting [0;1;39msystemd-tmpfiles-setup.se…[0mate System Files and Directories...
+         Starting [0;1;39msystemd-userdb-load-crede…[0mr/group Records from Credentials...
+         Mounting [0;1;39mproc-sys-fs-binfmt_misc.m…[0mcutable File Formats File System...
+[[0;32m  OK  [0m] Finished [0;1;39mplymouth-read-write.servi…[0mPlymouth To Write Out Runtime Data.
+[[0;32m  OK  [0m] Mounted [0;1;39mproc-sys-fs-binfmt_misc.mo…[0mxecutable File Formats File System.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-binfmt.service[0m - Set Up Additional Binary Formats.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-userdb-load-crede…[0mser/group Records from Credentials.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-tmpfiles-setup.se…[0mreate System Files and Directories.
+         Starting [0;1;39mauditd.service[0m - Security Audit Logging Service...
+         Starting [0;1;39mldconfig.service[0m - Rebuild Dynamic Linker Cache...
+         Starting [0;1;39msystemd-journal-catalog-u…ervice[0m - Rebuild Journal Catalog...
+[[0;32m  OK  [0m] Started [0;1;39mauditd.service[0m - Security Audit Logging Service.
+         Starting [0;1;39maudit-rules.service[0m - Load Audit Rules...
+         Starting [0;1;39msystemd-update-utmp.servi…[0mord System Boot/Shutdown in UTMP...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-update-utmp.servi…[0mecord System Boot/Shutdown in UTMP.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-journal-catalog-u….service[0m - Rebuild Journal Catalog.
+[[0;32m  OK  [0m] Finished [0;1;39maudit-rules.service[0m - Load Audit Rules.
+         Mounting [0;1;39mvar-lib-nfs-rpc_pipefs.mount[0m - RPC Pipe File System...
+[0;21;39mRPC: Registered named UNIX socket transport module.[0m
+[0;21;39mRPC: Registered udp transport module.[0m
+[[0;32m  OK  [0m] Mounted [0;1;39mvar-lib-nfs-rpc_pipefs.mount[0m - RPC Pipe File System.
+[[0;32m  OK  [0m] Reached target [0;1;39mrpc_pipefs.target[0m.
+[0;21;39mRPC: Registered tcp transport module.[0m
+[0;21;39mRPC: Registered tcp-with-tls transport module.[0m
+[0;21;39mRPC: Registered tcp NFSv4.1 backchannel transport module.[0m
+[[0;32m  OK  [0m] Finished [0;1;39mldconfig.service[0m - Rebuild Dynamic Linker Cache.
+         Starting [0;1;39msystemd-update-done.service[0m - Update is Completed...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-update-done.service[0m - Update is Completed.
+[[0;32m  OK  [0m] Reached target [0;1;39msysinit.target[0m - System Initialization.
+[[0;32m  OK  [0m] Started [0;1;39mcups.path[0m - CUPS Scheduler.
+[[0;32m  OK  [0m] Started [0;1;39mryoku-snapshot-menu.path[0m - Ryoku snapshot boot menu trigger.
+[[0;32m  OK  [0m] Started [0;1;39mdnf-makecache.timer[0m - dnf5 makecache.
+[[0;32m  OK  [0m] Started [0;1;39mfstrim.timer[0m - Discard unused filesystem blocks once a week.
+[[0;32m  OK  [0m] Started [0;1;39mlogrotate.timer[0m - Daily rotation of log files.
+[[0;32m  OK  [0m] Started [0;1;39mplocate-updatedb.timer[0m - Update the plocate database daily.
+[[0;32m  OK  [0m] Started [0;1;39mraid-check.timer[0m - Weekly RAID setup health check.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-tmpfiles-clean.tim…[0my Cleanup of Temporary Directories.
+[[0;32m  OK  [0m] Started [0;1;39munbound-anchor.timer[0m - dai…f the root trust anchor for DNSSEC.
+[[0;32m  OK  [0m] Reached target [0;1;39mpaths.target[0m - Path Units.
+[[0;32m  OK  [0m] Reached target [0;1;39mtimers.target[0m - Timer Units.
+[[0;32m  OK  [0m] Listening on [0;1;39mavahi-daemon.socket[0m -…DNS/DNS-SD Stack Activation Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39mcups.socket[0m - CUPS Scheduler.
+[[0;32m  OK  [0m] Listening on [0;1;39mdbus.socket[0m - D-Bus System Message Bus Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39miscsid.socket[0m - Open-iSCSI iscsid Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39miscsiuio.socket[0m - Open-iSCSI iscsiuio Socket.
+         Starting [0;1;39mpcscd.socket[0m - PC/SC Smart Card Daemon Activation Socket...
+[[0;32m  OK  [0m] Listening on [0;1;39msshd-unix-local.socke…[0mtemd-ssh-generator, AF_UNIX Local).
+         Starting [0;1;39msshd-vsock.socket[0m - OpenS…systemd-ssh-generator, AF_VSOCK)...
+[[0;32m  OK  [0m] Listening on [0;1;39msssd-kcm.socket[0m - SSS…ros Cache Manager responder socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-hostnamed.socket[0m - Hostname Service Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-logind-varlin…[0mer Login Management Varlink Socket.
+         Starting [0;1;39mdbus-broker.service[0m - D-Bus System Message Bus...
+[[0;32m  OK  [0m] Listening on [0;1;39mpcscd.socket[0m - PC/SC Smart Card Daemon Activation Socket.
+[[0;32m  OK  [0m] Listening on [0;1;39msshd-vsock.socket[0m - O… (systemd-ssh-generator, AF_VSOCK).
+[[0;32m  OK  [0m] Reached target [0;1;39msockets.target[0m - Socket Units.
+[[0;32m  OK  [0m] Reached target [0;1;39mssh-access.target[0m - SSH Access Available.
+[[0;32m  OK  [0m] Started [0;1;39mdbus-broker.service[0m - D-Bus System Message Bus.
+[[0;32m  OK  [0m] Reached target [0;1;39mbasic.target[0m - Basic System.
+         Starting [0;1;39mabrtd.service[0m - ABRT Daemon...
+         Starting [0;1;39makmods-keygen@akmods-keyg…[0ms Secure boot MOK Key Generation...
+[[0;32m  OK  [0m] Started [0;1;39malsa-state.service[0m - Manag…und Card State (restore and store).
+[[0;32m  OK  [0m] Reached target [0;1;39msound.target[0m - Sound Card.
+         Starting [0;1;39mauthselect-apply-changes.…rvice[0m - Apply authselect changes...
+         Starting [0;1;39mavahi-daemon.service[0m - Avahi mDNS/DNS-SD Stack...
+         Starting [0;1;39mdkms.service[0m - Builds and… new kernel modules through DKMS...
+         Starting [0;1;39mdracut-shutdown.service[0m -…store /run/initramfs on shutdown...
+         Starting [0;1;39mfaraday-rebrand.service[0m - FaradayOS branding...
+         Starting [0;1;39mfaraday-remove-liveuser.s…[0mmatic login on installed systems...
+[[0;32m  OK  [0m] Started [0;1;39mfirewalld.service[0m - firewalld - dynamic firewall daemon.
+         Starting [0;1;39mflatpak-add-fedora-repos.…[0m Add Fedora flatpak repositories...
+[[0;32m  OK  [0m] Started [0;1;39mirqbalance.service[0m - irqbalance daemon.
+         Starting [0;1;39mchronyd.service[0m - NTP client/server...
+         Starting [0;1;39mlm_sensors.service[0m - Hardware Monitoring Sensors...
+[[0;32m  OK  [0m] Started [0;1;39mmcelog.service[0m - Machine Check Exception Logging Daemon.
+[[0;32m  OK  [0m] Started [0;1;39mnvidia-powerd.service[0m - nvidia-powerd service.
+         Starting [0;1;39mpolkit.service[0m - Authorization Manager...
+         Starting [0;1;39msystemd-homed.service[0m - Home Area Manager...
+[[0;32m  OK  [0m] Finished [0;1;39mauthselect-apply-changes.service[0m - Apply authselect changes.
+[[0;32m  OK  [0m] Finished [0;1;39mdracut-shutdown.service[0m - Restore /run/initramfs on shutdown.
+[[0;32m  OK  [0m] Finished [0;1;39mlm_sensors.service[0m - Hardware Monitoring Sensors.
+[[0;32m  OK  [0m] Reached target [0;1;39mnss-user-lookup.target[0m - User and Group Name Lookups.
+         Starting [0;1;39msystemd-logind.service[0m - User Login Management...
+[[0;32m  OK  [0m] Started [0;1;39mchronyd.service[0m - NTP client/server.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-logind.service[0m - User Login Management.
+[[0;32m  OK  [0m] Started [0;1;39mpolkit.service[0m - Authorization Manager.
+[[0;32m  OK  [0m] Finished [0;1;39mdkms.service[0m - Builds and…ll new kernel modules through DKMS.
+[[0;32m  OK  [0m] Finished [0;1;39mfaraday-rebrand.service[0m - FaradayOS branding.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-homed.service[0m - Home Area Manager.
+[[0;32m  OK  [0m] Reached target [0;1;39mnetwork-pre.target[0m - Preparation for Network.
+         Starting [0;1;39mModemManager.service[0m - Modem Manager...
+         Starting [0;1;39mNetworkManager.service[0m - Network Manager...
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-homed-activate.service[0m - Home Area Activation.
+[[0;32m  OK  [0m] Finished [0;1;39mfaraday-remove-liveuser.s…[0mtomatic login on installed systems.
+[[0;32m  OK  [0m] Finished [0;1;39mflatpak-add-fedora-repos.…[0m - Add Fedora flatpak repositories.
+[[0;32m  OK  [0m] Started [0;1;39mavahi-daemon.service[0m - Avahi mDNS/DNS-SD Stack.
+[[0;32m  OK  [0m] Started [0;1;39mabrtd.service[0m - ABRT Daemon.
+[[0;32m  OK  [0m] Started [0;1;39mabrt-journal-core.service[0m - ABRT coredumpctl message creator.
+[[0;32m  OK  [0m] Started [0;1;39mabrt-oops.service[0m - ABRT kernel log watcher.
+[[0;32m  OK  [0m] Started [0;1;39mabrt-xorg.service[0m - ABRT Xorg log watcher.
+         Starting [0;1;39msystemd-hostnamed.service[0m - Hostname Service...
+[0;21;39mNET: Registered PF_QIPCRTR protocol family[0m
+[[0;32m  OK  [0m] Started [0;1;39mModemManager.service[0m - Modem Manager.
+[[0;32m  OK  [0m] Started [0;1;39msystemd-hostnamed.service[0m - Hostname Service.
+[[0;32m  OK  [0m] Listening on [0;1;39msystemd-rfkill.socket[0m…ll Switch Status /dev/rfkill Watch.
+         Starting [0;1;39mNetworkManager-dispatcher…[0manager Script Dispatcher Service...
+[[0;32m  OK  [0m] Started [0;1;39mNetworkManager.service[0m - Network Manager.
+[[0;32m  OK  [0m] Reached target [0;1;39mnetwork.target[0m - Network.
+         Starting [0;1;39mNetworkManager-wait-onlin…ce[0m - Network Manager Wait Online...
+         Starting [0;1;39mgssproxy.service[0m - GSSAPI Proxy Daemon...
+         Starting [0;1;39mtuned.service[0m - Dynamic System Tuning Daemon...
+[[0;32m  OK  [0m] Started [0;1;39mNetworkManager-dispatcher.…[0m Manager Script Dispatcher Service.
+[[0;32m  OK  [0m] Started [0;1;39mgssproxy.service[0m - GSSAPI Proxy Daemon.
+[[0;32m  OK  [0m] Reached target [0;1;39mnfs-client.target[0m - NFS client services.
+[[0;32m  OK  [0m] Reached target [0;1;39mremote-fs-pre.targe…[0mreparation for Remote File Systems.
+[[0;32m  OK  [0m] Reached target [0;1;39mremote-cryptsetup.target[0m - Remote Encrypted Volumes.
+[[0;32m  OK  [0m] Reached target [0;1;39mremote-veritysetup.…[0m - Remote Verity Protected Volumes.
+[[0;32m  OK  [0m] Finished [0;1;39mNetworkManager-wait-onlin…vice[0m - Network Manager Wait Online.
+[[0;32m  OK  [0m] Reached target [0;1;39mnetwork-online.target[0m - Network is Online.
+         Starting [0;1;39mfaraday-vr-setup.service[0m …WiVRn/ALVR, SteamVR permissions)...
+[[0;32m  OK  [0m] Reached target [0;1;39mremote-fs.target[0m - Remote File Systems.
+         Starting [0;1;39mrpc-statd-notify.service[0m - Notify NFS peers of a restart...
+         Starting [0;1;39mrsyslog.service[0m - System Logging Service...
+         Starting [0;1;39msystemd-user-sessions.service[0m - Permit User Sessions...
+[[0;32m  OK  [0m] Started [0;1;39mrpc-statd-notify.service[0m - Notify NFS peers of a restart.
+[[0;32m  OK  [0m] Finished [0;1;39msystemd-user-sessions.service[0m - Permit User Sessions.
+[[0;32m  OK  [0m] Started [0;1;39matd.service[0m - Deferred execution scheduler.
+[[0;32m  OK  [0m] Started [0;1;39mcrond.service[0m - Command Scheduler.
+         Starting [0;1;39mplymouth-quit-wait.servic…[0md until boot process finishes up...
+         Starting [0;1;39mplymouth-quit.service[0m - Terminate Plymouth Boot Screen...
+[!p]104\[0m[?7h[1G[0J[6n[32766;32766H[6n[!p]104\[0m[?7h[1G[0J[6n[32766;32766H[6n]3008;start=e9be6cf5ce6d4f0487857d45de4df430;user=root;hostname=faradayos;machineid=350353dd97fd456eb199aa74d9acafed;bootid=1bc6c9413de3401ea6630ddbe3f02223;pid=1145;pidfdid=296;comm=(agetty);servicename=serial-getty@ttyS0.service;invocationid=2d2a9469ff6a4bb1b79c58395c9ed731;type=service\P+q6E616D65\
+FaradayOS v0.92e
+Kernel 7.3.6-200.fc44.x86_64 on x86_64 (ttyS0)
+
+Activate the web console with: systemctl enable --now cockpit.socket
+
+Try contacting this VM's SSH server via 'ssh vsock%4294967295' from host.
+
+faradayos login: root
+Password: 
+]3008;start=ada7eba277a34581801653046f012670;user=root;hostname=faradayos;machineid=350353dd97fd456eb199aa74d9acafed;bootid=1bc6c9413de3401ea6630ddbe3f02223;pid=1145;pidfdid=296;comm=login;targetuser=root;sessionid=1;type=session\]3008;start=0b9ed589-eae6-45d7-9ee7-8bf3427445b3;type=shell;machineid=350353dd97fd456eb199aa74d9acafed;user=root;hostname=faradayos;bootid=1bc6c941-3de3-401e-a663-0ddbe3f02223;pid=1622;cwd=/root\[?2004h[root@faradayos ~]# unset command_not_found_handle; export PS1='$ ' TERM=dumb SYSTEMD_PAGER= PAGER=cat; bind 'set enable-bracketed-paste off'; stty -echo cols 250; dmesg -n 1
+[?2004l]3008;start=401cdd79-0a56-4256-979e-17c55a375bba;type=command;machineid=350353dd97fd456eb199aa74d9acafed;user=root;hostname=faradayos;bootid=1bc6c941-3de3-401e-a663-0ddbe3f02223;pid=1622;cwd=/root\cat /etc/os-release; systemctl -]3008;end=401cdd79-0a56-4256-979e-17c55a375bba;exit=success\]3008;start=0b9ed589-eae6-45d7-9ee7-8bf3427445b3;type=shell;machineid=350353dd97fd456eb199aa74d9acafed;user=root;hostname=faradayos;bootid=1bc6c941-3de3-401e-a663-0ddbe3f02223;pid=1622;cwd=/root\$ ]3008;start=57630018-c9ae-42be-9b1f-5c682e1bcfad;type=command;machineid=350353dd97fd456eb199aa74d9acafed;user=root;hostname=faradayos;bootid=1bc6c941-3de3-401e-a663-0ddbe3f02223;pid=1622;cwd=/root\NAME="FaradayOS"
+VERSION="0.92e (Fedora 44)"
+RELEASE_TYPE=stable
+ID=fedora
+VERSION_ID=44
+VERSION_CODENAME=""
+PRETTY_NAME="FaradayOS v0.92e"
+ANSI_COLOR="38;5;208"
+LOGO=faradayos
+CPE_NAME="cpe:/o:fedoraproject:fedora:44"
+HOME_URL="https://fedoraproject.org/"
+DOCUMENTATION_URL="https://docs.fedoraproject.org/en-US/fedora/f44/"
+SUPPORT_URL="https://ask.fedoraproject.org/"
+BUG_REPORT_URL="https://bugzilla.redhat.com/"
+REDHAT_BUGZILLA_PRODUCT="Fedora"
+REDHAT_BUGZILLA_PRODUCT_VERSION=44
+REDHAT_SUPPORT_PRODUCT="Fedora"
+REDHAT_SUPPORT_PRODUCT_VERSION=44
+SUPPORT_END=2027-05-19
+VARIANT="KDE Plasma Desktop Edition"
+VARIANT_ID=kde
+DEFAULT_HOSTNAME=faradayos
+IMAGE_ID=faradayos
+IMAGE_VERSION=0.92e
+  UNIT LOAD ACTIVE SUB DESCRIPTION
+
+0 loaded units listed.
+uid=1000(tester) gid=1000(tester) groups=1000(tester),10(wheel)
+inactive
+]3008;end=57630018-c9ae-42be-9b1f-5c682e1bcfad;exit=failure;status=3\]3008;start=0b9ed589-eae6-45d7-9ee7-8bf3427445b3;type=shell;machineid=350353dd97fd456eb199aa74d9acafed;user=root;hostname=faradayos;bootid=1bc6c941-3de3-401e-a663-0ddbe3f02223;pid=1622;cwd=/root\$ ]3008;start=485b1397-9f23-4bab-92b6-9a1c8d62ffd3;type=command;machineid=350353dd97fd456eb199aa74d9acafed;user=root;hostname=faradayos;bootid=1bc6c941-3de3-401e-a663-0ddbe3f02223;pid=1622;cwd=/root\__END30__
+]3008;end=485b1397-9f23-4bab-92b6-9a1c8d62ffd3;exit=success\]3008;start=0b9ed589-eae6-45d7-9ee7-8bf3427445b3;type=shell;machineid=350353dd97fd456eb199aa74d9acafed;user=root;hostname=faradayos;bootid=1bc6c941-3de3-401e-a663-0ddbe3f02223;pid=1622;cwd=/root\$ ]3008;start=5ca03d52-c12b-45f6-ace3-0261360f4d5f;type=command;machineid=350353dd97fd456eb199aa74d9acafed;user=root;hostname=faradayos;bootid=1bc6c941-3de3-401e-a663-0ddbe3f02223;pid=1622;cwd=/root\ls: cannot access '/run/user/1000/': No such file or directory
+runuser: user liveuser does not exist or the user entry does not contain all the required fields
+]3008;end=5ca03d52-c12b-45f6-ace3-0261360f4d5f;exit=failure;status=1\]3008;start=0b9ed589-eae6-45d7-9ee7-8bf3427445b3;type=shell;machineid=350353dd97fd456eb199aa74d9acafed;user=root;hostname=faradayos;bootid=1bc6c941-3de3-401e-a663-0ddbe3f02223;pid=1622;cwd=/root\$ ]3008;start=30d6e3d7-fcb5-4747-8b01-29559b898497;type=command;machineid=350353dd97fd456eb199aa74d9acafed;user=root;hostname=faradayos;bootid=1bc6c941-3de3-401e-a663-0ddbe3f02223;pid=1622;cwd=/root\__END31__
+]3008;end=30d6e3d7-fcb5-4747-8b01-29559b898497;exit=success\]3008;start=0b9ed589-eae6-45d7-9ee7-8bf3427445b3;type=shell;machineid=350353dd97fd456eb199aa74d9acafed;user=root;hostname=faradayos;bootid=1bc6c941-3de3-401e-a663-0ddbe3f02223;pid=1622;cwd=/root\$ ]3008;start=d0f7d6b4-3c37-4ed0-8e1d-2b5c61d1aa2c;type=command;machineid=350353dd97fd456eb199aa74d9acafed;user=root;hostname=faradayos;bootid=1bc6c941-3de3-401e-a663-0ddbe3f02223;pid=1622;cwd=/root\curl: cannot open '/tmp/vmshot.png'
+curl: try 'curl --help' for more information
+]3008;end=d0f7d6b4-3c37-4ed0-8e1d-2b5c61d1aa2c;exit=success\]3008;start=0b9ed589-eae6-45d7-9ee7-8bf3427445b3;type=shell;machineid=350353dd97fd456eb199aa74d9acafed;user=root;hostname=faradayos;bootid=1bc6c941-3de3-401e-a663-0ddbe3f02223;pid=1622;cwd=/root\$ ]3008;start=5cc6f4af-da6f-499e-90f7-e8bbe6b51856;type=command;machineid=350353dd97fd456eb199aa74d9acafed;user=root;hostname=faradayos;bootid=1bc6c941-3de3-401e-a663-0ddbe3f02223;pid=1622;cwd=/root\__END32__

@@ -1,0 +1,23 @@
+qemu-system-x86_64: egl: eglMakeCurrent failed: EGL_BAD_ACCESS
+make_current: Error switching context: -1
+qemu-system-x86_64: egl: eglMakeCurrent failed: EGL_BAD_ACCESS
+make_current: Error switching context: -1
+qemu-system-x86_64: egl: eglMakeCurrent failed: EGL_BAD_ACCESS
+make_current: Error switching context: -1
+qemu-system-x86_64: egl: eglMakeCurrent failed: EGL_BAD_ACCESS
+make_current: Error switching context: -1
+qemu-system-x86_64: egl: eglMakeCurrent failed: EGL_BAD_ACCESS
+make_current: Error switching context: -1
+qemu-system-x86_64: egl: eglMakeCurrent failed: EGL_BAD_ACCESS
+make_current: Error switching context: -1
+qemu-system-x86_64: egl: eglMakeCurrent failed: EGL_BAD_ACCESS
+make_current: Error switching context: -1
+qemu-system-x86_64: egl: eglMakeCurrent failed: EGL_BAD_ACCESS
+make_current: Error switching context: -1
+vrend_check_no_error: context error reported 7 "qs" Unknown 1282
+context 7 failed to dispatch DRAW_VBO: 22
+vrend_decode_ctx_submit_cmd: context error reported 7 "qs" Illegal command buffer 786440
+qemu-system-x86_64: egl: eglMakeCurrent failed: EGL_BAD_ACCESS
+make_current: Error switching context: -1
+qemu-system-x86_64: egl: eglMakeCurrent failed: EGL_BAD_ACCESS
+make_current: Error switching context: -1
