@@ -45,7 +45,7 @@ class VM:
                 "-cpu", "host" if self.kvm else "max", "-smp", str(self.smp), "-m", str(self.mem),
                 "-device", f"virtio-vga,xres={self.width},yres={self.height}", "-display", "none",
                 "-device", "qemu-xhci", "-device", "usb-tablet", "-device", "usb-kbd",
-                "-device", "intel-hda", "-device", "hda-duplex",  # a sound card, so audio can be checked
+                "-audiodev", "none,id=snd0", "-device", "intel-hda", "-device", "hda-duplex,audiodev=snd0",  # a sound card, so audio can be checked
                 "-drive", f"file={self.disk},if=virtio",
                 "-netdev", "user,id=n0", "-device", "virtio-net-pci,netdev=n0",
                 "-serial", f"unix:{self.W}/serial.sock,server=on,wait=off",
@@ -168,12 +168,18 @@ class VM:
         out = "\n".join(l for l in out.split("\n") if "__END" not in l).strip("\n")
         return re.sub(r"^(\$ )+", "", out)
 
+    def write_file(self, path, content):
+        """Writes a file inside the VM (as root)."""
+        import base64
+        b = base64.b64encode(content.encode()).decode()
+        self.run(f"echo {b} | base64 -d > {path}")
+
     def as_user(self, cmd, user="liveuser", uid=1000, timeout=120):
         """Runs a command as the desktop user inside the graphical session (niri socket + Wayland env)."""
         env = (f"XDG_RUNTIME_DIR=/run/user/{uid} WAYLAND_DISPLAY=$(ls /run/user/{uid}/ | grep -E '^wayland-[0-9]+$' | head -1) "
                f"NIRI_SOCKET=$(ls /run/user/{uid}/niri.*.sock 2>/dev/null | head -1) "
                f"DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/{uid}/bus")
-        return self.run(f"runuser -u {user} -- env {env} sh -c {json.dumps(cmd)}", timeout)
+        return self.run(f"runuser -u {user} -- env {env} sh -c {json.dumps(cmd)} 2>&1", timeout)
 
     def wait_desktop(self, user="liveuser", tries=120):
         for _ in range(tries):
@@ -289,7 +295,7 @@ poweroff
 def install_unattended(vm, timeout=2400):
     """From the live system's root shell: installs to the VM disk with Anaconda (live image copy, kickstart),
     then powers off. Afterwards vm.start(live=False) boots the installed system (root and tester: password faraday)."""
-    vm.run("cat > /root/vmtest.ks <<'EOF'\n" + KS_INSTALL + "EOF")
+    vm.write_file("/root/vmtest.ks", KS_INSTALL)
     say("unattended install started")
     vm.run("nohup sh -c 'anaconda --liveinst --cmdline --kickstart /root/vmtest.ks >/root/anaconda-run.txt 2>&1; "
            "echo rc=$? >/root/anaconda-rc' >/dev/null 2>&1 &")
