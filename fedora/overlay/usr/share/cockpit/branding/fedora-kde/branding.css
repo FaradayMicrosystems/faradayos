@@ -29,6 +29,14 @@
     --pf-t--global--background--color--floating--default: #161616;
     --pf-t--global--text--color--regular: #ededed;
     --pf-t--global--text--color--on-brand--default: #0b0b0b;
+    --pf-t--global--text--color--on-brand--hover: #0b0b0b;
+    --pf-t--global--text--color--on-brand--clicked: #0b0b0b;
+    /* Dim help text and finished steps were hard to read on black */
+    --pf-t--global--text--color--subtle: #b5b5b5;
+    /* Text fields: dark field, light text. Without this the fields stayed PatternFly white and the light text
+       typed into them (names, passphrases) was invisible (VM test, v0.91e) */
+    --pf-t--global--background--color--control--default: #1c1c1c;
+    --pf-t--global--background--color--control--read-only: #161616;
     background-color: #0b0b0b;
     color: #ededed;
 
@@ -48,5 +56,45 @@
 
     .pf-v6-c-wizard__nav-link.pf-m-current::before {
         --pf-v6-c-wizard__nav-link--m-current--before--BackgroundColor: var(--brand-default);
+    }
+
+    .pf-v6-c-form-control,
+    .pf-v6-c-text-input-group,
+    .pf-v6-c-search-input {
+        --pf-v6-c-form-control--BackgroundColor: #1c1c1c;
+        --pf-v6-c-form-control--Color: #ededed;
+        --pf-v6-c-text-input-group--BackgroundColor: #1c1c1c;
+        background-color: #1c1c1c;
+        color: #ededed;
+    }
+    .pf-v6-c-form-control > input,
+    .pf-v6-c-form-control > textarea,
+    .pf-v6-c-text-input-group__text-input,
+    input[type="text"], input[type="password"], input[type="search"], textarea {
+        background-color: #1c1c1c;
+        color: #ededed;
+        caret-color: var(--brand-default);
+        -webkit-text-fill-color: #ededed;
+    }
+    input::placeholder, textarea::placeholder {
+        color: #8a8a8a;
+        -webkit-text-fill-color: #8a8a8a;
+    }
+
+    /* Back, Quit and the other plain buttons in the brand orange, not PatternFly blue */
+    .pf-v6-c-button.pf-m-secondary {
+        --pf-v6-c-button--m-secondary--Color: var(--brand-default);
+        --pf-v6-c-button--m-secondary--BorderColor: var(--brand-default);
+        --pf-v6-c-button--m-secondary--hover--Color: var(--brand-default-light);
+        --pf-v6-c-button--m-secondary--hover--BorderColor: var(--brand-default-light);
+    }
+    .pf-v6-c-button.pf-m-link {
+        --pf-v6-c-button--m-link--Color: var(--brand-default);
+        --pf-v6-c-button--m-link--hover--Color: var(--brand-default-light);
+    }
+    /* Next on hover is yellow: dark text on it */
+    .pf-v6-c-button.pf-m-primary {
+        --pf-v6-c-button--m-primary--Color: #0b0b0b;
+        --pf-v6-c-button--m-primary--hover--Color: #0b0b0b;
     }
 }

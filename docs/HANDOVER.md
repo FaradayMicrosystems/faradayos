@@ -38,7 +38,7 @@ No open PRs at handover.
 - **Base distro: Fedora 44, mutable.** Aurora dislikes locked-down atomic/immutable systems. Do not suggest switching.
 - **CachyOS build is deprecated.** Do not fix or develop it. Keep `profile/airootfs/` (shared branding).
 - **Version:** format `vX.YY`, in `fedora/VERSION` as `0.88`. Experimental releases add `e`: `vX.YYe` (e.g. `0.89e`). **Bump it in every PR.** Never three-part (`v0.0.x`). Update README version mentions too.
-  - Next free number: **0.93** (or **0.93e** if experimental).
+  - Next free number: **0.95** (or **0.95e** if experimental).
 - **Editions.** One kickstart for all editions (`#@if <edition>` blocks); see FARADAYOS.md section 1. New editions: a line in `fedora/editions.list` plus tagged blocks; the Builder app shows it without changes.
 - **Lean ISO.** Large optional software goes in the add-ons list (`fedora/overlay/usr/share/faraday/addons.list`), never in `%packages`. Ask Aurora before adding anything large to the ISO.
 - **Auto-merge.** Claude merges its own PRs once CI passes; do not ask Aurora to merge. If CI fails, fix it. Re-run once for RPM Fusion outages.
@@ -121,3 +121,14 @@ notification (no app name, text or time; a shell restart cleared it). `usr/share
 patches Ryoku's `NotificationPopups.qml` (run by rebrand-ryoku.py, so re-applied after updates), and
 `ryogami.service.d/faradayos-quiet.conf` turns Ryogami's "Wallpaper changed" toast off before it starts.
 The CI VM test (`--no-stuck-popup`) fails if the `ryoku-notifications` layer is still on screen 30 s after sign-in.
+
+### First-time-user VM test (v0.93e, fixed in v0.94e)
+Fixed: invisible text in the installer's account fields, add-on checklists with no tick boxes, Ryoku names left on
+screen (settings header, QS Bar settings, RyoStore, notification titles, fastfetch, dnf repo name), the Store could
+not install (no Flathub remote), the tour marked the wrong bar as default, the shortcut hint never closed, US
+timezone on the live USB, "Install app" first when searching "install", Fedora icon on the installer, firewalld and
+mcelog/nvidia-settings errors on non-matching hardware, no PDF/image viewer or calculator in the performance edition,
+black screen without 3D graphics (now falls back to KDE Plasma), Fedora name/links in os-release.
+Known, not fixed yet: the tour window stays above apps; one click on a launcher result does not open it; the
+installer takes 2+ minutes to appear; clipboard panel ignores Esc; no keyboard shortcut for lock/power; duplicate
+menu entries; Super+O opens no notes app.

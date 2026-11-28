@@ -166,6 +166,13 @@ check "FaradayOS branding: Hub name, wallpaper, bar mark" "grep -qx \"Name=Farad
 check "FaradayOS branding re-applied after updates" "grep -q rebrand-ryoku.py $R/etc/dnf/libdnf5-plugins/actions.d/zz-faraday-rebrand-ryoku.actions"
 check "Installer (web UI) installed"         "chroot $R rpm -q anaconda-webui firefox"
 check "Installer window: session env has no shell-quoted values" "grep -qx QT_QPA_PLATFORM=wayland $R/etc/environment.d/99-zz-faradayos.conf"
+check "Store: Flathub remote set up"          "grep -q remote..flathub $R/var/lib/flatpak/repo/config"
+check "PDF and image viewers are the defaults" "chroot $R rpm -q evince loupe gnome-calculator && grep -q application/pdf=org.gnome.Evince.desktop $R/etc/xdg/mimeapps.list"
+check "mcelog only on Intel CPUs"              "grep -q GenuineIntel $R/etc/systemd/system/mcelog.service.d/10-faradayos-intel-only.conf"
+check "NVIDIA settings autostart only with the NVIDIA driver" "! grep -qx Exec=nvidia-settings\\ -l $R/etc/xdg/autostart/*.desktop && test -x $R/usr/libexec/faraday/nvidia-settings-load"
+check "Fastfetch base OS name set"             "grep -qx RYOKU_BASE_OS=Fedora $R/etc/environment.d/99-zz-faradayos.conf"
+check "os-release: FaradayOS variant and links" "grep -qx VARIANT=.FaradayOS\\ desktop. $R/usr/lib/os-release && grep -q HOME_URL=.https://github.com/FaradayMicrosystems $R/usr/lib/os-release"
+check "Live timezone Australia/Brisbane"       "readlink $R/etc/localtime | grep -q Australia/Brisbane"
 
 # Workplace edition: same desktop and drivers, no gaming, no VR, no KDE Plasma
 work  "Workplace: no Steam, gamescope, MangoHud, GameMode" "! chroot $R rpm -q steam gamescope mangohud gamemode | grep -qv \"not installed\""

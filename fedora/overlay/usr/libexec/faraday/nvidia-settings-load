@@ -1,0 +1,5 @@
+#!/bin/sh
+# Autostart: load the saved NVIDIA settings, only on PCs where the NVIDIA driver is running.
+# (nvidia-settings -l failed at every sign-in on AMD/Intel graphics; VM test, v0.93e)
+[ -e /proc/driver/nvidia/version ] || exit 0
+exec nvidia-settings -l

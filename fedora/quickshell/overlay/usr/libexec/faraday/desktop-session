@@ -9,6 +9,13 @@ gen=/usr/lib/systemd/user-environment-generators/30-systemd-environment-d-genera
 
 case "${1:-}" in
 faradayos)
+  # niri needs a GPU with a 3D driver (it will not draw with software rendering): with none (no /dev/dri/renderD*,
+  # e.g. a VM without 3D acceleration or a graphics card with no driver) the screen stayed black. Start KDE Plasma
+  # instead, which can draw without one (VM test, v0.93e).
+  if ! compgen -G "/dev/dri/renderD*" >/dev/null && [ -x /usr/bin/startplasma-wayland ]; then
+    echo "desktop-session: no 3D graphics driver, starting KDE Plasma instead of the FaradayOS desktop" >&2
+    exec "$0" plasma
+  fi
   # Plasma may have taken Ryoku's Qt/GTK settings out of the user manager (below); put them back.
   if [ -x "$gen" ]; then
     "$gen" 2>/dev/null | grep '=' | xargs -r -d '\n' systemctl --user set-environment 2>/dev/null

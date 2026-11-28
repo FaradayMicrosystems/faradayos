@@ -7,6 +7,9 @@ FV=$(cat /usr/share/faraday/version 2>/dev/null)
 if [ -f $O ]; then
   sed -i 's/^NAME=.*/NAME="FaradayOS"/; s/^LOGO=.*/LOGO=faradayos/; s/^ANSI_COLOR=.*/ANSI_COLOR="38;5;208"/' $O
   grep -q '^LOGO=' $O || echo 'LOGO=faradayos' >> $O
+  # Shown by "About this PC" and system info tools: FaradayOS's own name and links, not Fedora KDE's (VM test, v0.93e).
+  # VARIANT_ID is left alone (the installer picks its colours by it).
+  sed -i 's/^VARIANT=.*/VARIANT="FaradayOS desktop"/; s|^HOME_URL=.*|HOME_URL="https://github.com/FaradayMicrosystems/faradayos"|; s|^SUPPORT_URL=.*|SUPPORT_URL="https://github.com/FaradayMicrosystems/faradayos/issues"|; s|^BUG_REPORT_URL=.*|BUG_REPORT_URL="https://github.com/FaradayMicrosystems/faradayos/issues"|; s|^DOCUMENTATION_URL=.*|DOCUMENTATION_URL="https://github.com/FaradayMicrosystems/faradayos/tree/main/docs"|' $O
   # Machine name when none was chosen (login prompt, terminal): "faradayos", not systemd's fallback "fedora"
   sed -i '/^DEFAULT_HOSTNAME=/d' $O; echo 'DEFAULT_HOSTNAME=faradayos' >> $O
   if [ -n "$FV" ]; then

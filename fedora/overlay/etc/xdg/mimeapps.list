@@ -1,0 +1,12 @@
+# FaradayOS default apps for files (each user can change them in Settings > Default Apps)
+[Default Applications]
+application/pdf=org.gnome.Evince.desktop
+image/png=org.gnome.Loupe.desktop
+image/jpeg=org.gnome.Loupe.desktop
+image/gif=org.gnome.Loupe.desktop
+image/webp=org.gnome.Loupe.desktop
+image/bmp=org.gnome.Loupe.desktop
+image/tiff=org.gnome.Loupe.desktop
+image/svg+xml=org.gnome.Loupe.desktop
+image/heif=org.gnome.Loupe.desktop
+image/avif=org.gnome.Loupe.desktop

@@ -11,8 +11,15 @@ if [ -f /usr/share/applications/liveinst.desktop ]; then
   A=~liveuser/.local/share/applications
   mkdir -p $A ~liveuser/Desktop
   sed -e '/^NoDisplay=/d' -e 's/^Name=.*/Name=Install FaradayOS/' \
+      -e 's|^Icon=.*|Icon=/usr/share/faraday/brand/mark.png|' \
       -e '/^\[Desktop Entry\]/a NoDisplay=false' \
       /usr/share/applications/liveinst.desktop > $A/liveinst.desktop
+  # Typing "install" in the launcher listed Ryoku's "Install app" (a package-file picker) above the installer,
+  # and Enter opened that picker. Hide it on the live USB so "Install FaradayOS" is the first match.
+  if [ -f /usr/share/applications/install-app.desktop ]; then
+    sed -e '/^NoDisplay=/d' -e '/^\[Desktop Entry\]/a NoDisplay=true' \
+        /usr/share/applications/install-app.desktop > $A/install-app.desktop
+  fi
   cp /usr/share/applications/liveinst.desktop ~liveuser/Desktop/
   chmod +x ~liveuser/Desktop/liveinst.desktop
   chown -R liveuser:liveuser ~liveuser/.local ~liveuser/Desktop
