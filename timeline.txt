@@ -1,0 +1,49 @@
+05:00:11 +56s serial root shell
+05:00:26 +71s desktop up=True
+05:01:12 +117s shot 01-live-after-55s.png brightness=52
+05:01:13 +118s tour page 1: clicking the bottom-right button
+05:01:22 +128s shot 02-tour-after-click-1.png brightness=53
+05:01:22 +128s tour page 2: clicking the bottom-right button
+05:01:31 +137s shot 03-tour-after-click-2.png brightness=51
+05:01:32 +137s tour page 3: clicking the bottom-right button
+05:01:41 +146s shot 04-tour-after-click-3.png brightness=49
+05:01:41 +147s tour page 4: clicking the bottom-right button
+05:01:50 +155s shot 05-tour-after-click-4.png brightness=50
+05:01:50 +156s tour page 5: clicking the bottom-right button
+05:01:59 +164s shot 06-tour-after-click-5.png brightness=50
+05:01:59 +165s tour page 6: clicking the bottom-right button
+05:02:08 +173s shot 07-tour-after-click-6.png brightness=50
+05:02:08 +173s tour page 7: clicking the bottom-right button
+05:02:16 +182s shot 08-tour-after-click-7.png brightness=50
+05:02:17 +182s tour page 8: clicking the bottom-right button
+05:02:25 +191s shot 09-tour-after-click-8.png brightness=50
+05:02:25 +191s tour page 9: clicking the bottom-right button
+05:02:34 +199s shot 10-tour-after-click-9.png brightness=50
+05:02:34 +200s tour page 10: clicking the bottom-right button
+05:02:43 +208s shot 11-tour-after-click-10.png brightness=50
+05:02:43 +208s tour page 11: clicking the bottom-right button
+05:02:52 +217s shot 12-tour-after-click-11.png brightness=50
+05:02:52 +217s tour page 12: clicking the bottom-right button
+05:03:01 +226s shot 13-tour-after-click-12.png brightness=50
+05:03:06 +231s shot 14-after-tour.png brightness=50
+05:03:20 +246s shot 15-tour-reopened.png brightness=50
+05:03:30 +256s shot 16-tour-after-skip.png brightness=49
+05:03:30 +256s tour open after Skip: True
+05:03:51 +276s shot 17-launcher-open.png brightness=48
+05:04:09 +294s shot 18-launcher-install-typed.png brightness=58
+05:04:09 +295s click 'Install FaradayOS' at 1113,585
+05:04:10 +295s installer launched from launcher (clicked 'Install FaradayOS')
+05:04:27 +312s shot 19-installer-wait-5s.png brightness=58
+05:04:58 +343s shot 20-installer-wait-20s.png brightness=58
+05:05:28 +374s shot 21-installer-wait-35s.png brightness=58
+05:05:57 +402s shot 22-installer-wait-50s.png brightness=58
+05:06:25 +431s shot 23-installer-wait-65s.png brightness=58
+05:07:00 +465s shot 24-installer-wait-80s.png brightness=58
+05:07:31 +497s shot 25-installer-wait-95s.png brightness=58
+05:08:00 +526s shot 26-installer-wait-110s.png brightness=58
+05:08:29 +554s shot 27-installer-wait-125s.png brightness=58
+05:08:57 +582s shot 28-installer-wait-140s.png brightness=58
+05:09:25 +610s shot 29-installer-wait-155s.png brightness=58
+05:09:54 +640s shot 30-installer-wait-170s.png brightness=58
+05:10:22 +668s shot 31-installer-wait-185s.png brightness=58
+05:10:51 +696s shot 32-installer-wait-200s.png brightness=58

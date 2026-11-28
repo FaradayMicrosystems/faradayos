@@ -1,0 +1,29 @@
+liveuser    2780 Sat Nov 28 00:00:15 2026 /usr/bin/bash /usr/bin/ryoku-session-intro welcome
+liveuser    3274 Sat Nov 28 00:00:17 2026 flock -n /run/user/1000/ryoku-keys-hint.lock env QML_IMPORT_PATH=/home/liveuser/.local/lib/qt6/qml QML2_IMPORT_PATH=/home/liveuser/.local/lib/qt6/qml qs -c keys-hint
+liveuser    3275 Sat Nov 28 00:00:17 2026 qs -c keys-hint
+[Desktop Entry]
+Type=Application
+Name=Install FaradayOS add-ons
+Comment=Pick optional software (VR tools, Wine and Lutris, and more) and install it in one go
+Exec=/usr/bin/faraday-addons
+Icon=faradayos
+Terminal=false
+Categories=System;Game;
+Name=Install FaradayOS
+Exec=liveinst
+Icon=org.fedoraproject.AnacondaInstaller
+/usr/share/applications/install-app.desktop
+               Local time: Sat 2026-11-28 00:01:12 EST
+           Universal time: Sat 2026-11-28 05:01:12 UTC
+                 RTC time: Sat 2026-11-28 05:01:11
+                Time zone: America/New_York (EST, -0500)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: yes
+ 
+Warning: The system is configured to read the RTC time in the local time zone.
+         This mode cannot be fully supported. It will create various problems
+         with time zone changes and daylight saving time adjustments. The RTC
+         time is never updated, it relies on external facilities to maintain it.
+         If at all possible, use RTC in UTC by calling
+         'timedatectl set-local-rtc 0'.
