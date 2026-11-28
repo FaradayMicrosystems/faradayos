@@ -1,0 +1,110 @@
+[Anaconda]
+debug = False
+activatable_modules = 
+	org.fedoraproject.Anaconda.Modules.*
+	org.fedoraproject.Anaconda.Addons.*
+forbidden_modules = 
+optional_modules = 
+	org.fedoraproject.Anaconda.Modules.Subscription
+	org.fedoraproject.Anaconda.Addons.*
+
+[Installation System]
+type = LIVE_OS
+can_detect_enabled_smt = False
+
+[Installation Target]
+type = HARDWARE
+physical_root = /mnt/sysimage
+system_root = /mnt/sysroot
+can_configure_network = True
+can_copy_input_kickstart = True
+can_save_output_kickstart = True
+can_save_installation_logs = True
+
+[Network]
+default_on_boot = FIRST_WIRED_WITH_LINK
+
+[Payload]
+default_environment = kde-desktop-environment
+ignored_packages = 
+updates_repositories = 
+	updates
+	updates-modular
+disabled_repositories = 
+	*source*
+	*debuginfo*
+	updates-testing
+	updates-testing-modular
+enabled_repositories_from_treeinfo = addon optional variant
+enable_closest_mirror = True
+default_source = CLOSEST_MIRROR
+flatpak_remote = 
+	fedora  oci+https://registry.fedoraproject.org
+verify_ssl = True
+default_rpm_gpg_keys = 
+	/etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
+
+[Security]
+selinux = -1
+
+[Bootloader]
+type = DEFAULT
+efi_dir = fedora
+menu_auto_hide = True
+nonibft_iscsi_boot = False
+preserved_arguments = 
+	cio_ignore zfcp.allow_lun_scan
+	speakup_synth apic noapic apm ide noht acpi video
+	pci nodmraid nompath nomodeset noiswmd fips selinux
+	biosdevname ipv6.disable net.ifnames net.ifnames.prefix
+	nosmt vga rd.net.dns rd.net.dns-resolve-mode rd.net.dns-backend console
+	clk_ignore_unused pd_ignore_unused arm64.nopauth
+
+[Storage]
+ibft = True
+multipath_friendly_names = True
+gpt_discoverable_partitions = True
+allow_imperfect_devices = False
+btrfs_compression = zstd:1
+disk_label_type = 
+file_system_type = 
+default_partitioning = 
+	/     (min 1 GiB, max 70 GiB)
+	/home (min 500 MiB, free 50 GiB)
+default_scheme = BTRFS
+luks_version = luks2
+
+[Storage Constraints]
+min_ram = 320 MiB
+luks2_min_ram = 128 MiB
+swap_is_recommended = False
+/etc/anaconda/conf.d:
+00-do-nothing.conf  01-still-do-nothing.conf  90-faradayos-accounts.conf  README
+
+/etc/anaconda/profile.d:
+almalinux.conf  circle.conf  fedora-designsuite.conf  fedora-iot.conf  fedora-kde-mobile.conf  fedora-sericea.conf  fedora-silverblue.conf   navix.conf  rhel.conf  rocky.conf             virtuozzo-linux.conf
+centos.conf     fedora.conf  fedora-eln.conf          fedora-kde.conf  fedora-kinoite.conf     fedora-server.conf   fedora-workstation.conf  ovirt.conf  rhvh.conf  scientific-linux.conf
+NAME="FaradayOS"
+VERSION="0.91e (Fedora 44)"
+RELEASE_TYPE=stable
+ID=fedora
+VERSION_ID=44
+VERSION_CODENAME=""
+PRETTY_NAME="FaradayOS v0.91e"
+ANSI_COLOR="38;5;208"
+LOGO=faradayos
+CPE_NAME="cpe:/o:fedoraproject:fedora:44"
+HOME_URL="https://fedoraproject.org/"
+DOCUMENTATION_URL="https://docs.fedoraproject.org/en-US/fedora/f44/"
+SUPPORT_URL="https://ask.fedoraproject.org/"
+BUG_REPORT_URL="https://bugzilla.redhat.com/"
+REDHAT_BUGZILLA_PRODUCT="Fedora"
+REDHAT_BUGZILLA_PRODUCT_VERSION=44
+REDHAT_SUPPORT_PRODUCT="Fedora"
+REDHAT_SUPPORT_PRODUCT_VERSION=44
+SUPPORT_END=2027-05-19
+VARIANT="KDE Plasma Desktop Edition"
+VARIANT_ID=kde
+DEFAULT_HOSTNAME=faradayos
+IMAGE_ID=faradayos
+IMAGE_VERSION=0.91e

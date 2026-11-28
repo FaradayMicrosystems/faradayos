@@ -1,0 +1,61 @@
+Starting installer, one moment...
+terminal size detection failed, using default width
+anaconda 44.30-2.fc44 for anaconda bluesky (pre-release) started.
+ * installation log files are stored in /tmp during the installation
+ * shell is available on TTY2 and in second TMUX pane (ctrl+b, then press 2)
+ * if the graphical installation interface fails to start, try again with the
+   inst.text boot option to start text installation
+ * when reporting a bug add logs from /tmp as separate text/plain attachments
+Installation
+1) [x] Language settings                 2) [x] Time settings
+       (English (United States))                (America/New_York timezone)
+3) [!] Installation Destination          4) [!] Root password
+       (Processing...)                          (Root account is disabled)
+5) [!] User creation
+       (No user will be created)
+Please make a selection from the above ['b' to begin installation, 'q' to quit,
+'r' to refresh]: Please make a selection from the above ['b' to begin installation, 'q' to quit,
+'r' to refresh]: Please make a selection from the above ['b' to begin installation, 'q' to quit,
+'r' to refresh]: Please make a selection from the above ['b' to begin installation, 'q' to quit,
+'r' to refresh]: Please make a selection from the above ['b' to begin installation, 'q' to quit,
+'r' to refresh]: ================================================================================
+Installation
+1) [x] Language settings                 2) [x] Time settings
+       (English (United States))                (America/New_York timezone)
+3) [!] Installation Destination          4) [!] Root password
+       (Automatic partitioning                  (Root account is disabled)
+       selected)
+5) [!] User creation
+       (No user will be created)
+Please make a selection from the above ['b' to begin installation, 'q' to quit,
+'r' to refresh]: Please make a selection from the above ['b' to begin installation, 'q' to quit,
+'r' to refresh]: Please make a selection from the above ['b' to begin installation, 'q' to quit,
+'r' to refresh]: Please make a selection from the above ['b' to begin installation, 'q' to quit,
+'r' to refresh]: Please make a selection from the above ['b' to begin installation, 'q' to quit,
+'r' to refresh]: 
+----
+00:12:17,030 INF main: anaconda called with cmdline = ['/usr/sbin/anaconda', '--liveinst', '--text', '--kickstart', '/root/vmtest.ks']
+00:12:20,447 INF main: Found a kickstart file: /usr/share/anaconda/interactive-defaults.ks
+00:12:20,460 INF startup_utils: Parsing kickstart: /usr/share/anaconda/interactive-defaults.ks
+00:12:20,764 DBG startup_utils: no default systemd target set & in text/remote desktop mode - setting multi-user.target.
+00:12:21,140 INF startup_utils: Geoloc: using timezone determined by geolocation
+00:12:21,253 INF lifecycle: Module initialized: UserSpoke
+00:12:21,285 DBG simpleline: No callback registered for user input 
+00:12:21,285 DBG simpleline: No callback registered for user input 
+00:12:21,294 DBG simpleline: No callback registered for user input 
+00:12:21,294 DBG simpleline: No callback registered for user input 
+00:12:21,299 DBG simpleline: No callback registered for user input 
+00:12:21,299 DBG simpleline: No callback registered for user input 
+00:12:21,305 DBG simpleline: No callback registered for user input 
+00:12:21,305 DBG simpleline: No callback registered for user input 
+00:12:21,313 DBG simpleline: No callback registered for user input 
+00:12:21,313 DBG simpleline: No callback registered for user input 
+00:12:21,335 DBG simpleline: No callback registered for user input 
+00:12:21,336 DBG simpleline: No callback registered for user input 
+00:12:21,342 DBG simpleline: No callback registered for user input 
+00:12:21,343 DBG simpleline: No callback registered for user input 
+00:12:21,349 DBG simpleline: No callback registered for user input 
+00:12:21,349 DBG simpleline: No callback registered for user input 
+00:12:21,356 DBG simpleline: No callback registered for user input 
+00:12:21,356 DBG simpleline: No callback registered for user input 
+00:12:21,357 DBG simpleline: New signal SendMessageSignal enqueued with source TextUserInterface

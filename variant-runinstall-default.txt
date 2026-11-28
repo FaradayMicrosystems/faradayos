@@ -1,0 +1,31 @@
+Starting installer, one moment...
+terminal size detection failed, using default width
+anaconda 44.30-2.fc44 for anaconda bluesky (pre-release) started.
+ * installation log files are stored in /tmp during the installation
+ * shell is available on TTY2 and in second TMUX pane (ctrl+b, then press 2)
+ * if the graphical installation interface fails to start, try again with the
+   inst.text boot option to start text installation
+ * when reporting a bug add logs from /tmp as separate text/plain attachments
+Installation
+1) [x] Language settings                 2) [x] Time settings
+       (English (United States))                (America/New_York timezone)
+3) [!] Installation Destination          4) [!] Root password
+       (Automatic partitioning                  (Root account is disabled)
+       selected)
+5) [!] User creation
+       (No user will be created)
+The installation was stopped due to an error which occurred while running in non-interactive cmdline mode. Since there cannot be any questions in cmdline mode, edit your kickstart file and retry installation. 
+The exact error message is: 
+The following mandatory spokes are not completed:
+Installation Destination
+Root password
+User creation. 
+The installer will now terminate.
+----
+00:07:14,371 INF main: Found a kickstart file: /usr/share/anaconda/interactive-defaults.ks
+00:07:14,545 INF startup_utils: Parsing kickstart: /usr/share/anaconda/interactive-defaults.ks
+00:07:15,563 DBG startup_utils: no default systemd target set & in text/remote desktop mode - setting multi-user.target.
+00:07:17,196 INF startup_utils: Geoloc: using timezone determined by geolocation
+00:07:25,027 INF lifecycle: Module initialized: UserSpoke
+User creation
+User creation

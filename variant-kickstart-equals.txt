@@ -1,0 +1,19 @@
+Starting installer, one moment...
+terminal size detection failed, using default width
+anaconda 44.30-2.fc44 for anaconda bluesky (pre-release) started.
+ * installation log files are stored in /tmp during the installation
+ * shell is available on TTY2 and in second TMUX pane (ctrl+b, then press 2)
+ * if the graphical installation interface fails to start, try again with the
+   inst.text boot option to start text installation
+ * when reporting a bug add logs from /tmp as separate text/plain attachments
+The installation was stopped due to an error which occurred while running in non-interactive cmdline mode. Since there cannot be any questions in cmdline mode, edit your kickstart file and retry installation. 
+The exact error message is: 
+Non interactive installation failed: The mount point /run/install/sources/mount-0000-live_os_image is already in use.. 
+The installer will now terminate.
+----
+00:08:46,349 INF main: anaconda called with cmdline = ['/usr/sbin/anaconda', '--liveinst', '--cmdline', '--kickstart=/root/vmtest.ks']
+00:08:49,959 INF main: Found a kickstart file: /usr/share/anaconda/interactive-defaults.ks
+00:08:49,972 INF startup_utils: Parsing kickstart: /usr/share/anaconda/interactive-defaults.ks
+00:08:50,289 DBG startup_utils: no default systemd target set & in text/remote desktop mode - setting multi-user.target.
+00:08:50,888 INF startup_utils: Geoloc: using timezone determined by geolocation
+00:08:51,030 INF lifecycle: Module initialized: UserSpoke
