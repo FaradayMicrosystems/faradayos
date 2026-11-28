@@ -207,7 +207,7 @@ class VM:
         if user != "root":
             self.send(f"sudo -S -i <<<'{password}'\r" if password else "sudo -i\r")
             time.sleep(3)
-        self.send("export PS1='$ ' TERM=dumb SYSTEMD_PAGER= PAGER=cat; bind 'set enable-bracketed-paste off'; "
+        self.send("unset command_not_found_handle; export PS1='$ ' TERM=dumb SYSTEMD_PAGER= PAGER=cat; bind 'set enable-bracketed-paste off'; "
                   "stty -echo cols 250; dmesg -n 1\r")
         self.read_until(r"\$ ", 30)
         say("logged in on serial console as", user)
