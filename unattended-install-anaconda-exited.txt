@@ -1,0 +1,109 @@
+Starting installer, one moment...
+terminal size detection failed, using default width
+anaconda 44.30-2.fc44 for anaconda bluesky (pre-release) started.
+ * installation log files are stored in /tmp during the installation
+ * shell is available on TTY2 and in second TMUX pane (ctrl+b, then press 2)
+ * if the graphical installation interface fails to start, try again with the
+   inst.text boot option to start text installation
+ * when reporting a bug add logs from /tmp as separate text/plain attachments
+================================================================================
+================================================================================
+Installation
+
+1) [x] Language settings                 2) [x] Time settings
+       (English (United States))                (Australia/Brisbane timezone)
+3) [!] Installation Destination          4) [x] Root password
+       (Automatic partitioning                  (Root password is set)
+       selected)
+5) [x] User creation
+       (Administrator tester will be
+       created)
+
+
+The installation was stopped due to an error which occurred while running in non-interactive cmdline mode. Since there cannot be any questions in cmdline mode, edit your kickstart file and retry installation. 
+The exact error message is: 
+
+The following mandatory spokes are not completed:
+Installation Destination. 
+
+The installer will now terminate.
+01:57:56,026 DBG anaconda: changing display mode from TUI to TUI
+01:57:56,026 DBG anaconda: working in noninteractive mode
+01:57:56,026 INF anaconda: Display mode is set to 'noninteractive text mode'.
+01:57:56,028 DBG ui.lib.addons: Loading spokes into module path for addon com_redhat_kdump
+01:57:56,037 INF startup_utils: check_memory(): total:8044, needed:320
+01:57:56,041 DBG startup_utils: no default systemd target set & in text/remote desktop mode - setting multi-user.target.
+01:57:56,043 INF network: got 0 NTP servers from DHCP
+01:57:56,047 INF core.threads: Thread Done: AnaWaitForConnectingNMThread (139940490299072)
+01:57:56,086 DBG core.storage: LABEL=OEMDRV matches [] for devicetree=None and disks_only=True
+01:57:56,087 INF core.threads: Running Thread: AnaStorageThread (139940490299072)
+01:57:56,092 INF core.threads: Running Thread: AnaTimeInitThread (139940464985792)
+01:57:56,185 DBG payload.manager: Restarting payload thread
+01:57:56,186 INF core.threads: Running Thread: AnaPayloadRestartThread (139940455544512)
+01:57:56,186 INF startup_utils: Geolocation is enabled.
+01:57:56,187 INF core.threads: Running Thread: AnaPayloadThread (139940447151808)
+01:57:56,187 INF core.threads: Thread Done: AnaPayloadRestartThread (139940455544512)
+01:57:56,194 DBG startup_utils: Skip the time synchronization.
+01:57:56,723 INF startup_utils: Geoloc: using timezone determined by geolocation
+01:57:56,731 INF startup_utils: Geoloc: skipping locale because already set
+01:57:56,731 DBG simpleline: GLib event loop is used!
+01:57:56,833 INF core.threads: Thread Done: AnaStorageThread (139940490299072)
+01:57:56,960 INF core.hw: Skipping detection of SMT.
+01:57:56,980 INF ui.common: Spoke NetworkSpoke will not be displayed because it is hidden by the Anaconda configuration file.
+01:57:56,981 INF lifecycle: Adding controller: SummaryHub
+01:57:58,387 INF lifecycle: Module initialized: LangSpoke
+01:57:58,392 INF lifecycle: Module initialized: TimeSpoke
+01:57:58,396 INF core.threads: Running Thread: AnaStorageWatcher (139940490299072)
+01:57:58,401 INF lifecycle: Module initialized: PasswordSpoke
+01:57:58,408 INF lifecycle: Module initialized: UserSpoke
+01:57:58,412 INF lifecycle: Initialization of all modules (5) has been started.
+01:57:58,412 DBG simpleline: Scheduling screen SummaryHub
+01:57:58,412 DBG simpleline: New signal RenderScreenSignal enqueued with source ScreenScheduler
+01:57:58,413 DBG simpleline: Scheduling screen ProgressSpoke
+01:57:58,413 DBG simpleline: Starting main loop
+01:57:58,415 WRN misc: /usr/lib64/python3.14/site-packages/gi/events.py:803: DeprecationWarning: 'asyncio.AbstractEventLoopPolicy' is deprecated and slated for removal in Python 3.16
+  AbstractEventLoopPolicy = getattr(asyncio, "AbstractEventLoopPolicy", object)
+
+01:57:58,416 DBG simpleline: Processing screen ScreenData(SummaryHub,None,False)
+01:57:58,420 DBG ui.lib.storage: Selecting one or less disks by default: vda
+01:57:58,421 INF lifecycle: Module initialized: StorageSpoke
+01:57:58,421 INF lifecycle: All modules have been initialized.
+01:57:58,421 INF core.threads: Thread Done: AnaStorageWatcher (139940490299072)
+01:57:58,436 DBG simpleline: Input is required by ScreenData(SummaryHub,None,False) screen
+01:57:58,439 ERR ui.tui.hubs.summary: CmdlineError: The following mandatory spokes are not completed:
+Installation Destination
+01:57:58,439 DBG simpleline: New signal ExceptionSignal enqueued with source ScreenScheduler
+01:57:58,439 DBG simpleline: Executing inner loop
+01:57:58,439 DBG simpleline: New signal ExceptionSignal enqueued with source ScreenScheduler
+01:57:58,439 ERR ui.tui: 
+======= Screen stack =======
+----------- TOP ------------
+ScreenData(SummaryHub,None,False)
+ScreenData(ProgressSpoke,None,False)
+============================
+
+01:57:58,439 DBG exception: running handleException
+01:57:58,473 CRT exception: Traceback (most recent call last):
+
+  File "/usr/lib/python3.14/site-packages/simpleline/render/screen_scheduler.py", line 251, in _process_screen
+    top_screen.ui_screen.get_input_with_error_check(top_screen.args)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+
+  File "/usr/lib/python3.14/site-packages/simpleline/render/screen/__init__.py", line 296, in get_input_with_error_check
+    self._input_manager.get_input(args=args)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+
+  File "/usr/lib/python3.14/site-packages/simpleline/render/screen/input_manager.py", line 113, in get_input
+    prompt = self._ui_screen.prompt(args)
+
+  File "/usr/lib64/python3.14/site-packages/pyanaconda/ui/tui/hubs/summary.py", line 124, in prompt
+    raise CmdlineError(errtxt)
+
+pyanaconda.errors.CmdlineError: The following mandatory spokes are not completed:
+Installation Destination
+
+01:57:58,667 DBG exception: Gtk cannot be initialized
+01:57:58,667 DBG exception: In the main thread, running exception handler
+01:57:58,679 INF core.util: Reporting the IPMI event: 10
+01:58:06,138 INF core.threads: Thread Done: AnaTimeInitThread (139940464985792)
+01:58:13,079 INF core.threads: Thread Done: AnaPayloadThread (139940447151808)
