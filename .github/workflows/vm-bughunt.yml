@@ -85,14 +85,10 @@ jobs:
         run: |
           cd fedora/test/vm
           if [ -n "$SCRIPT" ]; then echo "$SCRIPT" | base64 -d | gunzip > scenario_inline.py; S=scenario_inline.py; else S=scenario_${{ matrix.scenario }}.py; fi
+          # Push what is there every 4 minutes too, so results can be looked at while the run goes on
+          ( while sleep 240; do bash "$GITHUB_WORKSPACE/fedora/test/vm/push-results.sh" "${{ matrix.scenario }}" >/dev/null 2>&1; done ) &
           timeout 8000 python3 "$S" "$GITHUB_WORKSPACE/iso/FaradayOS.iso" "$GITHUB_WORKSPACE/out"
 
       - name: Push results to refs/vm-results
         if: always()
-        run: |
-          cd out 2>/dev/null || exit 0
-          rm -f *.ppm *.sock disk.qcow2 OVMF_VARS.fd; rm -rf boot
-          git init -q . && git add -A
-          git -c user.name=vm-bughunt -c user.email=vm-bughunt@users.noreply.github.com commit -qm "VM results run ${{ github.run_id }} ${{ matrix.scenario }}"
-          git push -f "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:refs/vm-results/${{ github.run_id }}/${{ matrix.scenario }}
-          echo "fetch: git fetch origin refs/vm-results/${{ github.run_id }}/${{ matrix.scenario }}"
+        run: bash fedora/test/vm/push-results.sh "${{ matrix.scenario }}"
