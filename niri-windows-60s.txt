@@ -1,0 +1,40 @@
+Window ID 2: (focused)
+  Title: "Welcome to FaradayOS"
+  App ID: "org.quickshell"
+  Is floating: yes
+  PID: 5426
+  Workspace ID: 1
+  Layout:
+    Tile size: 1188 x 768
+    Workspace-view position: 366, 184
+    Window size: 1180 x 760
+    Window offset in tile: 4 x 4
+
+Output "Virtual-1":
+  Background layer:
+    Surface:
+      Namespace: "ryoku-overview-backdrop"
+      Keyboard interactivity: none
+
+  Bottom layer:
+    Surface:
+      Namespace: "ryoku-dock"
+      Keyboard interactivity: none
+
+    Surface:
+      Namespace: "ryoku-widgets"
+      Keyboard interactivity: none
+
+  Top layer:
+    Surface:
+      Namespace: "quickshell"
+      Keyboard interactivity: none
+
+  Overlay layer:
+    Surface:
+      Namespace: "ryoku-keys-hint"
+      Keyboard interactivity: none
+
+    Surface:
+      Namespace: "ryoku-notifications"
+      Keyboard interactivity: none

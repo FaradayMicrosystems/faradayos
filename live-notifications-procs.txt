@@ -1,0 +1,37 @@
+liveuser    2795 /usr/bin/bash /usr/bin/ryoku-session-intro welcome
+liveuser    3161 qs -p /home/liveuser/.config/quickshell/reload-cover
+liveuser    3261 flock -n /run/user/1000/ryoku-keys-hint.lock env QML_IMPORT_PATH=/home/liveuser/.local/lib/qt6/qml QML2_IMPORT_PATH=/home/liveuser/.local/lib/qt6/qml qs -c keys-hint
+liveuser    3264 qs -c keys-hint
+liveuser    4346 quickshell -p /usr/share/ryogami/shell.qml
+liveuser    5253 qs -c shell
+liveuser    5322 /usr/bin/notify-send -a Ryogami -i /home/liveuser/Pictures/Wallpapers/default.webp Wallpaper changed default
+liveuser    5395 /usr/bin/bash /usr/bin/ryoku-session-intro welcome
+/home/liveuser/Desktop:
+total 16
+drwxr-xr-x.  2 liveuser liveuser    80 Nov 28  2026 .
+drwx------. 13 liveuser liveuser   340 Nov 27 23:41 ..
+-rwxr-xr-x.  1 liveuser liveuser   241 Nov 26 09:12 faraday-addons.desktop
+-rwxr-xr-x.  1 liveuser liveuser 10788 Nov 28  2026 liveinst.desktop
+
+/home/liveuser/.local/share/applications:
+total 12
+drwxr-xr-x. 2 liveuser liveuser    60 Nov 28  2026 .
+drwxr-xr-x. 8 liveuser liveuser   160 Nov 27 23:41 ..
+-rw-r--r--. 1 liveuser liveuser 10785 Nov 28  2026 liveinst.desktop
+  UNIT           LOAD   ACTIVE SUB    DESCRIPTION
+● mcelog.service loaded failed failed Machine Check Exception Logging Daemon
+
+Legend: LOAD   → Reflects whether the unit definition was properly loaded.
+        ACTIVE → The high-level unit activation state, i.e. generalization of SUB.
+        SUB    → The low-level unit activation state, values depend on unit type.
+
+1 loaded units listed.
+Nov 27 23:40:27 faradayos kernel: virt/tdx: TDX not supported by the host platform
+Nov 28 04:41:14 faradayos alsactl[1326]: /usr/sbin/alsactl: load_state:1745: Cannot open /var/lib/alsa/asound.state for reading: No such file or directory
+Nov 28 04:41:17 localhost-live systemd[1]: Failed to start ryoku-greeter-guard.service.
+Nov 28 04:41:22 localhost-live firewalld[1191]: ERROR: INVALID_ZONE: (default)
+Nov 28 04:41:22 localhost-live firewalld[1191]: ERROR: INVALID_ZONE: (default)
+Nov 27 23:41:27 localhost-live dbus-broker-launch[2503]: Ignoring duplicate name 'org.freedesktop.secrets' in service file '/usr/share//dbus-1/services/org.freedesktop.secrets.service'
+Nov 27 23:41:27 localhost-live dbus-broker-launch[2503]: Ignoring duplicate name 'org.freedesktop.FileManager1' in service file '/usr/share//dbus-1/services/org.kde.dolphin.FileManager1.service'
+Nov 27 23:41:31 localhost-live dbus-broker-launch[2578]: Ignoring duplicate name 'org.freedesktop.secrets' in service file '/usr/share//dbus-1/services/org.freedesktop.secrets.service'
+Nov 27 23:41:31 localhost-live dbus-broker-launch[2578]: Ignoring duplicate name 'org.freedesktop.FileManager1' in service file '/usr/share//dbus-1/services/org.kde.dolphin.FileManager1.service'

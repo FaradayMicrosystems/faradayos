@@ -1,0 +1,144 @@
+04:41:31 +71s serial root shell
+04:41:46 +86s desktop up=True
+04:41:51 +91s shot 01-live-first-screen.png brightness=1
+04:42:58 +158s shot 02-live-after-60s.png brightness=51
+04:42:59 +158s windows: [('org.quickshell', 'Welcome to FaradayOS')]
+04:42:59 +158s NOT FOUND on screen: 'Show me around'
+04:42:59 +158s NOT FOUND on screen: 'around'
+04:43:07 +167s shot 03-tour-page-1.png brightness=51
+04:43:07 +167s NOT FOUND on screen: 'Next'
+04:43:07 +167s NOT FOUND on screen: 'Continue'
+04:43:07 +167s NOT FOUND on screen: 'Get started'
+04:43:07 +167s NOT FOUND on screen: 'Finish'
+04:43:07 +167s click 'Done' at 1506,208
+04:43:17 +177s shot 04-tour-page-2.png brightness=51
+04:43:17 +177s NOT FOUND on screen: 'Next'
+04:43:17 +177s NOT FOUND on screen: 'Continue'
+04:43:17 +177s NOT FOUND on screen: 'Get started'
+04:43:17 +177s NOT FOUND on screen: 'Finish'
+04:43:17 +177s click 'Done' at 1506,208
+04:43:27 +186s shot 05-tour-page-3.png brightness=51
+04:43:27 +186s NOT FOUND on screen: 'Next'
+04:43:27 +186s NOT FOUND on screen: 'Continue'
+04:43:27 +186s NOT FOUND on screen: 'Get started'
+04:43:27 +186s NOT FOUND on screen: 'Finish'
+04:43:27 +186s click 'Done' at 1506,208
+04:43:36 +196s shot 06-tour-page-4.png brightness=51
+04:43:36 +196s NOT FOUND on screen: 'Next'
+04:43:36 +196s NOT FOUND on screen: 'Continue'
+04:43:36 +196s NOT FOUND on screen: 'Get started'
+04:43:36 +196s NOT FOUND on screen: 'Finish'
+04:43:36 +196s click 'Done' at 1506,208
+04:43:46 +206s shot 07-tour-page-5.png brightness=51
+04:43:46 +206s NOT FOUND on screen: 'Next'
+04:43:46 +206s NOT FOUND on screen: 'Continue'
+04:43:46 +206s NOT FOUND on screen: 'Get started'
+04:43:46 +206s NOT FOUND on screen: 'Finish'
+04:43:46 +206s click 'Done' at 1506,208
+04:43:55 +215s shot 08-tour-page-6.png brightness=51
+04:43:56 +215s NOT FOUND on screen: 'Next'
+04:43:56 +215s NOT FOUND on screen: 'Continue'
+04:43:56 +215s NOT FOUND on screen: 'Get started'
+04:43:56 +215s NOT FOUND on screen: 'Finish'
+04:43:56 +215s click 'Done' at 1506,208
+04:44:05 +225s shot 09-tour-page-7.png brightness=51
+04:44:05 +225s NOT FOUND on screen: 'Next'
+04:44:05 +225s NOT FOUND on screen: 'Continue'
+04:44:05 +225s NOT FOUND on screen: 'Get started'
+04:44:05 +225s NOT FOUND on screen: 'Finish'
+04:44:05 +225s click 'Done' at 1506,208
+04:44:15 +235s shot 10-tour-page-8.png brightness=51
+04:44:15 +235s NOT FOUND on screen: 'Next'
+04:44:15 +235s NOT FOUND on screen: 'Continue'
+04:44:15 +235s NOT FOUND on screen: 'Get started'
+04:44:15 +235s NOT FOUND on screen: 'Finish'
+04:44:15 +235s click 'Done' at 1506,208
+04:44:24 +244s shot 11-tour-page-9.png brightness=51
+04:44:25 +244s NOT FOUND on screen: 'Next'
+04:44:25 +244s NOT FOUND on screen: 'Continue'
+04:44:25 +244s NOT FOUND on screen: 'Get started'
+04:44:25 +244s NOT FOUND on screen: 'Finish'
+04:44:25 +244s click 'Done' at 1506,208
+04:44:34 +254s shot 12-tour-page-10.png brightness=51
+04:44:34 +254s NOT FOUND on screen: 'Next'
+04:44:34 +254s NOT FOUND on screen: 'Continue'
+04:44:34 +254s NOT FOUND on screen: 'Get started'
+04:44:34 +254s NOT FOUND on screen: 'Finish'
+04:44:34 +254s click 'Done' at 1506,208
+04:44:43 +263s shot 13-tour-page-11.png brightness=51
+04:44:43 +263s NOT FOUND on screen: 'Next'
+04:44:43 +263s NOT FOUND on screen: 'Continue'
+04:44:43 +263s NOT FOUND on screen: 'Get started'
+04:44:43 +263s NOT FOUND on screen: 'Finish'
+04:44:43 +263s click 'Done' at 1506,208
+04:44:53 +272s shot 14-tour-page-12.png brightness=51
+04:44:53 +273s NOT FOUND on screen: 'Next'
+04:44:53 +273s NOT FOUND on screen: 'Continue'
+04:44:53 +273s NOT FOUND on screen: 'Get started'
+04:44:53 +273s NOT FOUND on screen: 'Finish'
+04:44:53 +273s click 'Done' at 1506,208
+04:45:02 +282s shot 15-tour-page-13.png brightness=51
+04:45:03 +282s NOT FOUND on screen: 'Next'
+04:45:03 +282s NOT FOUND on screen: 'Continue'
+04:45:03 +282s NOT FOUND on screen: 'Get started'
+04:45:03 +282s NOT FOUND on screen: 'Finish'
+04:45:03 +282s click 'Done' at 1506,208
+04:45:12 +292s shot 16-tour-page-14.png brightness=51
+04:45:12 +292s NOT FOUND on screen: 'Next'
+04:45:12 +292s NOT FOUND on screen: 'Continue'
+04:45:12 +292s NOT FOUND on screen: 'Get started'
+04:45:12 +292s NOT FOUND on screen: 'Finish'
+04:45:12 +292s click 'Done' at 1506,208
+04:45:21 +301s shot 17-tour-page-15.png brightness=51
+04:45:21 +301s NOT FOUND on screen: 'Next'
+04:45:21 +301s NOT FOUND on screen: 'Continue'
+04:45:21 +301s NOT FOUND on screen: 'Get started'
+04:45:21 +301s NOT FOUND on screen: 'Finish'
+04:45:21 +301s click 'Done' at 1506,208
+04:45:30 +310s shot 18-after-tour.png brightness=51
+04:45:43 +323s shot 19-launcher-open.png brightness=48
+04:45:56 +336s shot 20-launcher-install-typed.png brightness=58
+04:45:57 +337s installer launched from launcher (Enter on top result)
+04:46:11 +350s shot 21-installer-wait-5s.png brightness=51
+04:46:11 +350s installer window after 13s: {'id': 2, 'title': 'Welcome to FaradayOS', 'app_id': 'org.quickshell', 'pid': 5426, 'workspace_id': 1, 'is_focused': False, 'is_floating': True, 'is_urgent': False, 'layout': {'pos_in_scrolling_layout': None, 'tile_size': [1188.0, 768.0], 'window_size': [1180, 760], 'tile_pos_in_workspace_view': [366.0, 184.0], 'window_offset_in_tile': [4.0, 4.0]}, 'focus_timestamp': {'secs': 335, 'nanos': 199384034}}
+04:46:34 +374s shot 22-inst-00.png brightness=51
+04:46:48 +387s shot 23-inst-01.png brightness=51
+04:47:01 +401s shot 24-inst-02.png brightness=51
+04:47:14 +414s shot 25-inst-03.png brightness=51
+04:47:29 +428s shot 26-inst-04.png brightness=51
+04:47:43 +442s shot 27-inst-05.png brightness=51
+04:47:56 +456s shot 28-inst-06.png brightness=51
+04:48:09 +468s shot 29-inst-07.png brightness=51
+04:48:24 +483s shot 30-inst-08.png brightness=51
+04:48:36 +496s shot 31-inst-09.png brightness=51
+04:48:49 +509s shot 32-inst-10.png brightness=51
+04:49:03 +522s shot 33-inst-11.png brightness=51
+04:49:15 +535s shot 34-inst-12.png brightness=51
+04:49:31 +551s shot 35-inst-13.png brightness=51
+04:49:45 +564s shot 36-inst-14.png brightness=51
+04:49:57 +577s shot 37-inst-15.png brightness=51
+04:50:12 +591s shot 38-inst-16.png brightness=51
+04:50:25 +604s shot 39-inst-17.png brightness=51
+04:50:37 +617s shot 40-inst-18.png brightness=51
+04:50:51 +630s shot 41-inst-19.png brightness=51
+04:51:06 +645s shot 42-inst-20.png brightness=51
+04:51:18 +658s shot 43-inst-21.png brightness=51
+04:51:31 +671s shot 44-inst-22.png brightness=51
+04:51:45 +684s shot 45-inst-23.png brightness=51
+04:51:57 +697s shot 46-inst-24.png brightness=51
+04:52:10 +710s shot 47-inst-25.png brightness=51
+04:52:28 +727s shot 48-inst-26.png brightness=51
+04:52:41 +741s shot 49-inst-27.png brightness=51
+04:52:54 +754s shot 50-inst-28.png brightness=51
+04:53:08 +767s shot 51-inst-29.png brightness=51
+04:53:21 +781s shot 52-inst-30.png brightness=51
+04:53:34 +793s shot 53-inst-31.png brightness=51
+04:53:46 +806s shot 54-inst-32.png brightness=51
+04:53:59 +818s shot 55-inst-33.png brightness=51
+04:54:11 +831s shot 56-inst-34.png brightness=51
+04:54:24 +843s shot 57-inst-35.png brightness=51
+04:54:36 +856s shot 58-inst-36.png brightness=51
+04:54:49 +869s shot 59-inst-37.png brightness=51
+04:55:02 +882s shot 60-inst-38.png brightness=51
+04:55:15 +895s shot 61-inst-39.png brightness=51
+04:55:28 +908s shot 62-inst-40.png brightness=51

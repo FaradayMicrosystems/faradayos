@@ -1,0 +1,14 @@
+[33,18] FARADAYOS| — = 026 © 23:43 &
+[1708,16] ae
+[776,92] — FD Press + K_ to open Kit x
+[843,154] Super| + Esc for the sidebar
+[843,184] Super| + , for settings
+[447,207] FARADAYOS fo 62 Your bar 63 Make it yours 64 Essentials 65 Done
+[447,225] FIRST RUN
+[763,450] Le
+[754,507] Welcome to FaradayOS
+[754,582] Your desktop is already dressed. This short tour shows
+[754,609] the few things worth knowing first.
+[755,684] Pick a bar, meet Store, then learn the keys that
+[755,712] open the desktop.
+[426,832] FIRST LIGHT

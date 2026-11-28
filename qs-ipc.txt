@@ -1,0 +1,150 @@
+target stage-settings
+  function resetLook(mode: string): string
+  function setSpatialModel(id: string): string
+  function resetMotion(mode: string): string
+  function setCutMatting(mode: string, value: bool): string
+  function setCutModel(mode: string, id: string): string
+  function setShadow(mode: string, value: real): string
+  function setDepthBackdrop(value: bool): string
+  function applyPreset(name: string): string
+  function setVisualizerFront(mode: string, value: bool): string
+  function setShadowAngle(mode: string, value: real): string
+  function setEdge(mode: string, value: real): string
+target battery-alerts-native
+  function test(): void
+  function status(): string
+target reactor
+  function test(kind: string, arg: string): void
+  function monsweep(): void
+  function clear(): void
+target keypresses
+  function deactivate(revision: string): void
+  function activate(theme: string, mode: string, revision: string): void
+  function toggle(): void
+  property active: bool
+  property revision: real
+  property lastEvent: string
+  property theme: string
+  property mode: string
+  property status: string
+  signal activeChanged()
+  signal modeChanged()
+  signal statusChanged()
+  signal lastEventChanged()
+  signal revisionChanged()
+  signal themeChanged()
+target visualizer
+  function setSmoothing(value: real): string
+  function setGain(value: real): string
+  function cycleStyle(direction: int): string
+  function place(): string
+  function done(): string
+  function setAdaptive(value: bool): string
+  function setEnabled(value: bool): string
+  function setFps(value: int): string
+target ryoku.system-update
+  function refresh(): void
+target layout
+  function lock(): void
+  function unlock(): void
+target desktop
+  function editWidgets(mon: string): void
+  function editSection(section: string, mon: string): void
+  function menu(widget: string, mon: string): void
+  function editDone(): void
+  function customize(widget: string, mon: string): void
+target shell
+  function voiceHide(): void
+  function bar(mon: string, id: string): void
+  function openSurface(mon: string, id: string): void
+  function keyringPrompt(payload: string): void
+  function closeAllMenus(mon: string): void
+  function closeSurface(mon: string, id: string): void
+  function keyringHide(): void
+  function pluginPopout(mon: string, id: string): void
+  function sessionConfirm(mon: string, action: string): void
+  function voiceShow(mon: string): void
+  function voiceOff(mon: string): void
+target qsbar
+  function layout(): string
+  function settings(route: string): void
+target osd
+  function preview(): void
+  function media(action: string): string
+  function hide(): void
+  function mic(): void
+  function keyboard(): void
+  function brightness(): void
+  function volume(): void
+target picker
+  function screenshots(): void
+  function videos(): void
+  function wallpaper(): void
+  function theme(): void
+target phoneCall
+  function simulate(state: string, number: string, contact: string): void
+  function answer(): void
+  function decline(): void
+target phone
+  function rejectPair(id: string): string
+  function call(number: string): string
+  function micStop(): string
+  function mirrorStart(): string
+  function ping(): string
+  function recordStop(): string
+  function pair(id: string): string
+  function dismiss(id: string): string
+  function webcamFacing(facing: string): string
+  function adbPair(address: string, code: string): string
+  function contactsRefresh(): string
+  function refresh(): string
+  function install(): string
+  function adbWifi(): string
+  function appLaunch(packageName: string): string
+  function action(id: string, key: string): string
+  function callAnswer(): string
+  function remove(): string
+  function webcamStart(): string
+  function adbConnect(address: string): string
+  function pickFiles(): string
+  function reply(id: string, text: string): string
+  function sms(number: string): string
+  function acceptPair(id: string): string
+  function typeText(text: string): string
+  function sendClipboard(): string
+  function recordStart(): string
+  function callDecline(): string
+  function mirrorStop(): string
+  function ring(): string
+  function share(text: string): string
+  function selectDevice(id: string): string
+  function favoriteApp(packageName: string, on: string): string
+  function adbRefresh(): string
+  function appsRefresh(): string
+  function runCommand(id: string): string
+  function micStart(): string
+  function webcamStop(): string
+  function browse(): string
+  function unpair(id: string): string
+  function appStop(packageName: string): string
+  function favoriteContact(id: string, on: string): string
+  function callSilence(): string
+  function dismissAll(): string
+target lifecycle
+  function ready(): bool
+target kdeconnect
+  function ping(devId: string): void
+  function shareFile(devId: string, path: string): void
+  function status(): string
+target camera
+  function toggle(): void
+  property active: bool
+  signal activeChanged()
+target wallpapers
+  function applyLockscreen(path: string): void
+  function apply(path: string): void
+target desktopIcons
+  function toggleHidden(): void
+  function align(): void
+  function biggerIcons(): void
+  function undo(): void
