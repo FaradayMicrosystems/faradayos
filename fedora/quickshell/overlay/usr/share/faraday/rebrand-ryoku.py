@@ -327,6 +327,18 @@ def login_sessions():
 
 # 8. Boot: keep the FaradayOS splash and a GRUB menu with only FaradayOS entries.
 #    ryoku-desktop's update script re-themes both; undo that.
+# 7c. No "ghost" notification cards: a popup card that outlived its notification stayed at the top
+#     right as an empty box with an X (v0.89e-v0.91e). no-ghost-popups.py patches Ryoku's popup list.
+GHOST = "/usr/share/faraday/no-ghost-popups.py"
+
+
+def ghost_popups():
+    if os.path.exists(GHOST):
+        r = subprocess.run([sys.executable, GHOST], capture_output=True, text=True)
+        if r.returncode:
+            print("rebrand-ryoku: " + (r.stdout + r.stderr).strip(), file=sys.stderr)
+
+
 def boot():
     stamp = "/var/lib/ryoku/plymouth-theme.stamp"
     if not os.path.exists(stamp):
@@ -401,6 +413,8 @@ def check():
     for path in other_sessions():
         if not re.search(r"^NoDisplay=true", read(path) or "", flags=re.M):
             left.append("%s: shown on the login screen" % path)
+    if os.path.exists(GHOST) and subprocess.run([sys.executable, GHOST, "--check"], capture_output=True).returncode:
+        left.append("NotificationPopups.qml: ghost-card fix not applied")
     for line in left:
         print("still Ryoku:", line)
     return 1 if left else 0
@@ -411,7 +425,7 @@ def main():
         sys.exit(check())
     if not os.path.isdir(SHARE):
         return                      # Ryoku is not installed: nothing to do
-    for step in (catalogs, qml, desktop_files, logos, rices, niri, kde_only, quiet_wallpaper, login_sessions, boot):
+    for step in (catalogs, qml, desktop_files, logos, rices, niri, kde_only, quiet_wallpaper, login_sessions, ghost_popups, boot):
         try:
             step()
         except Exception as e:      # one failed step must not stop the others or dnf

@@ -22,6 +22,8 @@ ap.add_argument("--launcher-entry", action="store_true",
 ap.add_argument("--account-page", action="store_true",
                 help="the installer itself must ask for the user account: its 'Create account' page must not be "
                      "hidden (nothing else on the installed system creates a user)")
+ap.add_argument("--no-stuck-popup", action="store_true",
+                help="fail if a notification card (layer ryoku-notifications) is still on screen 30 s after the desktop settles")
 ap.add_argument("--login-screen", action="store_true",
                 help="after the installer test, start the installed system's login screen (SDDM) and check its greeter runs")
 ap.add_argument("--prep", default="", help="shell command to run as root in the live system before the installer starts")
@@ -165,6 +167,8 @@ if a.account_page:
     result["installer_asks_for_user"] = False
 if a.login_screen:
     result["login_screen"] = False
+if a.no_stuck_popup:
+    result["no_stuck_popup"] = False
 # The v0.72 crash: the installer's keyboard page looped, starting thousands of keyboard tasks. A normal start needs a few.
 MAX_TASKS = 300
 try:
@@ -282,6 +286,24 @@ try:
         m1, m2 = re.search(r"greeter1=(\d+)", st), re.search(r"greeter2=(\d+)", st)
         result["login_screen"] = bool(m1 and m2 and int(m1.group(1)) > 0 and int(m2.group(1)) > 0)
         say("login screen greeter running:", result["login_screen"])
+
+    if a.no_stuck_popup:
+        # The empty box at the top right (v0.89e-v0.91e) was a notification card left on screen after sign-in.
+        # Notifications vanish after 5 s, so 30 s after the desktop settled no card may be left: the
+        # ryoku-notifications layer only exists while a card is shown. The layer list must also show the
+        # bar/dock, or the check could not see anything and counts as failed.
+        time.sleep(30)
+        lay = run(
+            "S=$(ls -t /run/user/1000/niri.*.sock 2>/dev/null | head -1); "
+            "runuser -u liveuser -- env NIRI_SOCKET=$S XDG_RUNTIME_DIR=/run/user/1000 niri msg --json layers 2>&1 | "
+            "python3 -c 'import json,sys; d=json.load(sys.stdin); print(\"NS=\" + \",\".join(sorted(l[\"namespace\"] for l in d)))' 2>&1",
+            120)
+        report("layers 30 s after sign-in", lay + "\nscreen brightness: %s" % shot("desktop-settled"))
+        m = re.search(r"NS=(\S*)", lay)
+        names = m.group(1).split(",") if m else []
+        result["no_stuck_popup"] = bool(names) and any(n.startswith(("ryoku-dock", "quickshell", "ryoku-bar")) for n in names) \
+            and "ryoku-notifications" not in names
+        say("no notification card left on screen:", result["no_stuck_popup"], names)
 
     # The job log is the only output some readers can see, so print the important parts there (filtered in the VM:
     # the serial line is too slow for the whole journal)

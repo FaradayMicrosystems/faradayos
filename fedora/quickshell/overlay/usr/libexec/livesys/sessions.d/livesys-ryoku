@@ -27,8 +27,13 @@ mkdir -p $D
 cat > $D/zz-faraday-live-autologin.conf <<'CONF'
 [Service]
 ExecStart=
-ExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin liveuser %I $TERM
+ExecStart=-/sbin/agetty -o '-p -f -- \\u' --skip-login --noissue --nohostname --nonewline --autologin liveuser %I $TERM
 CONF
+# No console text before the desktop: no "localhost-live login:" on TTY1 (nobody signs in there on the
+# live USB) and nothing printed on TTY2 while it signs liveuser in (no issue, prompt or last-login line).
+touch ~liveuser/.hushlogin && chown liveuser:liveuser ~liveuser/.hushlogin
+systemctl mask --runtime getty@tty1.service
+systemctl --no-block stop getty@tty1.service
 systemctl daemon-reload
 systemctl --no-block restart getty@tty2.service
 chvt 2 2>/dev/null || true
