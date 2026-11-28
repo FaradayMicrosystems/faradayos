@@ -1,0 +1,135 @@
+Starting installer, one moment...
+terminal size detection failed, using default width
+anaconda 44.30-2.fc44 for anaconda bluesky (pre-release) started.
+ * installation log files are stored in /tmp during the installation
+ * shell is available on TTY2 and in second TMUX pane (ctrl+b, then press 2)
+ * if the graphical installation interface fails to start, try again with the
+   inst.text boot option to start text installation
+ * when reporting a bug add logs from /tmp as separate text/plain attachments
+================================================================================
+================================================================================
+Installation
+
+1) [x] Language settings                 2) [x] Time settings
+       (English (United States))                (America/Phoenix timezone)
+3) [!] Installation Destination          4) [!] Root password
+       (Processing...)                          (Root account is disabled)
+5) [!] User creation
+       (No user will be created)
+
+
+The installation was stopped due to an error which occurred while running in non-interactive cmdline mode. Since there cannot be any questions in cmdline mode, edit your kickstart file and retry installation. 
+The exact error message is: 
+
+The following mandatory spokes are not completed:
+Installation Destination
+Root password
+User creation. 
+
+The installer will now terminate.
+Exception ignored in atexit callback <function exitHandler at 0x7fa99b71f060>:
+Traceback (most recent call last):
+  File "/usr/sbin/anaconda", line 42, in exitHandler
+    runtime_proxy.Exit()
+  File "/usr/lib/python3.14/site-packages/dasbus/client/handler.py", line 450, in _call_method
+    return self._get_method_reply(
+  File "/usr/lib/python3.14/site-packages/dasbus/client/handler.py", line 483, in _get_method_reply
+    return self._handle_method_error(error)
+  File "/usr/lib/python3.14/site-packages/dasbus/client/handler.py", line 509, in _handle_method_error
+    raise exception from None
+pyanaconda.modules.common.errors.payload.SourceTearDownError: Failed to tear down sources:
+The mount point /run/install/sources/mount-0000-live_os_image is still in use.
+00:20:26,825 INF core.threads: Thread Done: AnaWaitForConnectingNMThread (140366235461312)
+00:20:26,888 DBG core.storage: LABEL=OEMDRV matches [] for devicetree=None and disks_only=True
+00:20:26,889 INF core.threads: Running Thread: AnaStorageThread (140366235461312)
+00:20:26,898 INF core.threads: Running Thread: AnaTimeInitThread (140366210148032)
+00:20:27,015 DBG payload.manager: Restarting payload thread
+00:20:27,015 INF core.threads: Running Thread: AnaPayloadRestartThread (140366201755328)
+00:20:27,015 INF startup_utils: Geolocation is enabled.
+00:20:27,016 INF core.threads: Running Thread: AnaPayloadThread (140366193362624)
+00:20:27,016 INF core.threads: Thread Done: AnaPayloadRestartThread (140366201755328)
+00:20:27,026 DBG startup_utils: Skip the time synchronization.
+00:20:27,636 INF core.threads: Thread Done: AnaStorageThread (140366235461312)
+00:20:27,817 INF startup_utils: Geoloc: using timezone determined by geolocation
+00:20:27,851 DBG localization: scripts found for locale en_US.UTF-8: ['Latn']
+00:20:27,852 DBG localization: console fonts found for locale en_US.UTF-8: ['eurlatgr']
+00:20:27,852 DBG localization: setting console font to eurlatgr
+00:20:27,875 DBG localization: console font set successfully to eurlatgr
+00:20:27,875 DBG localization: setting locale to: en_US.UTF-8
+00:20:27,919 DBG simpleline: GLib event loop is used!
+00:20:28,269 INF core.hw: Skipping detection of SMT.
+00:20:28,294 INF ui.common: Spoke NetworkSpoke will not be displayed because it is hidden by the Anaconda configuration file.
+00:20:28,295 INF lifecycle: Adding controller: SummaryHub
+00:20:30,224 INF lifecycle: Module initialized: LangSpoke
+00:20:30,229 INF lifecycle: Module initialized: TimeSpoke
+00:20:30,386 INF core.threads: Running Thread: AnaStorageWatcher (140366235461312)
+00:20:30,393 INF lifecycle: Module initialized: PasswordSpoke
+00:20:30,400 INF lifecycle: Module initialized: UserSpoke
+00:20:30,403 INF lifecycle: Initialization of all modules (5) has been started.
+00:20:30,403 DBG simpleline: Scheduling screen SummaryHub
+00:20:30,404 DBG simpleline: New signal RenderScreenSignal enqueued with source ScreenScheduler
+00:20:30,404 DBG simpleline: Scheduling screen ProgressSpoke
+00:20:30,404 DBG simpleline: Starting main loop
+00:20:30,407 WRN misc: /usr/lib64/python3.14/site-packages/gi/events.py:803: DeprecationWarning: 'asyncio.AbstractEventLoopPolicy' is deprecated and slated for removal in Python 3.16
+  AbstractEventLoopPolicy = getattr(asyncio, "AbstractEventLoopPolicy", object)
+
+00:20:30,407 DBG simpleline: Processing screen ScreenData(SummaryHub,None,False)
+00:20:30,421 DBG ui.lib.storage: Selecting one or less disks by default: vda
+00:20:30,421 INF lifecycle: Module initialized: StorageSpoke
+00:20:30,421 INF lifecycle: All modules have been initialized.
+00:20:30,421 INF core.threads: Thread Done: AnaStorageWatcher (140366235461312)
+00:20:30,429 DBG simpleline: Input is required by ScreenData(SummaryHub,None,False) screen
+00:20:30,439 ERR ui.tui.hubs.summary: CmdlineError: The following mandatory spokes are not completed:
+Installation Destination
+Root password
+User creation
+00:20:30,440 DBG simpleline: New signal ExceptionSignal enqueued with source ScreenScheduler
+00:20:30,441 DBG simpleline: Executing inner loop
+00:20:30,441 DBG simpleline: New signal ExceptionSignal enqueued with source ScreenScheduler
+00:20:30,441 ERR ui.tui: 
+======= Screen stack =======
+----------- TOP ------------
+ScreenData(SummaryHub,None,False)
+ScreenData(ProgressSpoke,None,False)
+============================
+
+00:20:30,442 DBG exception: running handleException
+00:20:30,486 CRT exception: Traceback (most recent call last):
+
+  File "/usr/lib/python3.14/site-packages/simpleline/render/screen_scheduler.py", line 251, in _process_screen
+    top_screen.ui_screen.get_input_with_error_check(top_screen.args)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+
+  File "/usr/lib/python3.14/site-packages/simpleline/render/screen/__init__.py", line 296, in get_input_with_error_check
+    self._input_manager.get_input(args=args)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+
+  File "/usr/lib/python3.14/site-packages/simpleline/render/screen/input_manager.py", line 113, in get_input
+    prompt = self._ui_screen.prompt(args)
+
+  File "/usr/lib64/python3.14/site-packages/pyanaconda/ui/tui/hubs/summary.py", line 124, in prompt
+    raise CmdlineError(errtxt)
+
+pyanaconda.errors.CmdlineError: The following mandatory spokes are not completed:
+Installation Destination
+Root password
+User creation
+
+00:20:30,738 DBG exception: Gtk cannot be initialized
+00:20:30,738 DBG exception: In the main thread, running exception handler
+00:20:30,754 INF core.util: Reporting the IPMI event: 10
+00:20:37,776 INF core.threads: Thread Done: AnaTimeInitThread (140366210148032)
+/tmp/packaging.log:ERROR:anaconda.modules.payloads.base.initialization:The mount point /run/install/sources/mount-0000-live_os_image is still in use.
+/tmp/packaging.log:Traceback (most recent call last):
+/tmp/packaging.log:    raise SourceTearDownError("The mount point {} is still in use.".format(
+/tmp/packaging.log:pyanaconda.modules.common.errors.payload.SourceTearDownError: The mount point /run/install/sources/mount-0000-live_os_image is still in use.
+/tmp/packaging.log:ERROR:anaconda.modules.common.task.task:Thread AnaTaskThread-TearDownSourcesTask-1 has failed: Traceback (most recent call last):
+/tmp/packaging.log:    raise SourceTearDownError(
+/tmp/packaging.log:        "Failed to tear down sources:\n" + "\n".join(self._errors)
+/tmp/packaging.log:pyanaconda.modules.common.errors.payload.SourceTearDownError: Failed to tear down sources:
+/tmp/packaging.log:Traceback (most recent call last):
+/tmp/packaging.log:    thread_manager.raise_if_error(self._thread_name)
+/tmp/packaging.log:  File "/usr/lib64/python3.14/site-packages/pyanaconda/core/threads.py", line 172, in raise_if_error
+/tmp/packaging.log:    raise SourceTearDownError(
+/tmp/packaging.log:        "Failed to tear down sources:\n" + "\n".join(self._errors)
+/tmp/packaging.log:pyanaconda.modules.common.errors.payload.SourceTearDownError: Failed to tear down sources:
