@@ -1,0 +1,35 @@
+Window ID 14:
+  Title: "/"
+  App ID: "kitty"
+  Is floating: no
+  PID: 22889
+  Workspace ID: 1
+  Layout:
+    Tile size: 936 x 952
+    Scrolling position: column 1, tile 1
+    Window size: 928 x 944
+    Window offset in tile: 4 x 4
+
+Window ID 15:
+  Title: "/"
+  App ID: "kitty"
+  Is floating: no
+  PID: 22951
+  Workspace ID: 1
+  Layout:
+    Tile size: 936 x 952
+    Scrolling position: column 2, tile 1
+    Window size: 928 x 944
+    Window offset in tile: 4 x 4
+
+Window ID 16: (focused)
+  Title: "/"
+  App ID: "kitty"
+  Is floating: no
+  PID: 23019
+  Workspace ID: 1
+  Layout:
+    Tile size: 936 x 952
+    Scrolling position: column 3, tile 1
+    Window size: 928 x 944
+    Window offset in tile: 4 x 4

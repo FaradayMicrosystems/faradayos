@@ -1,0 +1,11 @@
+Window ID 11: (focused)
+  Title: "FaradayOS Settings"
+  App ID: "org.quickshell"
+  Is floating: no
+  PID: 21611
+  Workspace ID: 1
+  Layout:
+    Tile size: 1128 x 952
+    Scrolling position: column 1, tile 1
+    Window size: 1120 x 944
+    Window offset in tile: 4 x 4

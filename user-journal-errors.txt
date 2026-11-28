@@ -1,0 +1,14 @@
+Nov 28 00:20:14 localhost-live dbus-broker-launch[2521]: Ignoring duplicate name 'org.freedesktop.secrets' in service file '/usr/share//dbus-1/services/org.freedesktop.secrets.service'
+Nov 28 00:20:14 localhost-live dbus-broker-launch[2521]: Service file '/usr/share//dbus-1/services/org.kde.dolphin.FileManager1.service' is not named after the D-Bus name 'org.freedesktop.FileManager1'.
+Nov 28 00:20:14 localhost-live dbus-broker-launch[2521]: Ignoring duplicate name 'org.freedesktop.FileManager1' in service file '/usr/share//dbus-1/services/org.kde.dolphin.FileManager1.service'
+Nov 28 00:20:14 localhost-live dbus-broker-launch[2521]: Service file '/usr/share//dbus-1/services/org.kde.plasma.Notifications.service' is not named after the D-Bus name 'org.freedesktop.Notifications'.
+Nov 28 00:20:22 localhost-live wireplumber[2712]: spa.bluez5: BlueZ system service is not available
+Nov 28 00:20:31 localhost-live gnome-keyring-daemon[3020]: discover_other_daemon: 0
+Nov 28 00:20:34 localhost-live systemd[2494]: app-nvidia\x2dsettings\x2duser@autostart.service: Failed with result 'exit-code'.
+Nov 28 00:20:36 localhost-live kdeconnectd[3046]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: Connection already associated with an application ID")
+Nov 28 00:20:39 localhost-live systemd[2494]: ryoku-shell.service: Control process exited, code=killed, status=15/TERM
+Nov 28 00:20:39 localhost-live systemd[2494]: ryoku-shell.service: Failed with result 'signal'.
+Nov 28 00:20:45 localhost-live systemd[2494]: ryogami.service: Found left-over process 5568 (notify-send) in control group while starting unit. Ignoring.
+Nov 28 00:20:45 localhost-live systemd[2494]: ryogami.service: This usually indicates unclean termination of a previous run, or service implementation deficiencies.
+Nov 28 00:20:48 localhost-live sudo[5950]: liveuser : a password is required ; PWD=/home/liveuser ; USER=root ; COMMAND=/usr/sbin/snapper -c root --csvout list --columns number,type,date,description,cleanup
+Nov 28 00:21:01 localhost-live kdeconnectd[3046]: Could not query capabilities from notifications server

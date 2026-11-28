@@ -1,0 +1,6 @@
+      Namespace: "ryoku-overview-backdrop"
+      Namespace: "ryoku-dock"
+      Namespace: "ryoku-widgets"
+      Namespace: "quickshell"
+      Namespace: "ryoku-keys-hint"
+      Namespace: "ryoku-notifications"
