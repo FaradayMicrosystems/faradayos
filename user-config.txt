@@ -1,0 +1,72 @@
+abrt	   btop		      chromium-flags.conf  equibop    ghostty  heroic	   kitty	    matugen  niri	 pip	quickshell  ryoku-terminal  starship	   tmux		     vesktop		 xfce4	  zed
+alacritty  cava		      dconf		   fastfetch  gtk-3.0  kdeconnect  kscreenlockerrc  micro    nvim	 pulse	qylock	    ryotunes	    starship.toml  user-dirs.dirs    wireplumber	 yazi	  zsh
+bash	   chrome-flags.conf  environment.d	   fish       gtk-4.0  kdeglobals  ksplashrc	    mozilla  obs-studio  qt6ct	ryoku	    Sidra	    systemd	   user-dirs.locale  xdg-desktop-portal  zathura
+brand.json
+desktop.json
+equalizer.json
+hypridle.conf
+keyring.json
+launcher.json
+matugen.json
+plugins.json
+rices
+ryogami.json
+shell.json
+shell.json.lock
+stage
+stage.json
+stash.json
+theme.json
+user_edits
+visualizer.json
+widgets.json
+/home/liveuser/.config/ryoku/stage/stage-editor.json
+/home/liveuser/.config/ryoku/shell.json
+/home/liveuser/.config/ryoku/visualizer.json
+/home/liveuser/.config/ryoku/widgets.json
+/home/liveuser/.config/ryoku/launcher.json
+/home/liveuser/.config/ryoku/rices/.baseline/lock.slug
+/home/liveuser/.config/ryoku/rices/.previous/lock.slug
+/home/liveuser/.config/ryoku/rices/default/rice.json
+/home/liveuser/.config/quickshell/welcome/art/logo-mark.svg
+/home/liveuser/.config/quickshell/welcome/PageBars.qml
+"lastSyncTime": ""
+"defaultLocation": ""
+"connectTimeout": 15
+"requestTimeout": 300
+"idleTimeoutSec": 300
+"screenTime": {
+"timeIndicators": true
+"clockFontVariant": "bold"
+"timeFormat": "system"
+"use24h": true
+"timeFormat": "system"
+"showTimeInfo": true
+"showDigitalTimePill": true
+"showBedtimeIcon": true
+"use24h": true
+"showArc24h": false
+"enableWeather": true
+"weather": {
+"showLocation": true
+"showLocation": true
+"showLocation": true
+"showLocation": true
+"showLocation": true
+"videoFrameTimes": []
+"clock": {
+"timer": {
+"weather": {
+"clock": {
+"clock": "expressive"
+"weather": "expressive"
+"timer": "expressive"
+"weatherWidget": {
+"disableTimer": false
+"disableWeather": true
+"watchLocation": false
+"clockWidget": {
+"timers": {
+"weather": {
+"timetable": {
+"dailySummaryTime": "08:00"

@@ -1,0 +1,7 @@
+total 0
+drwxr-xr-x.  4 liveuser liveuser  80 Nov 27 23:50 .
+drwx------. 13 liveuser liveuser 340 Nov 27 23:50 ..
+drwxr-xr-x.  2 liveuser liveuser 500 Nov 27 23:50 ryodecors
+drwxr-xr-x.  2 liveuser liveuser  60 Nov 27 23:50 Wallpapers
+===
+Nothing is copied

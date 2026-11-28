@@ -1,0 +1,1 @@
+unattended install did not finish (see install-hung.txt); testing the live session instead

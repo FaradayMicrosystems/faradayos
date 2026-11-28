@@ -1,0 +1,11 @@
+Window ID 7: (focused)
+  Title: "Alacritty"
+  App ID: "Alacritty"
+  Is floating: no
+  PID: 15655
+  Workspace ID: 1
+  Layout:
+    Tile size: 936 x 952
+    Scrolling position: column 1, tile 1
+    Window size: 928 x 944
+    Window offset in tile: 4 x 4

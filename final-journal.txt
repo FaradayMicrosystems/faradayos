@@ -1,0 +1,52 @@
+Nov 27 23:49:22 faradayos kernel: virt/tdx: TDX not supported by the host platform
+Nov 28 04:50:03 faradayos alsactl[1326]: /usr/sbin/alsactl: load_state:1745: Cannot open /var/lib/alsa/asound.state for reading: No such file or directory
+Nov 28 04:50:05 localhost-live systemd[1]: Failed to start ryoku-greeter-guard.service.
+Nov 28 04:50:09 localhost-live firewalld[1191]: ERROR: INVALID_ZONE: (default)
+Nov 28 04:50:09 localhost-live firewalld[1191]: ERROR: INVALID_ZONE: (default)
+Nov 28 04:50:11 localhost-live dbus-broker-launch[2491]: Ignoring duplicate name 'org.freedesktop.secrets' in service file '/usr/share//dbus-1/services/org.freedesktop.secrets.service'
+Nov 28 04:50:11 localhost-live dbus-broker-launch[2491]: Ignoring duplicate name 'org.freedesktop.FileManager1' in service file '/usr/share//dbus-1/services/org.kde.dolphin.FileManager1.service'
+Nov 27 23:50:16 localhost-live dbus-broker-launch[2567]: Ignoring duplicate name 'org.freedesktop.secrets' in service file '/usr/share//dbus-1/services/org.freedesktop.secrets.service'
+Nov 27 23:50:16 localhost-live dbus-broker-launch[2567]: Ignoring duplicate name 'org.freedesktop.FileManager1' in service file '/usr/share//dbus-1/services/org.kde.dolphin.FileManager1.service'
+Nov 27 23:50:39 localhost-live anaconda[2626]: anaconda: ui.tui.hubs.summary: CmdlineError: The following mandatory spokes are not completed:
+                                               Installation Destination
+                                               Root password
+                                               User creation
+Nov 27 23:50:39 localhost-live anaconda[2626]: anaconda: ui.tui: 
+                                               ======= Screen stack =======
+                                               ----------- TOP ------------
+                                               ScreenData(SummaryHub,None,False)
+                                               ScreenData(ProgressSpoke,None,False)
+                                               ============================
+Nov 27 23:50:39 localhost-live anaconda[2626]: anaconda: exception: Traceback (most recent call last):
+                                               
+                                                 File "/usr/lib/python3.14/site-packages/simpleline/render/screen_scheduler.py", line 251, in _process_screen
+                                                   top_screen.ui_screen.get_input_with_error_check(top_screen.args)
+                                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+                                               
+                                                 File "/usr/lib/python3.14/site-packages/simpleline/render/screen/__init__.py", line 296, in get_input_with_error_check
+                                                   self._input_manager.get_input(args=args)
+                                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+                                               
+                                                 File "/usr/lib/python3.14/site-packages/simpleline/render/screen/input_manager.py", line 113, in get_input
+                                                   prompt = self._ui_screen.prompt(args)
+                                               
+                                                 File "/usr/lib64/python3.14/site-packages/pyanaconda/ui/tui/hubs/summary.py", line 124, in prompt
+                                                   raise CmdlineError(errtxt)
+                                               
+                                               pyanaconda.errors.CmdlineError: The following mandatory spokes are not completed:
+                                               Installation Destination
+                                               Root password
+                                               User creation
+Nov 27 23:50:42 localhost-live sudo[5904]: liveuser : a password is required ; PWD=/home/liveuser ; USER=root ; COMMAND=/usr/sbin/snapper -c root --csvout list --columns number,type,date,description,cleanup
+Nov 27 23:56:29 localhost-live sudo[12826]: liveuser : a password is required ; PWD=/home/liveuser ; USER=root ; COMMAND=/usr/sbin/snapper -c root --csvout list --columns number,type,date,description,cleanup
+Nov 27 23:58:26 localhost-live sudo[14198]: liveuser : a password is required ; PWD=/home/liveuser ; USER=root ; COMMAND=/usr/sbin/snapper -c root --csvout list --columns number,type,date,description,cleanup
+Nov 28 00:00:48 localhost-live sudo[16102]: liveuser : a password is required ; PWD=/home/liveuser ; USER=root ; COMMAND=/usr/sbin/snapper -c root --csvout list --columns number,type,date,description,cleanup
+Nov 28 00:03:56 localhost-live quickshell[18227]: PAM _pam_init_handlers: no default config other
+  UNIT           LOAD   ACTIVE SUB    DESCRIPTION
+● mcelog.service loaded failed failed Machine Check Exception Logging Daemon
+
+Legend: LOAD   → Reflects whether the unit definition was properly loaded.
+        ACTIVE → The high-level unit activation state, i.e. generalization of SUB.
+        SUB    → The low-level unit activation state, values depend on unit type.
+
+1 loaded units listed.

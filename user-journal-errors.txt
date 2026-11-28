@@ -1,0 +1,18 @@
+Nov 28 04:50:11 localhost-live dbus-broker-launch[2491]: Ignoring duplicate name 'org.freedesktop.secrets' in service file '/usr/share//dbus-1/services/org.freedesktop.secrets.service'
+Nov 28 04:50:11 localhost-live dbus-broker-launch[2491]: Service file '/usr/share//dbus-1/services/org.kde.dolphin.FileManager1.service' is not named after the D-Bus name 'org.freedesktop.FileManager1'.
+Nov 28 04:50:11 localhost-live dbus-broker-launch[2491]: Ignoring duplicate name 'org.freedesktop.FileManager1' in service file '/usr/share//dbus-1/services/org.kde.dolphin.FileManager1.service'
+Nov 28 04:50:11 localhost-live dbus-broker-launch[2491]: Service file '/usr/share//dbus-1/services/org.kde.plasma.Notifications.service' is not named after the D-Bus name 'org.freedesktop.Notifications'.
+Nov 27 23:50:20 localhost-live wireplumber[2681]: spa.bluez5: BlueZ system service is not available
+Nov 27 23:50:27 localhost-live gnome-keyring-daemon[2966]: discover_other_daemon: 0
+Nov 27 23:50:29 localhost-live systemd[2463]: app-nvidia\x2dsettings\x2duser@autostart.service: Failed with result 'exit-code'.
+Nov 27 23:50:31 localhost-live kdeconnectd[2995]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: Connection already associated with an application ID")
+Nov 27 23:50:35 localhost-live systemd[2463]: ryoku-shell.service: Control process exited, code=killed, status=15/TERM
+Nov 27 23:50:35 localhost-live systemd[2463]: ryoku-shell.service: Failed with result 'signal'.
+Nov 27 23:50:35 localhost-live systemd[2463]: ryoku-shell.service: Found left-over process 4330 (ryoku-power-cut) in control group while starting unit. Ignoring.
+Nov 27 23:50:35 localhost-live systemd[2463]: ryoku-shell.service: This usually indicates unclean termination of a previous run, or service implementation deficiencies.
+Nov 27 23:50:35 localhost-live systemd[2463]: ryoku-shell.service: Found left-over process 4348 (systemctl) in control group while starting unit. Ignoring.
+Nov 27 23:50:35 localhost-live systemd[2463]: ryoku-shell.service: This usually indicates unclean termination of a previous run, or service implementation deficiencies.
+Nov 27 23:50:40 localhost-live systemd[2463]: ryogami.service: Found left-over process 5671 (notify-send) in control group while starting unit. Ignoring.
+Nov 27 23:50:40 localhost-live systemd[2463]: ryogami.service: This usually indicates unclean termination of a previous run, or service implementation deficiencies.
+Nov 27 23:50:42 localhost-live sudo[5904]: liveuser : a password is required ; PWD=/home/liveuser ; USER=root ; COMMAND=/usr/sbin/snapper -c root --csvout list --columns number,type,date,description,cleanup
+Nov 27 23:50:55 localhost-live kdeconnectd[2995]: Could not query capabilities from notifications server

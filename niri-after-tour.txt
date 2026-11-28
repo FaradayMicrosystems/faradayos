@@ -1,0 +1,57 @@
+Window ID 3: (focused)
+  Title: "FaradayOS Store"
+  App ID: "org.quickshell"
+  Is floating: no
+  PID: 9529
+  Workspace ID: 1
+  Layout:
+    Tile size: 988 x 952
+    Scrolling position: column 1, tile 1
+    Window size: 980 x 944
+    Window offset in tile: 4 x 4
+
+===
+Output "Virtual-1":
+  Background layer:
+    Surface:
+      Namespace: "ryoku-overview-backdrop"
+      Keyboard interactivity: none
+
+  Bottom layer:
+    Surface:
+      Namespace: "ryoku-dock"
+      Keyboard interactivity: none
+
+    Surface:
+      Namespace: "ryoku-widgets"
+      Keyboard interactivity: none
+
+  Top layer:
+    Surface:
+      Namespace: "quickshell"
+      Keyboard interactivity: none
+
+  Overlay layer:
+    Surface:
+      Namespace: "ryoku-keys-hint"
+      Keyboard interactivity: none
+
+    Surface:
+      Namespace: "ryoku-notifications"
+      Keyboard interactivity: none
+
+===
+Window ID 3: (focused)
+  Title: "FaradayOS Store"
+  App ID: "org.quickshell"
+  Is floating: no
+  PID: 9529
+  Workspace ID: 1
+  Layout:
+    Tile size: 988 x 952
+    Scrolling position: column 1, tile 1
+    Window size: 980 x 944
+    Window offset in tile: 4 x 4
+Output "Virtual-1":
+ * 1
+   2

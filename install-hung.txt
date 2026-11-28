@@ -1,0 +1,71 @@
+# Unattended install used by the VM tests (same live image the installer copies)
+cmdline
+lang en_US.UTF-8
+keyboard us
+timezone Australia/Brisbane --utc
+network --bootproto=dhcp --hostname=faradayos
+zerombr
+clearpart --all --initlabel --disklabel=gpt
+autopart
+bootloader --append="console=tty0 console=ttyS0,115200"
+rootpw --iscrypted $6$vmtestsalt$uvkFL9Wm7kdVq3AXTcXfaEHbQNRLQNyxHw1Up.YopXBH4LgII7lbB5/9/qSbGcPlmJpy864JtmBYVA4k2kwxZ.
+user --name=tester --password=$6$vmtestsalt$uvkFL9Wm7kdVq3AXTcXfaEHbQNRLQNyxHw1Up.YopXBH4LgII7lbB5/9/qSbGcPlmJpy864JtmBYVA4k2kwxZ. --iscrypted --groups=wheel --gecos="Test User"
+poweroff
+====
+Starting installer, one moment...
+terminal size detection failed, using default width
+anaconda 44.30-2.fc44 for anaconda bluesky (pre-release) started.
+ * installation log files are stored in /tmp during the installation
+ * shell is available on TTY2 and in second TMUX pane (ctrl+b, then press 2)
+ * if the graphical installation interface fails to start, try again with the
+   inst.text boot option to start text installation
+ * when reporting a bug add logs from /tmp as separate text/plain attachments
+================================================================================
+================================================================================
+Installation
+
+1) [x] Language settings                 2) [x] Time settings
+       (English (United States))                (America/Los_Angeles timezone)
+3) [!] Installation Destination          4) [!] Root password
+       (Automatic partitioning                  (Root account is disabled)
+       selected)
+5) [!] User creation
+       (No user will be created)
+
+
+The installation was stopped due to an error which occurred while running in non-interactive cmdline mode. Since there cannot be any questions in cmdline mode, edit your kickstart file and retry installation. 
+The exact error message is: 
+
+The following mandatory spokes are not completed:
+Installation Destination
+Root password
+User creation. 
+
+The installer will now terminate.
+====
+23:50:28,273 DBG ui.lib.addons: Loading spokes into module path for addon com_redhat_kdump
+23:50:28,293 DBG startup_utils: no default systemd target set & in text/remote desktop mode - setting multi-user.target.
+23:50:32,138 INF ui.common: Spoke NetworkSpoke will not be displayed because it is hidden by the Anaconda configuration file.
+23:50:38,386 INF lifecycle: Module initialized: LangSpoke
+23:50:38,396 INF lifecycle: Module initialized: TimeSpoke
+23:50:38,770 INF lifecycle: Module initialized: PasswordSpoke
+23:50:38,809 INF lifecycle: Module initialized: UserSpoke
+23:50:38,824 DBG simpleline: Scheduling screen ProgressSpoke
+23:50:38,871 INF lifecycle: Module initialized: StorageSpoke
+23:50:39,112 ERR ui.tui.hubs.summary: CmdlineError: The following mandatory spokes are not completed:
+Root password
+User creation
+ScreenData(ProgressSpoke,None,False)
+pyanaconda.errors.CmdlineError: The following mandatory spokes are not completed:
+Root password
+User creation
+root        2621  0.0  0.0 232232  3816 ttyS0    S    23:50   0:00 sh -c anaconda --liveinst --cmdline --kickstart /root/vmtest.ks >/root/anaconda-run.txt 2>&1; echo rc=$? >/root/anaconda-rc
+root        2626 21.6  1.5 987212 128484 ttyS0   Sl   23:50   0:06 /usr/bin/python3 /usr/sbin/anaconda --liveinst --cmdline --kickstart /root/vmtest.ks
+root        2726  0.7  0.0   8844  5388 ttyS0    S    23:50   0:00 dbus-daemon --print-address --syslog --config-file=/usr/share/anaconda/dbus/anaconda-bus.conf
+root        2728  0.0  0.0 232232  3804 ttyS0    S    23:50   0:00 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.boss
+root        2729  2.0  0.8 545652 67100 ttyS0    Sl   23:50   0:00 python3 -m pyanaconda.modules.boss
+root        2738  0.0  0.0 232232  3920 ttyS0    S    23:50   0:00 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.services
+root        2741  0.0  0.0 232232  3764 ttyS0    S    23:50   0:00 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.runtime
+root        2743  0.0  0.0 232232  3916 ttyS0    S    23:50   0:00 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.security
+root        2744  2.1  0.8 470360 66056 ttyS0    Sl   23:50   0:00 python3 -m pyanaconda.modules.services
+root        2746  2.1  0.8 544552 66452 ttyS0    Sl   23:50   0:00 python3 -m pyanaconda.modules.runtime
