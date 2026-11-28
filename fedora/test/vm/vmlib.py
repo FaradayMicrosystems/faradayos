@@ -359,6 +359,7 @@ network --bootproto=dhcp --hostname=faradayos
 zerombr
 clearpart --all --initlabel --disklabel=gpt
 autopart
+liveimg --url=file:///run/initramfs/live/LiveOS/squashfs.img
 bootloader --append="console=tty0 console=ttyS0,115200"
 rootpw --plaintext faraday
 user --name=tester --password=faraday --plaintext --groups=wheel --gecos="Test User"
@@ -370,10 +371,11 @@ def install_unattended(vm, timeout=2400):
     """From the live system's root shell: installs to the VM disk with Anaconda (live image copy, kickstart),
     then powers off. Afterwards vm.start(live=False) boots the installed system (root and tester: password faraday)."""
     vm.write_file("/root/vmtest.ks", KS_INSTALL)
-    # A live install always parses interactive-defaults.ks and ignores --kickstart here, so put ours in its place
-    vm.run("command cp -f /root/vmtest.ks /usr/share/anaconda/interactive-defaults.ks")
+    # --liveinst ignores --kickstart and treats interactive-defaults.ks as defaults only (no partitioning runs), so run a
+    # normal automated install that copies the live image itself (liveimg in KS_INSTALL)
+    say("live image:", vm.run("ls -l /run/initramfs/live/LiveOS/squashfs.img 2>&1"))
     say("unattended install started")
-    vm.run("nohup sh -c 'PKEXEC_UID=1000 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus anaconda --liveinst --cmdline --kickstart=/root/vmtest.ks >/root/anaconda-run.txt 2>&1; "
+    vm.run("nohup sh -c 'PKEXEC_UID=1000 XDG_RUNTIME_DIR=/run/user/1000 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus anaconda --cmdline --kickstart=/root/vmtest.ks >/root/anaconda-run.txt 2>&1; "
            "echo rc=$? >/root/anaconda-rc' >/dev/null 2>&1 &")
     end = time.time() + timeout
     last = ""
