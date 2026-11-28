@@ -1,0 +1,48 @@
+akmod-nvidia-620.73.04-1.fc44.x86_64
+flatpak-1.18.4-1.fc44.x86_64
+flatpak-kcm-6.8.3-1.fc44.x86_64
+flatpak-libs-1.18.4-1.fc44.x86_64
+flatpak-selinux-1.18.4-1.fc44.noarch
+flatpak-session-helper-1.18.4-1.fc44.x86_64
+kmod-nvidia-7.3.6-200.fc44.x86_64-620.73.04-1.fc44.x86_64
+niri-26.04-1.fc44.x86_64
+nvidia-gpu-firmware-20261124-1.fc44.noarch
+nvidia-modprobe-620.73.04-1.fc44.x86_64
+nvidia-settings-620.73.04-1.fc44.x86_64
+plasma-discover-flatpak-6.8.3-1.fc44.x86_64
+quickshell-0.3.2-1.fc44.x86_64
+ryoku-1.1.0-1.fc44.x86_64
+ryoku-blobs-1.1.0-1.fc44.x86_64
+ryoku-cursor-material-1.0.0-2.fc44.noarch
+ryoku-desktop-1.1.0-1.fc44.x86_64
+ryoku-desktop-niri-1.1.0-1.fc44.x86_64
+ryoku-extras-1.1.0-1.fc44.x86_64
+ryoku-hub-1.1.0-1.fc44.x86_64
+ryoku-keyring-1.1.0-1.fc44.noarch
+ryoku-palette-bridge-1.1.0-1.fc44.x86_64
+ryoku-shell-1.1.0-1.fc44.x86_64
+sddm-theme-ryoku-1.1.0-1.fc44.noarch
+snapper-0.13.0-3.fc44.x86_64
+snapper-libs-0.13.0-3.fc44.x86_64
+xorg-x11-drv-nvidia-620.73.04-1.fc44.x86_64
+xorg-x11-drv-nvidia-cuda-libs-620.73.04-1.fc44.x86_64
+xorg-x11-drv-nvidia-kmodsrc-620.73.04-1.fc44.x86_64
+xorg-x11-drv-nvidia-libs-620.73.04-1.fc44.i686
+xorg-x11-drv-nvidia-libs-620.73.04-1.fc44.x86_64
+xorg-x11-drv-nvidia-power-620.73.04-1.fc44.x86_64
+xorg-x11-drv-nvidia-xorg-libs-620.73.04-1.fc44.x86_64
+Name   Options
+fedora oci
+brand  browser  config  extras  grub  i18n  lockscreen  nomarchy  npmrc  packages  palette-bridge  reload-cover  rices  ryodecors  services.tsv  xdg  zsh
+[Desktop Entry]
+Type=Application
+Exec=nvidia-settings -l
+Icon=nvidia-settings
+Hidden=false
+NoDisplay=false
+Name[en_GB]=nvidia-settings
+Name=nvidia-settings
+Comment[en_GB]=Load user settings
+Comment=Load user settings
+X-GNOME-Autostart-Delay=30
+X-GNOME-Autostart-enabled=true
