@@ -186,7 +186,7 @@ cp -L /etc/resolv.conf "$R"
 bash /src/fedora/apply-branding.sh "${ANA_INSTALL_PATH:-/mnt/sysimage}" /src
 # Quickshell edition files: Ryoku/Hyprland repos for updates, TTY2/TTY4 desktops, live session
 cp -a --no-preserve=ownership /src/fedora/quickshell/overlay/. "${ANA_INSTALL_PATH:-/mnt/sysimage}/"
-chmod 755 "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/livesys/sessions.d/livesys-ryoku" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/share/faraday/rebrand-ryoku.py" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/faraday/tty-session" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/faraday/desktop-session" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/faraday/niri-session"
+chmod 755 "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/livesys/sessions.d/livesys-ryoku" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/share/faraday/rebrand-ryoku.py" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/faraday/tty-session" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/faraday/desktop-session" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/faraday/niri-session" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/libexec/faraday/ryogami-quiet" "${ANA_INSTALL_PATH:-/mnt/sysimage}/usr/share/faraday/no-ghost-popups.py"
 %end
 
 %post --erroronfail

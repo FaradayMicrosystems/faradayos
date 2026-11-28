@@ -38,7 +38,7 @@ No open PRs at handover.
 - **Base distro: Fedora 44, mutable.** Aurora dislikes locked-down atomic/immutable systems. Do not suggest switching.
 - **CachyOS build is deprecated.** Do not fix or develop it. Keep `profile/airootfs/` (shared branding).
 - **Version:** format `vX.YY`, in `fedora/VERSION` as `0.88`. Experimental releases add `e`: `vX.YYe` (e.g. `0.89e`). **Bump it in every PR.** Never three-part (`v0.0.x`). Update README version mentions too.
-  - Next free number: **0.92** (or **0.92e** if experimental).
+  - Next free number: **0.93** (or **0.93e** if experimental).
 - **Editions.** One kickstart for all editions (`#@if <edition>` blocks); see FARADAYOS.md section 1. New editions: a line in `fedora/editions.list` plus tagged blocks; the Builder app shows it without changes.
 - **Lean ISO.** Large optional software goes in the add-ons list (`fedora/overlay/usr/share/faraday/addons.list`), never in `%packages`. Ask Aurora before adding anything large to the ISO.
 - **Auto-merge.** Claude merges its own PRs once CI passes; do not ask Aurora to merge. If CI fails, fix it. Re-run once for RPM Fusion outages.
@@ -113,3 +113,10 @@ Never tell Aurora to clone a different branch or folder.
 - Boot animation source: `dark.zip` (537 frames) in the project files.
 - Quickshell edition details: `fedora/quickshell/README.md`.
 - Ryoku upstream: https://ryoku.dev, https://github.com/Ryoku-dev/ryoku (GPL-3.0).
+
+### Notification "ghost" card (fixed v0.92e)
+The empty box with an X at the top right (v0.89e-v0.91e) was a Ryoku notification popup card that outlived its
+notification (no app name, text or time; a shell restart cleared it). `usr/share/faraday/no-ghost-popups.py`
+patches Ryoku's `NotificationPopups.qml` (run by rebrand-ryoku.py, so re-applied after updates), and
+`ryogami.service.d/faradayos-quiet.conf` turns Ryogami's "Wallpaper changed" toast off before it starts.
+The CI VM test (`--no-stuck-popup`) fails if the `ryoku-notifications` layer is still on screen 30 s after sign-in.

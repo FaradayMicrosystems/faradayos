@@ -22,6 +22,8 @@ ap.add_argument("--launcher-entry", action="store_true",
 ap.add_argument("--account-page", action="store_true",
                 help="the installer itself must ask for the user account: its 'Create account' page must not be "
                      "hidden (nothing else on the installed system creates a user)")
+ap.add_argument("--no-stuck-popup", action="store_true",
+                help="fail if a notification card (layer ryoku-notifications) is still on screen 30 s after the desktop settles")
 ap.add_argument("--login-screen", action="store_true",
                 help="after the installer test, start the installed system's login screen (SDDM) and check its greeter runs")
 ap.add_argument("--prep", default="", help="shell command to run as root in the live system before the installer starts")
@@ -165,6 +167,10 @@ if a.account_page:
     result["installer_asks_for_user"] = False
 if a.login_screen:
     result["login_screen"] = False
+if a.no_stuck_popup:
+    result["no_stuck_popup"] = False
+    result["ghost_fix_in_session"] = False
+    result["wallpaper_toast_off"] = False
 # The v0.72 crash: the installer's keyboard page looped, starting thousands of keyboard tasks. A normal start needs a few.
 MAX_TASKS = 300
 try:
@@ -282,6 +288,38 @@ try:
         m1, m2 = re.search(r"greeter1=(\d+)", st), re.search(r"greeter2=(\d+)", st)
         result["login_screen"] = bool(m1 and m2 and int(m1.group(1)) > 0 and int(m2.group(1)) > 0)
         say("login screen greeter running:", result["login_screen"])
+
+    if a.no_stuck_popup:
+        # The empty box at the top right (v0.89e-v0.91e) was a notification card left on screen after sign-in.
+        # Notifications vanish after 5 s, so 30 s after the desktop settled no card may be left: the
+        # ryoku-notifications layer only exists while a card is shown.
+        time.sleep(30)
+        lay = run(
+            "S=$(ls -t /run/user/1000/niri.*.sock 2>/dev/null | head -1); "
+            "runuser -u liveuser -- env NIRI_SOCKET=$S XDG_RUNTIME_DIR=/run/user/1000 niri msg --json layers 2>&1 | "
+            "python3 -c 'import json,sys; d=json.load(sys.stdin); print(\"NS=\" + \",\".join(sorted(l[\"namespace\"] for l in d)))' 2>&1",
+            120)
+        report("layers 30 s after sign-in", lay + "\nscreen brightness: %s" % shot("desktop-settled"))
+        m = re.search(r"NS=(\S*)", lay)
+        names = [x for x in (m.group(1).split(",") if m else []) if x]
+        # The VM has no GPU for niri to draw with (virtio-vga, no 3D): niri then lists no layers at all and the
+        # screenshot is black, so the layer test can only fail when it actually sees a card. What the VM can prove
+        # is that the fixes are in what runs: every NotificationPopups.qml the shell can load carries the
+        # ghost-card fix, and liveuser's Ryogami has the wallpaper toast off before it started.
+        fx = run(
+            "F=$(ls /usr/share/ryoku/config/quickshell/shell/modules/notifications/NotificationPopups.qml "
+            "~liveuser/.config/quickshell/shell/modules/notifications/NotificationPopups.qml "
+            "/etc/xdg/quickshell/shell/modules/notifications/NotificationPopups.qml 2>/dev/null); "
+            "echo FILES=$(echo $F | wc -w); for f in $F; do grep -q 'FaradayOS: no ghost cards' $f && echo FIXED $f || echo UNFIXED $f; done; "
+            "grep -o '\"notifyOnWallpaperChange\": *[a-z]*' ~liveuser/.config/ryoku/ryogami.json 2>&1; "
+            "journalctl -b --no-pager -o cat _UID=1000 | grep -c 'Wallpaper changed' | sed 's/^/TOASTS=/'", 120)
+        report("ghost-card fix and wallpaper toast in the running session", fx)
+        result["ghost_fix_in_session"] = "UNFIXED" not in fx and "FIXED " in fx
+        result["wallpaper_toast_off"] = re.search(r'notifyOnWallpaperChange": *false', fx) is not None
+        say("ghost-card fix in the running shell:", result["ghost_fix_in_session"],
+            "wallpaper toast off:", result["wallpaper_toast_off"])
+        result["no_stuck_popup"] = "ryoku-notifications" not in names
+        say("no notification card left on screen:", result["no_stuck_popup"], names or "(niri lists no layers: no GPU in the VM)")
 
     # The job log is the only output some readers can see, so print the important parts there (filtered in the VM:
     # the serial line is too slow for the whole journal)
