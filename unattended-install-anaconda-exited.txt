@@ -1,0 +1,88 @@
+Starting installer, one moment...
+terminal size detection failed, using default width
+anaconda 44.30-2.fc44 for anaconda bluesky (pre-release) started.
+ * installation log files are stored in /tmp during the installation
+ * shell is available on TTY2 and in second TMUX pane (ctrl+b, then press 2)
+ * if the graphical installation interface fails to start, try again with the
+   inst.text boot option to start text installation
+ * when reporting a bug add logs from /tmp as separate text/plain attachments
+Traceback (most recent call last):
+  File "/usr/sbin/anaconda", line 385, in <module>
+    startup_utils.activate_keyboard(opts)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "/usr/lib64/python3.14/site-packages/pyanaconda/startup_utils.py", line 545, in activate_keyboard
+    keyboard.populate_missing_items(localization_proxy)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/site-packages/pyanaconda/keyboard.py", line 136, in populate_missing_items
+    sync_run_task(task_proxy)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/site-packages/pyanaconda/modules/common/task/__init__.py", line 53, in sync_run_task
+    task_proxy.Finish()
+    ~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.14/site-packages/dasbus/client/handler.py", line 450, in _call_method
+    return self._get_method_reply(
+           ~~~~~~~~~~~~~~~~~~~~~~^
+        self._client.sync_call,
+        ^^^^^^^^^^^^^^^^^^^^^^^
+        *args,
+        ^^^^^^
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/usr/lib/python3.14/site-packages/dasbus/client/handler.py", line 483, in _get_method_reply
+    return self._handle_method_error(error)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/usr/lib/python3.14/site-packages/dasbus/client/handler.py", line 509, in _handle_method_error
+    raise exception from None
+pyanaconda.modules.common.errors.general.AnacondaError: Live user is requested to run command but can't be found
+01:14:33,822 INF core.configuration.profile: Loading information about profiles from /etc/anaconda/profile.d.
+01:14:33,846 INF core.configuration.profile: Found the 'almalinux' profile at /etc/anaconda/profile.d/almalinux.conf.
+01:14:33,853 INF core.configuration.profile: Found the 'centos' profile at /etc/anaconda/profile.d/centos.conf.
+01:14:33,854 INF core.configuration.profile: Found the 'circle' profile at /etc/anaconda/profile.d/circle.conf.
+01:14:33,855 INF core.configuration.profile: Found the 'fedora-designsuite' profile at /etc/anaconda/profile.d/fedora-designsuite.conf.
+01:14:33,856 INF core.configuration.profile: Found the 'fedora-eln' profile at /etc/anaconda/profile.d/fedora-eln.conf.
+01:14:33,857 INF core.configuration.profile: Found the 'fedora-iot' profile at /etc/anaconda/profile.d/fedora-iot.conf.
+01:14:33,858 INF core.configuration.profile: Found the 'fedora-kde-mobile' profile at /etc/anaconda/profile.d/fedora-kde-mobile.conf.
+01:14:33,858 INF core.configuration.profile: Found the 'fedora-kde' profile at /etc/anaconda/profile.d/fedora-kde.conf.
+01:14:33,859 INF core.configuration.profile: Found the 'fedora-kinoite' profile at /etc/anaconda/profile.d/fedora-kinoite.conf.
+01:14:33,860 INF core.configuration.profile: Found the 'fedora-sericea' profile at /etc/anaconda/profile.d/fedora-sericea.conf.
+01:14:33,861 INF core.configuration.profile: Found the 'fedora-server' profile at /etc/anaconda/profile.d/fedora-server.conf.
+01:14:33,862 INF core.configuration.profile: Found the 'fedora-silverblue' profile at /etc/anaconda/profile.d/fedora-silverblue.conf.
+01:14:33,863 INF core.configuration.profile: Found the 'fedora-workstation' profile at /etc/anaconda/profile.d/fedora-workstation.conf.
+01:14:33,864 INF core.configuration.profile: Found the 'fedora' profile at /etc/anaconda/profile.d/fedora.conf.
+01:14:33,865 INF core.configuration.profile: Found the 'navix' profile at /etc/anaconda/profile.d/navix.conf.
+01:14:33,866 INF core.configuration.profile: Found the 'ovirt' profile at /etc/anaconda/profile.d/ovirt.conf.
+01:14:33,867 INF core.configuration.profile: Found the 'rhel' profile at /etc/anaconda/profile.d/rhel.conf.
+01:14:33,868 INF core.configuration.profile: Found the 'rhvh' profile at /etc/anaconda/profile.d/rhvh.conf.
+01:14:33,869 INF core.configuration.profile: Found the 'rocky' profile at /etc/anaconda/profile.d/rocky.conf.
+01:14:33,870 INF core.configuration.profile: Found the 'scientific-linux' profile at /etc/anaconda/profile.d/scientific-linux.conf.
+01:14:33,871 INF core.configuration.profile: Found the 'virtuozzo-linux' profile at /etc/anaconda/profile.d/virtuozzo-linux.conf.
+01:14:33,871 DBG core.configuration.profile: Detecting a profile for ID=fedora, VARIANT_ID=kde.
+01:14:33,871 INF core.configuration.profile: The 'fedora-kde' profile is detected.
+01:14:33,871 INF core.configuration.anaconda: Load the 'fedora-kde' profile configuration.
+01:14:33,876 INF main: /usr/sbin/anaconda 44.30-2.fc44
+01:14:33,877 INF core.util: Reporting the IPMI event: 7
+01:14:34,655 INF startup_utils: check_memory(): total:8046, needed:320
+01:14:34,655 DBG startup_utils: Don't set up proxy variables.
+01:14:34,656 INF screensaver: Inhibiting screensaver.
+01:14:34,665 WRN screensaver: Unable to inhibit the screensaver: The name is not activatable
+01:14:34,666 INF main: anaconda called with cmdline = ['/usr/sbin/anaconda', '--liveinst', '--cmdline', '--kickstart=/root/vmtest.ks']
+01:14:34,667 INF main: Default encoding = utf-8 
+01:14:34,668 INF misc: Configuration loaded from: ['/etc/anaconda/anaconda.conf', '/etc/anaconda/profile.d/fedora.conf', '/etc/anaconda/profile.d/fedora-kde.conf', '/etc/anaconda/conf.d/00-do-nothing.conf', '/etc/anaconda/conf.d/01-still-do-nothing.conf', '/etc/anaconda/conf.d/90-faradayos-accounts.conf']
+01:14:34,669 INF misc: Writing the runtime configuration to: /run/anaconda/anaconda.conf
+01:14:34,773 INF core.dbus: Connecting to the Anaconda bus at unix:path=/tmp/dbus-zkDc9wk4Mq,guid=d8f1fa5291f7c58a58002d296b0a714a.
+01:14:39,497 INF main: Found a kickstart file: /usr/share/anaconda/interactive-defaults.ks
+01:14:39,514 INF startup_utils: Parsing kickstart: /usr/share/anaconda/interactive-defaults.ks
+01:14:39,751 WRN kickstart: Command cmdline will be parsed in DBus module.
+01:14:39,751 WRN kickstart: Command lang will be parsed in DBus module.
+01:14:39,751 WRN kickstart: Command keyboard will be parsed in DBus module.
+01:14:39,751 WRN kickstart: Command timezone will be parsed in DBus module.
+01:14:39,751 WRN kickstart: Command network will be parsed in DBus module.
+01:14:39,752 WRN kickstart: Command zerombr will be parsed in DBus module.
+01:14:39,752 WRN kickstart: Command clearpart will be parsed in DBus module.
+01:14:39,752 WRN kickstart: Command autopart will be parsed in DBus module.
+01:14:39,752 WRN kickstart: Command bootloader will be parsed in DBus module.
+01:14:39,752 WRN kickstart: Command rootpw will be parsed in DBus module.
+01:14:39,752 WRN kickstart: Command user will be parsed in DBus module.
+01:14:39,752 WRN kickstart: Command poweroff will be parsed in DBus module.
