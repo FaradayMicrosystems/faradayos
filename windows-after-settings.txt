@@ -1,0 +1,2 @@
+  Title: "FaradayOS Settings"
+  App ID: "org.quickshell"

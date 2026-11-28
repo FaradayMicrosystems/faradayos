@@ -1,0 +1,7 @@
+  Title: "FaradayOS Settings"
+  App ID: "org.quickshell"
+  Title: "FaradayOS add-ons"
+  App ID: "org.kde.kdialog"
+polkitd     1245  0.1  0.1 310924 12812 ?        Ssl  00:26   0:00 /usr/lib/polkit-1/polkitd --no-debug --log-level=notice
+liveuser   11351  0.3  0.0 232364  4072 ?        S    00:38   0:00 bash /usr/bin/faraday-addons
+liveuser   11981  1.1  0.7 896048 59732 ?        Sl   00:38   0:00 kdialog --title FaradayOS add-ons --warningcontinuecancel You are in the live session. Add-ons installed here are lost when you restart, and large ones can fill the memory. Install FaradayOS first (Install to Hard Drive), then install add-ons there. --continue-label Install anyway

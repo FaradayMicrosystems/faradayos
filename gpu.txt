@@ -1,0 +1,74 @@
+akmod-nvidia-620.73.04-1.fc44.x86_64
+akmods-0.6.2-14.fc44.noarch
+kmod-nvidia-7.3.5-200.fc44.x86_64-620.73.04-1.fc44.x86_64
+nvidia-gpu-firmware-20261019-1.fc44.noarch
+nvidia-modprobe-620.73.04-1.fc44.x86_64
+nvidia-settings-620.73.04-1.fc44.x86_64
+xorg-x11-drv-nvidia-620.73.04-1.fc44.x86_64
+xorg-x11-drv-nvidia-cuda-libs-620.73.04-1.fc44.x86_64
+xorg-x11-drv-nvidia-kmodsrc-620.73.04-1.fc44.x86_64
+xorg-x11-drv-nvidia-libs-620.73.04-1.fc44.i686
+xorg-x11-drv-nvidia-libs-620.73.04-1.fc44.x86_64
+xorg-x11-drv-nvidia-power-620.73.04-1.fc44.x86_64
+xorg-x11-drv-nvidia-xorg-libs-620.73.04-1.fc44.x86_64
+7.3.5-200.fc44.x86_64
+nvidia-kmod-620.73.04-1.fc44.src.rpm  nvidia-kmod.latest
+nvidia
+     Loaded: loaded (/usr/lib/systemd/system/akmods.service; enabled; preset: enabled)
+    Drop-In: /usr/lib/systemd/system/service.d
+             └─10-timeout-abort.conf
+     Active: active (exited) since Sat 2026-11-28 05:26:29 EST; 4h 58min left
+ Invocation: 781f74efc28141dab37e3e571fa8408e
+   Main PID: 1394 (code=exited, status=0/SUCCESS)
+   Mem peak: 29.4M
+        CPU: 871ms
+
+Nov 28 05:26:28 faradayos systemd[1]: Starting akmods.service - Builds and install new kmods from akmod packages...
+Nov 28 05:26:29 localhost-live akmods[1394]: Checking kmods exist for 7.3.5-200.fc44.x86_64 [  OK  ]
+Nov 28 05:26:29 localhost-live systemd[1]: Finished akmods.service - Builds and install new kmods from akmod packages.
+Nov 28 05:26:28 faradayos systemd[1]: Starting akmods.service - Builds and install new kmods from akmod packages...
+Nov 28 05:26:29 localhost-live akmods[1394]: Checking kmods exist for 7.3.5-200.fc44.x86_64 [  OK  ]
+Nov 28 05:26:29 localhost-live systemd[1]: Finished akmods.service - Builds and install new kmods from akmod packages.
+# FaradayOS: let the NVIDIA driver own NVIDIA cards. nouveau (the open driver) grabs the card first
+# if it loads, and then the NVIDIA driver cannot. Harmless on AMD and Intel PCs.
+blacklist nouveau
+options nouveau modeset=0
+# Needed for KDE Wayland on NVIDIA (on by default in new drivers; set so older ones match)
+options nvidia-drm modeset=1 fbdev=1
+options nvidia NVreg_PreserveVideoMemoryAllocations=1
+#
+# Save and restore all video memory allocations.
+#options nvidia NVreg_PreserveVideoMemoryAllocations=1
+#
+# The destination should not be using tmpfs, so we prefer
+# /var/tmp instead of /tmp
+#options nvidia NVreg_TemporaryFilePath=/var/tmp
+#
+# Enable kernel suspend notifiers for open modules,
+# the kernel handles video memory preservation directly
+#options nvidia NVreg_UseKernelSuspendNotifiers=1
+# Make a soft dependency for nvidia-uvm as adding the module loading to
+# /usr/lib/modules-load.d/nvidia-uvm.conf for systemd consumption, makes the
+# configuration file to be added to the initrd but not the module, throwing an
+# error on plymouth about not being able to find the module.
+# Ref: /usr/lib/dracut/modules.d/00systemd/module-setup.sh
+
+# Even adding the module is not the correct thing, as we don't want it to be
+# included in the initrd, so use this configuration file to specify the
+# dependency.
+
+softdep nvidia post: nvidia-uvm
+/etc/dracut.conf.d:
+
+/usr/lib/dracut/dracut.conf.d:
+01-dist.conf  02-rescue.conf  50-nss-softokn.conf  90-faraday-nvidia.conf  99-nvidia-dracut.conf
+initrd=initrd root=live:CDLABEL=FaradayOSv0-91e-performance rd.driver.blacklist=nouveau modprobe.blacklist=nouveau rd.live.image quiet rhgb console=tty0 console=ttyS0,115200
+faraday-rebrand.service                      enabled         disabled
+faraday-remove-liveuser.service              enabled         disabled
+faraday-vr-setup.service                     enabled         disabled
+nvidia-fallback.service                      disabled        disabled
+nvidia-hibernate.service                     enabled         enabled
+nvidia-powerd.service                        enabled         enabled
+nvidia-resume.service                        enabled         enabled
+nvidia-suspend-then-hibernate.service        enabled         enabled
+nvidia-suspend.service                       enabled         enabled

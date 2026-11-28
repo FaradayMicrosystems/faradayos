@@ -1,0 +1,38 @@
+ERROR: [Loader Message] Code 0 : loader_scanned_icd_add: Could not get 'vkCreateInstance' via 'vk_icdGetInstanceProcAddr' for ICD /usr/lib64/libGLX_nvidia.so.0
+	deviceType         = PHYSICAL_DEVICE_TYPE_CPU
+	deviceName         = llvmpipe (LLVM 22.1.8, 256 bits)
+gm=0
+FaradayOS VR readiness check
+  [ OK ] Steam installed
+  [ OK ] Steam VR/controller udev rules (steam-devices)
+  [ OK ] mesa-dri-drivers.i686
+  [ OK ] mesa-vulkan-drivers.i686
+  [ OK ] pipewire-libs.i686
+  [ OK ] GameMode installed
+  [FAIL] Vulkan cannot see any GPU
+  [WARN] SteamVR not installed yet: open 'Set up SteamVR' from the app menu (needed for ALVR and wired headsets)
+  [FAIL] WiVRn missing (open 'Install VR tools' from the app menu)
+  [WARN] WiVRn dashboard missing (open 'Install VR tools')
+  [ OK ] Avahi running (headset can discover this PC)
+  [WARN] No xrizer/OpenComposite: SteamVR-only games won't run on WiVRn
+  [FAIL] ALVR missing (open 'Install VR tools' from the app menu)
+  [ OK ] Firewall open for WiVRn (9757) and ALVR (9943-9944)
+
+VR readiness: 8 ok, 3 warnings, 3 problems
+Audio
+ ├─ Devices:
+ │      44. Built-in Audio                      [alsa]
+ │  
+ ├─ Sinks:
+ │  *   51. Built-in Audio Analog Stereo        [vol: 0.40]
+ │  
+ ├─ Sources:
+ │  *   52. Built-in Audio Analog Stereo        [vol: 1.00]
+ │  
+ ├─ Filters:
+ │  
+ └─ Streams:
+
+Video
+ryoku-nvim.desktop
+WAYLAND_DISPLAY=wayland-1

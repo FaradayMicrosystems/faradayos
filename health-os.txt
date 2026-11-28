@@ -1,0 +1,70 @@
+NAME="FaradayOS"
+VERSION="0.91e (Fedora 44)"
+RELEASE_TYPE=stable
+ID=fedora
+VERSION_ID=44
+VERSION_CODENAME=""
+PRETTY_NAME="FaradayOS v0.91e"
+ANSI_COLOR="38;5;208"
+LOGO=faradayos
+CPE_NAME="cpe:/o:fedoraproject:fedora:44"
+HOME_URL="https://fedoraproject.org/"
+DOCUMENTATION_URL="https://docs.fedoraproject.org/en-US/fedora/f44/"
+SUPPORT_URL="https://ask.fedoraproject.org/"
+BUG_REPORT_URL="https://bugzilla.redhat.com/"
+REDHAT_BUGZILLA_PRODUCT="Fedora"
+REDHAT_BUGZILLA_PRODUCT_VERSION=44
+REDHAT_SUPPORT_PRODUCT="Fedora"
+REDHAT_SUPPORT_PRODUCT_VERSION=44
+SUPPORT_END=2027-05-19
+VARIANT="KDE Plasma Desktop Edition"
+VARIANT_ID=kde
+DEFAULT_HOSTNAME=faradayos
+IMAGE_ID=faradayos
+IMAGE_VERSION=0.91e
+     Static hostname: localhost-live
+           Icon name: computer-vm
+             Chassis: vm 🖴
+          Machine ID: 248fc0dc86bb4f5d8f22583d6dd865e7
+             Boot ID: 40b4b0427f654f82bbdfc9658b0344c5
+      Virtualization: kvm
+    Operating System: FaradayOS v0.91e
+         CPE OS Name: cpe:/o:fedoraproject:fedora:44
+      OS Support End: Wed 2027-05-19
+OS Support Remaining: 5month 2w 5d
+            OS Image: faradayos
+    OS Image Version: 0.91e
+              Kernel: Linux 7.3.5-200.fc44.x86_64
+        Architecture: x86-64
+     Hardware Vendor: QEMU
+      Hardware Model: Standard PC _Q35 + ICH9, 2009_
+    Hardware Version: pc-q35-10.2
+    Firmware Version: 2025.11-3ubuntu7.4
+       Firmware Date: Thu 2026-10-08
+        Firmware Age: 1month 2w 6d
+0.0 0 0.0
+0
+LOCAL
+               Local time: Sat 2026-11-28 00:27:38 EST
+           Universal time: Sat 2026-11-28 05:27:38 UTC
+                 RTC time: Sat 2026-11-28 05:27:37
+                Time zone: America/New_York (EST, -0500)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: yes
+ 
+Warning: The system is configured to read the RTC time in the local time zone.
+         This mode cannot be fully supported. It will create various problems
+         with time zone changes and daylight saving time adjustments. The RTC
+         time is never updated, it relies on external facilities to maintain it.
+         If at all possible, use RTC in UTC by calling
+         'timedatectl set-local-rtc 0'.
+System Locale: LANG=en_US.UTF-8
+    VC Keymap: us
+   X11 Layout: (unset)
+id: ‘tester’: no such user
+Name   Title           URL                                    Collection ID Subset Filter Priority Options    Comment Description Homepage Icon
+fedora Fedora Flatpaks oci+https://registry.fedoraproject.org -             -      -      1        system,oci -       -           -        -
+polkitd     1245  1.1  0.1 310548 12124 ?        Ssl  00:26   0:00 /usr/lib/polkit-1/polkitd --no-debug --log-level=notice
+polkit-kde-authentication-agent-1.desktop
+OnlyShowIn=KDE;

@@ -1,0 +1,17 @@
+NAME  FSTYPE   FSVER            LABEL                       UUID                                 FSAVAIL FSUSE% MOUNTPOINTS
+loop0 squashfs 4.0                                                                                     0   100% /run/rootfsbase
+sr0   iso9660  Joliet Extension FaradayOSv0-91e-performance 2026-11-26-14-50-28-00                     0   100% /run/initramfs/live
+zram0 swap     1                zram0                       2b44eacc-f993-4381-b05d-123b33eb1f20                [SWAP]
+vda                                                                                                             
+Filesystem      Size  Used Avail Use% Mounted on
+LiveOS_rootfs   1.6G  208M  1.4G  14% /
+LiveOS_rootfs   1.6G  208M  1.4G  14% /
+ERROR: not a btrfs filesystem: /
+ERROR: can't access '/'
+cat: /etc/fstab: No such file or directory
+NAME       TYPE      SIZE USED PRIO
+/dev/zram0 partition 7.7G   0B  100
+snapper-0.13.0-3.fc44.x86_64
+package btrfs-assistant is not installed
+Config │ Subvolume
+───────┼──────────

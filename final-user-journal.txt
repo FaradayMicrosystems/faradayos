@@ -1,0 +1,21 @@
+Nov 28 00:26:39 localhost-live dbus-broker-launch[2501]: Ignoring duplicate name 'org.freedesktop.secrets' in service file '/usr/share//dbus-1/services/org.freedesktop.secrets.service'
+Nov 28 00:26:39 localhost-live dbus-broker-launch[2501]: Service file '/usr/share//dbus-1/services/org.kde.dolphin.FileManager1.service' is not named after the D-Bus name 'org.freedesktop.FileManager1'.
+Nov 28 00:26:39 localhost-live dbus-broker-launch[2501]: Ignoring duplicate name 'org.freedesktop.FileManager1' in service file '/usr/share//dbus-1/services/org.kde.dolphin.FileManager1.service'
+Nov 28 00:26:40 localhost-live dbus-broker-launch[2501]: Service file '/usr/share//dbus-1/services/org.kde.plasma.Notifications.service' is not named after the D-Bus name 'org.freedesktop.Notifications'.
+Nov 28 00:26:48 localhost-live wireplumber[2667]: spa.bluez5: BlueZ system service is not available
+Nov 28 00:26:54 localhost-live gnome-keyring-daemon[2819]: discover_other_daemon: 0
+Nov 28 00:26:57 localhost-live systemd[2470]: app-nvidia\x2dsettings\x2duser@autostart.service: Failed with result 'exit-code'.
+Nov 28 00:26:58 localhost-live kdeconnectd[2843]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: Connection already associated with an application ID")
+Nov 28 00:27:02 localhost-live systemd[2470]: ryoku-shell.service: Control process exited, code=killed, status=15/TERM
+Nov 28 00:27:02 localhost-live systemd[2470]: ryoku-shell.service: Failed with result 'signal'.
+Nov 28 00:27:07 localhost-live systemd[2470]: ryogami.service: Found left-over process 5283 (notify-send) in control group while starting unit. Ignoring.
+Nov 28 00:27:07 localhost-live systemd[2470]: ryogami.service: This usually indicates unclean termination of a previous run, or service implementation deficiencies.
+Nov 28 00:27:09 localhost-live sudo[5662]: liveuser : a password is required ; PWD=/home/liveuser ; USER=root ; COMMAND=/usr/sbin/snapper -c root --csvout list --columns number,type,date,description,cleanup
+Nov 28 00:27:23 localhost-live kdeconnectd[2843]: Could not query capabilities from notifications server
+Nov 28 00:37:04 localhost-live pkexec[8533]: liveuser: Error executing command as another user: Not authorized [USER=root] [TTY=unknown] [CWD=/home/liveuser] [COMMAND=/usr/libexec/cpugovctl set performance]
+Nov 28 00:37:04 localhost-live pkexec[8540]: liveuser: Error executing command as another user: Not authorized [USER=root] [TTY=unknown] [CWD=/home/liveuser] [COMMAND=/usr/libexec/procsysctl split_lock_mitigate 0]
+Nov 28 00:37:04 localhost-live pkexec[8547]: liveuser: Error executing command as another user: Not authorized [USER=root] [TTY=unknown] [CWD=/home/liveuser] [COMMAND=/usr/libexec/procsysctl split_lock_mitigate 1]
+Nov 28 00:37:07 localhost-live sudo[8932]: liveuser : a password is required ; PWD=/home/liveuser ; USER=root ; COMMAND=/usr/sbin/snapper -c root --csvout list --columns number,type,date,description,cleanup
+Nov 28 00:37:41 localhost-live pkexec[9981]: pam_systemd(polkit-1:session): Failed to check if /run/user/0/bus exists, ignoring: Permission denied
+Nov 28 00:38:26 localhost-live sudo[11176]: liveuser : a password is required ; PWD=/home/liveuser ; USER=root ; COMMAND=/usr/sbin/snapper -c root --csvout list --columns number,type,date,description,cleanup
+Nov 28 00:42:35 localhost-live systemd-coredump[14775]: Process 14773 (crashreporter) of user 1000 terminated abnormally without generating a coredump.

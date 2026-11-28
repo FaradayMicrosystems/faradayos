@@ -1,0 +1,8 @@
+  Title: "FaradayOS Settings"
+  App ID: "org.quickshell"
+  Title: "FaradayOS add-ons"
+  App ID: "org.kde.kdialog"
+  Title: "default-testpage.pdf — Mozilla Firefox"
+  App ID: "org.mozilla.firefox"
+bin_steam.sh[13653]: Setting up Steam content in /home/liveuser/.local/share/Steam
+961M	/home/liveuser/.local/share/Steam

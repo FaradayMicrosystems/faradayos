@@ -1,0 +1,1 @@
+Skip on the first-run tour did not close it; closing it through niri

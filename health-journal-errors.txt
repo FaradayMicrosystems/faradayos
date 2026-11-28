@@ -1,0 +1,12 @@
+Nov 28 00:25:36 faradayos kernel: virt/tdx: TDX not supported by the host platform
+Nov 28 05:26:27 faradayos alsactl[1311]: /usr/sbin/alsactl: load_state:1745: Cannot open /var/lib/alsa/asound.state for reading: No such file or directory
+Nov 28 05:26:30 localhost-live systemd[1]: Failed to start ryoku-greeter-guard.service.
+Nov 28 05:26:35 localhost-live firewalld[1181]: ERROR: INVALID_ZONE: (default)
+Nov 28 05:26:35 localhost-live firewalld[1181]: ERROR: INVALID_ZONE: (default)
+Nov 28 00:26:39 localhost-live dbus-broker-launch[2501]: Ignoring duplicate name 'org.freedesktop.secrets' in service file '/usr/share//dbus-1/services/org.freedesktop.secrets.service'
+Nov 28 00:26:39 localhost-live dbus-broker-launch[2501]: Ignoring duplicate name 'org.freedesktop.FileManager1' in service file '/usr/share//dbus-1/services/org.kde.dolphin.FileManager1.service'
+Nov 28 00:26:43 localhost-live dbus-broker-launch[2573]: Ignoring duplicate name 'org.freedesktop.secrets' in service file '/usr/share//dbus-1/services/org.freedesktop.secrets.service'
+Nov 28 00:26:43 localhost-live dbus-broker-launch[2573]: Ignoring duplicate name 'org.freedesktop.FileManager1' in service file '/usr/share//dbus-1/services/org.kde.dolphin.FileManager1.service'
+Nov 28 00:27:09 localhost-live sudo[5662]: liveuser : a password is required ; PWD=/home/liveuser ; USER=root ; COMMAND=/usr/sbin/snapper -c root --csvout list --columns number,type,date,description,cleanup
+Nov 28 00:27:37 localhost-live (systemd-stdio-bridge)[7726]: run-p7725-i6090.service: Failed to determine credentials for user 'tester': Unknown user
+Nov 28 00:27:37 localhost-live (systemd-stdio-bridge)[7726]: run-p7725-i6090.service: Failed at step USER spawning systemd-stdio-bridge: Invalid argument

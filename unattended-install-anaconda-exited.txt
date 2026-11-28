@@ -1,0 +1,110 @@
+Starting installer, one moment...
+terminal size detection failed, using default width
+anaconda 44.30-2.fc44 for anaconda bluesky (pre-release) started.
+ * installation log files are stored in /tmp during the installation
+ * shell is available on TTY2 and in second TMUX pane (ctrl+b, then press 2)
+ * if the graphical installation interface fails to start, try again with the
+   inst.text boot option to start text installation
+ * when reporting a bug add logs from /tmp as separate text/plain attachments
+================================================================================
+================================================================================
+Installation
+
+1) [x] Language settings                 2) [x] Time settings
+       (English (United States))                (America/New_York timezone)
+3) [!] Installation Destination          4) [!] Root password
+       (Automatic partitioning                  (Root account is disabled)
+       selected)
+5) [!] User creation
+       (No user will be created)
+
+
+The installation was stopped due to an error which occurred while running in non-interactive cmdline mode. Since there cannot be any questions in cmdline mode, edit your kickstart file and retry installation. 
+The exact error message is: 
+
+The following mandatory spokes are not completed:
+Installation Destination
+Root password
+User creation. 
+
+The installer will now terminate.
+00:24:52,035 DBG core.storage: LABEL=OEMDRV matches [] for devicetree=None and disks_only=True
+00:24:52,036 INF core.threads: Running Thread: AnaStorageThread (140640151185088)
+00:24:52,060 INF core.threads: Running Thread: AnaTimeInitThread (140640125871808)
+00:24:52,215 DBG payload.manager: Restarting payload thread
+00:24:52,217 INF core.threads: Running Thread: AnaPayloadRestartThread (140639844955840)
+00:24:52,217 INF startup_utils: Geolocation is enabled.
+00:24:52,219 INF core.threads: Running Thread: AnaPayloadThread (140639836563136)
+00:24:52,220 INF core.threads: Thread Done: AnaPayloadRestartThread (140639844955840)
+00:24:52,233 DBG startup_utils: Skip the time synchronization.
+00:24:53,164 INF core.threads: Thread Done: AnaStorageThread (140640151185088)
+00:24:53,189 INF startup_utils: Geoloc: using timezone determined by geolocation
+00:24:53,260 DBG localization: scripts found for locale en_US.UTF-8: ['Latn']
+00:24:53,261 DBG localization: console fonts found for locale en_US.UTF-8: ['eurlatgr']
+00:24:53,261 DBG localization: setting console font to eurlatgr
+00:24:53,310 DBG localization: console font set successfully to eurlatgr
+00:24:53,310 DBG localization: setting locale to: en_US.UTF-8
+00:24:53,338 DBG simpleline: GLib event loop is used!
+00:24:53,793 INF core.hw: Skipping detection of SMT.
+00:24:53,838 INF ui.common: Spoke NetworkSpoke will not be displayed because it is hidden by the Anaconda configuration file.
+00:24:53,839 INF lifecycle: Adding controller: SummaryHub
+00:24:56,553 INF lifecycle: Module initialized: LangSpoke
+00:24:56,567 INF lifecycle: Module initialized: TimeSpoke
+00:24:56,736 INF core.threads: Running Thread: AnaStorageWatcher (140640151185088)
+00:24:56,746 INF lifecycle: Module initialized: PasswordSpoke
+00:24:56,755 INF lifecycle: Module initialized: UserSpoke
+00:24:56,757 INF lifecycle: Initialization of all modules (5) has been started.
+00:24:56,758 DBG simpleline: Scheduling screen SummaryHub
+00:24:56,758 DBG simpleline: New signal RenderScreenSignal enqueued with source ScreenScheduler
+00:24:56,758 DBG simpleline: Scheduling screen ProgressSpoke
+00:24:56,759 DBG simpleline: Starting main loop
+00:24:56,761 WRN misc: /usr/lib64/python3.14/site-packages/gi/events.py:803: DeprecationWarning: 'asyncio.AbstractEventLoopPolicy' is deprecated and slated for removal in Python 3.16
+  AbstractEventLoopPolicy = getattr(asyncio, "AbstractEventLoopPolicy", object)
+
+00:24:56,762 DBG simpleline: Processing screen ScreenData(SummaryHub,None,False)
+00:24:56,769 DBG ui.lib.storage: Selecting one or less disks by default: vda
+00:24:56,769 INF lifecycle: Module initialized: StorageSpoke
+00:24:56,770 INF lifecycle: All modules have been initialized.
+00:24:56,770 INF core.threads: Thread Done: AnaStorageWatcher (140640151185088)
+00:24:56,785 DBG simpleline: Input is required by ScreenData(SummaryHub,None,False) screen
+00:24:56,790 ERR ui.tui.hubs.summary: CmdlineError: The following mandatory spokes are not completed:
+Installation Destination
+Root password
+User creation
+00:24:56,790 DBG simpleline: New signal ExceptionSignal enqueued with source ScreenScheduler
+00:24:56,791 DBG simpleline: Executing inner loop
+00:24:56,791 DBG simpleline: New signal ExceptionSignal enqueued with source ScreenScheduler
+00:24:56,791 ERR ui.tui: 
+======= Screen stack =======
+----------- TOP ------------
+ScreenData(SummaryHub,None,False)
+ScreenData(ProgressSpoke,None,False)
+============================
+
+00:24:56,791 DBG exception: running handleException
+00:24:56,836 CRT exception: Traceback (most recent call last):
+
+  File "/usr/lib/python3.14/site-packages/simpleline/render/screen_scheduler.py", line 251, in _process_screen
+    top_screen.ui_screen.get_input_with_error_check(top_screen.args)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+
+  File "/usr/lib/python3.14/site-packages/simpleline/render/screen/__init__.py", line 296, in get_input_with_error_check
+    self._input_manager.get_input(args=args)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+
+  File "/usr/lib/python3.14/site-packages/simpleline/render/screen/input_manager.py", line 113, in get_input
+    prompt = self._ui_screen.prompt(args)
+
+  File "/usr/lib64/python3.14/site-packages/pyanaconda/ui/tui/hubs/summary.py", line 124, in prompt
+    raise CmdlineError(errtxt)
+
+pyanaconda.errors.CmdlineError: The following mandatory spokes are not completed:
+Installation Destination
+Root password
+User creation
+
+00:24:57,097 DBG exception: Gtk cannot be initialized
+00:24:57,098 DBG exception: In the main thread, running exception handler
+00:24:57,189 INF core.util: Reporting the IPMI event: 10
+00:25:03,329 INF core.threads: Thread Done: AnaTimeInitThread (140640125871808)
+00:25:20,724 INF core.threads: Thread Done: AnaPayloadThread (140639836563136)

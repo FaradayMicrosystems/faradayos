@@ -1,0 +1,6 @@
+  Title: "FaradayOS Settings"
+  App ID: "org.quickshell"
+  Title: "FaradayOS add-ons"
+  App ID: "org.kde.kdialog"
+  Title: "faraday-vr-check"
+  App ID: "kitty"
