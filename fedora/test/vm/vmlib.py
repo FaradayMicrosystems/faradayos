@@ -371,7 +371,7 @@ def install_unattended(vm, timeout=2400):
     then powers off. Afterwards vm.start(live=False) boots the installed system (root and tester: password faraday)."""
     vm.write_file("/root/vmtest.ks", KS_INSTALL)
     # A live install always parses interactive-defaults.ks and ignores --kickstart here, so put ours in its place
-    vm.run("cp /root/vmtest.ks /usr/share/anaconda/interactive-defaults.ks")
+    vm.run("command cp -f /root/vmtest.ks /usr/share/anaconda/interactive-defaults.ks")
     say("unattended install started")
     vm.run("nohup sh -c 'anaconda --liveinst --cmdline --kickstart=/root/vmtest.ks >/root/anaconda-run.txt 2>&1; "
            "echo rc=$? >/root/anaconda-rc' >/dev/null 2>&1 &")
