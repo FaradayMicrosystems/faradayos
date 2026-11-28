@@ -1,0 +1,11 @@
+/usr/share/ryoku/config/quickshell/ryoshot/Singletons/Config.qml
+/usr/share/ryoku/config/quickshell/shell/modules/bar/barstyles/qsbar/modules/ParticleStream.qml
+/usr/share/ryoku/config/quickshell/shell/services/Stash.qml
+/usr/share/ryoku/config/quickshell/welcome/Welcome.qml
+/usr/share/ryoku/i18n/ar.json
+/usr/share/ryoku/i18n/bn.json
+/usr/share/ryoku/i18n/cs.json
+/usr/share/ryoku/i18n/de.json
+/usr/share/ryoku/i18n/el.json
+/usr/share/ryoku/i18n/en.json
+0

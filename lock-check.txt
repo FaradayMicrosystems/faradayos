@@ -1,0 +1,29 @@
+      Namespace: "ryoku-overview-backdrop"
+      Namespace: "ryoku-dock"
+      Namespace: "ryoku-widgets"
+      Namespace: "quickshell"
+      Namespace: "ryoku-keys-hint"
+      Namespace: "ryoku-notifications"
+3293 flock -n /run/user/1000/ryoku-keys-hint.lock env QML_IMPORT_PATH=/home/liveuser/.local/lib/qt6/qml QML2_IMPORT_PATH=/home/liveuser/.local/lib/qt6/qml qs -c keys-hint
+3296 qs -c keys-hint
+5229 qs -c shell
+Nov 27 23:56:14 localhost-live systemd[2474]: Started ryoku-power-cutover-guard.service - [systemd-run] /usr/bin/systemd-inhibit --what=sleep --mode=block --who=ryoku-session-cutover "--why=keep the desktop awake until its lock and lid owners are ready" /usr/bin/sleep infinity.
+Nov 27 23:56:15 localhost-live systemd[2474]: Starting ryoku-qylock-generation-guard.service - [systemd-run] /usr/bin/ryoku-power-cutover generation-guard-hold /run/user/1000/ryoku-qylock-launch.lock /run/user/1000/ryoku-qylock-generation.lock /run/user/1000/ryoku-qylock-generation-guard.ready...
+Nov 27 23:56:15 localhost-live systemd[2474]: Started ryoku-qylock-generation-guard.service - [systemd-run] /usr/bin/ryoku-power-cutover generation-guard-hold /run/user/1000/ryoku-qylock-launch.lock /run/user/1000/ryoku-qylock-generation.lock /run/user/1000/ryoku-qylock-generation-guard.ready.
+Nov 27 23:56:15 localhost-live systemd[2474]: app-niri-sh-2789.scope: Consumed 1.269s CPU time over 3.812s wall clock time, 13.9M memory peak.
+Nov 27 23:56:17 localhost-live systemd[2474]: ryoku-shell.service: Unit process 4303 (ryoku-qylock-ac) remains running after unit stopped.
+Nov 27 23:56:17 localhost-live systemd[2474]: ryoku-shell.service: Found left-over process 4303 (ryoku-qylock-ac) in control group while starting unit. Ignoring.
+Nov 27 23:56:20 localhost-live systemd[2474]: Stopping ryoku-qylock-generation-guard.service - [systemd-run] /usr/bin/ryoku-power-cutover generation-guard-hold /run/user/1000/ryoku-qylock-launch.lock /run/user/1000/ryoku-qylock-generation.lock /run/user/1000/ryoku-qylock-generation-guard.ready...
+Nov 27 23:56:20 localhost-live systemd[2474]: Stopped ryoku-qylock-generation-guard.service - [systemd-run] /usr/bin/ryoku-power-cutover generation-guard-hold /run/user/1000/ryoku-qylock-launch.lock /run/user/1000/ryoku-qylock-generation.lock /run/user/1000/ryoku-qylock-generation-guard.ready.
+Nov 27 23:56:23 localhost-live systemd[2474]: ryogami.service: Consumed 4.184s CPU time over 5.622s wall clock time, 155.9M memory peak.
+Nov 27 23:56:23 localhost-live systemd[2474]: Stopping ryoku-power-cutover-guard.service - [systemd-run] /usr/bin/systemd-inhibit --what=sleep --mode=block --who=ryoku-session-cutover "--why=keep the desktop awake until its lock and lid owners are ready" /usr/bin/sleep infinity...
+Nov 27 23:56:23 localhost-live systemd[2474]: Stopped ryoku-power-cutover-guard.service - [systemd-run] /usr/bin/systemd-inhibit --what=sleep --mode=block --who=ryoku-session-cutover "--why=keep the desktop awake until its lock and lid owners are ready" /usr/bin/sleep infinity.
+Nov 27 23:56:27 localhost-live systemd[2474]: app-niri-sh-2764.scope: Consumed 2.010s CPU time over 15.686s wall clock time, 12.2M memory peak.
+Nov 27 23:57:39 localhost-live systemd[2474]: app-niri-sh-2794.scope: Consumed 2.579s CPU time over 1min 26.899s wall clock time, 113.2M memory peak.
+Nov 28 00:00:20 localhost-live niri[2651]: 2026-11-28T05:00:20.811428Z  INFO niri::niri: locking session
+Nov 28 00:00:21 localhost-live quickshell[10193]: pam_unix(ryoku-lock-pw:auth): user [liveuser] has blank password; authenticated without it
+Nov 28 00:00:21 localhost-live systemd[2474]: Starting ryoku-qylock-unlock-guard-1.service - [systemd-run] /usr/bin/ryoku-host inhibit --what=sleep --mode=block --who=ryoku-qylock-unlock-1 "--why=keep suspend blocked until the compositor lock is released" /usr/bin/sleep infinity...
+Nov 28 00:00:21 localhost-live systemd[2474]: Started ryoku-qylock-unlock-guard-1.service - [systemd-run] /usr/bin/ryoku-host inhibit --what=sleep --mode=block --who=ryoku-qylock-unlock-1 "--why=keep suspend blocked until the compositor lock is released" /usr/bin/sleep infinity.
+Nov 28 00:00:22 localhost-live niri[2651]: 2026-11-28T05:00:22.119464Z  INFO niri::niri: unlocking session
+Nov 28 00:00:22 localhost-live systemd[2474]: Stopping ryoku-qylock-unlock-guard-1.service - [systemd-run] /usr/bin/ryoku-host inhibit --what=sleep --mode=block --who=ryoku-qylock-unlock-1 "--why=keep suspend blocked until the compositor lock is released" /usr/bin/sleep infinity...
+Nov 28 00:00:22 localhost-live systemd[2474]: Stopped ryoku-qylock-unlock-guard-1.service - [systemd-run] /usr/bin/ryoku-host inhibit --what=sleep --mode=block --who=ryoku-qylock-unlock-1 "--why=keep suspend blocked until the compositor lock is released" /usr/bin/sleep infinity.

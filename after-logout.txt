@@ -1,0 +1,11 @@
+SESSION  UID USER     SEAT  LEADER CLASS         TTY   IDLE SINCE
+      1 1000 liveuser seat0 1735   user          tty2  no   -
+      2 1000 liveuser -     2474   manager       -     no   -
+      3    0 root     -     1737   user-early    ttyS0 no   -
+      4    0 root     -     2554   manager-early -     no   -
+
+4 sessions listed.
+2635 /bin/sh /usr/libexec/faraday/niri-session
+2651 niri --session
+5207 ryoku-wm-niri watch
+5578 ryoku-wm-niri watch outputs workspaces focus overview

@@ -1,0 +1,59 @@
+./config/quickshell/hub/Hub.qml:1140:                                    : (SysInfo.sysPackageManager === "dnf" ? "RYOKU FEDORA" : "RYOKU ARCH"))); color: Tokens.ink; font.family: Tokens.ui
+./config/quickshell/hub/pages/AddonsPage.qml:863:                text: I18n.tr("BROWSE RYOSTORE")
+./config/quickshell/hub/pages/AddonsPage.qml:1242:                        text: I18n.tr("BROWSE RYOSTORE")
+./config/quickshell/hub/pages/FastfetchPage.qml:740:                    text: I18n.tr("BROWSE RYOSTORE")
+./config/quickshell/hub/pages/LauncherPage.qml:572:                            text: I18n.tr("BROWSE RYOSTORE")
+./config/quickshell/hub/pages/LockscreenPage.qml:1051:                text: I18n.tr("BROWSE RYOSTORE")
+./config/quickshell/hub/pages/StoreDesignGallery.qml:306:                text: I18n.tr("BROWSE RYOSTORE")
+./config/quickshell/keys/commands/catalog/ryoku-cli.json:8717:      "description": "Prints SSH hosts merged with Ryoport metadata as JSON.",
+./config/quickshell/keys/commands/catalog/ryoku-cli.json:8863:      "description": "Adds or replaces a Ryoport-managed SSH host and its metadata.",
+./config/quickshell/keys/commands/catalog/ryoku-cli.json:8872:      "description": "Removes a Ryoport-managed host from its generated SSH config and sidecar.",
+./config/quickshell/keys/commands/catalog/ryoku-tools.json:2969:      "title": "Open a Ryoport machine",
+./config/quickshell/keys/commands/catalog/ryoku-tools.json:2979:      "title": "List Ryoport machines",
+./config/quickshell/keys/commands/catalog/ryoku-tools.json:2988:      "title": "Create a Ryoport machine",
+./config/quickshell/keys/commands/catalog/ryoku-tools.json:2998:      "title": "Start a Ryoport machine",
+./config/quickshell/keys/commands/catalog/ryoku-tools.json:3008:      "title": "Stop a Ryoport machine",
+./config/quickshell/keys/commands/catalog/ryoku-tools.json:3018:      "title": "Remove a Ryoport machine",
+./config/quickshell/keys/commands/catalog/ryoku-tools.json:3029:      "title": "Check a Ryoport machine",
+./config/quickshell/plugins/discover.sh:7:#   $RYOSTORE_PLUGINS_DIR (dev override, colon-separated; legacy RYOKU_PLUGINS_DIR still read)
+./config/quickshell/plugins/discover.sh:46:plugins_dir="${RYOSTORE_PLUGINS_DIR:-${RYOKU_PLUGINS_DIR:-}}"
+./config/quickshell/plugins/ryoku-plugins-place:51:	local pdir="${RYOSTORE_PLUGINS_DIR:-${RYOKU_PLUGINS_DIR:-}}"
+./config/quickshell/ryostore/Singletons/Store.qml:78:        var match = raw.trim().match(/^RYOSTORE-PROGRESS (download|extract|verify|apply) ([0-9]+) ([0-9]+)$/);
+./config/quickshell/ryostore/lib/store.test.mjs:260:console.log("RYOSTORE-STORE-HELPERS-PASS");
+./config/quickshell/ryovm/Dashboard.qml:154:        title: I18n.tr("Ryoport")
+./config/quickshell/ryovm/logo.svg:2:  <title>Ryoport</title>
+./config/quickshell/ryovm/shell.qml:6:// providers. Ryoport is the visible product identity inside the window.
+./config/quickshell/shell/modules/bar/barstyles/qsbar/controlcenter/kit/CcWidgetList.qml:432:                                text: I18n.tr("SHARE TO RYOSTORE")
+./config/quickshell/shell/modules/bar/barstyles/qsbar/controlcenter/routes/CommunityRoute.qml:323:                            text: I18n.tr("OPEN RYOSTORE")
+./config/quickshell/shell/modules/bar/barstyles/qsbar/controlcenter/routes/LayoutRoute.qml:539:                                text: I18n.tr("GET MORE IN RYOSTORE")
+./config/quickshell/welcome/PageMake.qml:64:                            text: I18n.tr("RYOSTORE")
+./i18n/ar.json:1499:  "BROWSE RYOSTORE": "تصفح ريوستور",
+./i18n/ar.json:4425:  "GET MORE IN RYOSTORE": "احصل على المزيد في ريوستور",
+./i18n/ar.json:6956:  "OPEN RYOSTORE": "افتح ريوستور",
+./i18n/ar.json:8132:  "RYOSTORE": "ريوستور",
+./i18n/ar.json:8752:  "Ryoport": "ريوبورت",
+./i18n/ar.json:8819:  "SHARE TO RYOSTORE": "شارك في ريوستور",
+./i18n/bn.json:1499:  "BROWSE RYOSTORE": "RYOSTORE ব্রাউজ করুন",
+./i18n/bn.json:4425:  "GET MORE IN RYOSTORE": "RYOSTORE এ আরও পান",
+./i18n/bn.json:6956:  "OPEN RYOSTORE": "রিওস্টোর খুলুন",
+./i18n/bn.json:8132:  "RYOSTORE": "রিওস্টোর",
+./i18n/bn.json:8752:  "Ryoport": "Ryoport",
+===
+config/quickshell/hub/ColorField.qml:24:        }).join("").toUpperCase();
+config/quickshell/hub/ColorField.qml:71:            text: root.value.toUpperCase()
+config/quickshell/hub/CompositorControl.qml:28:    function cap(name) { return name.length ? name.charAt(0).toUpperCase() + name.slice(1) : name; }
+config/quickshell/hub/CompositorSwitchSheet.qml:46:    function cap(name) { return name && name.length ? name.charAt(0).toUpperCase() + name.slice(1) : (name || ""); }
+config/quickshell/hub/CompositorSwitchSheet.qml:234:                        text: I18n.tr("UNAVAILABLE ON %1").arg(sh.cap(sh.targetName).toUpperCase())
+config/quickshell/hub/Hub.qml
+config/quickshell/hub/SettingsSheet.qml
+config/quickshell/hub/barstudio/NacreAppearance.qml
+config/quickshell/hub/pages/AddonPluginCard.qml
+config/quickshell/hub/pages/AddonsPage.qml
+config/quickshell/hub/pages/BarStudioPage.qml
+config/quickshell/hub/pages/PluginsPage.qml
+config/quickshell/hub/pages/WindowManagerPage.qml
+config/quickshell/inir/services/GlobalActions.qml
+config/quickshell/ryostore/lib/store.js
+===
+/home/liveuser/.config/niri/rebinds.kdl:135:    Print { spawn-sh "env QML_IMPORT_PATH=\"$HOME/.local/lib/qt6/qml\" QML2_IMPORT_PATH=\"$HOME/.local/lib/qt6/qml\" ryoku-cmd-ryoshot"; }
+/home/liveuser/.config/niri/rebinds.kdl:136:    Shift+Print { spawn-sh "env QML_IMPORT_PATH=\"$HOME/.local/lib/qt6/qml\" QML2_IMPORT_PATH=\"$HOME/.local/lib/qt6/qml\" RYOSHOT_MODE=monitor ryoku-cmd-ryoshot"; }

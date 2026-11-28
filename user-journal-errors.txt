@@ -1,0 +1,15 @@
+Nov 27 23:55:55 localhost-live dbus-broker-launch[2501]: Ignoring duplicate name 'org.freedesktop.secrets' in service file '/usr/share//dbus-1/services/org.freedesktop.secrets.service'
+Nov 27 23:55:55 localhost-live dbus-broker-launch[2501]: Service file '/usr/share//dbus-1/services/org.kde.dolphin.FileManager1.service' is not named after the D-Bus name 'org.freedesktop.FileManager1'.
+Nov 27 23:55:55 localhost-live dbus-broker-launch[2501]: Ignoring duplicate name 'org.freedesktop.FileManager1' in service file '/usr/share//dbus-1/services/org.kde.dolphin.FileManager1.service'
+Nov 27 23:55:55 localhost-live dbus-broker-launch[2501]: Service file '/usr/share//dbus-1/services/org.kde.plasma.Notifications.service' is not named after the D-Bus name 'org.freedesktop.Notifications'.
+Nov 27 23:56:03 localhost-live wireplumber[2669]: spa.bluez5: BlueZ system service is not available
+Nov 27 23:56:10 localhost-live gnome-keyring-daemon[2822]: discover_other_daemon: 0
+Nov 27 23:56:13 localhost-live systemd[2474]: app-nvidia\x2dsettings\x2duser@autostart.service: Failed with result 'exit-code'.
+Nov 27 23:56:14 localhost-live kdeconnectd[2824]: Failed to register with host portal QDBusError("org.freedesktop.portal.Error.Failed", "Could not register app ID: Connection already associated with an application ID")
+Nov 27 23:56:17 localhost-live systemd[2474]: ryoku-shell.service: Control process exited, code=killed, status=15/TERM
+Nov 27 23:56:17 localhost-live systemd[2474]: ryoku-shell.service: Failed with result 'signal'.
+Nov 27 23:56:17 localhost-live systemd[2474]: ryoku-shell.service: Found left-over process 4303 (ryoku-qylock-ac) in control group while starting unit. Ignoring.
+Nov 27 23:56:17 localhost-live systemd[2474]: ryoku-shell.service: This usually indicates unclean termination of a previous run, or service implementation deficiencies.
+Nov 27 23:56:23 localhost-live systemd[2474]: ryogami.service: Found left-over process 5293 (notify-send) in control group while starting unit. Ignoring.
+Nov 27 23:56:23 localhost-live systemd[2474]: ryogami.service: This usually indicates unclean termination of a previous run, or service implementation deficiencies.
+Nov 27 23:56:25 localhost-live sudo[5706]: liveuser : a password is required ; PWD=/home/liveuser ; USER=root ; COMMAND=/usr/sbin/snapper -c root --csvout list --columns number,type,date,description,cleanup

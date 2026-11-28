@@ -1,0 +1,180 @@
+161:    Super+Q repeat=false { spawn-sh "jq -e '(.barStyle // \"qsbar\") == \"iris\" and .inir.closeConfirm.enabled == true' \"${XDG_CONFIG_HOME:-$HOME/.config}/ryoku/shell.json\" >/dev/null 2>&1 && qs -c shell ipc call closeConfirm trigger || niri msg action close-window"; }
+162:    Super+F { fullscreen-window; }
+163:    Super+A { toggle-window-floating; }
+164:    Super+R { switch-preset-column-width; }
+165:    Super+Shift+R { switch-preset-window-height; }
+166:    Super+T { toggle-column-tabbed-display; }
+167:    Super+D { maximize-column; }
+168:    Super+C { center-column; }
+169:    Alt+Tab { focus-window-previous; }
+170:    Super+Left { focus-column-or-monitor-left; }
+171:    Super+Right { focus-column-or-monitor-right; }
+172:    Super+Up { focus-window-or-monitor-up; }
+173:    Super+Down { focus-window-or-monitor-down; }
+174:    Super+Home { focus-column-first; }
+175:    Super+End { focus-column-last; }
+176:    Super+Shift+Left { move-column-left; }
+177:    Super+Shift+Right { move-column-right; }
+178:    Super+Shift+Up { move-window-up; }
+179:    Super+Shift+Down { move-window-down; }
+180:    Super+bracketleft { consume-or-expel-window-left; }
+181:    Super+bracketright { consume-or-expel-window-right; }
+182:    Super+Ctrl+Left { set-column-width "-10%"; }
+183:    Super+Ctrl+Right { set-column-width "+10%"; }
+184:    Super+Ctrl+Up { set-window-height "-10%"; }
+185:    Super+Ctrl+Down { set-window-height "+10%"; }
+186:    Super+Ctrl+R { reset-window-height; }
+187:    Super+equal { switch-preset-column-width; }
+188:    Super+minus { switch-preset-column-width-back; }
+189:    Super+1 { focus-workspace 1; }
+190:    Super+2 { focus-workspace 2; }
+191:    Super+3 { focus-workspace 3; }
+192:    Super+4 { focus-workspace 4; }
+193:    Super+5 { focus-workspace 5; }
+194:    Super+6 { focus-workspace 6; }
+195:    Super+7 { focus-workspace 7; }
+196:    Super+8 { focus-workspace 8; }
+197:    Super+9 { focus-workspace 9; }
+198:    Super+0 { focus-workspace 10; }
+199:    Super+Alt+1 { move-window-to-workspace 1; }
+200:    Super+Alt+2 { move-window-to-workspace 2; }
+201:    Super+Alt+3 { move-window-to-workspace 3; }
+202:    Super+Alt+4 { move-window-to-workspace 4; }
+203:    Super+Alt+5 { move-window-to-workspace 5; }
+204:    Super+Alt+6 { move-window-to-workspace 6; }
+205:    Super+Alt+7 { move-window-to-workspace 7; }
+206:    Super+Alt+8 { move-window-to-workspace 8; }
+207:    Super+Alt+9 { move-window-to-workspace 9; }
+208:    Super+Alt+0 { move-window-to-workspace 10; }
+209:    Super+Shift+1 { move-window-to-workspace 1 focus=false; }
+210:    Super+Shift+2 { move-window-to-workspace 2 focus=false; }
+211:    Super+Shift+3 { move-window-to-workspace 3 focus=false; }
+212:    Super+Shift+4 { move-window-to-workspace 4 focus=false; }
+213:    Super+Shift+5 { move-window-to-workspace 5 focus=false; }
+214:    Super+Shift+6 { move-window-to-workspace 6 focus=false; }
+215:    Super+Shift+7 { move-window-to-workspace 7 focus=false; }
+216:    Super+Shift+8 { move-window-to-workspace 8 focus=false; }
+217:    Super+Shift+9 { move-window-to-workspace 9 focus=false; }
+218:    Super+Shift+0 { move-window-to-workspace 10 focus=false; }
+219:    Super+KP_1 { focus-workspace 1; }
+220:    Super+KP_2 { focus-workspace 2; }
+221:    Super+KP_3 { focus-workspace 3; }
+222:    Super+KP_4 { focus-workspace 4; }
+223:    Super+KP_5 { focus-workspace 5; }
+224:    Super+KP_6 { focus-workspace 6; }
+225:    Super+KP_7 { focus-workspace 7; }
+226:    Super+KP_8 { focus-workspace 8; }
+227:    Super+KP_9 { focus-workspace 9; }
+228:    Super+KP_0 { focus-workspace 10; }
+229:    Super+Alt+KP_1 { move-window-to-workspace 1; }
+230:    Super+Alt+KP_2 { move-window-to-workspace 2; }
+231:    Super+Alt+KP_3 { move-window-to-workspace 3; }
+232:    Super+Alt+KP_4 { move-window-to-workspace 4; }
+233:    Super+Alt+KP_5 { move-window-to-workspace 5; }
+234:    Super+Alt+KP_6 { move-window-to-workspace 6; }
+235:    Super+Alt+KP_7 { move-window-to-workspace 7; }
+236:    Super+Alt+KP_8 { move-window-to-workspace 8; }
+237:    Super+Alt+KP_9 { move-window-to-workspace 9; }
+238:    Super+Alt+KP_0 { move-window-to-workspace 10; }
+239:    Super+Shift+KP_1 { move-window-to-workspace 1 focus=false; }
+240:    Super+Shift+KP_2 { move-window-to-workspace 2 focus=false; }
+241:    Super+Shift+KP_3 { move-window-to-workspace 3 focus=false; }
+242:    Super+Shift+KP_4 { move-window-to-workspace 4 focus=false; }
+243:    Super+Shift+KP_5 { move-window-to-workspace 5 focus=false; }
+244:    Super+Shift+KP_6 { move-window-to-workspace 6 focus=false; }
+245:    Super+Shift+KP_7 { move-window-to-workspace 7 focus=false; }
+246:    Super+Shift+KP_8 { move-window-to-workspace 8 focus=false; }
+247:    Super+Shift+KP_9 { move-window-to-workspace 9 focus=false; }
+248:    Super+Shift+KP_0 { move-window-to-workspace 10 focus=false; }
+249:    Super+Page_Up { focus-workspace-up; }
+250:    Super+Page_Down { focus-workspace-down; }
+251:    Super+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
+252:    Super+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+253:    Super+Shift+Page_Up { move-column-to-workspace-up; }
+254:    Super+Shift+Page_Down { move-column-to-workspace-down; }
+255:    Super+Ctrl+Page_Up { move-workspace-up; }
+256:    Super+Ctrl+Page_Down { move-workspace-down; }
+257:    Super+Tab { toggle-overview; }
+258:    Super+Alt+Left { focus-monitor-left; }
+259:    Super+Alt+Right { focus-monitor-right; }
+260:    Super+Alt+Up { focus-monitor-up; }
+261:    Super+Alt+Down { focus-monitor-down; }
+262:    Super+Alt+Shift+Left { move-column-to-monitor-left; }
+263:    Super+Alt+Shift+Right { move-column-to-monitor-right; }
+264:    Super+Alt+Shift+Up { move-column-to-monitor-up; }
+265:    Super+Alt+Shift+Down { move-column-to-monitor-down; }
+266:    Super+Ctrl+Alt+Left { move-workspace-to-monitor-left; }
+267:    Super+Ctrl+Alt+Right { move-workspace-to-monitor-right; }
+268:    Super+Ctrl+Alt+Up { move-workspace-to-monitor-up; }
+269:    Super+Ctrl+Alt+Down { move-workspace-to-monitor-down; }
+270:    Super+P { spawn "ryoku-wm-niri" "act" "output.cycle"; }
+271:    Super+Return { spawn "ryoku-app" "terminal"; }
+272:    Super+E { spawn "ryoku-app" "files"; }
+273:    Super+B { spawn "ryoku-app" "browser"; }
+274:    Super+N { spawn "ryoku-app" "editor"; }
+275:    Super+O { spawn "ryoku-app" "notes"; }
+276:    Super+Alt+E { spawn "kitty" "-e" "yazi"; }
+277:    Super+J { spawn "ryotunes"; }
+278:    Super+Space { spawn "ryoku-shell" "launcher"; }
+279:    Super+K { spawn "ryoku-shell" "cheatsheet"; }
+280:    Super+Shift+G allow-inhibiting=false { spawn "ryoku-shell" "gamebar"; }
+281:    Super+L { spawn "ryoku-shell" "lock"; }
+282:    Super+Escape allow-inhibiting=false { spawn "ryoku-shell" "quicksettings"; }
+283:    Super+W { spawn "ryogami" "wallpaper" "ui"; }
+284:    Super+Shift+W { spawn "ryogami" "wallpaper" "random"; }
+285:    Super+Shift+V { spawn-sh "ryoku-summon ryovm env QML_IMPORT_PATH=\"$HOME/.local/lib/qt6/qml\" QML2_IMPORT_PATH=\"$HOME/.local/lib/qt6/qml\" flock -n -o /tmp/ryovm.lock qs -c ryovm"; }
+286:    Super+V { spawn "ryoku-shell" "clipboard"; }
+287:    Super+M { spawn "ryoku-shell" "visualizer"; }
+288:    Super+Shift+M { spawn "ryoku-shell" "visualizer-overlay"; }
+289:    Super+Alt+M { spawn "ryoku-shell" "visualizer-place"; }
+290:    Super+grave repeat=false { spawn "ryoku-shell" "voice"; }
+291:    Super+comma { spawn "ryoku-shell" "settings"; }
+292:    Super+Shift+D { spawn "ryoku-shell" "hub" "open" "widgets"; }
+293:    Super+Shift+S { spawn-sh "env QML_IMPORT_PATH=\"$HOME/.local/lib/qt6/qml\" QML2_IMPORT_PATH=\"$HOME/.local/lib/qt6/qml\" ryoku-cmd-ryoshot"; }
+294:    Print { spawn-sh "env QML_IMPORT_PATH=\"$HOME/.local/lib/qt6/qml\" QML2_IMPORT_PATH=\"$HOME/.local/lib/qt6/qml\" ryoku-cmd-ryoshot"; }
+296:    Super+Shift+C { spawn "hyprpicker" "-a"; }
+297:    Super+Shift+A { spawn "ryoku-restart-audio"; }
+298:    Super+Shift+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+299:    XF86AudioRaiseVolume allow-when-locked=true { spawn "ryoku-volume" "up"; }
+300:    XF86AudioLowerVolume allow-when-locked=true { spawn "ryoku-volume" "down"; }
+301:    XF86AudioMute allow-when-locked=true repeat=false { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+302:    XF86AudioMicMute allow-when-locked=true repeat=false { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+303:    XF86AudioPlay allow-when-locked=true repeat=false { spawn "ryoku-media" "play-pause"; }
+304:    XF86AudioPause allow-when-locked=true repeat=false { spawn "ryoku-media" "pause"; }
+305:    XF86AudioNext allow-when-locked=true { spawn "playerctl" "next"; }
+306:    XF86AudioPrev allow-when-locked=true { spawn "playerctl" "previous"; }
+307:    XF86MonBrightnessUp allow-when-locked=true { spawn "ryoku-cmd-brightness" "+5"; }
+308:    XF86MonBrightnessDown allow-when-locked=true { spawn "ryoku-cmd-brightness" "-5"; }
+309:    XF86TouchpadToggle allow-when-locked=true { spawn "ryoku-wm-niri" "act" "input.touchpad" "toggle"; }
+310:    XF86TouchpadOn allow-when-locked=true { spawn "ryoku-wm-niri" "act" "input.touchpad" "on"; }
+311:    XF86TouchpadOff allow-when-locked=true { spawn "ryoku-wm-niri" "act" "input.touchpad" "off"; }
+312:    Super+KP_End { focus-workspace 1; }
+313:    Super+KP_Down { focus-workspace 2; }
+314:    Super+KP_Next { focus-workspace 3; }
+315:    Super+KP_Left { focus-workspace 4; }
+316:    Super+KP_Begin { focus-workspace 5; }
+317:    Super+KP_Right { focus-workspace 6; }
+318:    Super+KP_Home { focus-workspace 7; }
+319:    Super+KP_Up { focus-workspace 8; }
+320:    Super+KP_Prior { focus-workspace 9; }
+321:    Super+KP_Insert { focus-workspace 10; }
+322:    Super+Alt+KP_End { move-window-to-workspace 1; }
+323:    Super+Alt+KP_Down { move-window-to-workspace 2; }
+324:    Super+Alt+KP_Next { move-window-to-workspace 3; }
+325:    Super+Alt+KP_Left { move-window-to-workspace 4; }
+326:    Super+Alt+KP_Begin { move-window-to-workspace 5; }
+327:    Super+Alt+KP_Right { move-window-to-workspace 6; }
+328:    Super+Alt+KP_Home { move-window-to-workspace 7; }
+329:    Super+Alt+KP_Up { move-window-to-workspace 8; }
+330:    Super+Alt+KP_Prior { move-window-to-workspace 9; }
+331:    Super+Alt+KP_Insert { move-window-to-workspace 10; }
+332:    Super+Shift+KP_End { move-window-to-workspace 1 focus=false; }
+333:    Super+Shift+KP_Down { move-window-to-workspace 2 focus=false; }
+334:    Super+Shift+KP_Next { move-window-to-workspace 3 focus=false; }
+335:    Super+Shift+KP_Left { move-window-to-workspace 4 focus=false; }
+336:    Super+Shift+KP_Begin { move-window-to-workspace 5 focus=false; }
+337:    Super+Shift+KP_Right { move-window-to-workspace 6 focus=false; }
+338:    Super+Shift+KP_Home { move-window-to-workspace 7 focus=false; }
+339:    Super+Shift+KP_Up { move-window-to-workspace 8 focus=false; }
+340:    Super+Shift+KP_Prior { move-window-to-workspace 9 focus=false; }
+341:    Super+Shift+KP_Insert { move-window-to-workspace 10 focus=false; }
