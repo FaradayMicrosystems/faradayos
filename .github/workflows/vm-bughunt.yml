@@ -1,0 +1,89 @@
+name: VM bug hunt
+
+# Boots FaradayOS in virtual machines (KVM, UEFI) and runs scenario scripts that use the system like a first-time
+# user: screenshots, key presses, clicks and checks over the serial console. Results (screenshots, logs, findings)
+# are pushed to the git ref refs/vm-results/<run id>/<scenario> so they can be fetched with plain git.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release to test (empty = latest release)
+        required: false
+      run_id:
+        description: ISO build run to test instead of a release (empty = use the release)
+        required: false
+      scenarios:
+        description: 'Scenario names, JSON list (fedora/test/vm/scenario_<name>.py), e.g. ["a","b","c"]'
+        required: false
+        default: '["a","b","c"]'
+      script:
+        description: Optional scenario script (gzip + base64) run instead of the files, for quick iterations
+        required: false
+      label:
+        description: Free text shown in the run name
+        required: false
+  push:
+    branches: ['claude/**']
+    paths: ['fedora/test/vm/**', '.github/workflows/vm-bughunt.yml']
+
+run-name: VM bug hunt ${{ inputs.label || github.ref_name }}
+
+jobs:
+  vm:
+    name: scenario ${{ matrix.scenario }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    permissions:
+      actions: read
+      contents: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+    strategy:
+      fail-fast: false
+      matrix:
+        scenario: ${{ fromJSON(inputs.scenarios || '["smoke"]') }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Free disk space
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache /usr/local/share/boost; df -h /
+
+      - name: Install QEMU
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q qemu-system-x86 qemu-utils p7zip-full python3-pil ovmf
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
+          ls -l /dev/kvm
+
+      - name: Get ISO
+        run: |
+          mkdir iso
+          if [ -n "${{ inputs.run_id }}" ]; then
+            gh run download "${{ inputs.run_id }}" -R "$GITHUB_REPOSITORY" -n FaradayOS-Fedora-ISO -D iso
+            mv iso/*.iso iso/FaradayOS.iso 2>/dev/null || { cat iso/*.iso.part* > iso/FaradayOS.iso && rm iso/*.iso.part*; }
+          else
+            TAG="${{ inputs.tag }}"; [ -n "$TAG" ] || TAG=$(gh release view -R "$GITHUB_REPOSITORY" --json tagName -q .tagName)
+            echo "Testing release $TAG"
+            gh release download "$TAG" -R "$GITHUB_REPOSITORY" -p '*-performance.iso.part*' -D iso || gh release download "$TAG" -R "$GITHUB_REPOSITORY" -p '*.iso.part*' -D iso
+            cat iso/*.iso.part* > iso/FaradayOS.iso && rm iso/*.iso.part*
+          fi
+          ls -l iso
+
+      - name: Run scenario
+        env:
+          SCRIPT: ${{ inputs.script }}
+        run: |
+          cd fedora/test/vm
+          if [ -n "$SCRIPT" ]; then echo "$SCRIPT" | base64 -d | gunzip > scenario_inline.py; S=scenario_inline.py; else S=scenario_${{ matrix.scenario }}.py; fi
+          timeout 8000 python3 "$S" "$GITHUB_WORKSPACE/iso/FaradayOS.iso" "$GITHUB_WORKSPACE/out"
+
+      - name: Push results to refs/vm-results
+        if: always()
+        run: |
+          cd out 2>/dev/null || exit 0
+          rm -f *.ppm *.sock disk.qcow2 OVMF_VARS.fd; rm -rf boot
+          git init -q . && git add -A
+          git -c user.name=vm-bughunt -c user.email=vm-bughunt@users.noreply.github.com commit -qm "VM results run ${{ github.run_id }} ${{ matrix.scenario }}"
+          git push -f "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:refs/vm-results/${{ github.run_id }}/${{ matrix.scenario }}
+          echo "fetch: git fetch origin refs/vm-results/${{ github.run_id }}/${{ matrix.scenario }}"
