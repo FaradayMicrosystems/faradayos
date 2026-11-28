@@ -371,7 +371,7 @@ def install_unattended(vm, timeout=2400):
     then powers off. Afterwards vm.start(live=False) boots the installed system (root and tester: password faraday)."""
     vm.write_file("/root/vmtest.ks", KS_INSTALL)
     say("unattended install started")
-    vm.run("nohup sh -c 'anaconda --liveinst --cmdline --kickstart /root/vmtest.ks >/root/anaconda-run.txt 2>&1; "
+    vm.run("nohup sh -c 'anaconda --liveinst --cmdline --kickstart=/root/vmtest.ks >/root/anaconda-run.txt 2>&1; "
            "echo rc=$? >/root/anaconda-rc' >/dev/null 2>&1 &")
     end = time.time() + timeout
     last = ""
@@ -380,6 +380,9 @@ def install_unattended(vm, timeout=2400):
             time.sleep(30)
             last = vm.run("cat /root/anaconda-rc 2>/dev/null; tail -n 3 /root/anaconda-run.txt | cut -c1-200", 60)
             say("install:", last.replace("\n", " | ")[-300:])
+            if "will now terminate" in last:  # anaconda stops but its process stays: end it
+                vm.run("sleep 5; pkill -f bin/anaconda; sleep 3; echo rc=99 >> /root/anaconda-rc")
+                last += "\nrc=99"
             if "rc=" in last:
                 vm.report("unattended install (anaconda exited)", vm.run(
                     "tail -n 60 /root/anaconda-run.txt; tail -n 80 /tmp/anaconda.log; "
