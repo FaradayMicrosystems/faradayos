@@ -86,8 +86,11 @@ jobs:
           cd fedora/test/vm
           if [ -n "$SCRIPT" ]; then echo "$SCRIPT" | base64 -d | gunzip > scenario_inline.py; S=scenario_inline.py; else S=scenario_${{ matrix.scenario }}.py; fi
           # Push what is there every 4 minutes too, so results can be looked at while the run goes on
-          ( while sleep 240; do bash "$GITHUB_WORKSPACE/fedora/test/vm/push-results.sh" "${{ matrix.scenario }}" >/dev/null 2>&1; done ) &
-          timeout 8000 python3 "$S" "$GITHUB_WORKSPACE/iso/FaradayOS.iso" "$GITHUB_WORKSPACE/out"
+          ( while sleep 240; do bash "$GITHUB_WORKSPACE/fedora/test/vm/push-results.sh" "${{ matrix.scenario }}"; done ) >/dev/null 2>&1 &
+          P=$!
+          rc=0; timeout 8000 python3 "$S" "$GITHUB_WORKSPACE/iso/FaradayOS.iso" "$GITHUB_WORKSPACE/out" || rc=$?
+          kill $P 2>/dev/null || true
+          exit $rc
 
       - name: Push results to refs/vm-results
         if: always()
