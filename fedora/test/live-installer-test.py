@@ -169,6 +169,8 @@ if a.login_screen:
     result["login_screen"] = False
 if a.no_stuck_popup:
     result["no_stuck_popup"] = False
+    result["ghost_fix_in_session"] = False
+    result["wallpaper_toast_off"] = False
 # The v0.72 crash: the installer's keyboard page looped, starting thousands of keyboard tasks. A normal start needs a few.
 MAX_TASKS = 300
 try:
@@ -290,8 +292,7 @@ try:
     if a.no_stuck_popup:
         # The empty box at the top right (v0.89e-v0.91e) was a notification card left on screen after sign-in.
         # Notifications vanish after 5 s, so 30 s after the desktop settled no card may be left: the
-        # ryoku-notifications layer only exists while a card is shown. The layer list must also show the
-        # bar/dock, or the check could not see anything and counts as failed.
+        # ryoku-notifications layer only exists while a card is shown.
         time.sleep(30)
         lay = run(
             "S=$(ls -t /run/user/1000/niri.*.sock 2>/dev/null | head -1); "
@@ -300,10 +301,25 @@ try:
             120)
         report("layers 30 s after sign-in", lay + "\nscreen brightness: %s" % shot("desktop-settled"))
         m = re.search(r"NS=(\S*)", lay)
-        names = m.group(1).split(",") if m else []
-        result["no_stuck_popup"] = bool(names) and any(n.startswith(("ryoku-dock", "quickshell", "ryoku-bar")) for n in names) \
-            and "ryoku-notifications" not in names
-        say("no notification card left on screen:", result["no_stuck_popup"], names)
+        names = [x for x in (m.group(1).split(",") if m else []) if x]
+        # The VM has no GPU for niri to draw with (virtio-vga, no 3D): niri then lists no layers at all and the
+        # screenshot is black, so the layer test can only fail when it actually sees a card. What the VM can prove
+        # is that the fixes are in what runs: every NotificationPopups.qml the shell can load carries the
+        # ghost-card fix, and liveuser's Ryogami has the wallpaper toast off before it started.
+        fx = run(
+            "F=$(ls /usr/share/ryoku/config/quickshell/shell/modules/notifications/NotificationPopups.qml "
+            "~liveuser/.config/quickshell/shell/modules/notifications/NotificationPopups.qml "
+            "/etc/xdg/quickshell/shell/modules/notifications/NotificationPopups.qml 2>/dev/null); "
+            "echo FILES=$(echo $F | wc -w); for f in $F; do grep -q 'FaradayOS: no ghost cards' $f && echo FIXED $f || echo UNFIXED $f; done; "
+            "grep -o '\"notifyOnWallpaperChange\": *[a-z]*' ~liveuser/.config/ryoku/ryogami.json 2>&1; "
+            "journalctl -b --no-pager -o cat _UID=1000 | grep -c 'Wallpaper changed' | sed 's/^/TOASTS=/'", 120)
+        report("ghost-card fix and wallpaper toast in the running session", fx)
+        result["ghost_fix_in_session"] = "UNFIXED" not in fx and "FIXED " in fx
+        result["wallpaper_toast_off"] = re.search(r'notifyOnWallpaperChange": *false', fx) is not None
+        say("ghost-card fix in the running shell:", result["ghost_fix_in_session"],
+            "wallpaper toast off:", result["wallpaper_toast_off"])
+        result["no_stuck_popup"] = "ryoku-notifications" not in names
+        say("no notification card left on screen:", result["no_stuck_popup"], names or "(niri lists no layers: no GPU in the VM)")
 
     # The job log is the only output some readers can see, so print the important parts there (filtered in the VM:
     # the serial line is too slow for the whole journal)
