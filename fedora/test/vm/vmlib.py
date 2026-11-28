@@ -85,6 +85,10 @@ class VM:
             if os.path.exists(f"{self.W}/{s}"):
                 os.unlink(f"{self.W}/{s}")
         self.qemu = subprocess.Popen(args, stdout=open(f"{self.W}/qemu.log", "a"), stderr=subprocess.STDOUT)
+        time.sleep(2)
+        if self.qemu.poll() is not None:
+            print(open(f"{self.W}/qemu.log").read()[-3000:], flush=True)
+            raise RuntimeError("QEMU did not start: " + " ".join(args))
         say("QEMU started", "(KVM)" if self.kvm else "(software emulation, slow)", "live" if live else "installed disk")
         self.ser = self._connect(f"{self.W}/serial.sock")
         self.ser.settimeout(1)

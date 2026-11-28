@@ -60,9 +60,13 @@ jobs:
           sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
           ls -l /dev/kvm
           # Host-side 3D for the guest's virtio GPU (VM_GPU=virgl): vgem render node + Mesa software rendering
-          sudo apt-get install -y -q libegl1 libgles2 libegl-mesa0 libgl1-mesa-dri libgbm1 mesa-utils-bin || sudo apt-get install -y -q libegl1 libegl-mesa0 libgl1-mesa-dri libgbm1
-          sudo modprobe vgem && sudo chmod 666 /dev/dri/* && ls -l /dev/dri || echo "no vgem"
-          eglinfo -B 2>&1 | head -30 || true
+          sudo apt-get install -y -q libegl1 libgles2 libegl-mesa0 libgl1-mesa-dri libgbm1 mesa-utils || sudo apt-get install -y -q libegl1 libegl-mesa0 libgl1-mesa-dri libgbm1
+          echo 'SUBSYSTEM=="drm", MODE="0666"' | sudo tee /etc/udev/rules.d/99-drm4all.rules
+          sudo udevadm control --reload-rules
+          sudo modprobe vgem || echo "no vgem"
+          sudo udevadm settle; sudo udevadm trigger --subsystem-match=drm; sudo udevadm settle
+          sudo chmod 666 /dev/dri/* 2>/dev/null; ls -l /dev/dri || true
+          (command -v eglinfo && EGL_PLATFORM=surfaceless eglinfo -B 2>&1 | head -20) || true
 
       - name: Get ISO
         run: |
