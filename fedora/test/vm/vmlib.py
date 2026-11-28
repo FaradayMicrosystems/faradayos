@@ -216,11 +216,13 @@ class VM:
         """Runs a shell command as root on the serial console and returns its output."""
         self.cmd_n += 1
         mark = f"__END{self.cmd_n}__"
-        self.send(f"{cmd}; echo {mark[:5]}''{mark[5:]}\r")
+        self.send(f"{cmd}\r")  # own line: commands ending in & stay valid
+        self.send(f"echo {mark[:5]}''{mark[5:]}\r")
         out = self.read_until(re.escape(mark) + r"\r?\n", timeout)
         out = re.sub(r"\x1b\][^\x07\x1b]*(\x07|\x1b\\)|\x1b\[[0-9;?]*[a-zA-Z]|\r", "", out)
         out = "\n".join(l for l in out.split("\n") if "__END" not in l).strip("\n")
-        return re.sub(r"^(\$ )+", "", out)
+        out = re.sub(r"^(\$ )+", "", out)  # the shell prompt printed after the previous command
+        return re.sub(r"(\n?\$ ?)+$", "", out)
 
     def write_file(self, path, content):
         """Writes a file inside the VM (as root), fetched over the VM network from the test's file server."""
