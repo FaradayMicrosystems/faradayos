@@ -1,0 +1,27 @@
+[61,26] FaradayOS v0.9le installation
+[801,86] wy) Press
+[967,88] K to open Kit
+[888,88] Super
+[274,102] Welcome. Let's install FaradayOS now.
+[24,105] @ Welcome
+[275,148] Language
+[959,153] for the sidebar
+[843,154] Super
+[921,154] Esc
+[57,165] Date and time
+[947,183] for settings
+[843,184] Super
+[31,220] WwW
+[57,220] Installation method
+[465,241] English (United States) Vv
+[57,275] Storage configuration
+[466,278] Deutsch (Deutschland)
+[466,315] English (United Kingdom)
+[57,330] Create Account
+[466,353] Espanol (Espana)
+[30,385] nn
+[57,385] Review and install
+[466,390] Frangais (France)
+[466,426] Pycckuii (Poccna)
+[466,464] (vac)
+[275,519] Keyboard

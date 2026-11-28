@@ -1,0 +1,5 @@
+[776,91] — FJ Press | Super + K_ to open Kit
+[895,156] + Esc for the sidebar
+[842,184] Super + , for settings
+[951,512] a
+[910,568] Initializing...

@@ -1,0 +1,17 @@
+[97,0] = —"
+[32,18] FARADAYOS = P 40% = 026
+[1706,15] Be) G 16% & us
+[776,92] — Press | Super) + K _ to open Kit x
+[843,154] Super | + Esc’ for the sidebar
+[843,184] Super| + , for settings
+[1165,207] io 62 Your ber 63 Make it yours 964 Essentials 65 Done
+[447,207] FARADAYOS
+[447,225] FIRST RUN
+[404,332] Make it yours
+[403,378] FaradayOS Store carries complete Looks and the pieces to build your own. Wallpaper colours retune the desktop.
+[428,564] Find the rest of the desktop Choose a picture or Live wall. Faraday0S
+[1168,596] follows its colours automatically.
+[427,618] Bar styles reshape the edge. Rices apply a complete Look. Plugins add new parts.
+[426,643] Widgets and Lockscreens are here too. | Super + W
+[757,690] Rices Plugins
+[639,691] Bar styles

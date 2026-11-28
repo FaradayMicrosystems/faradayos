@@ -1,0 +1,45 @@
+7633 /usr/bin/bash /usr/libexec/anaconda/webui-desktop -t live
+7634 /usr/bin/python3 /sbin/anaconda --liveinst --graphical
+7650 /usr/bin/bash /usr/libexec/anaconda/cockpit-coproc-wrapper.sh 127.0.0.1
+7688 dbus-daemon --print-address --syslog --config-file=/usr/share/anaconda/dbus/anaconda-bus.conf
+7690 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.boss
+7691 python3 -m pyanaconda.modules.boss
+7701 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.security
+7704 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.users
+7706 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.services
+7708 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.runtime
+7709 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.payloads
+7710 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.storage
+7715 python3 -m pyanaconda.modules.security
+7717 python3 -m pyanaconda.modules.users
+7720 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.network
+7722 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.localization
+7723 /usr/bin/bash /usr/libexec/anaconda/start-module pyanaconda.modules.timezone
+7724 python3 -m pyanaconda.modules.services
+7727 python3 -m pyanaconda.modules.runtime
+7729 python3 -m pyanaconda.modules.storage
+7730 python3 -m pyanaconda.modules.payloads
+7733 python3 -m pyanaconda.modules.network
+7739 python3 -m pyanaconda.modules.localization
+7741 python3 -m pyanaconda.modules.timezone
+7750 slitherer http://127.0.0.1/cockpit/@localhost/anaconda-webui/index.html
+00:16:56,630 INF startup_utils: check_memory(): total:8046, needed:320
+00:16:56,630 INF startup_utils: check_memory(): total:8046, graphical:410
+00:16:56,658 INF network: got 0 NTP servers from DHCP
+00:16:56,680 INF core.threads: Thread Done: AnaWaitForConnectingNMThread (140302703273664)
+00:16:56,720 DBG core.storage: LABEL=OEMDRV matches [] for devicetree=None and disks_only=True
+00:16:56,720 INF core.threads: Running Thread: AnaStorageThread (140302703273664)
+00:16:56,730 INF core.threads: Running Thread: AnaTimeInitThread (140302543578816)
+00:16:57,063 DBG payload.manager: Restarting payload thread
+00:16:57,064 INF core.threads: Running Thread: AnaPayloadRestartThread (140302534137536)
+00:16:57,064 INF startup_utils: Geolocation is enabled.
+00:16:57,069 INF core.threads: Running Thread: AnaPayloadThread (140302525744832)
+00:16:57,071 INF core.threads: Thread Done: AnaPayloadRestartThread (140302534137536)
+00:16:57,112 DBG startup_utils: Skip the time synchronization.
+00:16:57,890 INF core.threads: Thread Done: AnaStorageThread (140302703273664)
+00:16:58,116 INF startup_utils: Geoloc: using timezone determined by geolocation
+00:16:58,147 DBG localization: setting locale to: en_US.UTF-8
+00:16:58,176 DBG ui.webui: Waiting for all threads to finish...
+00:16:58,177 DBG core.threads: Waiting for thread AnaTimeInitThread to exit
+00:17:08,006 INF core.threads: Thread Done: AnaTimeInitThread (140302543578816)
+00:17:08,006 DBG core.threads: Waiting for thread AnaPayloadThread to exit

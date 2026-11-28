@@ -1,0 +1,59 @@
+05:13:33 +56s serial root shell
+05:13:48 +71s desktop up=True
+05:14:35 +118s shot 01-live-after-55s.png brightness=51
+05:14:45 +128s shot 02-tour-after-next-1.png brightness=52
+05:14:55 +137s shot 03-tour-after-next-2.png brightness=51
+05:15:05 +147s shot 04-tour-after-next-3.png brightness=49
+05:15:13 +156s shot 05-tour-after-next-4.png brightness=49
+05:15:18 +161s shot 06-tour-last-page.png brightness=49
+05:15:18 +161s click 'Finish' at 1132,685
+05:15:28 +171s shot 07-tour-after-finish.png brightness=95
+05:15:29 +171s tour open after Finish: False (53s)
+05:15:47 +189s shot 08-tour-reopened.png brightness=51
+05:15:57 +200s shot 09-tour-after-skip.png brightness=51
+05:15:57 +200s tour open after Skip: True
+05:16:14 +217s shot 10-launcher-open.png brightness=48
+05:16:30 +233s shot 11-launcher-install-typed.png brightness=57
+05:16:31 +234s click 'Install FaradayOS' at 1113,585
+05:16:46 +249s shot 12-launcher-after-single-click.png brightness=57
+05:16:46 +249s installer launched from launcher (clicked 'Install FaradayOS', then Enter)
+05:17:32 +294s shot 13-installer-wait-5s.png brightness=51
+05:17:37 +300s installer window after 66s: {'id': 4, 'title': 'Anaconda Web UI', 'app_id': 'org.fedoraproject.AnacondaInstaller', 'pid': 7750, 'workspace_id': 1, 'is_focused': True, 'is_floating': False, 'is_urgent': False, 'layout': {'pos_in_scrolling_layout': [1, 1], 'tile_size': [1920.0, 1080.0], 'window_size': [1920, 1080], 'tile_pos_in_workspace_view': None, 'window_offset_in_tile': [0.0, 0.0]}, 'focus_timestamp': {'secs': 266, 'nanos': 697236798}}
+05:17:58 +321s shot 14-installer-loading-0.png brightness=16
+05:18:12 +335s shot 15-installer-loading-1.png brightness=21
+05:18:16 +339s shot 16-inst-00.png brightness=21
+05:18:26 +348s shot 17-inst-01.png brightness=21
+05:18:35 +357s shot 18-inst-02.png brightness=21
+05:18:35 +357s NOT FOUND on screen: 'Use entire disk'
+05:18:35 +357s NOT FOUND on screen: 'Erase data'
+05:18:35 +357s NOT FOUND on screen: '64'
+05:18:35 +357s NOT FOUND on screen: 'Virtio'
+05:18:35 +357s NOT FOUND on screen: 'vda'
+05:18:35 +357s NOT FOUND on screen: 'Continue'
+05:18:35 +357s NOT FOUND on screen: 'Accept'
+05:18:44 +367s shot 19-inst-03.png brightness=21
+05:18:44 +367s NOT FOUND on screen: 'Use entire disk'
+05:18:44 +367s NOT FOUND on screen: 'Erase data'
+05:18:44 +367s NOT FOUND on screen: '64'
+05:18:44 +367s NOT FOUND on screen: 'Virtio'
+05:18:44 +367s NOT FOUND on screen: 'vda'
+05:18:44 +367s NOT FOUND on screen: 'Continue'
+05:18:44 +367s NOT FOUND on screen: 'Accept'
+05:18:53 +376s shot 20-inst-04.png brightness=21
+05:18:53 +376s NOT FOUND on screen: 'Use entire disk'
+05:18:53 +376s NOT FOUND on screen: 'Erase data'
+05:18:53 +376s NOT FOUND on screen: '64'
+05:18:53 +376s NOT FOUND on screen: 'Virtio'
+05:18:53 +376s NOT FOUND on screen: 'vda'
+05:18:53 +376s NOT FOUND on screen: 'Continue'
+05:18:53 +376s NOT FOUND on screen: 'Accept'
+05:19:02 +385s shot 21-inst-05.png brightness=21
+05:19:02 +385s NOT FOUND on screen: 'Use entire disk'
+05:19:02 +385s NOT FOUND on screen: 'Erase data'
+05:19:02 +385s NOT FOUND on screen: '64'
+05:19:02 +385s NOT FOUND on screen: 'Virtio'
+05:19:02 +385s NOT FOUND on screen: 'vda'
+05:19:02 +385s NOT FOUND on screen: 'Continue'
+05:19:02 +385s NOT FOUND on screen: 'Accept'
+05:19:06 +389s shot 22-installer-final.png brightness=21
+05:19:07 +389s live VM stopped

@@ -1,0 +1,61 @@
+00:16:51,759 INF core.configuration.profile: Found the 'fedora-server' profile at /etc/anaconda/profile.d/fedora-server.conf.
+00:16:51,759 INF core.configuration.profile: Found the 'fedora-silverblue' profile at /etc/anaconda/profile.d/fedora-silverblue.conf.
+00:16:51,760 INF core.configuration.profile: Found the 'fedora-workstation' profile at /etc/anaconda/profile.d/fedora-workstation.conf.
+00:16:51,761 INF core.configuration.profile: Found the 'fedora' profile at /etc/anaconda/profile.d/fedora.conf.
+00:16:51,761 INF core.configuration.profile: Found the 'navix' profile at /etc/anaconda/profile.d/navix.conf.
+00:16:51,762 INF core.configuration.profile: Found the 'ovirt' profile at /etc/anaconda/profile.d/ovirt.conf.
+00:16:51,763 INF core.configuration.profile: Found the 'rhel' profile at /etc/anaconda/profile.d/rhel.conf.
+00:16:51,763 INF core.configuration.profile: Found the 'rhvh' profile at /etc/anaconda/profile.d/rhvh.conf.
+00:16:51,764 INF core.configuration.profile: Found the 'rocky' profile at /etc/anaconda/profile.d/rocky.conf.
+00:16:51,764 INF core.configuration.profile: Found the 'scientific-linux' profile at /etc/anaconda/profile.d/scientific-linux.conf.
+00:16:51,765 INF core.configuration.profile: Found the 'virtuozzo-linux' profile at /etc/anaconda/profile.d/virtuozzo-linux.conf.
+00:16:51,765 DBG core.configuration.profile: Detecting a profile for ID=fedora, VARIANT_ID=kde.
+00:16:51,765 INF core.configuration.profile: The 'fedora-kde' profile is detected.
+00:16:51,765 INF core.configuration.anaconda: Load the 'fedora-kde' profile configuration.
+00:16:51,768 INF main: /sbin/anaconda 44.30-2.fc44
+00:16:51,768 INF core.util: Reporting the IPMI event: 7
+00:16:52,237 INF startup_utils: check_memory(): total:8046, needed:320
+00:16:52,237 DBG startup_utils: Don't set up proxy variables.
+00:16:52,237 INF screensaver: Inhibiting screensaver.
+00:16:52,243 INF main: anaconda called with cmdline = ['/sbin/anaconda', '--liveinst', '--graphical']
+00:16:52,243 INF main: Default encoding = utf-8 
+00:16:52,244 INF misc: Configuration loaded from: ['/etc/anaconda/anaconda.conf', '/etc/anaconda/profile.d/fedora.conf', '/etc/anaconda/profile.d/fedora-kde.conf', '/etc/anaconda/conf.d/00-do-nothing.conf', '/etc/anaconda/conf.d/01-still-do-nothing.c
+00:16:52,244 INF misc: Writing the runtime configuration to: /run/anaconda/anaconda.conf
+00:16:52,314 INF core.dbus: Connecting to the Anaconda bus at unix:path=/tmp/dbus-i6DkVXlBH6,guid=c9b34bb8a976f3cc0e4499b86b0a63c4.
+00:16:56,063 INF main: Found a kickstart file: /usr/share/anaconda/interactive-defaults.ks
+00:16:56,131 INF startup_utils: Parsing kickstart: /usr/share/anaconda/interactive-defaults.ks
+00:16:56,569 DBG anaconda: setting display mode to GUI
+00:16:56,576 DBG localization: setting locale to: en_US.UTF-8
+00:16:56,602 INF core.threads: Running Thread: AnaWaitForConnectingNMThread (140302703273664)
+00:16:56,603 DBG anaconda: changing display mode from GUI to GUI
+00:16:56,603 INF anaconda: Display mode is set to 'interactive graphical mode'.
+00:16:56,630 INF startup_utils: check_memory(): total:8046, needed:320
+00:16:56,630 INF startup_utils: check_memory(): total:8046, graphical:410
+00:16:56,658 INF network: got 0 NTP servers from DHCP
+00:16:56,680 INF core.threads: Thread Done: AnaWaitForConnectingNMThread (140302703273664)
+00:16:56,720 DBG core.storage: LABEL=OEMDRV matches [] for devicetree=None and disks_only=True
+00:16:56,720 INF core.threads: Running Thread: AnaStorageThread (140302703273664)
+00:16:56,730 INF core.threads: Running Thread: AnaTimeInitThread (140302543578816)
+00:16:57,063 DBG payload.manager: Restarting payload thread
+00:16:57,064 INF core.threads: Running Thread: AnaPayloadRestartThread (140302534137536)
+00:16:57,064 INF startup_utils: Geolocation is enabled.
+00:16:57,069 INF core.threads: Running Thread: AnaPayloadThread (140302525744832)
+00:16:57,071 INF core.threads: Thread Done: AnaPayloadRestartThread (140302534137536)
+00:16:57,112 DBG startup_utils: Skip the time synchronization.
+00:16:57,890 INF core.threads: Thread Done: AnaStorageThread (140302703273664)
+00:16:58,116 INF startup_utils: Geoloc: using timezone determined by geolocation
+00:16:58,147 DBG localization: setting locale to: en_US.UTF-8
+00:16:58,176 DBG ui.webui: Waiting for all threads to finish...
+00:16:58,177 DBG core.threads: Waiting for thread AnaTimeInitThread to exit
+00:17:08,006 INF core.threads: Thread Done: AnaTimeInitThread (140302543578816)
+00:17:08,006 DBG core.threads: Waiting for thread AnaPayloadThread to exit
+00:17:53,925 INF core.threads: Thread Done: AnaPayloadThread (140302525744832)
+00:17:53,930 DBG ui.webui: web-ui: starting cockpit web view
+00:17:53,930 DBG ui.webui: web-ui: watching webui-desktop pid on live environment
+00:17:53,931 WRN misc: /usr/lib64/python3.14/site-packages/gi/overrides/GLib.py:959: PyGIDeprecationWarning: Calling child_watch_add without priority as first argument is deprecated
+  warnings.warn(
+
+00:17:53,932 WRN misc: /usr/lib64/python3.14/site-packages/gi/events.py:803: DeprecationWarning: 'asyncio.AbstractEventLoopPolicy' is deprecated and slated for removal in Python 3.16
+  AbstractEventLoopPolicy = getattr(asyncio, "AbstractEventLoopPolicy", object)
+
+/tmp/anaconda.log  /tmp/anaconda-webui.log  /tmp/dbus.log  /tmp/packaging.log  /tmp/program.log  /tmp/storage.log

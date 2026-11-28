@@ -1,0 +1,23 @@
+Window ID 3:
+  Title: "Welcome to FaradayOS"
+  App ID: "org.quickshell"
+  Is floating: yes
+  PID: 7205
+  Workspace ID: 1
+  Layout:
+    Tile size: 1188 x 768
+    Workspace-view position: 366, 150
+    Window size: 1180 x 760
+    Window offset in tile: 4 x 4
+
+Window ID 4: (focused)
+  Title: "Anaconda Web UI"
+  App ID: "org.fedoraproject.AnacondaInstaller"
+  Is floating: no
+  PID: 7750
+  Workspace ID: 1
+  Layout:
+    Tile size: 1920 x 1080
+    Scrolling position: column 1, tile 1
+    Window size: 1920 x 1080
+    Window offset in tile: 0 x 0
