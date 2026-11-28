@@ -1,0 +1,21 @@
+#!/usr/bin/python3
+# Sets general.notifyOnWallpaperChange=false in ~/.config/ryoku/ryogami.json unless the key is
+# already there (the user's choice in Ryogami's settings stays). Run before every Ryogami start.
+import json, os
+d = os.path.join(os.environ.get("XDG_CONFIG_HOME") or os.path.expanduser("~/.config"), "ryoku")
+p = os.path.join(d, "ryogami.json")
+try:
+    data = json.load(open(p)) if os.path.exists(p) and os.path.getsize(p) else {}
+except ValueError:
+    raise SystemExit(0)          # a broken file is Ryogami's to handle; never overwrite it
+if not isinstance(data, dict):
+    raise SystemExit(0)
+g = data.setdefault("general", {})
+if isinstance(g, dict) and "notifyOnWallpaperChange" not in g:
+    g["notifyOnWallpaperChange"] = False
+    os.makedirs(d, exist_ok=True)
+    tmp = p + ".faraday-tmp"
+    with open(tmp, "w") as f:
+        json.dump(data, f, indent=2)
+        f.write("\n")
+    os.replace(tmp, p)
