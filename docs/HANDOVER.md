@@ -112,6 +112,7 @@ Never tell Aurora to clone a different branch or folder.
 - Releases: https://github.com/FaradayMicrosystems/faradayos/releases/latest
 - Boot animation source: `dark.zip` (537 frames) in the project files.
 - Quickshell edition details: `fedora/quickshell/README.md`.
+- VM bug hunt (v0.93e): `.github/workflows/vm-bughunt.yml` boots a Release or ISO build in QEMU, runs `fedora/test/vm/scenario_<name>.py` and pushes screenshots and logs to `refs/vm-results/<run id>/<scenario>`. Read them with `git fetch origin refs/vm-results/<id>/<name>`.
 - Ryoku upstream: https://ryoku.dev, https://github.com/Ryoku-dev/ryoku (GPL-3.0).
 
 ### Notification "ghost" card (fixed v0.92e)
