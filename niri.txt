@@ -1,0 +1,76 @@
+Output "Red Hat, Inc. QEMU Monitor Unknown" (Virtual-1)
+  Current mode: 1920x1080 @ 74.998 Hz (preferred)
+  Variable refresh rate: not supported
+  Physical size: 480x270 mm
+  Logical position: 0, 0
+  Logical size: 1920x1080
+  Scale: 1
+  Transform: normal
+  Available modes:
+    1920x1080@74.998 (current, preferred)
+    5120x2160@50.000
+    4096x2160@50.000
+    3840x2160@60.000
+    3840x2160@59.940
+    3840x2160@50.000
+    1920x1440@60.000
+    2560x1080@50.000
+    1856x1392@59.995
+    1792x1344@60.000
+    2048x1152@60.000
+    1920x1200@59.885
+    1920x1080@60.000
+    1920x1080@50.000
+    1600x1200@60.000
+    1680x1050@59.954
+    1400x1050@59.978
+    1280x1024@60.020
+    1440x900@59.887
+    1280x960@60.000
+    1360x768@60.015
+    1280x768@59.870
+    1024x768@60.004
+    800x600@60.317
+    640x480@60.000
+    640x480@59.940
+
+Output "Virtual-1":
+  Background layer:
+    Surface:
+      Namespace: "ryoku-overview-backdrop"
+      Keyboard interactivity: none
+
+  Bottom layer:
+    Surface:
+      Namespace: "ryoku-dock"
+      Keyboard interactivity: none
+
+    Surface:
+      Namespace: "ryoku-widgets"
+      Keyboard interactivity: none
+
+  Top layer:
+    Surface:
+      Namespace: "quickshell"
+      Keyboard interactivity: none
+
+  Overlay layer:
+    Surface:
+      Namespace: "ryoku-keys-hint"
+      Keyboard interactivity: none
+
+    Surface:
+      Namespace: "ryoku-notifications"
+      Keyboard interactivity: none
+
+Window ID 2: (focused)
+  Title: "Welcome to FaradayOS"
+  App ID: "org.quickshell"
+  Is floating: yes
+  PID: 5249
+  Workspace ID: 1
+  Layout:
+    Tile size: 1188 x 768
+    Workspace-view position: 366, 184
+    Window size: 1180 x 760
+    Window offset in tile: 4 x 4
