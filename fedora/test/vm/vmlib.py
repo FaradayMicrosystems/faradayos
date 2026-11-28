@@ -40,6 +40,37 @@ class VM:
         self.buf = b""
         self.log = open(f"{self.W}/serial.log", "ab")
         self.findings = []
+        self.desktop_user = "liveuser"
+        self._serve()
+
+    def _serve(self):
+        """Small HTTP server the VM reaches at 10.0.2.2: GET xfer/<name> (files for the VM), PUT <name> (uploads,
+        e.g. screenshots, saved in the output folder)."""
+        import http.server, threading
+        os.makedirs(f"{self.W}/xfer", exist_ok=True)
+        W = self.W
+
+        class H(http.server.BaseHTTPRequestHandler):
+            def log_message(self, *a):
+                pass
+
+            def do_GET(self):
+                p = f"{W}/xfer/{os.path.basename(self.path)}"
+                if not os.path.isfile(p):
+                    self.send_response(404); self.end_headers(); return
+                d = open(p, "rb").read()
+                self.send_response(200); self.send_header("Content-Length", str(len(d))); self.end_headers()
+                self.wfile.write(d)
+
+            def do_PUT(self):
+                n = int(self.headers.get("Content-Length", 0))
+                d = self.rfile.read(n)
+                open(f"{W}/{os.path.basename(self.path)}", "wb").write(d)
+                self.send_response(201); self.end_headers()
+
+        self.httpd = http.server.ThreadingHTTPServer(("0.0.0.0", 0), H)
+        self.http_port = self.httpd.server_address[1]
+        threading.Thread(target=self.httpd.serve_forever, daemon=True).start()
 
     def _gpu_args(self):
         if self.gpu == "virgl":
@@ -192,13 +223,10 @@ class VM:
         return re.sub(r"^(\$ )+", "", out)
 
     def write_file(self, path, content):
-        """Writes a file inside the VM (as root)."""
-        import base64
-        b = base64.b64encode(content.encode()).decode()
-        self.run(f": > {path}.b64")
-        for i in range(0, len(b), 1000):
-            self.run(f"echo {b[i:i + 1000]} >> {path}.b64")
-        self.run(f"base64 -d {path}.b64 > {path} && rm {path}.b64")
+        """Writes a file inside the VM (as root), fetched over the VM network from the test's file server."""
+        name = "xfer-" + re.sub(r"[^A-Za-z0-9]+", "-", path)
+        open(f"{self.W}/xfer/{name}", "wb").write(content.encode() if isinstance(content, str) else content)
+        self.run(f"curl -sf http://10.0.2.2:{self.http_port}/{name} -o {path} && echo WROTE || echo WRITE-FAILED")
 
     def as_user(self, cmd, user="liveuser", uid=1000, timeout=120):
         """Runs a command as the desktop user inside the graphical session (niri socket + Wayland env)."""
@@ -217,21 +245,39 @@ class VM:
         return False
 
     # ---------------------------------------------------------------- screen
-    def shot(self, name):
-        """Saves NN-name.png in the output folder. Returns the average brightness (0 = black)."""
+    def shot(self, name, user=None, uid=1000):
+        """Saves NN-name.png in the output folder. Returns the average brightness (0 = black).
+        Uses QEMU's screendump; if that gives nothing (3D GPU), grabs the screen inside the VM with grim as the
+        desktop user (user=None: liveuser on the live system, else the given user) and uploads it."""
         self.shot_n += 1
+        fname = f"{self.shot_n:02d}-{re.sub(r'[^a-z0-9]+', '-', name.lower()).strip('-')}.png"
+        path = f"{self.W}/{fname}"
         ppm = f"{self.W}/shot.ppm"
-        self.qmp("screendump", filename=ppm)
+        if os.path.exists(ppm):
+            os.unlink(ppm)
+        r = self.qmp("screendump", filename=ppm)
+        for _ in range(20):
+            if os.path.exists(ppm) and os.path.getsize(ppm) > 0:
+                break
+            time.sleep(0.1)
         try:
             from PIL import Image, ImageStat
-            im = Image.open(ppm)
-            path = f"{self.W}/{self.shot_n:02d}-{re.sub(r'[^a-z0-9]+', '-', name.lower()).strip('-')}.png"
-            im.save(path, optimize=True)
+            if os.path.exists(ppm) and os.path.getsize(ppm) > 0:
+                Image.open(ppm).save(path, optimize=True)
+            else:
+                if not getattr(self, "_shot_warned", False):
+                    say("screendump gave no image (", r, "), using grim inside the VM")
+                    self._shot_warned = True
+                    say("grim:", self.run("command -v grim || dnf -y -q install grim >/dev/null 2>&1; command -v grim || echo NO-GRIM", 600))
+                u = user or getattr(self, "desktop_user", "liveuser")
+                self.as_user(f"grim /tmp/vmshot.png", user=u, uid=uid, timeout=60)
+                self.run(f"curl -sf -T /tmp/vmshot.png http://10.0.2.2:{self.http_port}/{fname}; rm -f /tmp/vmshot.png", 120)
+            im = Image.open(path)
             b = round(ImageStat.Stat(im.convert("L")).mean[0])
-            say(f"screenshot {os.path.basename(path)} brightness {b}")
+            say(f"screenshot {fname} brightness {b}")
             return b
         except Exception as e:  # noqa: BLE001
-            say("screenshot failed:", e)
+            say("screenshot failed:", repr(e))
 
     # ---------------------------------------------------------------- input
     KEYS = {"enter": "ret", "return": "ret", "esc": "esc", "escape": "esc", "tab": "tab", "space": "spc",

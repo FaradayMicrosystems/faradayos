@@ -3,7 +3,7 @@
 set -e
 [ -d "$GITHUB_WORKSPACE/out" ] || exit 0
 T=$(mktemp -d)
-rsync -a --exclude '*.ppm' --exclude '*.sock' --exclude 'disk.qcow2' --exclude 'OVMF_VARS.fd' --exclude 'boot/' "$GITHUB_WORKSPACE/out/" "$T/"
+rsync -a --exclude '*.ppm' --exclude '*.sock' --exclude 'disk.qcow2' --exclude 'OVMF_VARS.fd' --exclude 'boot/' --exclude 'xfer/' "$GITHUB_WORKSPACE/out/" "$T/"
 cd "$T"
 git init -q . && git add -A
 git -c user.name=vm-bughunt -c user.email=vm-bughunt@users.noreply.github.com commit -qm "VM results run $GITHUB_RUN_ID $1"
