@@ -1,0 +1,52 @@
+2
+tty2
+total 0
+drwxr-xr-x. 2 root root      60 Nov 28  2026 by-path
+crw-rw----+ 1 root video 226, 0 Nov 28  2026 card0
+lrwxrwxrwx. 1 root root       5 Nov 28  2026 ryoku-gpu-0000-00-01-0 -> card0
+connected
+00:01.0 VGA compatible controller: Device 1234:1111 (rev 02)
+	Subsystem: Red Hat, Inc. Device 1100
+	Kernel driver in use: bochs-drm
+	Kernel modules: bochs
+2026-11-28T04:00:23.967881Z  INFO niri: starting version 26.04
+2026-11-28T04:00:23.984319Z DEBUG niri_config: loaded config from "/home/liveuser/.config/niri/config.kdl"
+2026-11-28T04:00:24.244330Z  WARN niri::backend::tty: error getting the render node for the primary GPU; proceeding anyway
+2026-11-28T04:00:24.274874Z  INFO niri::backend::tty: using as the render node: "/dev/dri/card0"
+2026-11-28T04:00:24.879536Z DEBUG niri::backend::tty: adding device: 57856 "/dev/dri/card0"
+2026-11-28T04:00:24.879591Z DEBUG niri::backend::tty: this is the primary node
+2026-11-28T04:00:29.363163Z DEBUG niri::backend::tty: failed to initialize renderer, falling back to primary gpu: software EGL renderers are skipped
+2026-11-28T04:00:29.363383Z  WARN niri::backend::tty: error adding primary node device, display-only devices may not work: no allocator available for device
+2026-11-28T04:00:29.363447Z  INFO niri: listening on Wayland socket: wayland-1
+2026-11-28T04:00:29.363454Z  INFO niri: IPC listening on: /run/user/1000/niri.wayland-1.2641.sock
+2026-11-28T04:00:29.424571Z  INFO niri: listening on X11 socket: :0
+2026-11-28T04:00:30.484999Z DEBUG niri_config: loaded config from "/home/liveuser/.config/niri/config.kdl"
+2026-11-28T04:00:32.719483Z  WARN niri::handlers::layer_shell: no output for new layer surface, closing
+2026-11-28T04:00:32.721296Z  WARN niri::backend::tty: error doing early import: Error::DeviceMissing
+2026-11-28T04:00:32.756574Z  WARN niri::backend::tty: error doing early import: Error::DeviceMissing
+2026-11-28T04:00:32.850612Z  WARN niri::handlers::layer_shell: no output for new layer surface, closing
+2026-11-28T04:00:32.850838Z  WARN niri::backend::tty: error doing early import: Error::DeviceMissing
+2026-11-28T04:00:32.873478Z  WARN niri::backend::tty: error doing early import: Error::DeviceMissing
+2026-11-28T04:00:36.608759Z DEBUG niri_config: loaded config from "/home/liveuser/.config/niri/config.kdl"
+2026-11-28T04:00:38.083339Z  WARN niri::backend::tty: error doing early import: Error::DeviceMissing
+2026-11-28T04:00:38.168927Z DEBUG niri_config: loaded config from "/home/liveuser/.config/niri/config.kdl"
+2026-11-28T04:00:38.870261Z  WARN niri::backend::tty: error doing early import: Error::DeviceMissing
+2026-11-28T04:00:38.995294Z  WARN niri::backend::tty: error doing early import: Error::DeviceMissing
+2026-11-28T04:00:39.705224Z DEBUG niri_config: loaded config from "/home/liveuser/.config/niri/config.kdl"
+2026-11-28T04:00:39.734607Z  WARN niri::backend::tty: error doing early import: Error::DeviceMissing
+2026-11-28T04:00:40.555488Z  WARN niri::backend::tty: error doing early import: Error::DeviceMissing
+2026-11-28T04:00:40.734136Z DEBUG niri_config: loaded config from "/home/liveuser/.config/niri/config.kdl"
+2026-11-28T04:00:41.486294Z  WARN niri::backend::tty: error doing early import: Error::DeviceMissing
+2026-11-28T04:00:42.488717Z  WARN niri::backend::tty: error doing early import: Error::DeviceMissing
+2026-11-28T04:00:42.768327Z DEBUG niri_config: loaded config from "/home/liveuser/.config/niri/config.kdl"
+2026-11-28T04:00:43.484649Z  WARN niri::backend::tty: error doing early import: Error::DeviceMissing
+2026-11-28T04:00:43.788065Z DEBUG niri_config: loaded config from "/home/liveuser/.config/niri/config.kdl"
+2026-11-28T04:00:44.483868Z  WARN niri::backend::tty: error doing early import: Error::DeviceMissing
+2026-11-28T04:00:45.483959Z  WARN niri::backend::tty: error doing early import: Error::DeviceMissing
+2026-11-28T04:00:46.484391Z  WARN niri::backend::tty: error doing early import: Error::DeviceMissing
+2026-11-28T04:00:47.484473Z  WARN niri::backend::tty: error doing early import: Error::DeviceMissing
+2026-11-28T04:00:48.484405Z  WARN niri::backend::tty: error doing early import: Error::DeviceMissing
+2026-11-28T04:00:49.484445Z  WARN niri::backend::tty: error doing early import: Error::DeviceMissing
+2026-11-28T04:00:50.484696Z  WARN niri::backend::tty: error doing early import: Error::DeviceMissing
+2026-11-28T04:00:51.484572Z  WARN niri::backend::tty: error doing early import: Error::DeviceMissing
+2026-11-28T04:00:52.485019Z  WARN niri::backend::tty: error doing early import: Error::DeviceMissing

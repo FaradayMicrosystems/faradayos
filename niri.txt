@@ -1,0 +1,11 @@
+Window ID 2:
+  Title: "Welcome to FaradayOS"
+  App ID: "org.quickshell"
+  Is floating: yes
+  PID: 5160
+  Workspace ID: 1
+  Layout:
+    Tile size: 108 x 108
+    Workspace-view position: 586, 306
+    Window size: 100 x 100
+    Window offset in tile: 4 x 4
