@@ -1,0 +1,15 @@
+[   54.018489] localhost-live dbus-broker-launch[2570]: Service file '/usr/share//dbus-1/services/org.kde.plasma.Notifications.service' is not named after the D-Bus name 'org.freedesktop.Notifications'.
+[   65.567135] localhost-live systemd[2538]: Starting app-org.kde.discover.notifier@autostart.service - Discover...
+[   66.037209] localhost-live systemd[2538]: app-org.kde.discover.notifier@autostart.service: Skipped due to 'exec-condition'.
+[   66.039765] localhost-live systemd[2538]: Condition check resulted in app-org.kde.discover.notifier@autostart.service - Discover being skipped.
+[   68.810322] localhost-live systemd[2538]: Started dbus-:1.2-org.freedesktop.Notifications@0.service.
+[   71.653458] localhost-live systemd[2538]: Starting ryogami.service - Ryogami wallpaper daemon...
+[   71.778742] localhost-live systemd[2538]: Started ryogami.service - Ryogami wallpaper daemon.
+[   72.178459] localhost-live ryogami[4286]: ryogami: listening on /run/user/1000/ryogami.sock
+[   75.815074] localhost-live systemd[2538]: Stopping ryogami.service - Ryogami wallpaper daemon...
+[   76.067809] localhost-live systemd[2538]: Stopped ryogami.service - Ryogami wallpaper daemon.
+[   76.067836] localhost-live systemd[2538]: ryogami.service: Consumed 3.349s CPU time over 4.414s wall clock time, 153.8M memory peak.
+[   76.074647] localhost-live systemd[2538]: Starting ryogami.service - Ryogami wallpaper daemon...
+[   76.201965] localhost-live systemd[2538]: Started ryogami.service - Ryogami wallpaper daemon.
+[   76.243850] localhost-live ryogami[5544]: ryogami: listening on /run/user/1000/ryogami.sock
+[   76.639194] localhost-live ryogami[5544]: ryogami: auto-restored wallpaper: default.webp

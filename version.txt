@@ -1,0 +1,3 @@
+NAME="FaradayOS"
+VERSION="0.92e (Fedora 44)"
+RELEASE_TYPE=stable
