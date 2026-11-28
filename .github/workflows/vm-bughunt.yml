@@ -16,6 +16,10 @@ on:
         description: 'Scenario names, JSON list (fedora/test/vm/scenario_<name>.py), e.g. ["a","b","c"]'
         required: false
         default: '["a","b","c"]'
+      gpu:
+        description: 'VM graphics: virgl (3D, host software rendering), std, virtio'
+        required: false
+        default: virgl
       script:
         description: Optional scenario script (gzip + base64) run instead of the files, for quick iterations
         required: false
@@ -55,6 +59,9 @@ jobs:
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
           sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
           ls -l /dev/kvm
+          # Host-side 3D for the guest's virtio GPU (VM_GPU=virgl): vgem render node + Mesa software rendering
+          sudo apt-get install -y -q libegl-mesa0 libgl1-mesa-dri libgbm1 "linux-modules-extra-$(uname -r)" || true
+          sudo modprobe vgem && sudo chmod 666 /dev/dri/* && ls -l /dev/dri || echo "no vgem"
 
       - name: Get ISO
         run: |
@@ -73,6 +80,7 @@ jobs:
       - name: Run scenario
         env:
           SCRIPT: ${{ inputs.script }}
+          VM_GPU: ${{ inputs.gpu || 'virgl' }}
         run: |
           cd fedora/test/vm
           if [ -n "$SCRIPT" ]; then echo "$SCRIPT" | base64 -d | gunzip > scenario_inline.py; S=scenario_inline.py; else S=scenario_${{ matrix.scenario }}.py; fi

@@ -26,7 +26,7 @@ class VM:
         self.mem, self.smp, self.width, self.height = mem, smp, width, height
         # "std" = QEMU standard VGA (bochs-drm in the guest): Mesa renders in software (llvmpipe), so niri can draw.
         # "virtio" = virtio-vga without 3D: niri cannot render there ("no allocator available"), screen stays black.
-        self.gpu = gpu or os.environ.get("VM_GPU", "std")
+        self.gpu = gpu or os.environ.get("VM_GPU", "virgl")
         self.kvm = os.access("/dev/kvm", os.R_OK | os.W_OK)
         self.mult = 1 if self.kvm else 6
         self.vars = f"{self.W}/OVMF_VARS.fd"
@@ -41,14 +41,24 @@ class VM:
         self.log = open(f"{self.W}/serial.log", "ab")
         self.findings = []
 
+    def _gpu_args(self):
+        if self.gpu == "virgl":
+            # 3D virtio GPU, rendered on the host with Mesa llvmpipe through a vgem render node (no real GPU needed)
+            node = next((f"/dev/dri/{n}" for n in sorted(os.listdir("/dev/dri")) if n.startswith("renderD")), None) \
+                if os.path.isdir("/dev/dri") else None
+            return ["-device", f"virtio-vga-gl,xres={self.width},yres={self.height}",
+                    "-display", "egl-headless" + (f",rendernode={node}" if node else "")]
+        if self.gpu == "std":
+            return ["-device", f"VGA,xres={self.width},yres={self.height},vgamem_mb=64", "-display", "none"]
+        return ["-device", f"virtio-vga,xres={self.width},yres={self.height}", "-display", "none"]
+
     # ---------------------------------------------------------------- start / stop
     def start(self, live=True, extra_append=""):
         """live=True: boot the ISO's kernel directly with a serial console (like the release test).
         live=False: boot the installed disk through its own bootloader (UEFI)."""
         args = ["qemu-system-x86_64", "-machine", "q35", "-accel", "kvm" if self.kvm else "tcg",
                 "-cpu", "host" if self.kvm else "max", "-smp", str(self.smp), "-m", str(self.mem),
-                "-device", (f"VGA,xres={self.width},yres={self.height},vgamem_mb=64" if self.gpu == "std"
-                            else f"virtio-vga,xres={self.width},yres={self.height}"), "-display", "none",
+                *self._gpu_args(),
                 "-device", "qemu-xhci", "-device", "usb-tablet", "-device", "usb-kbd",
                 "-audiodev", "none,id=snd0", "-device", "intel-hda", "-device", "hda-duplex,audiodev=snd0",  # a sound card, so audio can be checked
                 "-drive", f"file={self.disk},if=virtio",
